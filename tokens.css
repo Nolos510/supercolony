@@ -1,0 +1,36 @@
+/* Hallmark · custom hybrid: living nature / scientific war room · map / diagram */
+:root {
+  --color-ink: oklch(27% .035 180);
+  --color-muted: oklch(43% .025 170);
+  --color-paper: oklch(96% .012 85);
+  --color-paper-deep: oklch(91% .022 85);
+  --color-panel: oklch(98% .01 85);
+  --color-water: oklch(90% .034 205);
+  --color-land: oklch(79% .042 132);
+  --color-contour: oklch(56% .03 145 / .5);
+  --color-map-grid: oklch(47% .035 200 / .13);
+  --color-habitat: oklch(49% .085 143);
+  --color-player: oklch(82% .12 195);
+  --color-player-dark: oklch(39% .07 195);
+  --color-rival: oklch(84% .12 78);
+  --color-rival-dark: oklch(42% .07 65);
+  --color-neutral: oklch(45% .016 92);
+  --color-chrome: oklch(25% .036 180);
+  --color-chrome-soft: oklch(32% .03 180);
+  --color-chrome-text: oklch(96% .015 95);
+  --color-chrome-muted: oklch(78% .023 160);
+  --color-line: oklch(34% .035 160 / .2);
+  --color-line-light: oklch(86% .016 160 / .3);
+  --color-focus: oklch(50% .14 240);
+  --color-shade: oklch(20% .02 175 / .3);
+  --color-shadow: oklch(20% .02 175 / .13);
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  --font-body: 'Avenir Next', 'Trebuchet MS', system-ui, sans-serif;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 12px; --space-lg: 16px;
+  --space-xl: 24px; --space-2xl: 32px; --space-3xl: 48px;
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 16px;
+  --ease-out: cubic-bezier(.2, 0, 0, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+  --dur-fast: 150ms;
+}

@@ -1,0 +1,165 @@
+import type { FactEntry, ResourceEntry, SpeciesId, SpeciesProfile } from '../game/types';
+
+// Editorial review dates describe this bundled catalog, not live monitoring.
+export const resources: ResourceEntry[] = [
+  {
+    id: 'global-study', title: 'The global expansion of a single ant supercolony',
+    organization: 'Van Wilgenburg, Torres & Tsutsui · Evolutionary Applications',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/',
+    group: 'research', type: 'paper', year: 2010, reviewedAt: '2026-10-13',
+    summary: 'Compare behavior, genes, and colony odors in historical samples from distant Argentine-ant populations.',
+    regionLabel: 'Global · historical sampling', regionIds: ['global'],
+    topics: ['supercolonies', 'prevention'], speciesIds: ['argentine'],
+  },
+  {
+    id: 'terrain-study', title: 'Complex battlefields favor strong soldiers over large armies in social animal warfare',
+    organization: 'Lymbery, Webber & Didham · PNAS',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/',
+    group: 'research', type: 'paper', year: 2023, reviewedAt: '2026-10-13',
+    summary: 'An Age of Empires II simulation and controlled ant experiments explore terrain, numbers, and individual strength.',
+    regionLabel: 'Australian experiments · broader research', regionIds: ['global', 'australia'],
+    topics: ['terrain', 'biodiversity'], speciesIds: ['argentine', 'meat'],
+  },
+  {
+    id: 'uc-ipm', title: 'Meet the Argentine ant',
+    organization: 'University of California · Statewide IPM Program',
+    url: 'https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html',
+    group: 'research', type: 'official-guide', reviewedAt: '2026-10-13',
+    summary: 'An identification guide covering worker appearance, trails, nesting, and feeding.',
+    regionLabel: 'California · species identification', regionIds: ['california'],
+    topics: ['identification', 'supercolonies'], speciesIds: ['argentine'],
+  },
+  {
+    id: 'inaturalist', title: 'Record your wildlife discoveries',
+    organization: 'iNaturalist',
+    url: 'https://help.inaturalist.org/en/support/solutions/articles/151000192921',
+    group: 'participate', type: 'citizen-science', reviewedAt: '2026-10-13',
+    summary: 'Learn to share a photo, time, and location for community identification. An observation is not a regulatory report.',
+    regionLabel: 'Worldwide', regionIds: ['global'],
+    topics: ['citizen-science', 'identification', 'biodiversity'], speciesIds: [],
+  },
+  {
+    id: 'xerces', title: 'Join an insect monitoring project',
+    organization: 'Xerces Society for Invertebrate Conservation',
+    url: 'https://xerces.org/community-science',
+    group: 'participate', type: 'citizen-science', reviewedAt: '2026-10-13',
+    summary: 'Explore projects for bees, butterflies, fireflies, and other invertebrates. Check each project’s location and training requirements.',
+    regionLabel: 'Primarily North America · broader biodiversity', regionIds: ['california'],
+    topics: ['citizen-science', 'biodiversity'], speciesIds: [],
+  },
+  {
+    id: 'doc-nz', title: 'Argentine ants in New Zealand',
+    organization: 'New Zealand Department of Conservation · Te Papa Atawhai',
+    url: 'https://www.doc.govt.nz/nature/pests-and-threats/animal-pests-and-threats/argentine-ants/',
+    group: 'support', type: 'official-guide', reviewedAt: '2026-10-13',
+    summary: 'Read government guidance on identification, ecological threats, and coordinated management. This advice is specific to New Zealand.',
+    regionLabel: 'New Zealand', regionIds: ['newzealand'],
+    topics: ['identification', 'biodiversity', 'prevention'], speciesIds: ['argentine'],
+  },
+  {
+    id: 'island-conservation', title: 'Explore island restoration',
+    organization: 'Island Conservation',
+    url: 'https://www.islandconservation.org/how-to-help/',
+    group: 'support', type: 'conservation-group', reviewedAt: '2026-10-13',
+    summary: 'Follow island-restoration work or explore optional support on the organization’s own site. Broader biodiversity work; no game partnership.',
+    regionLabel: 'Islands worldwide · broader biodiversity', regionIds: ['global', 'hawaii', 'newzealand'],
+    topics: ['biodiversity', 'prevention'], speciesIds: [],
+  },
+];
+
+export const facts: FactEntry[] = [
+  {
+    id: 'supercolonies', title: 'One colony, many nests', topic: 'supercolonies',
+    summary: 'A supercolony is a network of cooperating nests.',
+    detail: 'The 2010 study found mutual tolerance among sampled major colonies across several continents. Other sampled colonies were aggressive toward them. These historical findings do not define today’s borders.',
+    resourceIds: ['global-study'], speciesIds: ['argentine'], regionIds: ['global'],
+  },
+  {
+    id: 'budding', title: 'A colony can branch out', topic: 'supercolonies',
+    summary: 'Queens and workers can move together to start a nearby nest.',
+    detail: 'UC IPM describes Argentine-ant colonies splitting in spring and summer. This process is called budding. Capturing a node is our game’s simplified version of expansion.',
+    resourceIds: ['uc-ipm'], speciesIds: ['argentine'], regionIds: ['global'],
+  },
+  {
+    id: 'recognition', title: 'A familiar colony scent', topic: 'supercolonies',
+    summary: 'Colony recognition involves chemical cues on an ant’s body.',
+    detail: 'Researchers compared body-surface chemicals, genes, and aggression. Tolerant populations had similar profiles. Being the same species does not make every colony an ally.',
+    resourceIds: ['global-study'], speciesIds: ['argentine'], regionIds: ['global'],
+  },
+  {
+    id: 'transport', title: 'An ocean needs a lift', topic: 'prevention',
+    summary: 'Human movement helps explain spread between distant places.',
+    detail: 'The global study discusses human commerce and introductions. Dashed routes represent simulated human-assisted dispersal. They are not trails that ants walk across an ocean.',
+    resourceIds: ['global-study'], speciesIds: ['argentine'], regionIds: ['global'],
+  },
+  {
+    id: 'terrain', title: 'The battlefield matters', topic: 'terrain',
+    summary: 'Tight spaces change how numbers and strength interact.',
+    detail: 'In the 2023 ant experiments, meat ants won in every arena. Complex arenas reduced meat-ant fatalities. Our balanced battles illustrate the mechanism; they do not reproduce those outcomes.',
+    resourceIds: ['terrain-study'], speciesIds: ['argentine', 'meat'], regionIds: ['global', 'australia'],
+  },
+  {
+    id: 'species', title: 'Workers, with different strengths', topic: 'identification',
+    summary: 'Both playable species have one worker form.',
+    detail: 'The study compared small Argentine ants with much larger Australian meat ants. Neither has a specialized soldier caste. Growth and combat values here are choices for play.',
+    resourceIds: ['terrain-study', 'uc-ipm'], speciesIds: ['argentine', 'meat'], regionIds: ['australia'],
+  },
+  {
+    id: 'honeydew', title: 'A sweet connection', topic: 'biodiversity',
+    summary: 'Argentine ants tend insects that produce sugary honeydew.',
+    detail: 'UC IPM lists this behavior alongside feeding on sweets. The game’s food intervention represents a simplified resource change, not a tested treatment.',
+    resourceIds: ['uc-ipm'], speciesIds: ['argentine'], regionIds: ['global'],
+  },
+  {
+    id: 'biodiversity', title: 'More than an ant rivalry', topic: 'biodiversity',
+    summary: 'An invasion can affect a wider food web.',
+    detail: 'New Zealand’s conservation agency describes displacement of native invertebrates and competition for food. Impacts depend on place. Our habitat percentage is a game score, not a biodiversity measurement.',
+    resourceIds: ['doc-nz'], speciesIds: ['argentine'], regionIds: ['newzealand'],
+  },
+  {
+    id: 'habitats', title: 'Keep the landscape varied', topic: 'terrain',
+    summary: 'Habitat structure can influence interactions between species.',
+    detail: 'The terrain study tested two ant species under controlled conditions. Its result offers a question for conservation research, not a universal recipe. Habitat restoration in this game is an abstraction.',
+    resourceIds: ['terrain-study'], speciesIds: ['argentine', 'meat'], regionIds: ['global', 'australia'],
+  },
+  {
+    id: 'prevention', title: 'Connected nests need coordination', topic: 'prevention',
+    summary: 'Managing a large nest network can take a community effort.',
+    detail: 'New Zealand guidance explains why linked nests complicate control. For a real suspected infestation, use local official guidance. The timed interventions here are game mechanics, not pest-control instructions.',
+    resourceIds: ['doc-nz'], speciesIds: ['argentine'], regionIds: ['newzealand'],
+  },
+  {
+    id: 'observation', title: 'Start with a closer look', topic: 'citizen-science',
+    summary: 'A wildlife photo can become a shared observation.',
+    detail: 'iNaturalist explains recording evidence, time, and location. You can start with a broad identification such as “Insects.” Community suggestions are not guaranteed identification or official invasive-species reports.',
+    resourceIds: ['inaturalist', 'xerces'], speciesIds: [], regionIds: ['global'],
+  },
+  {
+    id: 'recovery', title: 'Curiosity can travel further', topic: 'biodiversity',
+    summary: 'Explore restoration work beyond the game.',
+    detail: 'Island Conservation offers project updates and optional ways to support island restoration. Xerces lists insect-monitoring projects. Both cover broader biodiversity; neither is a partner of this game.',
+    resourceIds: ['island-conservation', 'xerces'], speciesIds: [], regionIds: ['global'],
+  },
+];
+
+export const species: Record<SpeciesId, SpeciesProfile> = {
+  argentine: {
+    id: 'argentine', name: 'Argentine ant', scientificName: 'Linepithema humile',
+    description: 'Small workers, cooperating nests. Play through recruitment and connections.',
+    workerForms: 1, sizeLabel: 'About 2–3 mm', strengthLabel: 'Game trait · rapid recruitment',
+    regionIds: ['california', 'mediterranean', 'japan', 'africa', 'australia', 'newzealand', 'hawaii'],
+    resourceIds: ['uc-ipm', 'global-study', 'terrain-study'],
+  },
+  meat: {
+    id: 'meat', name: 'Australian meat ant', scientificName: 'Iridomyrmex purpureus',
+    description: 'Larger Australian workers. Play through individual strength and narrow routes.',
+    workerForms: 1, sizeLabel: 'About 8 mm', strengthLabel: 'Game trait · strong individuals',
+    regionIds: ['australia'], resourceIds: ['terrain-study'],
+  },
+  native: {
+    id: 'native', name: 'Native ant communities', scientificName: 'Regional native ant communities',
+    description: 'An Ecologist habitat proxy for local communities, rather than one named species or a measured population.',
+    workerForms: null, sizeLabel: 'Varies by region', strengthLabel: 'Simulation proxy',
+    regionIds: ['global'], resourceIds: ['global-study', 'doc-nz'],
+  },
+};

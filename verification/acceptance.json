@@ -1,0 +1,14 @@
+{
+  "durationSeconds": 300,
+  "worldRegions": ["california", "mediterranean", "japan", "africa", "australia", "newzealand", "hawaii"],
+  "nestsPerWorldRegion": 6,
+  "speciesNests": 12,
+  "facts": 12,
+  "resources": 7,
+  "dominanceShare": 0.6,
+  "dominanceSeconds": 20,
+  "ecologyTarget": 0.6,
+  "chargeCapacity": 3,
+  "chargeRegenerationSeconds": 15,
+  "viewports": [1440, 768, 390, 320, 375, 414]
+}
