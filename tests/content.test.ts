@@ -18,3 +18,14 @@ it('all learning entries resolve to reviewed official resources', () => {
   }
   expect(species.argentine.workerForms).toBe(1);
 });
+
+
+it('provides native-range context and ant-specific documentation', () => {
+  const native = facts.find(f => f.id === 'native-range');
+  expect(native?.regionIds).toContain('southamerica');
+  expect(native?.resourceIds).toContain('antweb');
+  const antweb = resources.find(r => r.id === 'antweb');
+  expect(new URL(antweb!.url).hostname).toBe('www.antweb.org');
+  expect(species.argentine.regionIds).toContain('southamerica');
+  expect(resources.find(r => r.id === 'inaturalist')!.summary).toMatch(/photo/i);
+});

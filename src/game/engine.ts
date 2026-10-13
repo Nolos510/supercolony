@@ -6,8 +6,6 @@ import type {
 
 const TICK = 0.1;
 const CAPACITY = 110;
-const DOMINANCE_SHARE = 0.6;
-const DOMINANCE_SECONDS = 20;
 const EFFECT_SECONDS: Record<Intervention, number> = { habitat: 60, food: 45, transport: 45 };
 const WORKERS: Record<SpeciesId, { growth: number; strength: number; capacity: number }> = {
   argentine: { growth: 0.95, strength: 1, capacity: CAPACITY },
@@ -35,7 +33,7 @@ function record(state: GameState, message: string, factId: string) {
   if (!state.discovered.includes(factId)) state.discovered.push(factId);
   const id = (state.events.at(-1)?.id ?? 0) + 1;
   state.events.push({ id, time: state.time, message, factId });
-  // The last forty reports are enough for a five-minute round and bound UI work.
+  // Bound the event log during untimed expeditions.
   if (state.events.length > 40) state.events.shift();
 }
 
@@ -82,7 +80,7 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
       }
     }
   } else {
-    regions.forEach((region, regionIndex) => {
+    regions.filter(region => mode !== 'ecologist' || !region.nativeRange).forEach((region, regionIndex) => {
       for (let i = 0; i < 6; i++) {
         let owner: Owner = i === 2 ? 'rival' : i === 3 ? 'player' : 'neutral';
         if (i === 0) owner = [0, 5].includes(regionIndex) ? 'player' : [1, 2, 4].includes(regionIndex) ? 'rival' : 'neutral';
@@ -105,7 +103,9 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
       ['mediterranean', 'africa', 24], ['mediterranean', 'japan', 34],
       ['japan', 'australia', 27], ['australia', 'newzealand', 20], ['hawaii', 'japan', 28],
     ];
-    connections.forEach(([from, to, travelSeconds]) => edges.push({
+    if (mode === 'war') connections.push(['southamerica', 'california', 31], ['southamerica', 'mediterranean', 34]);
+    const presentRegions = new Set(nodes.map(site => site.regionId));
+    connections.filter(([from, to]) => presentRegions.has(from) && presentRegions.has(to)).forEach(([from, to, travelSeconds]) => edges.push({
       id: `dispersal-${from}-${to}`, from: `${from}-0`, to: `${to}-0`, kind: 'overseas', travelSeconds,
     }));
   }
@@ -114,7 +114,7 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
     mode, playerSpecies, seed: normalizedSeed, rng: normalizedSeed || 1,
     time: 0, duration: scenarios[mode].duration, status: 'running', aiEnabled: true,
     nodes, edges, fleets: [], effects: [], charges: 3, chargeProgress: 0,
-    dominanceTime: 0, initialHabitat: nodes.reduce((sum, site) => sum + site.habitat, 0),
+    initialHabitat: nodes.reduce((sum, site) => sum + site.habitat, 0),
     events: [], discovered: [], nextFleetId: 1,
     stats: { orders: 0, captures: 0, interventions: 0, losses: 0 },
   };
@@ -354,24 +354,24 @@ function growAndEcology(state: GameState, dt: number) {
   }
 }
 
-function dominant(state: GameState): Owner | undefined {
-  const counts = territory(state);
-  if (counts.player / state.nodes.length >= DOMINANCE_SHARE) return 'player';
-  if (counts.rival / state.nodes.length >= DOMINANCE_SHARE) return 'rival';
-  return undefined;
+function finishSurvey(state: GameState) {
+  state.status = habitat(state) + 1e-9 >= 0.6 ? 'won' : 'lost';
+  record(state, 'The habitat survey is complete. Explore ways to observe and protect biodiversity.', 'observation');
 }
 
-function finish(state: GameState) {
-  if (state.mode === 'ecologist') {
-    state.status = habitat(state) + 1e-9 >= 0.6 ? 'won' : 'lost';
-    record(state, 'The habitat survey is complete. Explore ways to observe and protect biodiversity.', 'observation');
-    record(state, 'Recovery and prevention are long-term work beyond a five-minute game.', 'recovery');
-  } else {
-    const counts = territory(state);
-    state.status = counts.player > counts.rival ? 'won' : counts.player < counts.rival ? 'lost' : 'draw';
-    record(state, 'The territory survey is complete. Every battlefield nest was simulated.', state.mode === 'species' ? 'terrain' : 'transport');
-    if (state.discovered.length < 3) record(state, 'Colony identity helps explain cooperation within networks and conflict between them.', 'recognition');
-  }
+function evaluateElimination(state: GameState) {
+  const alive = (owner: Owner) => state.nodes.some(site => site.owner === owner)
+    || state.fleets.some(fleet => fleet.owner === owner && fleet.units > 0);
+  const playerAlive = alive('player');
+  const rivalAlive = alive('rival');
+  if (playerAlive && rivalAlive) return;
+  state.status = playerAlive ? 'won' : rivalAlive ? 'lost' : 'draw';
+  const message = state.status === 'won'
+    ? 'The rival colony has no nests or workers in transit. Your colony survives.'
+    : state.status === 'lost'
+      ? 'Your colony has no nests or workers in transit. Review the expedition and try a new strategy.'
+      : 'Neither colony has nests or workers in transit. The expedition ends without a surviving colony.';
+  record(state, message, state.mode === 'species' ? 'species' : 'recognition');
 }
 
 /** A fixed 100 ms tick. Hosts accumulate frame time before passing complete ticks. */
@@ -381,8 +381,8 @@ export function advance(state: GameState, seconds: number): GameState {
   if (!ticks) return state;
   const next = copy(state);
   for (let tick = 0; tick < ticks && next.status === 'running'; tick++) {
-    const previousDominant = dominant(next);
-    next.time = Math.min(next.duration, Math.round((next.time + TICK) * 10) / 10);
+    next.time = Math.round((next.time + TICK) * 10) / 10;
+    if (next.mode === 'ecologist' && next.duration !== null) next.time = Math.min(next.duration, next.time);
     next.effects = next.effects.filter(effect => effect.expires > next.time);
     growAndEcology(next, TICK);
     moveFleets(next, TICK);
@@ -392,19 +392,8 @@ export function advance(state: GameState, seconds: number): GameState {
         next.chargeProgress += TICK;
         if (next.chargeProgress + 1e-8 >= 15) { next.charges++; next.chargeProgress = 0; }
       } else next.chargeProgress = 0;
-    } else {
-      const owner = dominant(next);
-      next.dominanceTime = owner ? owner === previousDominant ? next.dominanceTime + TICK : TICK : 0;
-      if (next.dominanceTime + 1e-8 >= DOMINANCE_SECONDS) {
-        next.status = owner === 'player' ? 'won' : 'lost';
-        record(next, `${owner === 'player' ? 'Your colony' : 'The rival colony'} held 60% of nests for twenty seconds.`, next.mode === 'species' ? 'species' : 'supercolonies');
-        if (next.discovered.length < 3) {
-          record(next, next.mode === 'species' ? 'Complex terrain changes how numbers and worker strength interact.' : 'Transport connects distant regions in this game abstraction.', next.mode === 'species' ? 'terrain' : 'transport');
-          record(next, 'Recognition shapes cooperation between real ant populations.', 'recognition');
-        }
-      }
-    }
-    if (next.time >= next.duration && next.status === 'running') finish(next);
+      if (next.duration !== null && next.time >= next.duration) finishSurvey(next);
+    } else evaluateElimination(next);
   }
   return next;
 }

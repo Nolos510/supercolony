@@ -190,3 +190,29 @@ dialog::backdrop { background: var(--color-shade); backdrop-filter: blur(4px); }
 }
 .topbar button:focus-visible, .command-bar button:focus-visible, .command-bar select:focus-visible { outline-color: var(--color-player); }
 .fact-entry p, .fact-entry .fact-detail, .resource-entry p, .learning-intro { font-size: 14px; }
+
+/* Playtest feedback: explain results and retain compact untimed controls. */
+.untimed-clock { font-size: 12px; white-space: nowrap; }
+.progress-target { max-width: 220px; }
+.result-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.result-stats div { min-width: 0; }
+.result-stats dt { font-size: 12px; color: var(--color-muted); }
+.result-stats dd { margin: 4px 0 8px; font-family: var(--font-display); font-size: 28px; }
+.result-stats .stat-definition { font: 12px/1.55 var(--font-body); color: var(--color-muted); margin: 0; }
+.result-involvement { display: block; }
+.result-involvement > h3 { font-family: var(--font-display); font-size: 24px; margin-bottom: 18px; }
+.next-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.next-steps h4 { font-size: 13px; margin-bottom: 8px; }
+.next-steps p { font-size: 13px; color: var(--color-muted); margin-bottom: 8px; }
+@media (max-width: 600px) {
+  .progress-target { max-width: none; font-size: 10px; }
+  .untimed-clock { font-size: 10px; }
+  .result-stats, .next-steps { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .result-stats div { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .result-stats .stat-definition { grid-column: 1 / -1; }
+  .result-stats dd { margin: 0; }
+}
+
+/* Educational regional panels participate in layout so actions cannot cover the inspector. */
+.map-viewport:has(.regional-context-card) { overflow-y: auto; padding: 150px 16px 80px; }
+.regional-context-card { position: relative; inset: auto; margin: 0 auto; width: 100%; max-width: 620px; }

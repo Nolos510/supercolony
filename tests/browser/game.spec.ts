@@ -26,7 +26,7 @@ test('tutorial, real orders, shared world/region state, and source access', asyn
   await expect(page.getByRole('link', { name: /Read the research/ }).first()).toHaveAttribute('target', '_blank');
 });
 
-test('all modes, ecological actions, five-minute results and restart', async ({ page }) => {
+test('untimed combat, review explanations, ecological results and restart', async ({ page }) => {
   for (const mode of ['Supercolony War', 'Species Clash', 'Ecologist']) {
     await page.goto('/');
     await page.getByRole('button', { name: mode, exact: true }).click();
@@ -37,7 +37,20 @@ test('all modes, ecological actions, five-minute results and restart', async ({ 
       await page.getByRole('button', { name: 'Restore habitat', exact: true }).click();
       expect(await page.evaluate(() => window.__supercolony.getState().charges)).toBe(2);
     }
-    await page.evaluate(() => window.__supercolony.advance(300));
+    if (mode !== 'Ecologist') {
+      await page.evaluate(() => { const s = window.__supercolony.getState(); s.aiEnabled = false; s.nodes.forEach((n, i) => { n.owner = i < Math.ceil(s.nodes.length * .7) ? 'rival' : 'player'; }); window.__supercolony.advance(900); });
+      expect(await page.evaluate(() => window.__supercolony.getState().status)).toBe('running');
+      await expect(page.getByText('No time limit', { exact: true })).toBeVisible();
+      await page.getByRole('button', { name: 'SUPERColony game menu', exact: true }).click();
+      await page.getByRole('button', { name: 'Review current match', exact: true }).click();
+      await expect(page.getByRole('dialog', { name: 'Match review' })).toBeVisible();
+      await expect(page.getByText('Capture events', { exact: true })).toBeVisible();
+      await expect(page.getByText('Topics encountered', { exact: true })).toBeVisible();
+      await expect(page.getByRole('link', { name: /Compare Argentine-ant specimens/ })).toHaveAttribute('href', /antweb/);
+      await page.getByRole('button', { name: 'Continue match', exact: true }).click();
+      expect(await page.evaluate(() => window.__supercolony.getState().status)).toBe('running');
+      await page.evaluate(() => { window.__supercolony.getState().nodes.forEach(n => { n.owner = 'player'; }); window.__supercolony.getState().fleets = []; window.__supercolony.advance(1); });
+    } else await page.evaluate(() => window.__supercolony.advance(300));
     await expect(page.getByRole('dialog', { name: 'Match results' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Play again', exact: true })).toBeVisible();
     await expect(page.getByRole('link', { name: /Explore further|Get involved/ }).first()).toBeVisible();
@@ -82,4 +95,17 @@ test('responsive layout, keyboard focus, reduced motion, and accessibility', asy
   const gameA11y = await new AxeBuilder({ page }).analyze();
   expect(gameA11y.violations).toEqual([]);
   expect(errors).toEqual([]);
+});
+
+
+test('South America shows native-range context and shares world nest state', async ({ page }) => {
+  await page.goto('/'); await page.getByRole('button', { name: 'Start match', exact: true }).click();
+  await page.getByRole('button', { name: 'Skip tutorial' }).click();
+  await page.getByRole('button', { name: 'Pause match' }).click();
+  const before = await page.evaluate(() => JSON.stringify(window.__supercolony.getState()));
+  await page.getByRole('button', { name: 'Zoom into South America', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Paraná basin · native range' })).toBeVisible();
+  await expect(page.locator('.map-node')).toHaveCount(6);
+  await page.getByRole('button', { name: 'World view', exact: true }).click();
+  expect(await page.evaluate(() => JSON.stringify(window.__supercolony.getState()))).toBe(before);
 });

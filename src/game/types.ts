@@ -6,10 +6,10 @@ export type Intervention = 'habitat' | 'food' | 'transport';
 export type MatchStatus = 'running' | 'paused' | 'won' | 'lost' | 'draw';
 export interface RegionDefinition {
   id: string; name: string; shortName: string; country: string;
-  anchor: [number, number]; overview: string; sourceIds: string[];
+  nativeRange?: boolean; anchor: [number, number]; overview: string; sourceIds: string[];
 }
 export interface ScenarioDefinition {
-  id: ModeId; name: string; description: string; objective: string; learning: string; duration: number;
+  id: ModeId; name: string; description: string; objective: string; learning: string; duration: number | null;
 }
 export interface SpeciesProfile {
   id: SpeciesId; name: string; scientificName: string; description: string;
@@ -40,10 +40,10 @@ export interface EffectState { nodeId: string; kind: Intervention; expires: numb
 export interface GameEvent { id: number; time: number; message: string; factId: string }
 export interface GameState {
   mode: ModeId; playerSpecies: SpeciesId; seed: number; rng: number;
-  time: number; duration: number; status: MatchStatus; aiEnabled: boolean;
+  time: number; duration: number | null; status: MatchStatus; aiEnabled: boolean;
   nodes: NestState[]; edges: TrailState[]; fleets: FleetState[];
   effects: EffectState[]; charges: number; chargeProgress: number;
-  dominanceTime: number; initialHabitat: number; events: GameEvent[]; discovered: string[];
+  initialHabitat: number; events: GameEvent[]; discovered: string[];
   nextFleetId: number; stats: { orders: number; captures: number; interventions: number; losses: number };
 }
 export interface CommandResult { state: GameState; error?: string }

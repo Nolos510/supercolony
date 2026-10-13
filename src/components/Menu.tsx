@@ -4,7 +4,7 @@ import { scenarios } from '../game/scenarios';
 import Ant from './Ant';
 import { Icon } from './Icons';
 
-export default function Menu({ onStart, onLearn, onResume }: { onStart: (mode: ModeId, species: SpeciesId) => void; onLearn: () => void; onResume?: () => void }) {
+export default function Menu({ onStart, onLearn, onResume, onReview }: { onStart: (mode: ModeId, species: SpeciesId) => void; onLearn: () => void; onResume?: () => void; onReview?: () => void }) {
   const [mode, setMode] = useState<ModeId>('war');
   const [species, setSpecies] = useState<SpeciesId>('argentine');
   const dialog = useRef<HTMLDialogElement>(null);
@@ -31,8 +31,9 @@ export default function Menu({ onStart, onLearn, onResume }: { onStart: (mode: M
         <button aria-pressed={species === 'meat'} onClick={() => setSpecies('meat')}>Australian meat ant</button>
       </div>}
       <button className="primary start-button" onClick={() => onStart(mode, species)}>Start match <Icon name="arrow" /></button>
+      {onReview && <button className="resume-current" onClick={onReview}>Review current match <Icon name="book" size={16} /></button>}
       {onResume && <button className="resume-current" onClick={onResume}>Resume current match <Icon name="play" size={16} /></button>}
-      <div className="menu-foot"><span>5-minute matches · Single player</span><button className="text-button" onClick={onLearn}>Learn & get involved <span aria-hidden="true">↗</span></button></div>
+      <div className="menu-foot"><span>{mode === 'ecologist' ? '5-minute habitat survey' : 'No time limit'} · Single player</span><button className="text-button" onClick={onLearn}>Learn & get involved <span aria-hidden="true">↗</span></button></div>
       <p className="science-caption">Real places and biology. Simulated nests, frontlines, and populations.</p>
     </div>
   </dialog>;

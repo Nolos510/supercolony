@@ -1,0 +1,9 @@
+# User playtest feedback successor
+
+2026-10-13. Baseline: committed, verified SUPERColony v1 at `2f0261f`. Its original contract, receipt and failed evidence are preserved. This new user request changes the original five-minute/60%-twenty-second objectives, so those acceptance rules were deliberately replaced before initializing this successor. New assertions retain conservation, deterministic simulation, invalid orders, simultaneous arrivals, pause, terrain, intervention expiry and ecology results, and add untimed majority play, elimination with pending-fleet survival, capture-event semantics, native-range context and clear ant resources.
+
+Combat uses no duration. Ecologist retains its finite habitat survey unless the user selects the open-ended alternative in the pending optional question. No dependency or global visual identity changes. Eight repairs after initial verification, 90-minute execution cap; Comfy excluded and port8000 reserved. Router cache could not be written in sandbox, so exact known source reads were used.
+
+Initial successor command attempt passed, but independent review-dialog axe audit found serious invalid definition-list structure. Evidence: output/feedback/review-failure.json. A linked repair receipt protects an added independent axe/viewport/state test and carries the same overall budget (repair1; seven remaining, original time deadline). Descriptions were moved into semantic dd elements. No existing protected fixtures or tests were changed after initialization.
+
+Supplemental Ecologist native-context mobile return action was covered by inspector (saved screenshot/failure summary). Second linked repair puts educational context in normal layout and protects an actual mobile-click regression. Total2 repairs; six remain under original deadline. Existing protected tests untouched.

@@ -44,20 +44,26 @@ export const regions: RegionDefinition[] = [
     overview: 'Argentine ants occur in Hawaii. In-game dispersal links represent human-assisted movement as an abstraction, not documented active shipping routes.',
     sourceIds: ['global-study'],
   },
+  {
+    id: 'southamerica', name: 'Paraná basin · native range', shortName: 'South America', country: 'Northern Argentina · Paraná drainage',
+    anchor: [-58.81, -27.49], nativeRange: true,
+    overview: 'Argentine ants are native to lowland river corridors in the Paraná drainage, including parts of northern Argentina, Paraguay, Uruguay and southern Brazil. Native-range presence is not an invasion. This playable nest network is simulated.',
+    sourceIds: ['antweb'],
+  },
 ];
 
 export const scenarios: Record<ModeId, ScenarioDefinition> = {
   war: {
     id: 'war', name: 'Supercolony War',
     description: 'Connect your nests. Build a swarm. Follow the network around the world.',
-    objective: 'Hold 60% of nests for 20 seconds, or lead in territory after five minutes.',
-    learning: 'Colony recognition, budding, and human-assisted dispersal.', duration: 300,
+    objective: 'Eliminate the rival colony by taking its last nest and defeating its remaining swarms.',
+    learning: 'Colony recognition, budding, native range, and human-assisted dispersal.', duration: null,
   },
   species: {
     id: 'species', name: 'Species Clash',
     description: 'Argentine recruitment meets meat-ant strength on an Australian battlefield.',
-    objective: 'Hold 60% of nests for 20 seconds, or lead in territory after five minutes.',
-    learning: 'Worker strength, recruitment, and the effect of complex terrain.', duration: 300,
+    objective: 'Eliminate the rival colony by taking its last nest and defeating its remaining swarms.',
+    learning: 'Worker strength, recruitment, and the effect of complex terrain.', duration: null,
   },
   ecologist: {
     id: 'ecologist', name: 'Ecologist',

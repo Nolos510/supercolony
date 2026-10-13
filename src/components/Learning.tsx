@@ -24,11 +24,11 @@ export default function Learning({ tab, focusFact, onClose }: { tab: 'guide' | '
   const ordered = [...facts].sort((a, b) => a.id === focusFact ? -1 : b.id === focusFact ? 1 : 0);
   const filtered = resources.filter(r => (topic === 'all' || r.topics.includes(topic)) && (region === 'all' || r.regionIds.includes(region) || r.regionIds.includes('global')));
   return <dialog ref={dialog} className="learning-dialog" aria-label={title} onCancel={onClose}>
-    <header className="dialog-header"><div><span className="eyebrow">The world beyond the game</span><h2>{title}</h2></div><button className="icon-button" aria-label="Close field guide" onClick={onClose}><Icon name="close" /></button></header>
+    <header className="dialog-header"><div><span className="eyebrow">The world beyond the game</span><h2>{title}</h2></div><button className="icon-button" aria-label={active === 'guide' ? 'Close field guide' : 'Close resources'} onClick={onClose}><Icon name="close" /></button></header>
     <div className="learning-tabs"><button aria-pressed={active === 'guide'} onClick={() => setActive('guide')}><Icon name="book" />Field guide</button><button aria-pressed={active === 'resources'} onClick={() => setActive('resources')}><Icon name="leaf" />Learn & get involved</button></div>
     <div className="dialog-scroll">
       {active === 'guide' ? <><p className="learning-intro">An extraordinary species. A complicated story. Follow each idea back to the people who study it.</p><div className="facts-grid">{ordered.map(f => <Fact key={f.id} fact={f} />)}</div></> : <>
-        <p className="learning-intro">Keep following your curiosity. Read a study, observe the wildlife around you, or find a conservation project to support.</p>
+        <p className="learning-intro">Start with ant-specific research and identification. You can also share wildlife photos for community identification or explore broader conservation projects.</p>
         <div className="resource-filters"><label>Topic<select value={topic} onChange={e => setTopic(e.target.value)}><option value="all">All topics</option>{Array.from(new Set(resources.flatMap(r => r.topics))).sort().map(t => <option key={t} value={t}>{t.replaceAll('-', ' ')}</option>)}</select></label><label>Region<select value={region} onChange={e => setRegion(e.target.value)}><option value="all">Worldwide & all regions</option>{regions.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}</select></label></div>
         {(['research', 'participate', 'support'] as const).map(group => {
           const entries = filtered.filter(r => r.group === group);

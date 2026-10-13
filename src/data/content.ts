@@ -30,11 +30,20 @@ export const resources: ResourceEntry[] = [
     topics: ['identification', 'supercolonies'], speciesIds: ['argentine'],
   },
   {
-    id: 'inaturalist', title: 'Record your wildlife discoveries',
+    id: 'antweb', title: 'AntWeb · Argentine-ant specimens',
+    organization: 'California Academy of Sciences · AntWeb',
+    url: 'https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all',
+    group: 'research', type: 'official-guide', reviewedAt: '2026-10-13',
+    summary: 'Browse ant specimen images, taxonomy, and collection records. An ant-focused research reference with native-range context.',
+    regionLabel: 'Worldwide records · South American native-range context', regionIds: ['global', 'southamerica'],
+    topics: ['identification', 'biodiversity'], speciesIds: ['argentine'],
+  },
+  {
+    id: 'inaturalist', title: 'Learn to record an observation',
     organization: 'iNaturalist',
     url: 'https://help.inaturalist.org/en/support/solutions/articles/151000192921',
     group: 'participate', type: 'citizen-science', reviewedAt: '2026-10-13',
-    summary: 'Learn to share a photo, time, and location for community identification. An observation is not a regulatory report.',
+    summary: 'Share a photo, date, and location for community identification. A general wildlife observation guide, not an ant-specific conservation program.',
     regionLabel: 'Worldwide', regionIds: ['global'],
     topics: ['citizen-science', 'identification', 'biodiversity'], speciesIds: [],
   },
@@ -52,7 +61,7 @@ export const resources: ResourceEntry[] = [
     organization: 'New Zealand Department of Conservation · Te Papa Atawhai',
     url: 'https://www.doc.govt.nz/nature/pests-and-threats/animal-pests-and-threats/argentine-ants/',
     group: 'support', type: 'official-guide', reviewedAt: '2026-10-13',
-    summary: 'Read government guidance on identification, ecological threats, and coordinated management. This advice is specific to New Zealand.',
+    summary: 'New Zealand guidance on identifying Argentine ants and preventing accidental spread: check potted plants, soil, materials, and gear before moving them.',
     regionLabel: 'New Zealand', regionIds: ['newzealand'],
     topics: ['identification', 'biodiversity', 'prevention'], speciesIds: ['argentine'],
   },
@@ -68,6 +77,12 @@ export const resources: ResourceEntry[] = [
 ];
 
 export const facts: FactEntry[] = [
+  {
+    id: 'native-range', title: 'At home in South America', topic: 'biodiversity',
+    summary: 'Argentine ants belong to a South American river basin.',
+    detail: 'Their native range follows lowland river corridors in the Paraná drainage, including parts of northern Argentina, Paraguay, Uruguay, and southern Brazil. Native-range presence is not an invasion. This region’s playable nests and rival ownership are simulated.',
+    resourceIds: ['antweb'], speciesIds: ['argentine'], regionIds: ['southamerica'],
+  },
   {
     id: 'supercolonies', title: 'One colony, many nests', topic: 'supercolonies',
     summary: 'A supercolony is a network of cooperating nests.',
@@ -147,8 +162,8 @@ export const species: Record<SpeciesId, SpeciesProfile> = {
     id: 'argentine', name: 'Argentine ant', scientificName: 'Linepithema humile',
     description: 'Small workers, cooperating nests. Play through recruitment and connections.',
     workerForms: 1, sizeLabel: 'About 2–3 mm', strengthLabel: 'Game trait · rapid recruitment',
-    regionIds: ['california', 'mediterranean', 'japan', 'africa', 'australia', 'newzealand', 'hawaii'],
-    resourceIds: ['uc-ipm', 'global-study', 'terrain-study'],
+    regionIds: ['california', 'mediterranean', 'japan', 'africa', 'australia', 'newzealand', 'hawaii', 'southamerica'],
+    resourceIds: ['uc-ipm', 'global-study', 'terrain-study', 'antweb'],
   },
   meat: {
     id: 'meat', name: 'Australian meat ant', scientificName: 'Iridomyrmex purpureus',

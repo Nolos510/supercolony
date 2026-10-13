@@ -13,6 +13,7 @@ The place names below describe each anchor’s intended reference area. Scientif
 | `australia` | Southern Australia | `[138.6, -34.93]` | Adelaide area; a reference point for the Australian network | `terrain-study`, `global-study` |
 | `newzealand` | Northern New Zealand | `[174.76, -36.85]` | Auckland area; a reference point for northern New Zealand | `doc-nz`, `global-study` |
 | `hawaii` | Hawaiian Islands | `[-155.58, 19.62]` | Hawaiʻi Island; a reference point for the Hawaiian network | `global-study` |
+| `southamerica` | Paraná basin · native range | `[-58.81, -27.49]` | Corrientes area on the Paraná corridor; broad South American native-range context | `antweb` |
 
 ## Geographic verification
 
@@ -27,8 +28,9 @@ Compared with Point geometry from the official [Natural Earth 1:10m populated pl
 | Adelaide | AU | `1159151165` | `[138.598059, -34.933042]` | 0.38 km |
 | Auckland | NZ | `1159151703` | `[174.763027, -36.848055]` | 0.35 km |
 | Hilo | US | `1159149209` | `[-155.08154, 19.705643]` | 53.06 km |
+| Corrientes | AR | `1159131953` | `[-58.809987, -27.489964]` | Less than 0.01 km |
 
-Six anchors are within 1.8 km of their reference cities. Hawaii's marker is a broad island placement west-southwest of Hilo, not a rounded Hilo coordinate. No game coordinates were changed.
+Seven anchors are within 1.8 km of their reference cities. Hawaii's marker is a broad island placement west-southwest of Hilo, not a rounded Hilo coordinate. The original seven anchors remain unchanged; Corrientes is the eighth anchor added in the authorized native-range revision.
 
 The downloaded reference and comparison evidence are retained only in ignored `output/geography-reference/`. Reference SHA-256: `fd3fa867a320cbd5c5b6bb5bc550afeec2939fb2cef688e508007282a55ac42f`. This verifies approximate geographic placement, not ants, nests, or current frontlines.
 
@@ -38,6 +40,7 @@ The downloaded reference and comparison evidence are retained only in ignored `o
 - [`uc-ipm`: University of California identification guide](https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html) supplies California-oriented species documentation. It does not identify the game’s Los Angeles anchor as a nest.
 - [`terrain-study`: ant warfare research (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/) supports an Australian two-species comparison and terrain mechanism. The Adelaide anchor is not claimed to be the experimental location.
 - [`doc-nz`: New Zealand Department of Conservation guidance](https://www.doc.govt.nz/nature/pests-and-threats/animal-pests-and-threats/argentine-ants/) documents New Zealand occurrence and ecological impacts, including Auckland context. It does not supply the game’s exact Auckland point.
+- [`antweb`: California Academy of Sciences species account](https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all) describes native Paraná-drainage context across parts of northern Argentina, Paraguay, Uruguay and southern Brazil. [Wild’s 2004 primary distribution study](https://academic.oup.com/aesa/article/97/6/1204/54982) corroborates the basin-scale interpretation and distinguishes introductions elsewhere in South America. Neither source makes the illustrative Corrientes point a surveyed nest or current colony boundary.
 
 The source papers and official guidance were reviewed for educational context; access limitations and publication years are recorded in `docs/SOURCES.md` and `docs/CONTENT_REVIEW.md`. The anchors remain illustrative design choices, with approximate placement verified against Natural Earth rather than attributed to the ant studies.
 
@@ -48,5 +51,7 @@ The world backdrop uses public-domain Natural Earth 1:110m land geometry, bundle
 Each regional gateway refers to an existing simulated nest. Regional nest layouts, territory ownership, trails, ocean links, worker counts, and habitat scores are game state. Zooming changes the view of that state, not its scientific status. Ocean links abstract human-assisted dispersal; they do not identify active shipping routes. The map does not show live ant populations, current war boundaries, or a physically continuous worldwide colony.
 
 Ecologist’s unnamed native-community proxies likewise do not imply that Australian meat ants occur outside Australia. The named meat-ant comparison belongs to the Australian scenario.
+
+The South American region is named **Paraná basin · native range** and shortened to **South America** for map navigation. War includes six fictional nests there. Ecologist retains this region as educational context and excludes it from invasion-pressure simulation: Argentine ants living within their native range are not thereby an invasive population. The anchor represents a broad basin context, not the whole continent’s native range, an exact range polygon, or an identified source colony for worldwide introductions.
 
 A future map of real observations or nest boundaries would require an explicitly licensed occurrence/survey dataset, observation dates, identification quality, coordinate uncertainty, and separate evidence for supercolony membership. This release bundles illustrative anchors and historical regional context instead.

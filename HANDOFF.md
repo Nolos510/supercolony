@@ -2,11 +2,11 @@
 
 ## Result and authority
 
-The approved local browser game is implemented and verified in `/Users/nolos/Desktop/Ant Game`. User additionally authorized creating and working through a GitHub repository. Delivery home: private `https://github.com/Nolos510/supercolony`, branch `main`. Validation snapshot: 2026-10-13, completion receipt attempt 4. Use `git log -1` for the delivery commit and `git status --short` when resuming.
+The approved local browser game is implemented and verified in `/Users/nolos/Desktop/Ant Game`. User additionally authorized creating and working through a GitHub repository. Delivery home: private `https://github.com/Nolos510/supercolony`, branch `main`. Latest validation: 2026-10-13 playtest-feedback revision; final feedback receipt passes. Launch baseline 2f0261f and its receipt remain historical. Use `git log -1` for the delivery commit and `git status --short` when resuming.
 
 ## User-visible behavior
 
-Three single-player modes: 42-node worldwide Supercolony War, a twelve-node Australian Species Clash with two species choices, and habitat-preservation Ecologist. Shared reserves/fleets across world and region views, 25/50/100% orders through tap/drag/native keyboard controls, automatic growth and AI, terrain combat, timed interventions, tutorials, pause, restart, and complete results. Twelve sourced field-guide entries and seven freely browsable research/participation/support resources connect discoveries and results directly to official destinations.
+Three single-player modes: 48-node worldwide Supercolony War with native Paraná-basin context, a twelve-node Australian Species Clash with two species choices, and habitat-preservation Ecologist. Shared reserves/fleets across world and region views, 25/50/100% orders through tap/drag/native keyboard controls, automatic growth and AI, terrain combat, timed interventions, tutorials, pause, restart, and complete results. Thirteen sourced field-guide entries and eight freely browsable research/participation/support resources connect discoveries and results directly to official destinations.
 
 The visual direction is a geographic field atlas with mineral-blue water, moss terrain, warm-paper specimens and learning surfaces, charcoal controls, and cyan/amber tactical symbols. React owns controls/inspectors; a seeded fixed-step engine and Canvas animation operate outside its render cycle.
 
@@ -16,7 +16,13 @@ Local development preview: `http://127.0.0.1:5173`. The task’s Vite process wa
 
 Production output is already built in `dist/`. Run `npm run build` to recreate it. To serve it, stop the development server for this project first, then run `npm run preview` on the same 5173 port. No backend, accounts, credentials, or API keys are required. Matches are in memory and refresh resets them.
 
-## Verification and evidence
+## Latest playtest feedback
+
+Combat is untimed and ends only when a colony has no nests or swarms left; majority control alone cannot end it. Ecologist retains its five-minute habitat survey and excludes native South America from its invasion graph. Review current match in the menu pauses, explains stats, preserves three takeaways, and allows continuing. AntWeb specimen/taxonomy links, explicit iNaturalist observation instructions, and New Zealand prevention links replace the unexplained Get involved destination.
+
+Latest verification: typecheck/lint/build,15 unit/content tests,7 browser tests, and final helper check pass. The feedback run needed two scoped repairs; its linked contract carries the same total budget/deadline. Details: docs/FEEDBACK_VERIFICATION.md; current receipt verification/feedback-final-receipt.json. Original acceptance was revised before successor initialization because the user explicitly changed end conditions.
+
+## Historical launch verification and evidence
 
 All five protected commands pass: typecheck, lint, test (11 tests), test:e2e (4 browser tests), and build. Final completion-helper check passes with four attempts / three repairs. Same initial-plus-eight repair budget; no protected verifier changes. Receipt: `verification/receipt.json`; command logs and failed evidence: `output/verification/`.
 

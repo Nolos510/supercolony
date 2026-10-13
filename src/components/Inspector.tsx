@@ -10,7 +10,7 @@ export default function Inspector({ state, node, view, onIntervene, onGuide }: {
   const [expanded, setExpanded] = useState(false);
   const profile = species[node.species];
   const region = regions.find(r => r.id === (view ?? node.regionId))!;
-  const factId = state.mode === 'ecologist' ? 'habitats' : node.terrain === 'complex' ? 'terrain' : state.events.at(-1)?.factId ?? 'supercolonies';
+  const factId = region.nativeRange ? 'native-range' : state.mode === 'ecologist' ? 'habitats' : node.terrain === 'complex' ? 'terrain' : state.events.at(-1)?.factId ?? 'supercolonies';
   const fact = facts.find(f => f.id === factId) ?? facts[0];
   const source = resources.find(r => r.id === fact.resourceIds[0])!;
   const effects = state.effects.filter(e => e.nodeId === node.id);

@@ -1,5 +1,7 @@
 # SUPERColony launch verification
 
+Historical launch record at2f0261f. Current playtest-feedback evidence is in [FEEDBACK_VERIFICATION.md](FEEDBACK_VERIFICATION.md).
+
 Reviewed locally on 2026-10-13. The approved implementation is complete; enjoyment, learning, and final balance need human playtesting.
 
 ## Protected checks
