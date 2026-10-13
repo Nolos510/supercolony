@@ -1,0 +1,120 @@
+{
+  "version": 2,
+  "task_id": "supercolony-group-fieldwork-reviewed",
+  "outcome": "Multiple owned nests dispatch independent conserved swarms to one target with mouse, touch and keyboard selection; Ecologist provides actual-state observations, deliberate response choice and paused-time-safe follow-up.",
+  "scope": "New user request following completed01c12e2. Preserve prior receipts/evidence; add multi-selection and guided observation flow within existing design. Existing ecology action browser fixture chooses Free fieldwork before raw controls, explicitly updated before initialization; no other old verifiers changed. No runtime dependencies, hosting, social characters or invented scientific case measurements. Linked review repair: first commands passed; independent UI/content review found crowded tablet charge heading and wording implying blocked fleets move or every action causes recovery. Repair spacing and claims only, keep all protected verifiers unchanged and carry original deadline/eight-repair allowance (one used, seven remain).",
+  "limits": {
+    "max_repairs": 7,
+    "max_seconds": 4893
+  },
+  "subjects": [
+    "/Users/nolos/Desktop/Ant Game/package.json",
+    "/Users/nolos/Desktop/Ant Game/package-lock.json",
+    "/Users/nolos/Desktop/Ant Game/index.html",
+    "/Users/nolos/Desktop/Ant Game/src/main.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/styles.css",
+    "/Users/nolos/Desktop/Ant Game/tokens.css",
+    "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+    "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Menu.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Learning.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Ant.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+    "/Users/nolos/Desktop/Ant Game/public/world.json",
+    "/Users/nolos/Desktop/Ant Game/README.md",
+    "/Users/nolos/Desktop/Ant Game/docs/SOURCES.md",
+    "/Users/nolos/Desktop/Ant Game/src/components/Icons.tsx",
+    "/Users/nolos/Desktop/Ant Game/docs/GEOGRAPHY.md",
+    "/Users/nolos/Desktop/Ant Game/docs/CONTENT_REVIEW.md",
+    "/Users/nolos/Desktop/Ant Game/src/components/SourcePicker.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Fieldwork.tsx"
+  ],
+  "protected": [
+    "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+    "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts"
+  ],
+  "criteria": [
+    {
+      "id": "types",
+      "description": "Strict TypeScript compilation",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "typecheck"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "lint",
+      "description": "Scoped source lint",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "lint"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "behavior-and-science",
+      "description": "Seeded gameplay, all outcomes, fixed fixtures, and source integrity",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "player-objectives",
+      "description": "Untimed combat beyond 900 seconds, optional review/continue, elimination, South American shared-state context, resources, pause and responsive accessibility.",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test:e2e"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 300
+      }
+    },
+    {
+      "id": "production",
+      "description": "Production bundle",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "build"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 180
+      }
+    }
+  ]
+}

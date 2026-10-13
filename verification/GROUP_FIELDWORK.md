@@ -1,0 +1,5 @@
+# Group orders and guided fieldwork
+
+User request follows completed01c12e2; previous receipts are historical. New contract protects batch conservation/partial failure, three-source UI/zoom, and guided observation→response→follow-up with pause semantics. Updated ecology browser fixture explicitly chooses Free fieldwork to preserve its raw-action test; the new independent test covers the default guided flow. Eight repairs/90minutes. Existing design retained, no dependencies, invented case measurements, social characters or real-world treatment claims. Router cache limitation unchanged; direct reads target known files.
+
+Initial command checks passed. Independent content/UI review then requested a tablet charge-label spacing repair, neutral action toast, and accurate distinction between traveling/waiting fleets and idle gateways. Linked final contract preserves the original deadline and seven remaining repairs. Existing protected verifiers unchanged. Preflight UI overflow/typography findings and confirmations are saved in output/group-fieldwork/.

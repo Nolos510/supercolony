@@ -1,4 +1,4 @@
-import { createGame, advance, send, intervene } from './engine';
+import { createGame, advance, send, sendMany, intervene } from './engine';
 import type { GameState, ModeId, SpeciesId, Intervention } from './types';
 
 let current: GameState;
@@ -17,6 +17,9 @@ export const gameStore = {
   },
   send(from: string, to: string, fraction: number) {
     const command = send(current, from, to, fraction); current = command.state; publish(); return command.error;
+  },
+  sendMany(from: string[], to: string, fraction: number) {
+    const command = sendMany(current, from, to, fraction); current = command.state; publish(); return command;
   },
   intervene(nodeId: string, kind: Intervention) {
     const command = intervene(current, nodeId, kind); current = command.state; publish(); return command.error;

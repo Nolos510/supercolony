@@ -34,6 +34,7 @@ test('untimed combat, review explanations, ecological results and restart', asyn
     await page.getByRole('button', { name: 'Start match', exact: true }).click();
     await page.getByRole('button', { name: 'Skip tutorial' }).click();
     if (mode === 'Ecologist') {
+      await page.getByRole('button', { name: 'Free fieldwork', exact: true }).click();
       await page.getByRole('button', { name: 'Restore habitat', exact: true }).click();
       expect(await page.evaluate(() => window.__supercolony.getState().charges)).toBe(2);
     }

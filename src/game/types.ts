@@ -47,4 +47,8 @@ export interface GameState {
   nextFleetId: number; stats: { orders: number; captures: number; interventions: number; losses: number };
 }
 export interface CommandResult { state: GameState; error?: string }
+export interface BatchCommandResult extends CommandResult {
+  sentFromIds: string[];
+  skipped: { sourceId: string; reason: string }[];
+}
 export interface CombatResult { defenderRemaining: number; attackerRemaining: number; ownerChanged: boolean }

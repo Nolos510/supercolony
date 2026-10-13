@@ -25,7 +25,7 @@ function ant(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number,
   ctx.restore();
 }
 
-export default function BattlefieldMap({ state, view, selected, onSelect, onZoom, onOrder }: { state: GameState; view: string | null; selected: string; onSelect: (id: string, order?: boolean) => void; onZoom: (region: string | null) => void; onOrder: (from: string, to: string) => void }) {
+export default function BattlefieldMap({ state, view, selected, onSelect, onZoom, onOrder }: { state: GameState; view: string | null; selected: string[]; onSelect: (id: string, order?: boolean, additive?: boolean) => void; onZoom: (region: string | null) => void; onOrder: (from: string, to: string) => void }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const geometry = useRef<Geography | null>(null);
   const selectedRef = useRef(selected);
@@ -103,8 +103,8 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
         const from = byId.get(edge.from)!, to = byId.get(edge.to)!;
         if (view ? from.regionId !== view || to.regionId !== view : edge.kind !== 'overseas') continue;
         const a = nestPoint(from, view), b = nestPoint(to, view);
-        ctx.strokeStyle = edge.from === selectedRef.current || edge.to === selectedRef.current ? colors.ink : colors.contour;
-        ctx.lineWidth = edge.from === selectedRef.current || edge.to === selectedRef.current ? 1.5 : 1;
+        ctx.strokeStyle = selectedRef.current.includes(edge.from) || selectedRef.current.includes(edge.to) ? colors.ink : colors.contour;
+        ctx.lineWidth = selectedRef.current.includes(edge.from) || selectedRef.current.includes(edge.to) ? 1.5 : 1;
         ctx.setLineDash(edge.kind === 'overseas' ? [4, 6] : []);
         ctx.beginPath(); ctx.moveTo(a[0] * width, a[1] * height); ctx.lineTo(b[0] * width, b[1] * height); ctx.stroke(); ctx.setLineDash([]);
         if (view && from.owner !== 'neutral' && !reduced.matches) {
@@ -146,7 +146,7 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     {visible.map(n => {
       const p = nestPoint(n, view); const region = regions.find(r => r.id === n.regionId)!;
       return <div key={n.id} data-region={n.regionId} className={`map-node-wrap ${!view && p[0] > .90 ? 'label-left' : ''}`} style={{ left: `${p[0] * 100}%`, top: `${p[1] * 100}%` }}>
-        <button className={`map-node ${n.owner} ${selected === n.id ? 'selected' : ''}`} aria-label={`${n.name}, ${n.owner === 'player' ? 'your nest' : n.owner === 'rival' ? 'rival nest' : 'unclaimed nest'}, ${Math.floor(n.units)} game units`} aria-pressed={selected === n.id} onClick={() => onSelect(n.id, true)} draggable={n.owner === 'player' && state.mode !== 'ecologist'} onDragStart={e => e.dataTransfer.setData('text/plain', n.id)} onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); const from = e.dataTransfer.getData('text/plain'); if (from) onOrder(from, n.id); }}><span className="owner-glyph" aria-hidden="true">{n.owner === 'rival' ? '◆' : n.owner === 'neutral' ? '○' : '●'}</span><span className="node-count">{Math.floor(n.units)}</span></button>
+        <button className={`map-node ${n.owner} ${selected.includes(n.id) ? 'selected' : ''}`} aria-label={`${n.name}, ${n.owner === 'player' ? 'your nest' : n.owner === 'rival' ? 'rival nest' : 'unclaimed nest'}, ${Math.floor(n.units)} game units`} aria-pressed={selected.includes(n.id)} onClick={e => onSelect(n.id, true, e.shiftKey || e.metaKey)} draggable={n.owner === 'player' && state.mode !== 'ecologist'} onDragStart={e => e.dataTransfer.setData('text/plain', n.id)} onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); const from = e.dataTransfer.getData('text/plain'); if (from) onOrder(from, n.id); }}><span className="owner-glyph" aria-hidden="true">{n.owner === 'rival' ? '◆' : n.owner === 'neutral' ? '○' : '●'}</span><span className="node-count">{Math.floor(n.units)}</span></button>
         <div className="map-node-label"><span>{view ? n.name : region.shortName}</span>{!view ? <button aria-label={`Zoom into ${region.shortName}`} onClick={() => onZoom(region.id)}>Explore region <Icon name="zoom" size={12} /></button> : <small>{n.terrain === 'complex' ? 'Complex habitat' : 'Open terrain'}</small>}</div>
       </div>;
     })}
@@ -158,7 +158,7 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     </div>
     {!view && <div className="mobile-world-regions" aria-label="World gateway nests">{regions.map(region => {
       const gateway = state.nodes.find(n => n.regionId === region.id && n.gateway);
-      return <div className={`world-region-control ${gateway?.owner ?? 'neutral'}`} key={region.id}><button className="region-order" onClick={() => gateway ? onSelect(gateway.id, true) : onZoom(region.id)} aria-label={`${region.shortName}${gateway ? `, ${Math.floor(gateway.units)} game units` : ', scientific context'}`}><span className="region-owner" aria-hidden="true">{gateway?.owner === 'rival' ? '◆' : gateway?.owner === 'player' ? '●' : '○'}</span><span>{region.shortName}<small>{gateway ? `${Math.floor(gateway.units)} game units` : 'Scientific context'}</small></span></button><button aria-label={`Zoom into ${region.shortName}`} onClick={() => onZoom(region.id)}><Icon name="zoom" size={16} /></button></div>;
+      return <div className={`world-region-control ${gateway?.owner ?? 'neutral'} ${gateway && selected.includes(gateway.id) ? 'group-selected' : ''}`} key={region.id}><button className="region-order" onClick={e => gateway ? onSelect(gateway.id, true, e.shiftKey || e.metaKey) : onZoom(region.id)} aria-label={`${region.shortName}${gateway ? `, ${Math.floor(gateway.units)} game units` : ', scientific context'}`}><span className="region-owner" aria-hidden="true">{gateway?.owner === 'rival' ? '◆' : gateway?.owner === 'player' ? '●' : '○'}</span><span>{region.shortName}<small>{gateway ? `${Math.floor(gateway.units)} game units` : 'Scientific context'}</small></span></button><button aria-label={`Zoom into ${region.shortName}`} onClick={() => onZoom(region.id)}><Icon name="zoom" size={16} /></button></div>;
     })}</div>}
   </div>;
 }

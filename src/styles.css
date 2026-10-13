@@ -216,3 +216,35 @@ dialog::backdrop { background: var(--color-shade); backdrop-filter: blur(4px); }
 /* Educational regional panels participate in layout so actions cannot cover the inspector. */
 .map-viewport:has(.regional-context-card) { overflow-y: auto; padding: 150px 16px 80px; }
 .regional-context-card { position: relative; inset: auto; margin: 0 auto; width: 100%; max-width: 620px; }
+
+/* Group commands and observation-led fieldwork use the existing atlas surfaces. */
+.source-control { display: flex; flex-direction: column; min-width: 0; gap: 4px; }
+.multi-toggle { min-height: 32px; padding: 4px 8px; font-size: 11px; }
+.source-control .text-button { color: var(--color-paper); }
+.selection-count { color: var(--color-paper); font-size: 12px; }
+.source-dialog { width: min(620px, calc(100% - 24px)); padding: 24px; }
+.source-dialog > p { font-size: 14px; margin: 16px 0; }
+.source-options { display: grid; gap: 8px; }
+.source-option { flex-direction: row; align-items: center; gap: 14px; min-height: 50px; padding: 10px; border: 1px solid var(--color-line); border-radius: var(--radius-sm); cursor: pointer; }
+.source-option input { width: 20px; height: 20px; accent-color: var(--color-player-dark); }
+.source-option span { display: flex; flex-direction: column; gap: 4px; }
+.source-option small { font-size: 12px; color: var(--color-muted); }
+.source-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.world-region-control.group-selected { outline: 2px solid var(--color-player-dark); outline-offset: -2px; }
+.fieldwork { font-size: 13px; }
+.fieldwork h3 { font-family: var(--font-display); font-size: 23px; margin-bottom: 10px; }
+.fieldwork h4 { font-size: 15px; margin: 12px 0 8px; }
+.fieldwork p { font-size: 13px; margin: 8px 0; }
+.fieldwork button { white-space: normal; width: 100%; min-height: 44px; margin-top: 7px; }
+.fieldwork .text-button { width: auto; min-height: 36px; }
+.fieldwork-step { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-muted); }
+.fieldwork-observation { padding: 12px; background: var(--color-paper-deep); border-radius: var(--radius-sm); margin-top: 12px; }
+.fieldwork-choices { display: flex; flex-direction: column; gap: 4px; }
+@media (max-width: 600px) { .order-fields { gap: 8px; } .source-control { width: 100%; } .source-dialog { padding: 18px; } .source-dialog h2 { font-size: 26px; } }
+.source-control { flex: 1; width: auto; }
+.source-control > button:not(.text-button) { font-size: 12px; padding-inline: 8px; white-space: normal; }
+.fieldwork-step { text-transform: none; letter-spacing: normal; }
+@media (max-width: 600px) { .source-control { width: auto; } }
+
+.fieldwork h3 { gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.fieldwork h3 > span { font: 12px var(--font-body); white-space: nowrap; }

@@ -4,6 +4,12 @@
 
 The approved local browser game is implemented and verified in `/Users/nolos/Desktop/Ant Game`. User additionally authorized creating and working through a GitHub repository. Delivery home: private `https://github.com/Nolos510/supercolony`, branch `main`. Latest validation: 2026-10-13 playtest-feedback revision; final feedback receipt passes. Launch baseline 2f0261f and its receipt remain historical. Use `git log -1` for the delivery commit and `git status --short` when resuming.
 
+## Current group/fieldwork revision
+
+User requested multi-source orders and a more interactive Ecologist. Select multiple / Shift-click plus the paused checkbox picker now sends separate conserved fleets to one destination, retains selection across zoom and removes lost sources. Guided fieldwork defaults to actual-state survey → priority → response → timed follow-up; Free fieldwork keeps direct tools. Existing atlas design and ecological objective retained.
+
+Final current receipt: verification/group-fieldwork-final-receipt.json. Typecheck, lint, 19 engine/content tests, 9 browser tests, production build and helper check pass. Independent UI/content review fixes were one linked repair under the original 90-minute/eight-repair budget. Details/screenshots: docs/GROUP_FIELDWORK_VERIFICATION.md. Local preview remains 5173; previous records below are historical. Next useful action: human playtesting of coordinated orders and the guided loop.
+
 ## User-visible behavior
 
 Three single-player modes: 48-node worldwide Supercolony War with native Paraná-basin context, a twelve-node Australian Species Clash with two species choices, and habitat-preservation Ecologist. Shared reserves/fleets across world and region views, 25/50/100% orders through tap/drag/native keyboard controls, automatic growth and AI, terrain combat, timed interventions, tutorials, pause, restart, and complete results. Thirteen sourced field-guide entries and eight freely browsable research/participation/support resources connect discoveries and results directly to official destinations.

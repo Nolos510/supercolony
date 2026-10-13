@@ -1,6 +1,6 @@
 import { regions, scenarios } from './scenarios';
 import type {
-  CombatResult, CommandResult, FleetState, GameState, Intervention,
+  BatchCommandResult, CombatResult, CommandResult, FleetState, GameState, Intervention,
   ModeId, NestState, Owner, SpeciesId, Terrain, TrailState,
 } from './types';
 
@@ -205,6 +205,30 @@ export function send(state: GameState, fromId: string, toId: string, fraction: n
   const factId = overseas ? 'transport' : terrain && state.mode === 'species' ? 'terrain' : 'budding';
   record(next, `${Math.floor(source.units * fraction)} workers sent to ${target.name}${overseas ? ' by simulated transport' : ''}.`, factId);
   return { state: next };
+}
+
+/** Independently dispatch unique selected nests; unsuccessful sources stay untouched. */
+export function sendMany(state: GameState, sourceIds: string[], toId: string, fraction: number): BatchCommandResult {
+  const sentFromIds: string[] = [];
+  const skipped: BatchCommandResult['skipped'] = [];
+  const reject = (error: string): BatchCommandResult => ({ state, sentFromIds, skipped, error });
+  if (state.status !== 'running') return reject('Resume the match before sending workers.');
+  if (state.mode === 'ecologist') return reject('Choose a habitat intervention in Ecologist mode.');
+  if (!Number.isFinite(fraction) || fraction <= 0 || fraction > 1) return reject('Choose a worker share between 1% and 100%.');
+  if (!state.nodes.some(site => site.id === toId)) return reject('Choose a destination nest on this map.');
+  const sources = [...new Set(sourceIds)].filter(sourceId => sourceId !== toId);
+  if (!sources.length) return reject('Select at least one owned source nest other than the destination.');
+
+  let next = state;
+  for (const sourceId of sources) {
+    const result = send(next, sourceId, toId, fraction);
+    if (result.error) skipped.push({ sourceId, reason: result.error });
+    else { next = result.state; sentFromIds.push(sourceId); }
+  }
+  return {
+    state: next, sentFromIds, skipped,
+    ...(sentFromIds.length ? {} : { error: 'No swarms were sent. Review the selected source nests.' }),
+  };
 }
 
 export function intervene(state: GameState, nodeId: string, kind: Intervention): CommandResult {
