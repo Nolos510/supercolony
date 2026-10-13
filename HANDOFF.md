@@ -2,7 +2,7 @@
 
 ## Result and authority
 
-The approved local browser game is implemented and verified in `/Users/nolos/Desktop/Ant Game`. User additionally authorized creating and working through a GitHub repository. Delivery home: private `https://github.com/Nolos510/supercolony`, branch `main`. Latest validation: 2026-10-13 playtest-feedback revision; final feedback receipt passes. Launch baseline 2f0261f and its receipt remain historical. Use `git log -1` for the delivery commit and `git status --short` when resuming.
+The approved local browser game is implemented and verified in `/Users/nolos/Desktop/Ant Game`. User additionally authorized creating and working through a GitHub repository. Delivery home: private `https://github.com/Nolos510/supercolony`, branch `main`. Latest validation: 2026-10-13 group-order/fieldwork revision; final group-fieldwork receipt passes. Launch baseline 2f0261f and its receipt remain historical. Use `git log -1` for the delivery commit and `git status --short` when resuming.
 
 ## Current group/fieldwork revision
 
