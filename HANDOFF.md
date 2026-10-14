@@ -41,3 +41,11 @@ Source/resource notes: `docs/SOURCES.md`, independent `docs/CONTENT_REVIEW.md`, 
 Comfy is excluded entirely; port 8000 stays reserved. No hosting, new hooks, telemetry, or external messages were introduced. Git commit identity is repository-local, based on the authenticated GitHub profile: Carlo Spampinato / `225438108+Nolos510@users.noreply.github.com`; global Git settings are unchanged.
 
 Next useful action: human playtesting for enjoyment, balance, and learning. Chromium was verified; physical mobile devices, Safari/Firefox, and screen-reader sessions remain unverified. Public-release destination review, future species, multiplayer, campaigns, hosting, and App Store packaging remain later work.
+
+## Local iPhone playtest checkpoint — 2026-10-13
+
+Source commit `98b651f`, branch `main`; source and configuration remain unchanged. The working tree was clean before this documentation checkpoint. The production build can be served on the Mac's LAN IPv4 at port 5173 with `npm run preview -- --host <LAN-IP>`. A development server bound specifically to `127.0.0.1:5173` can run simultaneously because the two servers bind different addresses; the earlier stop-development instruction applies when bindings overlap. The Mac and iPhone must share the same LAN.
+
+The user is testing in Brave on iPhone; start in portrait. Temporary URL, interface, process-session details, and smoke evidence stay only in ignored `output/phone-test/session.json`; inspect that local file for the current address rather than committing an IP. HTTP 200 and phone-sized touch Chromium smoke passed: start, tutorial, sending, multi-selection, and checkbox picker, with no overflow/runtime errors or development bridge. The existing `verification/group-fieldwork-final-receipt.json` helper check still passes; no source tests were rerun for this documentation-only update.
+
+Physical iPhone Brave/WebKit remains unverified. Landscape widths above 600px may hit the current 780px minimum-height layout; portrait is the first playtest target. Next: verify the primary controls on the physical phone and record any layout findings before changing source. No code, configuration, server, or firewall changes are part of this checkpoint.
