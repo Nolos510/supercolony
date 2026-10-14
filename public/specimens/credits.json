@@ -1,0 +1,60 @@
+{
+  "reviewedAt": "2026-10-13",
+  "assets": [
+    {
+      "path": "/specimens/argentine-worker.jpg",
+      "species": "Linepithema humile",
+      "caste": "worker",
+      "specimenCode": "CASENT0006019",
+      "photographer": "April Nobile",
+      "rightsHolder": "AntWeb / California Academy of Sciences",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "identitySource": "https://www.antweb.org/specimen.do?code=casent0006019",
+      "photographerSource": "https://www.antweb.org/bigPicture.do?name=casent0006019&number=1&shot=p",
+      "archiveSource": "https://commons.wikimedia.org/wiki/File:Linepithema_humile_casent0006019_profile_1.jpg",
+      "imageSource": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Linepithema_humile_casent0006019_profile_1.jpg",
+      "licenseEvidence": "Original JPEG copyright field explicitly grants Attribution-ShareAlike 3.0 (cc-by-sa-3.0). We follow that grant, preserving it, rather than relying on the archive’s newer generic CC BY 4.0 label.",
+      "changes": "None: original archive bytes retained. Any future adaptations of this photograph must retain applicable share-alike terms.",
+      "width": 1156,
+      "height": 808,
+      "bytes": 129375,
+      "sha256": "05007b9e057b219038980fce0560938f3b8960aa64c1faeda0be5de9555e0477"
+    },
+    {
+      "path": "/specimens/meat-worker.jpg",
+      "species": "Iridomyrmex purpureus",
+      "caste": "workers",
+      "specimenCode": "CSIRO ScienceImage 3225",
+      "photographer": "Steve Shattuck",
+      "rightsHolder": "CSIRO",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "identitySource": "https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3225_Meat_ant_Iridomyrmex_purpureus_Formicidae.jpg",
+      "reuseGrantSource": "https://www.csiro.au/en/news/All/News/2023/July/ScienceImage-Online",
+      "originalCollectionSource": "http://www.scienceimage.csiro.au/image/3225",
+      "archiveSource": "https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3225_Meat_ant_Iridomyrmex_purpureus_Formicidae.jpg",
+      "imageSource": "https://upload.wikimedia.org/wikipedia/commons/7/79/CSIRO_ScienceImage_3225_Meat_ant_Iridomyrmex_purpureus_Formicidae.jpg",
+      "licenseEvidence": "CSIRO’s 31 July 2023 statement grants Creative Commons Attribution reuse to its ScienceImage collection. The archival file page names Steve Shattuck, CSIRO, species, and CC BY 3.0; original EXIF credits Steve Shattuck/CSIRO Australia. Original collection host did not resolve on review.",
+      "changes": "None: original archive bytes retained.",
+      "width": 3008,
+      "height": 2000,
+      "bytes": 3185229,
+      "sha256": "8ce9425cc217ff8f1b352ce7f624bc4b66b802a5a996484fceb42638bf31ab7e"
+    }
+  ],
+  "externalViewer": {
+    "url": "https://biomedisa.info/antscan/specimen/1040/",
+    "species": "Linepithema humile",
+    "caste": "worker",
+    "specimenCode": "OKENT0105450",
+    "reviewedAt": "2026-10-13",
+    "relationship": "Different worker from the bundled photograph. Only an external link; no model or scan redistributed.",
+    "verification": "Official HTML title names Linepithema humile | Dolichoderinae | worker | OKENT0105450 and lists processed 5x/27-25.stl data."
+  },
+  "omissions": [
+    "CASENT0106119 not bundled: per-image endpoint unavailable during acquisition; used the independently verified CASENT0006019 worker instead.",
+    "CASENT0010657 meat-ant image not bundled because its individual-license metadata was unresolved.",
+    "No exact Iridomyrmex purpureus 3D worker scan verified; do not imply the Argentine viewer shows a meat ant."
+  ]
+}

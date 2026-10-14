@@ -79,7 +79,7 @@ describe('simulation contract', () => {
   it('lets a colony with no nests recover through its in-flight workers', () => {
     const s = createGame('species'); s.aiEnabled = false;
     s.nodes.forEach(n => { n.owner = 'rival'; n.growth = 0; n.units = 0; });
-    s.fleets = [{ id: 1, owner: 'player', species: 'argentine', units: 20, path: ['australia-0', 'australia-1'], legIndex: 0, elapsed: 0 }];
+    s.fleets = [{ id: 1, owner: 'player', colonyId: 'player-network', species: 'argentine', units: 20, path: ['australia-0', 'australia-1'], legIndex: 0, elapsed: 0 }];
     const moving = advance(s, 1); expect(moving.status).toBe('running');
     const recovered = advance(moving, 10); expect(recovered.status).toBe('running');
     expect(recovered.nodes.find(n => n.id === 'australia-1')!.owner).toBe('player');

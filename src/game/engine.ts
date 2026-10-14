@@ -17,6 +17,15 @@ const POSITIONS: [number, number][] = [[20, 38], [40, 25], [67, 23], [27, 69], [
 const LOCAL_PAIRS: [number, number][] = [[0, 1], [1, 2], [0, 3], [1, 4], [2, 4], [3, 4], [4, 5], [2, 5]];
 const PLACE_NAMES = ['Gateway nest', 'Garden edge', 'Open clearing', 'Shaded grove', 'Leaf-litter trail', 'Habitat margin'];
 
+/** Simulated recognition compatibility; it does not identify surveyed supercolonies. */
+export function compatibleOwners(first: Owner, second: Owner): boolean {
+  return first === second || (first === 'player' || first === 'ally') && (second === 'player' || second === 'ally');
+}
+
+function colonyId(owner: Owner, nestId: string): string {
+  return owner === 'neutral' ? `simulated-${nestId}` : `simulated-${owner}-network`;
+}
+
 function copy(state: GameState): GameState {
   return {
     ...state,
@@ -40,7 +49,7 @@ function record(state: GameState, message: string, factId: string) {
 function node(id: string, regionId: string, index: number, owner: Owner, species: SpeciesId): NestState {
   const [x, y] = POSITIONS[index % POSITIONS.length];
   return {
-    id, name: PLACE_NAMES[index % PLACE_NAMES.length], regionId, x, y, owner, species,
+    id, name: PLACE_NAMES[index % PLACE_NAMES.length], regionId, x, y, owner, colonyId: colonyId(owner, id), species,
     units: owner === 'neutral' ? 8 + index * 2 : species === 'meat' ? 24 : 44,
     capacity: WORKERS[species].capacity, growth: WORKERS[species].growth,
     terrain: index === 3 || index === 4 ? 'complex' : 'open',
@@ -89,10 +98,12 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
           owner = i === 0 || i === 2 ? 'rival' : 'player';
           species = owner === 'rival' ? 'argentine' : region.id === 'australia' ? 'meat' : 'native';
         }
+        if (mode === 'war' && i === 1 && ['california', 'newzealand'].includes(region.id)) owner = 'ally';
         const site = node(`${region.id}-${i}`, region.id, i, owner, species);
         if (mode === 'war' && i === 0) site.units = owner === 'player' ? 66 : owner === 'rival' ? 48 : 20;
         if (mode === 'war' && i === 2) site.units = 32;
         if (mode === 'war' && i === 3) site.units = 30;
+        if (mode === 'war' && owner === 'ally') site.units = 32;
         if (mode === 'ecologist') site.units = owner === 'rival' ? 65 : 18;
         nodes.push(site);
       }
@@ -116,7 +127,7 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
     nodes, edges, fleets: [], effects: [], charges: 3, chargeProgress: 0,
     initialHabitat: nodes.reduce((sum, site) => sum + site.habitat, 0),
     events: [], discovered: [], nextFleetId: 1,
-    stats: { orders: 0, captures: 0, interventions: 0, losses: 0 },
+    stats: { orders: 0, captures: 0, interventions: 0, losses: 0, reinforcementOrders: 0, reinforcementWorkers: 0 },
   };
   record(state, mode === 'ecologist' ? 'Protect habitat while the simulated invasion unfolds.' : mode === 'species' ? 'More workers or stronger workers? Terrain changes the contest.' : 'Your nests share one network. Select a nest to issue an order.', mode === 'ecologist' ? 'biodiversity' : mode === 'species' ? 'species' : 'supercolonies');
   return state;
@@ -169,7 +180,7 @@ function route(state: GameState, fromId: string, toId: string, owner: Owner, spe
       const next = edge.from === current ? edge.to : edge.to === current ? edge.from : undefined;
       if (!next || !remaining.has(next)) continue;
       const site = state.nodes.find(item => item.id === next)!;
-      if (next !== toId && site.owner !== owner) continue;
+      if (next !== toId && !compatibleOwners(site.owner, owner)) continue;
       const tentative = shortest + edge.travelSeconds;
       if (tentative < (distances.get(next) ?? Infinity)) {
         distances.set(next, tentative); previous.set(next, current);
@@ -182,7 +193,7 @@ function route(state: GameState, fromId: string, toId: string, owner: Owner, spe
 function dispatch(state: GameState, source: NestState, path: string[], fraction: number) {
   const units = Math.floor(source.units * fraction);
   source.units -= units;
-  state.fleets.push({ id: state.nextFleetId++, owner: source.owner, species: source.species, units, path, legIndex: 0, elapsed: 0 });
+  state.fleets.push({ id: state.nextFleetId++, owner: source.owner, colonyId: source.colonyId, species: source.species, units, path, legIndex: 0, elapsed: 0 });
 }
 
 export function send(state: GameState, fromId: string, toId: string, fraction: number): CommandResult {
@@ -200,10 +211,16 @@ export function send(state: GameState, fromId: string, toId: string, fraction: n
   const next = copy(state);
   dispatch(next, next.nodes.find(site => site.id === fromId)!, path, fraction);
   next.stats.orders++;
+  const units = Math.floor(source.units * fraction);
+  const reinforcement = compatibleOwners(source.owner, target.owner);
+  if (reinforcement) {
+    next.stats.reinforcementOrders++;
+    next.stats.reinforcementWorkers += units;
+  }
   const overseas = path.some((id, index) => index > 0 && edgeBetween(state, path[index - 1], id)?.kind === 'overseas');
   const terrain = path.some(id => state.nodes.find(site => site.id === id)?.terrain === 'complex');
-  const factId = overseas ? 'transport' : terrain && state.mode === 'species' ? 'terrain' : 'budding';
-  record(next, `${Math.floor(source.units * fraction)} workers sent to ${target.name}${overseas ? ' by simulated transport' : ''}.`, factId);
+  const factId = target.owner === 'ally' ? 'recognition' : overseas ? 'transport' : terrain && state.mode === 'species' ? 'terrain' : 'budding';
+  record(next, `${units} workers sent to ${target.name}${target.owner === 'ally' ? ' in the cooperating network' : ''}${overseas ? ' by simulated transport' : ''}.`, factId);
   return { state: next };
 }
 
@@ -259,8 +276,8 @@ export function resolveCombat(defenderUnits: number, attackerUnits: number, defe
   return { defenderRemaining: (defense - attack) / strength(defenderSpecies, terrain), attackerRemaining: 0, ownerChanged: false };
 }
 
-export function territory(state: GameState): { player: number; rival: number; neutral: number } {
-  return state.nodes.reduce((counts, site) => { counts[site.owner]++; return counts; }, { player: 0, rival: 0, neutral: 0 });
+export function territory(state: GameState): Record<Owner, number> {
+  return state.nodes.reduce((counts, site) => { counts[site.owner]++; return counts; }, { player: 0, ally: 0, rival: 0, neutral: 0 });
 }
 
 export function habitat(state: GameState): number {
@@ -275,12 +292,23 @@ function random(state: GameState): number {
 
 function ai(state: GameState) {
   if (!state.aiEnabled) return;
-  const ready = state.nodes.filter(site => site.owner === 'rival' && site.units >= (site.species === 'meat' ? 22 : 32));
+  const ready = state.nodes.filter(site => (site.owner === 'rival' || site.owner === 'ally') && site.units >= (site.species === 'meat' ? 22 : 32));
   for (const source of ready) {
+    if (source.owner === 'ally') {
+      // Give depleted player nests dependable help before choosing an attack.
+      const support = state.nodes.filter(site => site.owner === 'player' && site.units < Math.min(24, site.capacity * 0.3))
+        .map(site => ({ site, path: route(state, source.id, site.id, source.owner, source.species) }))
+        .filter((candidate): candidate is { site: NestState; path: string[] } => !!candidate.path)
+        .sort((first, second) => first.site.units - second.site.units || first.path.length - second.path.length);
+      if (support.length) {
+        dispatch(state, source, support[0].path, 0.5);
+        continue;
+      }
+    }
     if (random(state) > 0.35) continue;
     const adjacent = state.edges.filter(edge => (edge.from === source.id || edge.to === source.id) && mayUseEdge(state, edge, source.species));
     const candidates = adjacent.map(edge => ({ edge, site: state.nodes.find(item => item.id === (edge.from === source.id ? edge.to : edge.from))! }))
-      .filter(({ site }) => site.owner !== 'rival');
+      .filter(({ site }) => source.owner === 'ally' ? site.owner === 'rival' : !compatibleOwners(site.owner, source.owner));
     if (!candidates.length) continue;
     const fraction = 0.6 + random(state) * 0.2;
     candidates.sort((a, b) => {
@@ -297,7 +325,7 @@ function ai(state: GameState) {
 }
 
 function arrive(state: GameState, fleet: FleetState, site: NestState): boolean {
-  if (site.owner === fleet.owner) {
+  if (compatibleOwners(site.owner, fleet.owner)) {
     if (fleet.legIndex === fleet.path.length - 2) { site.units += fleet.units; return true; }
     return false;
   }
@@ -306,7 +334,7 @@ function arrive(state: GameState, fleet: FleetState, site: NestState): boolean {
   const wasPlayer = site.owner === 'player';
   site.units = result.ownerChanged ? result.attackerRemaining : result.defenderRemaining;
   if (result.ownerChanged) {
-    site.owner = fleet.owner; site.species = fleet.species;
+    site.owner = fleet.owner; site.colonyId = fleet.colonyId; site.species = fleet.species;
     site.capacity = WORKERS[fleet.species].capacity; site.growth = WORKERS[fleet.species].growth;
     if (fleet.owner === 'player') {
       state.stats.captures++;
@@ -314,6 +342,8 @@ function arrive(state: GameState, fleet: FleetState, site: NestState): boolean {
     } else if (wasPlayer) {
       state.stats.losses++;
       record(state, `${site.name} was taken by the rival colony.`, state.mode === 'ecologist' ? 'biodiversity' : 'recognition');
+    } else if (fleet.owner === 'ally') {
+      record(state, `${site.name} joins the cooperating network.`, 'recognition');
     }
   }
   // An order stops at the first hostile encounter, even if that nest changes hands in flight.
@@ -327,12 +357,12 @@ function moveFleets(state: GameState, dt: number) {
     if (!edge) {
       // A malformed route is returned to its current nest instead of deleting workers.
       const origin = state.nodes.find(site => site.id === fleet.path[fleet.legIndex]);
-      if (origin?.owner === fleet.owner) origin.units += fleet.units;
+      if (origin && compatibleOwners(origin.owner, fleet.owner)) origin.units += fleet.units;
       continue;
     }
     if (edge.kind === 'overseas' && (fleet.species === 'native' || state.mode === 'ecologist' && fleet.species !== 'argentine')) {
       const origin = state.nodes.find(site => site.id === fleet.path[fleet.legIndex]);
-      if (origin?.owner === fleet.owner) origin.units += fleet.units;
+      if (origin && compatibleOwners(origin.owner, fleet.owner)) origin.units += fleet.units;
       continue;
     }
     if (blocked(state, edge)) { surviving.push(fleet); continue; }

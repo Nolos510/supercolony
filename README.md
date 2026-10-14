@@ -15,27 +15,37 @@ Open http://127.0.0.1:5173. The game is single-player, browser-local, and needs 
 
 ## Play
 
-- **Supercolony War:** move between eight real regional contexts, including the native Paraná basin in South America. Expand across 48 simulated nests. There is no time limit or majority-control cutoff: combat ends when one colony has no nests or swarms left.
+- **Supercolony War:** move between eight real regional contexts, including the native Paraná basin in South America. Expand across 48 simulated nests. Two cooperating AI nests provide friendly passage, accept reinforcements, support depleted player nests, and target rivals. Command only your own nests. There is no time limit: victory requires eliminating rival nests and surviving rival swarms while your colony survives; cooperating nests never need conquering.
 - **Species Clash:** choose Argentine ants or Australian meat ants on a twelve-site Australian battlefield. Use recruitment, worker strength, and complex terrain. Combat is untimed and uses the same elimination rule.
 - **Ecologist:** preserve at least 60% of initial native habitat after five minutes. Restore habitat, reduce food subsidies, or restrict transport at gateway nests. Three charges; one returns every fifteen seconds. Guided fieldwork adds a three-second observation, a chosen priority, an intervention test, and a ten-second follow-up using actual simulated site values. Pause freezes observations and follow-ups. Free fieldwork keeps the direct tools available.
 
-Choose your cyan source nest and a destination, then send 25%, 50%, or 100% of its workers. For a group order, enable Select multiple or Shift-click owned nests. Choose sources opens a paused checkbox selector for touch and keyboard use. Send swarms dispatches the selected share from each eligible source to one destination; nests without a route are skipped and reported. Group selection survives zoom and removes nests that change ownership. Tap a rival/unclaimed nest after selecting your source, drag between nests, or use the labeled source and destination selectors with a keyboard. The world map shows gateway nests; regional zoom exposes their local neighbors. Both views operate on the same workers and fleets. Pause whenever you want; opening the field guide pauses the match. Hidden browser tabs automatically pause. Use the leaf wordmark to return to mode selection. Choose Review current match there to pause, see takeaways, and continue without ending your match.
+Drag from an owned nest, sweep across other owned nests to collect sources, and release on the destination to send 25%, 50%, or 100% from each eligible source. The preview identifies attack, capture, or reinforcement. Dropping outside a nest, another finger, pointer cancellation, opening a menu, or changing views cancels the gesture. Ownership and reserves are rechecked on release. Tap/Shift-click selection, **Choose sources** checkboxes, and **Keyboard orders → Send** provide alternatives. Unreachable sources are skipped and reported.
+
+The world map shows gateway nests; the region selector reveals their local neighbors. Both views share the same workers and fleets. Phone **Nest details** opens a dedicated reading screen; desktop keeps a side inspector. **Game menu** exposes Resume, Review current match, Restart, and Exit to home. Restart preserves mode/species; restart and exit require confirmation with Cancel focused first. Matches stay in memory and refreshing starts over.
+
+**Learn** pauses play and opens a searchable Topics / Species / Regions / Resources index with one article and one reading scroller. Back returns to your prior screen; press Resume to continue a paused match. **Research** also pauses, hides game orders, and shows dated evidence separately from match ownership. Hidden browser tabs pause automatically.
 
 ## Science and resources
 
 Real geography and published biology inform the game. Nest positions, territorial ownership, worker counts, dispersal routes, intervention timelines, and combat coefficients are simulated. These are strategy scenarios, not live surveys or pest-control recommendations. Both featured species have one worker form.
 
-The freely accessible field guide contains thirteen short entries and eight reviewed resources, with topic/region filtering. AntWeb provides Argentine-ant specimen images and taxonomy; iNaturalist explains sharing an ant photo, date, and location for community identification. Neither is an official invasive-species reporting channel. See [source notes](docs/SOURCES.md) and the [independent content review](docs/CONTENT_REVIEW.md).
+The freely accessible field guide contains thirteen short entries, eight regional profiles, and eight reviewed resources, with search and collapsible topic/region filters. AntWeb provides Argentine-ant specimen images and taxonomy; iNaturalist explains sharing an ant photo, date, and location for community identification. Neither is an official invasive-species reporting channel. See [source notes](docs/SOURCES.md) and the [independent content review](docs/CONTENT_REVIEW.md).
 
 The native South American region is educational context in Ecologist, because native-range ants are not treated as invaders. Ecologist uses generic native-community proxies outside Australia, rather than suggesting Australian meat ants occur worldwide. Its habitat pressure and intervention effects are game-balanced abstractions. Conservation resources lead to independent organizations; participation and optional financial support take place on their own websites.
+
+Real Argentine- and meat-ant worker photographs carry visible photographer, source, specimen identity, and license credits. Species comparison labels antennae, mandibles, head, mesosoma, waist, and gaster on an original explanatory diagram; photographs are not to a common scale. The Argentine-ant inspector links to the verified Antscan worker viewer. No exact meat-ant scan or embedded 3D model is claimed. See [asset credits](docs/ASSETS.md).
+
+Research layers bundle the 2010 study’s nine samples and only its explicitly reported recognition assays, and the 2025 California resurvey’s GPS records separated by survey period. They disclose observation dates, methods, coordinate precision, review date, and limitations. Occurrence records do not establish colony identity or current frontlines. [Source pack](docs/SOURCE_PACK_RECOGNITION.md) records the data and transformations. Simulated cooperating networks are separate from documented relationships; the replayable three-step walkthrough explains that distinction.
+
+Two local [visual studies](docs/DESIGN_STUDIES.html) compare the retained paper-atlas direction with a darker exploration; the exploration was not adopted. With the development server running, open `/docs/DESIGN_STUDIES.html`.
 
 ## Architecture
 
 - React/TypeScript/Vite shell with a shared external store.
 - Immutable, seeded engine stepping at 0.1 simulated seconds; AI and three objectives share the same graph.
 - Canvas geography, trails, and decorative swarm particles; semantic HTML nest buttons and native controls provide keyboard access.
-- Natural Earth land geometry bundled in `public/world.json`; native vector specimen illustration and CSS token palette.
-- Scenario registry and typed species/fact/resource entries provide the extension points for later species.
+- Natural Earth land geometry bundled in `public/world.json`; licensed worker photographs, original anatomy diagrams, and the existing CSS token palette.
+- Scenario registry and typed species/fact/resource/specimen/regional-context/research-map entries provide the extension points for later species.
 - Matches are in memory. Refreshing starts over. No backend, analytics, multiplayer, or persistent campaign.
 
 ## Validate
@@ -48,11 +58,17 @@ npm run test:e2e
 npm run build
 ```
 
-Browser tests use Playwright Chromium (`npx playwright install chromium` once if needed), exercise all three modes and six widths, and save screenshots/report in `output/playwright/`. Five-minute browser result checks accelerate simulated time using a development-only bridge; production builds omit that bridge. `npm run preview` serves the production build locally.
+Browser tests use Playwright Chromium and WebKit (`npx playwright install chromium webkit` once if needed), exercise all three modes, six widths, and short landscape, and save screenshots/report in `output/playwright/`. Five-minute browser result checks accelerate simulated time using a development-only bridge; production builds omit that bridge. `npm run preview` serves the production build locally.
 
 Results distinguish capture events (including recaptures), successful swarm orders or interventions, and science topics linked to events. Topics encountered is not a learning assessment. Nests currently held are reported separately.
 
-The playtest feedback uses a successor protected completion contract in `verification/feedback-contract.json` and receipt in `verification/feedback-receipt.json`; the original checked launch is preserved in Git at `2f0261f`. The project also retains its original completion contract in `verification/contract.json`. Final evidence and implementation status are recorded in `HANDOFF.md`; human playtesting is still needed to judge enjoyment and learning.
+The current protected completion contract is `verification/mobile-atlas-delivery-contract.json`; its receipt is `verification/mobile-atlas-delivery-receipt.json`. All declared command checks run through the completion helper. Earlier contracts and failed evidence remain historical. Final outcomes, screenshots, and human-device limits are recorded in [HANDOFF.md](HANDOFF.md) and [delivery evidence](docs/MOBILE_ATLAS_VERIFICATION.md). Human playtesting is still needed to judge enjoyment and learning.
+
+## iPhone Brave preview
+
+Build with `npm run build`, then serve with `npm run preview -- --host <Mac-LAN-IP>`. The Mac and iPhone must share the same Wi-Fi/LAN. Open `http://<Mac-LAN-IP>:5173/` in Brave; use the Mac’s LAN address rather than localhost. A development server bound only to `127.0.0.1` can coexist on the same port when the preview binds specifically to the LAN address. If another server binds all interfaces, use one project server at a time.
+
+The phone layout uses dynamic viewport height, safe-area padding, touch-sized controls, and a dedicated short-landscape arrangement. Automated WebKit tests do not replace the physical iPhone Brave acceptance step: try portrait and landscape, toolbar expansion/collapse, a multi-source drag, cancellation, restart/exit, and reading navigation. Temporary LAN addresses remain in ignored `output/phone-test/session.json`.
 
 ## Repository
 

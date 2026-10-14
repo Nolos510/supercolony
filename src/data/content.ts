@@ -172,7 +172,7 @@ export const species: Record<SpeciesId, SpeciesProfile> = {
     regionIds: ['australia'], resourceIds: ['terrain-study'],
   },
   native: {
-    id: 'native', name: 'Native ant communities', scientificName: 'Regional native ant communities',
+    id: 'native', name: 'Native habitat communities', scientificName: 'Regional native biodiversity',
     description: 'An Ecologist habitat proxy for local communities, rather than one named species or a measured population.',
     workerForms: null, sizeLabel: 'Varies by region', strengthLabel: 'Simulation proxy',
     regionIds: ['global'], resourceIds: ['global-study', 'doc-nz'],

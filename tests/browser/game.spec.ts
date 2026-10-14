@@ -13,16 +13,18 @@ test('tutorial, real orders, shared world/region state, and source access', asyn
   await page.getByRole('button', { name: 'World view', exact: true }).click();
   expect(await page.evaluate(() => JSON.stringify(window.__supercolony.getState()))).toBe(before);
   await page.getByRole('button', { name: 'Resume match' }).click();
+  await page.getByText('Keyboard orders', { exact: true }).click();
   await page.getByLabel('Source nest').selectOption('california-0');
-  await page.getByLabel('Destination nest').selectOption('california-1');
+  await page.getByLabel('Destination nest').selectOption('california-4');
   await page.getByRole('button', { name: 'Send swarm', exact: true }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Swarm dispatched' })).toBeVisible();
   expect(await page.evaluate(() => window.__supercolony.getState().stats.orders)).toBeGreaterThan(0);
   await page.evaluate(() => window.__supercolony.advance(25));
   expect(await page.evaluate(() => window.__supercolony.getState().stats.captures)).toBeGreaterThan(0);
-  await page.getByRole('button', { name: 'Field guide', exact: true }).click();
+  await page.getByRole('button', { name: 'Learn', exact: true }).click();
   await expect(page.getByRole('dialog', { name: 'Field guide' })).toBeVisible();
   expect(await page.evaluate(() => window.__supercolony.getState().status)).toBe('paused');
+  await page.getByRole('button', { name: /One colony, many nests/ }).click();
   await expect(page.getByRole('link', { name: /Read the research/ }).first()).toHaveAttribute('target', '_blank');
 });
 
@@ -34,6 +36,7 @@ test('untimed combat, review explanations, ecological results and restart', asyn
     await page.getByRole('button', { name: 'Start match', exact: true }).click();
     await page.getByRole('button', { name: 'Skip tutorial' }).click();
     if (mode === 'Ecologist') {
+      await page.getByRole('button', { name: 'Nest details', exact: true }).click();
       await page.getByRole('button', { name: 'Free fieldwork', exact: true }).click();
       await page.getByRole('button', { name: 'Restore habitat', exact: true }).click();
       expect(await page.evaluate(() => window.__supercolony.getState().charges)).toBe(2);
@@ -64,6 +67,7 @@ test('freely browsable resources, filtering, and external link semantics', async
   await page.goto('/');
   await page.getByRole('button', { name: 'Learn & get involved', exact: true }).first().click();
   await expect(page.getByRole('dialog', { name: 'Learn & get involved' })).toBeVisible();
+  await page.getByRole('button', { name: 'Filter resources', exact: true }).click();
   await page.getByLabel('Topic').selectOption('terrain');
   await expect(page.getByRole('link', { name: /Complex battlefields/ })).toBeVisible();
   const links = page.getByRole('dialog').locator('a');

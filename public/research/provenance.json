@@ -1,0 +1,49 @@
+{
+  "reviewedAt": "2026-10-13",
+  "global": {
+    "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+    "publicationYear": 2010,
+    "observationPeriod": "2008–2009",
+    "sampleCount": 9,
+    "reportedPairCount": 17,
+    "unreportedPairs": "Unknown; do not infer by transitivity.",
+    "coordinatePolicy": "Five markers follow Table 1 as printed; four are disclosed approximate locality centers due to invalid/inconsistent printed coordinates.",
+    "transformations": "Original textual summaries; decimal conversion and disclosed locality substitution; no article map figures copied."
+  },
+  "california": {
+    "sourceUrl": "https://link.springer.com/article/10.1007/s10530-025-03583-8",
+    "authors": "Shane Hathaway, Sean B. Menke, David A. Holway",
+    "publicationYear": 2025,
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "appendixUrls": [
+      "https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs10530-025-03583-8/MediaObjects/10530_2025_3583_MOESM1_ESM.xlsx",
+      "https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs10530-025-03583-8/MediaObjects/10530_2025_3583_MOESM2_ESM.xlsx"
+    ],
+    "appendixSha256": {
+      "1": "452a15cea0f50049c5c8b7ee05d11213405c9785a3ba9fa1e699b478ba563ff0",
+      "2": "503d941e6f81e168145f6358ea77f749922096616210bcc4c7edd8a828c0cbe2"
+    },
+    "pointCounts": {
+      "TPSR": {
+        "points": 111,
+        "original": 95
+      },
+      "PLECA": {
+        "points": 184,
+        "original": 16
+      }
+    },
+    "uniqueGpsSites": 295,
+    "observationRows": 406,
+    "transformations": "GPS decimal values rounded to six decimal places. Presence cells normalized to present/not-detected; N/A excluded from historical rows. Original/resurvey separated; mixed method codes expanded. No source figures copied.",
+    "limitations": "The appendix presence column combines available resurvey methods, not a method-specific count. Methods differ across original and resurvey work. Absence means not detected, not proven absence. Article Figure 2 caption states 80 additional PLECA sites, while Appendix 2 and Methods state 168; bundled records follow all 168 appendix rows. The exact visit dates are not recorded per row.",
+    "coordinateCorrection": {
+      "pointId": "tpsr-49---guy-flemming",
+      "samplingPoint": "49 - Guy Flemming",
+      "reportedLongitude": 117.257748,
+      "renderedLongitude": -117.257748,
+      "policy": "Single documented west-sign correction supported by the named Torrey Pines locality; approximate marker, not unqualified published GPS. Original XLSX hashes unchanged."
+    }
+  }
+}

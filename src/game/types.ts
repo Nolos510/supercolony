@@ -1,6 +1,6 @@
 export type ModeId = 'war' | 'species' | 'ecologist';
 export type SpeciesId = 'argentine' | 'meat' | 'native';
-export type Owner = 'player' | 'rival' | 'neutral';
+export type Owner = 'player' | 'ally' | 'rival' | 'neutral';
 export type Terrain = 'open' | 'complex';
 export type Intervention = 'habitat' | 'food' | 'transport';
 export type MatchStatus = 'running' | 'paused' | 'won' | 'lost' | 'draw';
@@ -28,12 +28,12 @@ export interface ResourceEntry {
 }
 export interface NestState {
   id: string; name: string; regionId: string; x: number; y: number;
-  owner: Owner; species: SpeciesId; units: number; capacity: number; growth: number;
+  owner: Owner; colonyId: string; species: SpeciesId; units: number; capacity: number; growth: number;
   terrain: Terrain; habitat: number; gateway: boolean;
 }
 export interface TrailState { id: string; from: string; to: string; kind: 'local' | 'overseas'; travelSeconds: number }
 export interface FleetState {
-  id: number; owner: Owner; species: SpeciesId; units: number;
+  id: number; owner: Owner; colonyId: string; species: SpeciesId; units: number;
   path: string[]; legIndex: number; elapsed: number;
 }
 export interface EffectState { nodeId: string; kind: Intervention; expires: number }
@@ -44,7 +44,21 @@ export interface GameState {
   nodes: NestState[]; edges: TrailState[]; fleets: FleetState[];
   effects: EffectState[]; charges: number; chargeProgress: number;
   initialHabitat: number; events: GameEvent[]; discovered: string[];
-  nextFleetId: number; stats: { orders: number; captures: number; interventions: number; losses: number };
+  nextFleetId: number; stats: { orders: number; captures: number; interventions: number; losses: number; reinforcementOrders: number; reinforcementWorkers: number };
+}
+export interface SpecimenAsset {
+  id: string; speciesId: SpeciesId; path: string; label: string; scientificName: string;
+  photographer: string; license: string; licenseUrl: string; sourceUrl: string;
+  sourceImageUrl: string; specimenCode?: string; viewerUrl?: string; reviewedAt: string; changes: string;
+}
+export interface RegionalContext {
+  regionId: string; environment: string; ecologicalStakes: string; gameAbstraction: string;
+  sourceIds: string[]; sourceUrls: { label: string; url: string }[]; reviewedAt: string;
+}
+export interface ResearchMapDataset {
+  id: string; title: string; publicationYear: number; observationPeriod: string;
+  method: string; precision: string; sourceUrl: string; reviewedAt: string;
+  dataPath: string; summary: string; caveat: string;
 }
 export interface CommandResult { state: GameState; error?: string }
 export interface BatchCommandResult extends CommandResult {

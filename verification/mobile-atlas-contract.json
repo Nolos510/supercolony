@@ -1,0 +1,138 @@
+{
+  "version": 2,
+  "task_id": "supercolony-mobile-atlas-recognition",
+  "outcome": "Phone-first atlas with drag collection, explicit restart/exit, readable educational navigation, credited real specimens, dated primary research maps and cooperating AI recognition networks.",
+  "scope": "User-approved successor after completed48cb58a. Preserve historical receipts. Source/asset requirements and behavioral fixtures frozen before implementation. Legacy browser fixture updates reflect approved Learn index, explicit Sources picker and dedicated ecological Details with clock controls; capture fixture now targets unclaimed CA4 because CA1 becomes allied. New protected tests add recognition, literal research-data/asset attribution, drag and cancellation, menu confirmation, cross-layer state preservation and short-landscape viewport checks. No runtime dependencies, hosting, account, analytics, protected-app or8000 access. Physical iPhone Brave playtest is a human follow-up and not an automated claim.",
+  "limits": {
+    "max_repairs": 8,
+    "max_seconds": 9000
+  },
+  "subjects": [
+    "/Users/nolos/Desktop/Ant Game/package.json",
+    "/Users/nolos/Desktop/Ant Game/package-lock.json",
+    "/Users/nolos/Desktop/Ant Game/index.html",
+    "/Users/nolos/Desktop/Ant Game/src/main.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/styles.css",
+    "/Users/nolos/Desktop/Ant Game/tokens.css",
+    "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+    "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Menu.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Learning.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Ant.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+    "/Users/nolos/Desktop/Ant Game/public/world.json",
+    "/Users/nolos/Desktop/Ant Game/README.md",
+    "/Users/nolos/Desktop/Ant Game/docs/SOURCES.md",
+    "/Users/nolos/Desktop/Ant Game/src/components/Icons.tsx",
+    "/Users/nolos/Desktop/Ant Game/docs/GEOGRAPHY.md",
+    "/Users/nolos/Desktop/Ant Game/docs/CONTENT_REVIEW.md",
+    "/Users/nolos/Desktop/Ant Game/src/components/SourcePicker.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Fieldwork.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/MatchMenu.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/CooperationTour.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Specimen.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/ResearchMap.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/data/research.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/regional.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/specimens.ts",
+    "/Users/nolos/Desktop/Ant Game/public/research/global-2010.json",
+    "/Users/nolos/Desktop/Ant Game/public/research/california-2025.json",
+    "/Users/nolos/Desktop/Ant Game/public/research/provenance.json",
+    "/Users/nolos/Desktop/Ant Game/public/specimens/argentine-worker.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/specimens/meat-worker.jpg",
+    "/Users/nolos/Desktop/Ant Game/docs/MOBILE_ATLAS_VERIFICATION.md",
+    "/Users/nolos/Desktop/Ant Game/docs/DESIGN_STUDIES.html",
+    "/Users/nolos/Desktop/Ant Game/docs/ASSETS.md"
+  ],
+  "protected": [
+    "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+    "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts"
+  ],
+  "criteria": [
+    {
+      "id": "types",
+      "description": "Strict TypeScript compilation",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "typecheck"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "lint",
+      "description": "Scoped source lint",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "lint"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "behavior-and-science",
+      "description": "Existing engine/content regression plus compatible transit, AI support, batch conservation, literal research fixtures and photo attribution.",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "player-objectives",
+      "description": "Chromium and WebKit flows: tutorial, all modes, drag/cancel, menu confirmations, grouped orders, research state preservation, sources, learning, fieldwork, focus/axe and short-landscape control visibility.",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test:e2e"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 300
+      }
+    },
+    {
+      "id": "production",
+      "description": "Production bundle",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "build"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 180
+      }
+    }
+  ]
+}

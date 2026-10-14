@@ -1,0 +1,215 @@
+{
+  "samples": [
+    {
+      "id": "US1",
+      "label": "Berkeley · US1",
+      "locality": "California, USA",
+      "lon": -122.264444,
+      "lat": 37.872778,
+      "regionId": "california",
+      "precision": "Published coordinates",
+      "coordinateNote": "Table 1 degrees/minutes/seconds converted to decimal; no nest boundary implied."
+    },
+    {
+      "id": "US2",
+      "label": "Lake Hodges · US2",
+      "locality": "California, USA",
+      "lon": -117.118889,
+      "lat": 33.0625,
+      "regionId": "california",
+      "precision": "Published coordinates",
+      "coordinateNote": "Table 1 labels this sample “Lake Hodges, La Mesa”; marker follows its printed Lake Hodges-area coordinates."
+    },
+    {
+      "id": "F",
+      "label": "Marseille · F",
+      "locality": "France",
+      "lon": 5.3698,
+      "lat": 43.2965,
+      "regionId": "mediterranean",
+      "precision": "Approximate locality",
+      "coordinateNote": "Marseille city marker: Table 1 prints an invalid 80-second latitude and a west longitude. No exact collection position is asserted."
+    },
+    {
+      "id": "AU",
+      "label": "Melbourne · AU",
+      "locality": "Australia",
+      "lon": 144.9631,
+      "lat": -37.8136,
+      "regionId": "australia",
+      "precision": "Approximate locality",
+      "coordinateNote": "Melbourne city marker: Table 1 prints northern/western hemispheres, inconsistent with the named locality."
+    },
+    {
+      "id": "NZ",
+      "label": "Wellington · NZ",
+      "locality": "New Zealand",
+      "lon": 174.7762,
+      "lat": -41.2865,
+      "regionId": "newzealand",
+      "precision": "Approximate locality",
+      "coordinateNote": "Wellington city marker: Table 1 prints northern/western hemispheres and invalid 76-minute longitude."
+    },
+    {
+      "id": "J",
+      "label": "Iwakuni · J",
+      "locality": "Japan",
+      "lon": 132.200278,
+      "lat": 34.104167,
+      "regionId": "japan",
+      "precision": "Published coordinates",
+      "coordinateNote": "Table 1 degrees/minutes/seconds converted to decimal; no nest boundary implied."
+    },
+    {
+      "id": "H1",
+      "label": "Kipuka Nene · H1",
+      "locality": "Hawaii, USA",
+      "lon": -155.634444,
+      "lat": 19.2225,
+      "regionId": "hawaii",
+      "precision": "Published coordinates",
+      "coordinateNote": "Table 1 degrees/minutes/seconds converted to decimal; historical sample, not a current park population survey."
+    },
+    {
+      "id": "H2",
+      "label": "KMC · H2",
+      "locality": "Hawaii, USA",
+      "lon": -155.273611,
+      "lat": 19.433611,
+      "regionId": "hawaii",
+      "precision": "Published coordinates",
+      "coordinateNote": "Table 1 degrees/minutes/seconds converted to decimal; historical sample, not a current park population survey."
+    },
+    {
+      "id": "SA",
+      "label": "Stellenbosch · SA",
+      "locality": "South Africa",
+      "lon": 18.8602,
+      "lat": -33.9321,
+      "regionId": "africa",
+      "precision": "Approximate locality",
+      "coordinateNote": "Stellenbosch city marker: Table 1 repeats the California US2 coordinates. No exact collection position is asserted."
+    }
+  ],
+  "links": [
+    {
+      "from": "US1",
+      "to": "J",
+      "aggressive": 0,
+      "total": 50,
+      "classification": "none"
+    },
+    {
+      "from": "US1",
+      "to": "F",
+      "aggressive": 0,
+      "total": 50,
+      "classification": "none"
+    },
+    {
+      "from": "US1",
+      "to": "NZ",
+      "aggressive": 0,
+      "total": 50,
+      "classification": "none"
+    },
+    {
+      "from": "US1",
+      "to": "H1",
+      "aggressive": 0,
+      "total": 20,
+      "classification": "none"
+    },
+    {
+      "from": "US1",
+      "to": "AU",
+      "aggressive": 4,
+      "total": 50,
+      "classification": "low"
+    },
+    {
+      "from": "J",
+      "to": "F",
+      "aggressive": 0,
+      "total": 50,
+      "classification": "none"
+    },
+    {
+      "from": "J",
+      "to": "AU",
+      "aggressive": 0,
+      "total": 50,
+      "classification": "none"
+    },
+    {
+      "from": "F",
+      "to": "H1",
+      "aggressive": 0,
+      "total": 20,
+      "classification": "none"
+    },
+    {
+      "from": "AU",
+      "to": "F",
+      "aggressive": 5,
+      "total": 50,
+      "classification": "low"
+    },
+    {
+      "from": "US1",
+      "to": "US2",
+      "aggressive": 42,
+      "total": 50,
+      "classification": "high"
+    },
+    {
+      "from": "US1",
+      "to": "SA",
+      "aggressive": 20,
+      "total": 50,
+      "classification": "high"
+    },
+    {
+      "from": "US1",
+      "to": "H2",
+      "aggressive": 31,
+      "total": 40,
+      "classification": "high"
+    },
+    {
+      "from": "US2",
+      "to": "F",
+      "aggressive": 47,
+      "total": 50,
+      "classification": "high"
+    },
+    {
+      "from": "US2",
+      "to": "J",
+      "aggressive": 45,
+      "total": 50,
+      "classification": "high"
+    },
+    {
+      "from": "US2",
+      "to": "AU",
+      "aggressive": 38,
+      "total": 45,
+      "classification": "high"
+    },
+    {
+      "from": "H2",
+      "to": "H1",
+      "aggressive": 15,
+      "total": 20,
+      "classification": "high"
+    },
+    {
+      "from": "H2",
+      "to": "F",
+      "aggressive": 13,
+      "total": 20,
+      "classification": "high"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { gameStore, startClock } from './game/store';
 import { regions, scenarios } from './game/scenarios';
 import { habitat, territory } from './game/engine';
@@ -8,8 +8,13 @@ import Map from './components/Map';
 import Menu from './components/Menu';
 import Inspector from './components/Inspector';
 import SourcePicker from './components/SourcePicker';
+import MatchMenu from './components/MatchMenu';
+import CooperationTour from './components/CooperationTour';
+
 import Learning, { ResourceLink } from './components/Learning';
 import { Icon } from './components/Icons';
+
+const ResearchMap = lazy(() => import('./components/ResearchMap'));
 
 function Results({ onRestart, onMenu, onContinue }: { onRestart: () => void; onMenu: () => void; onContinue?: () => void }) {
   const state = gameStore.getState();
@@ -29,7 +34,7 @@ function Results({ onRestart, onMenu, onContinue }: { onRestart: () => void; onM
       <div><dt>{state.mode === 'ecologist' ? 'Interventions used' : 'Swarms sent'}</dt><dd>{state.mode === 'ecologist' ? state.stats.interventions : state.stats.orders}</dd><dd className="stat-definition">{state.mode === 'ecologist' ? 'Accepted habitat, food, or transport actions.' : 'Successful dispatch commands, including reinforcements.'}</dd></div>
       <div><dt>Topics encountered</dt><dd>{state.discovered.length}</dd><dd className="stat-definition">Unique science topics linked to match events. This does not measure learning.</dd></div>
     </dl>
-    <h3>Three things to take with you</h3><div className="result-discoveries">{discoveries.map(f => <article key={f.id}><h4>{f.title}</h4><p>{f.summary}</p><ResourceLink resource={resources.find(r => r.id === f.resourceIds[0])!}>Explore further</ResourceLink></article>)}</div>
+    <p className="support-summary">Reinforcements: {state.stats.reinforcementOrders} orders · {state.stats.reinforcementWorkers} workers sent. These orders targeted your own or cooperating nests.</p><h3>Three things to take with you</h3><div className="result-discoveries">{discoveries.map(f => <article key={f.id}><h4>{f.title}</h4><p>{f.summary}</p><ResourceLink resource={resources.find(r => r.id === f.resourceIds[0])!}>Explore further</ResourceLink></article>)}</div>
     <section className="result-involvement"><h3>Keep following the ants</h3><div className="next-steps">
       <article><h4>Explore Argentine ants</h4><p>AntWeb offers specimen images, taxonomy, and recorded localities for research.</p><ResourceLink resource={antweb}>Compare Argentine-ant specimens</ResourceLink></article>
       <article><h4>Share an ant photo</h4><p>iNaturalist lets you share a photo, date, and location for community identification.</p><ResourceLink resource={observation}>Learn to record an observation</ResourceLink></article>
@@ -39,106 +44,158 @@ function Results({ onRestart, onMenu, onContinue }: { onRestart: () => void; onM
   </dialog>;
 }
 
+type Screen = 'home' | 'play' | 'menu' | 'review' | 'sources' | 'details' | 'learn' | 'cooperation';
+interface Navigation {
+  screen: Screen; layer: 'game' | 'research'; returnTo: 'home' | 'play' | 'details' | 'learn'; history: Screen[];
+  restoreReading?: boolean; tab: 'guide' | 'resources'; fact?: string; species?: SpeciesId; region?: string;
+}
+const initialNavigation: Navigation = { screen: 'home', layer: 'game', returnTo: 'home', history: [], tab: 'guide' };
+
 export default function App() {
   const state = useSyncExternalStore(gameStore.subscribe, gameStore.getSnapshot);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [navigation, setNavigation] = useState<Navigation>(initialNavigation);
   const [hasStarted, setHasStarted] = useState(false);
-  const [reviewOpen, setReviewOpen] = useState(false);
   const [view, setView] = useState<string | null>(null);
   const [selected, setSelected] = useState('california-0');
   const [sourceIds, setSourceIds] = useState<string[]>(['california-0']);
-  const [multiSelect, setMultiSelect] = useState(false);
-  const [pickerOpen, setPickerOpen] = useState(false);
-  const [matchRevision, setMatchRevision] = useState(0);
   const [destination, setDestination] = useState('california-1');
   const [fraction, setFraction] = useState(.5);
-  const [learning, setLearning] = useState<{ tab: 'guide' | 'resources'; fact?: string } | null>(null);
   const [tutorial, setTutorial] = useState<'intro' | 'active' | null>(null);
   const [notice, setNotice] = useState('');
-  const pausedBeforeLearning = useRef(true);
-  const pausedBeforeMenu = useRef(true);
-  const pausedBeforePicker = useRef(true);
+  const [matchRevision, setMatchRevision] = useState(0);
+  const [cooperationSeen, setCooperationSeen] = useState(false);
+  const [desktop, setDesktop] = useState(() => matchMedia('(min-width: 1000px) and (min-height: 600px)').matches);
+  const detailsDialog = useRef<HTMLDialogElement>(null);
+  const detailsScroll = useRef<HTMLDivElement>(null);
+  const fieldworkTarget = useRef(false);
+  const returnFocus = useRef<HTMLElement | null>(null);
   const noticeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  useEffect(() => { gameStore.pause(true); return startClock(); }, []);
-  useEffect(() => () => { if (noticeTimer.current) clearTimeout(noticeTimer.current); }, []);
+  const screen = navigation.screen;
+  const research = navigation.layer === 'research';
+  const ended = ['won', 'lost', 'draw'].includes(state.status);
   const node = state.nodes.find(n => n.id === selected) ?? state.nodes[0];
   const owned = state.nodes.filter(n => n.owner === 'player');
-  const sourceNode = owned.find(n => n.id === selected) ?? owned[0] ?? node;
-  const targetNode = state.nodes.find(n => n.id === destination && n.id !== sourceNode.id) ?? state.nodes.find(n => n.id !== sourceNode.id)!;
   const selectedSources = sourceIds.filter(id => owned.some(n => n.id === id));
-  const commandedSources = multiSelect ? selectedSources : [sourceNode.id];
-  const unitPreview = state.nodes.filter(n => commandedSources.includes(n.id) && n.id !== targetNode.id).reduce((sum, n) => sum + Math.floor(n.units * fraction), 0);
+  const sourceNode = owned.find(n => n.id === selectedSources[0]) ?? owned[0] ?? node;
+  const targetNode = state.nodes.find(n => n.id === destination && n.id !== sourceNode.id) ?? state.nodes.find(n => n.id !== sourceNode.id)!;
   const counts = territory(state);
-  const share = state.mode === 'ecologist' ? habitat(state) : counts.player / state.nodes.length;
   const timeLeft = state.duration === null ? null : Math.max(0, state.duration - Math.floor(state.time));
+  const unitPreview = owned.filter(n => selectedSources.includes(n.id) && n.id !== targetNode.id).reduce((sum, n) => sum + Math.floor(n.units * fraction), 0);
+  useEffect(() => { gameStore.pause(true); return startClock(); }, []);
+  useEffect(() => () => { if (noticeTimer.current) clearTimeout(noticeTimer.current); }, []);
   useEffect(() => {
-    const retained = sourceIds.filter(id => state.nodes.some(n => n.id === id && n.owner === 'player'));
-    if (retained.length !== sourceIds.length) { setSourceIds(retained); if (multiSelect) { setNotice('Selection updated: a nest changed ownership.'); if (noticeTimer.current) clearTimeout(noticeTimer.current); noticeTimer.current = setTimeout(() => setNotice(''), 4500); } }
-  }, [sourceIds, state.nodes, multiSelect]);
-  const ended = ['won', 'lost', 'draw'].includes(state.status);
-
-  function notify(message: string) { setNotice(message); if (noticeTimer.current) clearTimeout(noticeTimer.current); noticeTimer.current = setTimeout(() => setNotice(''), 4500); }
+    const media = matchMedia('(min-width: 1000px) and (min-height: 600px)');
+    const changed = () => setDesktop(media.matches); media.addEventListener('change', changed);
+    return () => media.removeEventListener('change', changed);
+  }, []);
+  useEffect(() => {
+    const dialog = detailsDialog.current;
+    if (!dialog) return;
+    dialog.close();
+    if (!ended && screen === 'details') dialog.showModal();
+    else if (!ended && desktop && screen === 'play' && !research) dialog.show();
+  }, [screen, desktop, research, ended]);
+  useEffect(() => {
+    const valid = sourceIds.filter(id => state.nodes.some(n => n.id === id && n.owner === 'player'));
+    if (valid.length !== sourceIds.length) setSourceIds(valid);
+  }, [sourceIds, state.nodes]);
+  useEffect(() => { if (detailsScroll.current) detailsScroll.current.scrollTop = 0; }, [matchRevision, node.id]);
+  useEffect(() => { if (screen === 'details' && fieldworkTarget.current) { fieldworkTarget.current = false; requestAnimationFrame(() => detailsScroll.current?.querySelector('.fieldwork')?.scrollIntoView({ block: 'start' })); } }, [screen]);
+  function notify(message: string) {
+    setNotice(message); if (noticeTimer.current) clearTimeout(noticeTimer.current);
+    noticeTimer.current = setTimeout(() => setNotice(''), 4500);
+  }
+  function open(next: Screen, values: Partial<Navigation> = {}) {
+    returnFocus.current = document.activeElement as HTMLElement;
+    if (!(next === 'details' && state.mode === 'ecologist')) gameStore.pause(true);
+    setNavigation(n => ({ ...n, screen: next, returnTo: n.screen === 'home' ? 'home' : n.screen === 'details' ? 'details' : n.screen === 'learn' ? 'learn' : 'play', history: [...n.history, n.screen], restoreReading: false, ...values }));
+  }
+  function back(resume = false) {
+    setNavigation(n => { const history = n.history.slice(0, -1); const previous = n.history.at(-1) ?? (hasStarted ? 'play' : 'home'); return { ...n, screen: previous, history, restoreReading: previous === 'learn', returnTo: (history.at(-1) ?? (hasStarted ? 'play' : 'home')) as Navigation['returnTo'] }; });
+    if (resume) gameStore.pause(false);
+    requestAnimationFrame(() => returnFocus.current?.focus());
+  }
+  function play(resume = false) {
+    setNavigation(n => ({ ...n, screen: 'play', history: [], returnTo: 'play' }));
+    if (resume) gameStore.pause(false);
+  }
   function start(mode: ModeId, species: SpeciesId = 'argentine', withTutorial = true) {
-    gameStore.start(mode, species); setSelected(mode === 'species' ? 'australia-0' : 'california-0');
-    setSourceIds([mode === 'species' ? 'australia-0' : 'california-0']); setMultiSelect(false); setPickerOpen(false); setMatchRevision(v => v + 1);
-    setDestination(mode === 'species' ? 'australia-1' : 'california-1'); setView(mode === 'species' ? 'australia' : null);
-    setMenuOpen(false); setReviewOpen(false); setHasStarted(true); setNotice(''); setTutorial(withTutorial ? 'intro' : null);
+    gameStore.start(mode, species);
+    const source = mode === 'species' ? 'australia-0' : 'california-0';
+    setSelected(source); setSourceIds([source]); setDestination(mode === 'species' ? 'australia-1' : 'california-1');
+    setView(mode === 'species' ? 'australia' : null); setMatchRevision(v => v + 1);
+    setNavigation({ ...initialNavigation, screen: 'play', returnTo: 'play' });
+    setHasStarted(true); setCooperationSeen(false); setNotice(''); setTutorial(withTutorial ? 'intro' : null);
     if (withTutorial) gameStore.pause(true);
   }
-  function learn(tab: 'guide' | 'resources', fact?: string) {
-    pausedBeforeLearning.current = gameStore.getState().status !== 'running'; gameStore.pause(true); setLearning({ tab, fact });
+  function exit() {
+    gameStore.start('war'); gameStore.pause(true); setHasStarted(false); setTutorial(null);
+    setNavigation(initialNavigation); setSourceIds(['california-0']); setSelected('california-0'); setView(null);
+    setMatchRevision(v => v + 1);
   }
-  function closeLearning() { setLearning(null); if (!pausedBeforeLearning.current && !menuOpen) gameStore.pause(false); }
-  function order(from?: string, to = targetNode.id) {
-    const ids = multiSelect ? selectedSources : [from ?? sourceNode.id];
-    const result = gameStore.sendMany(ids, to, fraction);
-    notify(result.error ?? (multiSelect ? `${result.sentFromIds.length} swarms dispatched.${result.skipped.length ? ` ${result.skipped.length} nests skipped: ${result.skipped[0].reason}` : ''}` : 'Swarm dispatched. Follow the trail.'));
-  }
-  function choose(id: string, issueOrder = false, additive = false) {
-    const target = state.nodes.find(n => n.id === id)!;
-    if (state.mode === 'ecologist') { setSelected(id); return; }
-    if ((additive || multiSelect) && target.owner === 'player') {
-      setMultiSelect(true); setSelected(id);
-      setSourceIds(ids => ids.includes(id) ? ids.filter(source => source !== id) : [...ids, id]);
-      return;
+  function learn(tab: 'guide' | 'resources', fact?: string, species?: SpeciesId, region?: string) { open('learn', { tab, fact, species, region }); }
+  function choose(id: string, _order = false, additive = false) {
+    const target = gameStore.getState().nodes.find(n => n.id === id);
+    if (!target) return;
+    setSelected(id);
+    if (state.mode !== 'ecologist') {
+      if (target.owner === 'player') setSourceIds(ids => additive ? ids.includes(id) ? ids.filter(i => i !== id) : [...ids, id] : [id]);
+      else setDestination(id);
+      if (target.owner === 'ally' && !cooperationSeen) { setCooperationSeen(true); open('cooperation'); }
     }
-    if (issueOrder && target.owner !== 'player' && (multiSelect ? selectedSources.length > 0 : node.owner === 'player') && state.status === 'running') { setDestination(id); order(node.id, id); }
-    else { setSelected(id); if (target.owner === 'player') { setSourceIds([id]); const neighbor = state.edges.find(e => e.from === id || e.to === id); if (neighbor) setDestination(neighbor.from === id ? neighbor.to : neighbor.from); } }
   }
-  function toggleMulti() { setMultiSelect(v => !v); if (!multiSelect && !selectedSources.length) setSourceIds(owned.length ? [sourceNode.id] : []); }
-  function openPicker() { pausedBeforePicker.current = gameStore.getState().status !== 'running'; gameStore.pause(true); setPickerOpen(true); }
-  function closePicker(ids?: string[]) { if (ids) setSourceIds(ids); setPickerOpen(false); if (!pausedBeforePicker.current) gameStore.pause(false); }
-  function intervene(kind: Intervention) { const error = gameStore.intervene(node.id, kind); notify(error ?? `${kind === 'habitat' ? 'Habitat restored' : kind === 'food' ? 'Food subsidy reduced' : 'Transport restricted'}. Watch what changes.`); return error; }
-  function menu() { pausedBeforeMenu.current = gameStore.getState().status !== 'running'; gameStore.pause(true); setMenuOpen(true); setReviewOpen(false); setTutorial(null); }
-  function review() { setMenuOpen(false); setReviewOpen(true); }
-  function continueReview() { setReviewOpen(false); gameStore.pause(false); }
-  function resumeMenu() { setMenuOpen(false); if (!pausedBeforeMenu.current) gameStore.pause(false); }
-
+  function order(ids = selectedSources, to = targetNode.id) {
+    const result = gameStore.sendMany(ids, to, fraction);
+    setDestination(to);
+    notify(result.error ?? `${result.sentFromIds.length === 1 ? 'Swarm dispatched' : `${result.sentFromIds.length} swarms dispatched`}.${result.skipped.length ? ` ${result.skipped.length} sources skipped.` : ''}`);
+  }
+  function intervene(kind: Intervention) {
+    const error = gameStore.intervene(node.id, kind);
+    notify(error ?? `${kind === 'habitat' ? 'Habitat supported' : kind === 'food' ? 'Food subsidy reduced' : 'Transport restricted'}. Watch what changes.`);
+    return error;
+  }
+  function switchLayer(layer: 'game' | 'research') {
+    gameStore.pause(true); setNavigation(n => ({ ...n, layer }));
+  }
+  const overlay = screen !== 'play' || ended;
   return <div className="app-shell">
     <a className="skip-link" href="#battlefield">Skip to the battlefield</a>
-    <div className="game-surface" inert={menuOpen || !!learning || ended || reviewOpen || pickerOpen} aria-hidden={menuOpen || !!learning || ended || reviewOpen || pickerOpen}>
-    <header className="topbar">
-      <button className="brand brand-button" onClick={menu} aria-label="SUPERColony game menu"><Icon name="leaf" size={25} /><span translate="no">SUPER<span className="brand-light">Colony</span></span></button>
-      <nav aria-label="Main navigation"><button className={!view ? 'nav-active' : ''} onClick={() => setView(null)}><Icon name="world" />World</button><button onClick={() => learn('guide')}><Icon name="book" />Field guide</button><button onClick={() => learn('resources')}><Icon name="leaf" />Learn & get involved</button></nav>
-      <div className="topbar-controls"><span className={`match-clock ${timeLeft === null ? 'untimed-clock' : ''}`} aria-label={timeLeft === null ? 'No time limit' : `${Math.floor(timeLeft / 60)} minutes ${timeLeft % 60} seconds remaining`}>{timeLeft === null ? 'No time limit' : `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</span><button className="pause-button" aria-label={state.status === 'paused' ? 'Resume match' : 'Pause match'} onClick={() => gameStore.pause(state.status !== 'paused')} disabled={ended}><Icon name={state.status === 'paused' ? 'play' : 'pause'} /><span>{state.status === 'paused' ? 'Resume' : 'Pause'}</span></button></div>
-    </header>
-    <section className="match-bar" aria-label="Match progress"><span className="mode-badge">{scenarios[state.mode].name}</span><div className="territory-progress"><div className="progress-label"><span>{state.mode === 'ecologist' ? 'Native habitat retained' : 'Your territory'}</span><strong>{Math.round(share * 100)}%</strong></div><div className="progress-track"><span style={{ width: `${Math.min(100, share * 100)}%` }} /></div><span className="progress-target">{state.mode === 'ecologist' ? 'Target 60% habitat' : 'Play until one colony has no nests or swarms'}</span></div><label className="region-switch"><span>Explore</span><select value={view ?? 'world'} onChange={e => setView(e.target.value === 'world' ? null : e.target.value)} aria-label="Map view"><option value="world">World map</option>{regions.map(r => <option value={r.id} key={r.id}>{r.shortName}</option>)}</select></label></section>
-    <main className="game-layout" id="battlefield">
-      <h1 className="sr-only">SUPERColony strategy game</h1>
-      <div className="battlefield-wrap"><Map state={state} view={view} selected={state.mode === 'ecologist' ? [node.id] : multiSelect ? selectedSources : [node.id]} onSelect={choose} onZoom={setView} onOrder={order} />
-        {tutorial && <section className="tutorial" aria-label="Interactive tutorial"><span className="eyebrow">A small first step</span><h2>{tutorial === 'intro' ? 'Your first trail' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'Watch your decision unfold' : state.mode === 'ecologist' ? 'Protect a patch of habitat' : 'Choose a destination'}</h2><p>{tutorial === 'intro' ? state.mode === 'ecologist' ? 'Inspect a habitat, collect an observation, choose a priority, then test a response and record a follow-up.' : 'Select a cyan nest, choose a destination, and send part of your swarm. Connected nests are your strength.' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'The match keeps running across every region. Pause whenever you want to explore the science.' : state.mode === 'ecologist' ? 'Choose an observation in the habitat panel. Use its evidence to choose a priority, test a response, and record a follow-up.' : 'Use the source and destination controls below, then Send swarm. You can also tap a rival or unclaimed nest.'}</p><div>{tutorial === 'intro' ? <button className="primary" onClick={() => { setTutorial('active'); setView(state.mode === 'species' ? 'australia' : 'california'); gameStore.pause(false); }}>Begin tutorial <Icon name="arrow" /></button> : (state.stats.orders > 0 || state.stats.interventions > 0) && <button className="primary" onClick={() => setTutorial(null)}>Finish tutorial <Icon name="arrow" /></button>}<button className="text-button" onClick={() => { setTutorial(null); gameStore.pause(false); }}>Skip tutorial</button></div></section>}
-        {state.status === 'paused' && !tutorial && !learning && !menuOpen && <div className="paused-indicator"><Icon name="pause" size={14} />Match paused · Take your time</div>}
-      </div>
-      <Inspector key={matchRevision} state={state} node={node} view={view} onIntervene={intervene} onGuide={id => learn('guide', id)} />
-    </main>
-    <footer className="command-bar">
-      {state.mode !== 'ecologist' ? <><div className="order-heading"><Icon name="arrow" size={23} /><div><strong>Send your swarm</strong><span>Up to {unitPreview} game units from {commandedSources.length} {commandedSources.length === 1 ? 'nest' : 'nests'} · {fraction * 100}% from each</span></div></div><div className="order-fields"><div className="source-control"><button className="multi-toggle" aria-pressed={multiSelect} onClick={toggleMulti}>Select multiple</button>{multiSelect ? <><span className="selection-count">{selectedSources.length} {selectedSources.length === 1 ? 'nest' : 'nests'} selected</span><button onClick={openPicker}>Choose sources ({selectedSources.length})</button><button className="text-button" onClick={() => setSourceIds([])}>Clear selection</button></> : <label>Source nest<select aria-label="Source nest" value={owned.some(n => n.id === selected) ? selected : owned[0]?.id ?? ''} onChange={e => choose(e.target.value)}>{owned.map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label>}</div><label>Destination nest<select aria-label="Destination nest" value={targetNode.id} onChange={e => setDestination(e.target.value)}>{state.nodes.filter(n => n.id !== sourceNode.id).map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label></div><div className="fraction-picker" aria-label="Swarm strength">{[.25, .5, 1].map(f => <button key={f} aria-pressed={fraction === f} onClick={() => setFraction(f)}>{f * 100}%</button>)}</div><button className="primary send-button" onClick={() => order(owned.some(n => n.id === selected) ? selected : owned[0]?.id)} disabled={state.status !== 'running' || !owned.length || (multiSelect && !selectedSources.length)}>{multiSelect ? 'Send swarms' : 'Send swarm'} <Icon name="arrow" /></button></> : <><div className="order-heading"><Icon name="leaf" size={25} /><div><strong>Protect the living network</strong><span>Choose a site. Apply an intervention. Watch what changes.</span></div></div><div className="charge-status">{Array.from({ length: 3 }, (_, i) => <span key={i} className={i < state.charges ? 'full' : ''} aria-hidden="true" />)}<strong>{state.charges}/3 charges</strong><span>Next in {Math.ceil(15 - state.chargeProgress)}s</span></div><button onClick={() => learn('resources')}>Find ways to get involved <Icon name="arrow" /></button></>}
-    </footer>
-    <div className={`notice ${notice ? 'show' : ''}`} role="status" aria-live="polite">{notice}</div>
+    <div className="game-surface" inert={overlay} aria-hidden={overlay}>
+      <header className="topbar">
+        <button className="game-menu-button" onClick={() => { setTutorial(null); if (hasStarted) open('menu'); else exit(); }} aria-label="SUPERColony game menu"><Icon name="leaf" /><span>Game menu</span></button>
+        <div className="brand" translate="no"><span className="brand-word">SUPER<span className="brand-light">Colony</span></span><span className="header-mode">{scenarios[state.mode].name}</span></div>
+        <div className="topbar-controls"><button onClick={() => learn('guide')}><Icon name="book" /><span>Learn</span></button><button className="pause-button" aria-label={state.status === 'paused' ? 'Resume match' : 'Pause match'} onClick={() => gameStore.pause(state.status !== 'paused')} disabled={ended || research || !hasStarted}><Icon name={state.status === 'paused' ? 'play' : 'pause'} /><span>{state.status === 'paused' ? 'Resume' : 'Pause'}</span></button></div>
+      </header>
+      <section className="match-bar" aria-label="Match progress">
+        <span className="match-clock" aria-label={timeLeft === null ? 'No time limit' : `${Math.floor(timeLeft / 60)} minutes ${timeLeft % 60} seconds remaining`}>{timeLeft === null ? 'No time limit' : `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`}</span>
+        {state.mode === 'ecologist' ? <span className="habitat-status">Habitat <strong>{Math.round(habitat(state) * 100)}%</strong> · goal 60%</span> : <div className="network-counts" aria-label="Nest ownership"><span>● You <strong>{counts.player}</strong></span>{state.mode === 'war' && <span>◐ Cooperating <strong>{counts.ally}</strong></span>}<span>◆ Rival <strong>{counts.rival}</strong></span></div>}
+        <div className="map-layers" aria-label="Map layer"><button aria-pressed={!research} onClick={() => research && (hasStarted ? switchLayer('game') : exit())}>Game</button><button aria-pressed={research} onClick={() => switchLayer('research')}>Research</button></div>
+      </section>
+      <main className={`game-layout ${research ? 'research-layout' : ''}`} id="battlefield">
+        <h1 className="sr-only">SUPERColony strategy game</h1>
+        <div className="battlefield-wrap">
+          {!research && <div className="map-toolbar"><label className="region-switch"><span className="sr-only">Explore region</span><select value={view ?? 'world'} onChange={e => setView(e.target.value === 'world' ? null : e.target.value)} aria-label="Map view"><option value="world">World map</option>{regions.map(r => <option value={r.id} key={r.id}>{r.shortName}</option>)}</select></label><button onClick={() => open('details')}>Nest details <Icon name="zoom" size={16} /></button></div>}
+          {research ? <Suspense fallback={<div className="map-load" role="status">Loading research…</div>}><ResearchMap /></Suspense> : <Map state={state} view={view} selected={state.mode === 'ecologist' ? [node.id] : selectedSources} onSelect={choose} onZoom={setView} onOrder={(from, to) => order([from], to)} onGroupOrder={order} onSelection={setSourceIds} active={screen === 'play' && state.status === 'running' && tutorial !== 'intro'} />}
+          {tutorial && !research && <section className="tutorial" aria-label="Interactive tutorial"><h2>{tutorial === 'intro' ? 'Your first trail' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'Watch your decision unfold' : state.mode === 'ecologist' ? 'Protect a patch of habitat' : 'Choose a destination'}</h2><p>{tutorial === 'intro' ? state.mode === 'ecologist' ? 'Observe a habitat, choose a response, then record what changes.' : 'Choose a percentage. Drag from your nest to another, then release to send.' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'Your trails continue across every region. Explore the science whenever you like.' : state.mode === 'ecologist' ? 'Open Nest details to begin fieldwork.' : 'Sweep across your nests to collect sources. Drop on a destination to send.'}</p><div>{tutorial === 'intro' ? <button className="primary" onClick={() => { setTutorial('active'); setView(state.mode === 'species' ? 'australia' : 'california'); gameStore.pause(false); }}>Begin tutorial <Icon name="arrow" /></button> : (state.stats.orders > 0 || state.stats.interventions > 0) && <button className="primary" onClick={() => setTutorial(null)}>Finish tutorial <Icon name="arrow" /></button>}<button className="text-button" onClick={() => { setTutorial(null); gameStore.pause(false); }}>Skip tutorial</button></div></section>}
+          {state.status === 'paused' && !tutorial && !research && <div className="paused-indicator"><Icon name="pause" size={14} />Paused · press Resume to play</div>}
+        </div>
+        {!research && <div className="inspector-space" />}
+      </main>
+      <footer className={`command-bar ${research ? 'research-dock' : ''}`}>
+        {research ? <><span>Research view · match paused</span><button onClick={() => hasStarted ? switchLayer('game') : exit()}>{hasStarted ? 'Back to map' : 'Back to home'} <Icon name="arrow" /></button></> : state.mode !== 'ecologist' ? <><div className="command-selection"><button onClick={() => open('sources')}>Choose sources ({selectedSources.length})</button><span className="selection-count">{selectedSources.length} {selectedSources.length === 1 ? 'nest' : 'nests'} selected</span><span className="drag-hint">Drag between nests to send</span></div><div className="fraction-picker" aria-label="Swarm strength">{[.25, .5, 1].map(f => <button key={f} aria-pressed={fraction === f} onClick={() => setFraction(f)}>{f * 100}%</button>)}</div><button className="primary send-button" onClick={() => order()} disabled={state.status !== 'running' || !selectedSources.length || research}>{selectedSources.length > 1 ? 'Send swarms' : 'Send swarm'} <Icon name="arrow" /></button><details className="keyboard-orders"><summary>Keyboard orders</summary><div className="order-fields"><label>Source nest<select aria-label="Source nest" value={sourceNode.id} onChange={e => choose(e.target.value)}>{owned.map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label><label>Destination nest<select aria-label="Destination nest" value={targetNode.id} onChange={e => setDestination(e.target.value)}>{state.nodes.filter(n => n.id !== sourceNode.id).map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label><span>{unitPreview} workers · {fraction * 100}% from each source</span></div></details></> : <><div className="command-selection"><strong>Fieldwork</strong><span>Observe → respond → follow up</span></div><div className="charge-status"><strong>{state.charges}/3 charges</strong><span>+1 in {Math.ceil(15 - state.chargeProgress)}s</span></div><button className="primary" onClick={() => { fieldworkTarget.current = true; open('details'); }}>Open fieldwork <Icon name="leaf" /></button></>}
+      </footer>
+      <div className={`notice ${notice ? 'show' : ''}`} role="status" aria-live="polite">{notice}</div>
     </div>
-    {menuOpen && !learning && <Menu onStart={start} onLearn={() => learn('resources')} onResume={hasStarted && !ended ? resumeMenu : undefined} onReview={hasStarted && !ended ? review : undefined} />}
-    {pickerOpen && <SourcePicker state={state} selected={selectedSources} onConfirm={ids => closePicker(ids)} onCancel={() => closePicker()} />}
-    {learning && <Learning tab={learning.tab} focusFact={learning.fact} onClose={closeLearning} />}
-    {(ended || reviewOpen) && !menuOpen && <Results onRestart={() => start(state.mode, state.playerSpecies, false)} onMenu={menu} onContinue={reviewOpen ? continueReview : undefined} />}
+    <dialog ref={detailsDialog} className={`details-dialog ${screen === 'details' ? 'details-full' : 'details-sidebar'}`} aria-label="Nest details" onCancel={e => { e.preventDefault(); play(); }}>
+      {screen === 'details' && <header className="details-header"><button onClick={() => play()}>Back to map <Icon name="arrow" /></button>{state.mode === 'ecologist' && <button aria-label={state.status === 'running' ? 'Pause fieldwork' : 'Resume fieldwork'} onClick={() => gameStore.pause(state.status === 'running')}>{state.status === 'running' ? 'Pause fieldwork' : 'Resume fieldwork'}</button>}</header>}
+      <div ref={detailsScroll} className="details-scroll"><Inspector key={matchRevision} visible={screen === 'details' || desktop && screen === 'play' && !research && !ended} detailed state={state} node={node} view={view} onIntervene={intervene} onGuide={id => learn('guide', id)} onSpecies={id => learn('guide', undefined, id)} onRegion={id => learn('guide', undefined, undefined, id)} onCooperation={() => open('cooperation')} /></div>
+    </dialog>
+    {screen === 'home' && <Menu onStart={start} onLearn={() => learn('resources')} />}
+    {screen === 'menu' && <MatchMenu modeName={scenarios[state.mode].name} onResume={() => play(true)} onRestart={() => start(state.mode, state.playerSpecies, false)} onExit={exit} onReview={() => open('review')} />}
+    {screen === 'sources' && <SourcePicker state={state} selected={selectedSources} onConfirm={ids => { setSourceIds(ids); play(true); }} onCancel={() => play()} />}
+    {screen === 'learn' && <Learning restorePrevious={navigation.restoreReading} returnLabel={navigation.returnTo === 'home' ? 'Back to home' : navigation.returnTo === 'details' ? 'Back to details' : 'Back to map'} tab={navigation.tab} focusFact={navigation.fact} focusSpecies={navigation.species} focusRegion={navigation.region} onClose={() => back()} onCooperation={() => open('cooperation')} />}
+    {screen === 'cooperation' && <CooperationTour onClose={() => back()} onResearch={() => { setNavigation(n => ({ ...n, screen: 'play', layer: 'research', history: hasStarted ? [] : ['home'], returnTo: hasStarted ? 'play' : 'home' })); }} onReinforce={() => { if (!hasStarted) start('war', 'argentine', false); setView('california'); setSourceIds(['california-0']); setDestination('california-1'); play(true); notify('Drop your swarm on the ◐ cooperating nest to reinforce it.'); }} />}
+    {(ended || screen === 'review') && screen !== 'home' && screen !== 'menu' && screen !== 'learn' && <Results onRestart={() => start(state.mode, state.playerSpecies, false)} onMenu={ended ? exit : () => open('menu')} onContinue={screen === 'review' ? () => play(true) : undefined} />}
+    {!hasStarted && <span className="sr-only">Start a match from the home screen.</span>}
   </div>;
 }

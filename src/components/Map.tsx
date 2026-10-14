@@ -25,7 +25,7 @@ function ant(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number,
   ctx.restore();
 }
 
-export default function BattlefieldMap({ state, view, selected, onSelect, onZoom, onOrder }: { state: GameState; view: string | null; selected: string[]; onSelect: (id: string, order?: boolean, additive?: boolean) => void; onZoom: (region: string | null) => void; onOrder: (from: string, to: string) => void }) {
+export default function BattlefieldMap({ state, view, selected, onSelect, onZoom, onGroupOrder, onSelection, active = true }: { state: GameState; view: string | null; selected: string[]; onSelect: (id: string, order?: boolean, additive?: boolean) => void; onZoom: (region: string | null) => void; onOrder: (from: string, to: string) => void; onGroupOrder: (sources: string[], target: string) => void; onSelection: (sources: string[]) => void; active?: boolean }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const geometry = useRef<Geography | null>(null);
   const selectedRef = useRef(selected);
@@ -51,7 +51,7 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     const bg = background.getContext('2d')!;
     const css = getComputedStyle(document.documentElement);
     const color = (token: string) => css.getPropertyValue(token).trim();
-    const colors = { water: color('--color-water'), land: color('--color-land'), contour: color('--color-contour'), grid: color('--color-map-grid'), ink: color('--color-ink'), player: color('--color-player-dark'), rival: color('--color-rival-dark'), neutral: color('--color-neutral'), habitat: color('--color-habitat') };
+    const colors = { water: color('--color-water'), land: color('--color-land'), contour: color('--color-contour'), grid: color('--color-map-grid'), ink: color('--color-ink'), player: color('--color-player-dark'), rival: color('--color-rival-dark'), ally: color('--color-player-dark'), neutral: color('--color-neutral'), habitat: color('--color-habitat') };
     let width = 0, height = 0, frame = 0, redraw = true;
     const scale = Math.min(window.devicePixelRatio || 1, 2);
     const region = regions.find(r => r.id === view);
@@ -136,29 +136,84 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     return () => { cancelAnimationFrame(frame); resize.disconnect(); };
   }, [view, load]);
 
+  const viewport = useRef<HTMLDivElement>(null);
+  const trail = useRef<SVGPolylineElement>(null);
+  const preview = useRef<HTMLDivElement>(null);
+  const suppressClick = useRef(false);
+  type Target = { id: string; x: number; y: number; width: number; height: number };
+  type Gesture = { id: number; x: number; y: number; moved: boolean; sources: string[]; prior: string[]; targets: Target[]; left: number; top: number };
+  const gesture = useRef<Gesture | null>(null);
+  function clearGesture(restore = false) {
+    const g = gesture.current;
+    if (g && restore) onSelection(g.prior);
+    gesture.current = null;
+    trail.current?.setAttribute('points', '');
+    if (preview.current) preview.current.hidden = true;
+    viewport.current?.classList.remove('ordering');
+  }
+  useEffect(() => { clearGesture(true); return () => clearGesture(true); }, [view, active]); // A view/menu/pause change cancels the order.
+  function hit(g: Gesture, x: number, y: number) {
+    return g.targets.filter(t => Math.abs(t.x - x) <= Math.max(22, t.width / 2) && Math.abs(t.y - y) <= Math.max(22, t.height / 2)).sort((a, b) => Math.hypot(a.x - x, a.y - y) - Math.hypot(b.x - x, b.y - y))[0];
+  }
+  function begin(e: React.PointerEvent<HTMLDivElement>) {
+    if (gesture.current) { suppressClick.current = true; clearGesture(true); return; }
+    if (!active || state.mode === 'ecologist' || !e.isPrimary && e.pointerType === 'touch') return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const targets = Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('[data-nest-id]')).map(button => {
+      const r = button.getBoundingClientRect(); return { id: button.dataset.nestId!, x: r.x + r.width / 2, y: r.y + r.height / 2, width: r.width, height: r.height };
+    });
+    const initial: Gesture = { id: e.pointerId, x: e.clientX, y: e.clientY, moved: false, sources: [], prior: selectedRef.current, targets, left: rect.left, top: rect.top };
+    const source = hit(initial, e.clientX, e.clientY);
+    if (!source || gameStore.getState().nodes.find(n => n.id === source.id)?.owner !== 'player') return;
+    initial.sources = selectedRef.current.includes(source.id) ? [...selectedRef.current] : [source.id];
+    gesture.current = initial;
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* Synthetic pointer tests have no active native pointer. */ }
+  }
+  function move(e: React.PointerEvent<HTMLDivElement>) {
+    const g = gesture.current;
+    if (!g || g.id !== e.pointerId) return;
+    if (!g.moved && Math.hypot(e.clientX - g.x, e.clientY - g.y) < 8) return;
+    e.preventDefault();
+    if (!g.moved) { g.moved = true; onSelection(g.sources); viewport.current?.classList.add('ordering'); }
+    const target = hit(g, e.clientX, e.clientY);
+    const node = target && gameStore.getState().nodes.find(n => n.id === target.id);
+    if (node?.owner === 'player' && !g.sources.includes(node.id)) { g.sources.push(node.id); onSelection([...g.sources]); }
+    const points = g.sources.map(id => g.targets.find(t => t.id === id)).filter((t): t is Target => !!t).map(t => `${t.x - g.left},${t.y - g.top}`);
+    points.push(`${e.clientX - g.left},${e.clientY - g.top}`); trail.current?.setAttribute('points', points.join(' '));
+    if (preview.current) {
+      preview.current.hidden = false;
+      preview.current.textContent = node ? `${node.owner === 'rival' ? 'Attack' : node.owner === 'neutral' ? 'Capture' : 'Reinforce'} ${node.name} · ${g.sources.filter(id => id !== node.id).length} sources` : 'Release outside a nest to cancel';
+    }
+  }
+  function end(e: React.PointerEvent<HTMLDivElement>) {
+    const g = gesture.current;
+    if (!g || g.id !== e.pointerId) return;
+    const target = hit(g, e.clientX, e.clientY);
+    if (g.moved) {
+      e.preventDefault(); suppressClick.current = true;
+      if (target && active) onGroupOrder([...g.sources], target.id);
+    }
+    clearGesture(g.moved && !target);
+  }
   const visible = state.nodes.filter(n => view ? n.regionId === view : n.gateway);
   return <div className="map-stage" data-view={view ?? 'world'}>
-    <div className="map-viewport">
-    <canvas ref={canvas} className="map-canvas" aria-hidden="true" />
+    <div ref={viewport} className="map-viewport" onPointerDown={begin} onPointerMove={move} onPointerUp={end} onPointerCancel={() => { suppressClick.current = true; clearGesture(true); }} onClickCapture={e => { if (suppressClick.current) { e.preventDefault(); e.stopPropagation(); suppressClick.current = false; } }}>
+    <canvas ref={canvas} className="map-canvas" aria-hidden="true" /><svg className="order-trail" aria-hidden="true"><polyline ref={trail} fill="none" /></svg><div ref={preview} className="drag-preview" hidden role="status" />
     <div className="map-heading"><span className="eyebrow">{view ? 'Within the supercolony' : 'A planet connected by tiny travelers'}</span><h2>{currentRegion?.name ?? 'The living world'}</h2><p>{view ? currentRegion?.nativeRange ? 'Native range · Simulated nests' : 'Simulated nests · Real regional context' : state.mode === 'species' ? 'Australian matchup · Worldwide context' : `${new Set(state.nodes.map(n => n.regionId)).size} regions. One continuous match.`}</p></div>
     {view && <button className="back-world" onClick={() => onZoom(null)}><Icon name="world" />World view</button>}
     {!view && <><span className="ocean-label ocean-pacific">Pacific Ocean</span><span className="ocean-label ocean-atlantic">Atlantic Ocean</span><span className="ocean-label ocean-indian">Indian Ocean</span></>}
     {visible.map(n => {
       const p = nestPoint(n, view); const region = regions.find(r => r.id === n.regionId)!;
       return <div key={n.id} data-region={n.regionId} className={`map-node-wrap ${!view && p[0] > .90 ? 'label-left' : ''}`} style={{ left: `${p[0] * 100}%`, top: `${p[1] * 100}%` }}>
-        <button className={`map-node ${n.owner} ${selected.includes(n.id) ? 'selected' : ''}`} aria-label={`${n.name}, ${n.owner === 'player' ? 'your nest' : n.owner === 'rival' ? 'rival nest' : 'unclaimed nest'}, ${Math.floor(n.units)} game units`} aria-pressed={selected.includes(n.id)} onClick={e => onSelect(n.id, true, e.shiftKey || e.metaKey)} draggable={n.owner === 'player' && state.mode !== 'ecologist'} onDragStart={e => e.dataTransfer.setData('text/plain', n.id)} onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); const from = e.dataTransfer.getData('text/plain'); if (from) onOrder(from, n.id); }}><span className="owner-glyph" aria-hidden="true">{n.owner === 'rival' ? '◆' : n.owner === 'neutral' ? '○' : '●'}</span><span className="node-count">{Math.floor(n.units)}</span></button>
+        <button data-nest-id={n.id} className={`map-node ${n.owner} ${selected.includes(n.id) ? 'selected' : ''}`} aria-label={`${n.name}, ${n.owner === 'player' ? 'your nest' : n.owner === 'rival' ? 'rival nest' : n.owner === 'ally' ? 'cooperating nest' : 'unclaimed nest'}, ${Math.floor(n.units)} game units`} aria-pressed={selected.includes(n.id)} onClick={e => onSelect(n.id, true, e.shiftKey || e.metaKey)}><span className="owner-glyph" aria-hidden="true">{n.owner === 'rival' ? '◆' : n.owner === 'neutral' ? '○' : n.owner === 'ally' ? '◐' : '●'}</span><span className="node-count">{Math.floor(n.units)}</span></button>
         <div className="map-node-label"><span>{view ? n.name : region.shortName}</span>{!view ? <button aria-label={`Zoom into ${region.shortName}`} onClick={() => onZoom(region.id)}>Explore region <Icon name="zoom" size={12} /></button> : <small>{n.terrain === 'complex' ? 'Complex habitat' : 'Open terrain'}</small>}</div>
       </div>;
     })}
     {view && !visible.length && currentRegion && <section className="regional-context-card"><span className="eyebrow">Explore the science</span><h3>{currentRegion.name}</h3><p>{currentRegion.overview}</p><p>{state.mode === 'ecologist' && currentRegion.nativeRange ? 'Argentine ants are native to this region. Ecologist focuses on introduced populations elsewhere, so this area is educational context.' : 'Species Clash’s playable matchup is in Australia. This region provides context for Argentine-ant research.'}</p><ResourceLink resource={resources.find(r => r.id === currentRegion.sourceIds[0])!}>Read the regional research</ResourceLink><button onClick={() => onZoom(state.mode === 'ecologist' ? 'california' : 'australia')}>{state.mode === 'ecologist' ? 'Return to the habitat survey' : 'Return to the Australian matchup'} <Icon name="arrow" /></button></section>}
     {state.mode === 'species' && !view && <div className="species-context"><Icon name="leaf" /><span>This species matchup lives in Australia.</span><button onClick={() => onZoom('australia')}>Enter the battlefield <Icon name="arrow" /></button></div>}
     {load !== 'ready' && <div className="map-load" role={load === 'error' ? 'alert' : 'status'}>{load === 'loading' ? 'Preparing the map…' : <><span>The geographic map couldn’t load.</span><button onClick={() => { setLoad('loading'); setRevision(v => v + 1); }}>Retry map</button></>}</div>}
-    <div className="map-key"><span><i className="key-player" />Your colony ●</span><span><i className="key-rival" />Rival colony ◆</span><span><i className="key-neutral" />Unclaimed ○</span><span className="route-key">{view ? '— Local trails' : '┄ Human-assisted dispersal'}</span></div>
+    <div className="map-key"><span><i className="key-player" />Your colony ●</span><span><i className="key-ally" />Cooperating ◐</span><span><i className="key-rival" />Rival colony ◆</span><span><i className="key-neutral" />Unclaimed ○</span><span className="route-key">{view ? '— Local trails' : '┄ Human-assisted dispersal'}</span></div>
     <span className="map-credit">Geography: Natural Earth · Match state: simulated</span>
     </div>
-    {!view && <div className="mobile-world-regions" aria-label="World gateway nests">{regions.map(region => {
-      const gateway = state.nodes.find(n => n.regionId === region.id && n.gateway);
-      return <div className={`world-region-control ${gateway?.owner ?? 'neutral'} ${gateway && selected.includes(gateway.id) ? 'group-selected' : ''}`} key={region.id}><button className="region-order" onClick={e => gateway ? onSelect(gateway.id, true, e.shiftKey || e.metaKey) : onZoom(region.id)} aria-label={`${region.shortName}${gateway ? `, ${Math.floor(gateway.units)} game units` : ', scientific context'}`}><span className="region-owner" aria-hidden="true">{gateway?.owner === 'rival' ? '◆' : gateway?.owner === 'player' ? '●' : '○'}</span><span>{region.shortName}<small>{gateway ? `${Math.floor(gateway.units)} game units` : 'Scientific context'}</small></span></button><button aria-label={`Zoom into ${region.shortName}`} onClick={() => onZoom(region.id)}><Icon name="zoom" size={16} /></button></div>;
-    })}</div>}
   </div>;
 }

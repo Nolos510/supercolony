@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ModeId, SpeciesId } from '../game/types';
 import { scenarios } from '../game/scenarios';
-import Ant from './Ant';
 import { Icon } from './Icons';
+import Specimen from './Specimen';
 
-export default function Menu({ onStart, onLearn, onResume, onReview }: { onStart: (mode: ModeId, species: SpeciesId) => void; onLearn: () => void; onResume?: () => void; onReview?: () => void }) {
+export default function Menu({ onStart, onLearn, onResume }: { onStart: (mode: ModeId, species: SpeciesId) => void; onLearn: () => void; onResume?: () => void; onReview?: () => void }) {
   const [mode, setMode] = useState<ModeId>('war');
   const [species, setSpecies] = useState<SpeciesId>('argentine');
   const dialog = useRef<HTMLDialogElement>(null);
-  useEffect(() => { dialog.current?.showModal(); }, []);
+  const startButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => { dialog.current?.showModal(); startButton.current?.focus(); }, []);
   return <dialog ref={dialog} className="menu-dialog" aria-labelledby="menu-title" onCancel={e => { e.preventDefault(); onResume?.(); }}>
-    <div className="menu-art" aria-hidden="true">
-      <span className="specimen-caption">LINEPITHEMA HUMILE</span><Ant large />
+    <div className="menu-art">
+      <span className="specimen-caption">LINEPITHEMA HUMILE</span><Specimen speciesId="argentine" />
       <div className="trail-doodle"><span /><span /><span /><span /></div>
       <div className="menu-art-caption">One ant is tiny.<br />Their story spans the planet.</div>
     </div>
@@ -30,9 +31,7 @@ export default function Menu({ onStart, onLearn, onResume, onReview }: { onStart
         <button aria-pressed={species === 'argentine'} onClick={() => setSpecies('argentine')}>Argentine ant</button>
         <button aria-pressed={species === 'meat'} onClick={() => setSpecies('meat')}>Australian meat ant</button>
       </div>}
-      <button className="primary start-button" onClick={() => onStart(mode, species)}>Start match <Icon name="arrow" /></button>
-      {onReview && <button className="resume-current" onClick={onReview}>Review current match <Icon name="book" size={16} /></button>}
-      {onResume && <button className="resume-current" onClick={onResume}>Resume current match <Icon name="play" size={16} /></button>}
+      <button ref={startButton} className="primary start-button" onClick={() => onStart(mode, species)}>Start match <Icon name="arrow" /></button>
       <div className="menu-foot"><span>{mode === 'ecologist' ? '5-minute habitat survey' : 'No time limit'} · Single player</span><button className="text-button" onClick={onLearn}>Learn & get involved <span aria-hidden="true">↗</span></button></div>
       <p className="science-caption">Real places and biology. Simulated nests, frontlines, and populations.</p>
     </div>

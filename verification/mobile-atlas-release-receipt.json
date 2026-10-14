@@ -1,0 +1,458 @@
+{
+  "version": 1,
+  "contract": {
+    "version": 2,
+    "task_id": "supercolony-mobile-atlas-release",
+    "outcome": "Phone-first atlas with drag collection, explicit restart/exit, readable educational navigation, credited real specimens, dated primary research maps and cooperating AI recognition networks.",
+    "scope": "User-approved successor after completed48cb58a. Preserve historical receipts. Source/asset requirements and behavioral fixtures frozen before implementation. Legacy browser fixture updates reflect approved Learn index, explicit Sources picker and dedicated ecological Details with clock controls; capture fixture now targets unclaimed CA4 because CA1 becomes allied. New protected tests add recognition, literal research-data/asset attribution, drag and cancellation, menu confirmation, cross-layer state preservation and short-landscape viewport checks. No runtime dependencies, hosting, account, analytics, protected-app or8000 access. Physical iPhone Brave playtest is a human follow-up and not an automated claim. Linked repair of initial integration: sandbox prevented browser launch/loopback; run verifier outside sandbox. Independent engine review proved revised CA3-half-to-CA4 capture fixture infeasible (15 vs16); restore originalCA0 source, retaining capture assertion and adding friendly CA1 transit. No engine balance or acceptance outcome changed. Prior failed receipt/evidence retained; total initial+8 repairs and original deadline carried forward. Budget clarification before any repair command: the unused repair initialization read a nonexistent created_at key; this corrected successor uses original started_at+9000 as absolute deadline. Unused receipt remains protected historical setup, not an attempt or renewed budget. Linked release repair: bounded attempt3 passed all commands and became terminal. Independent200% computed-font QA then found clipped/overlapping HUD and four-category tabs; source now wraps controls/tabs and scrolls a minimum readable battlefield with max-content header/status/footer rows. Research copy removes fixture jargon. The terminal passing receipt remains protected, and no verifier changed. Four prior verification attempts consumed three repairs; this release first attempt is repair4, with at most four additional repairs. Original absolute deadline 1791948444.840898 remains authoritative.",
+    "limits": {
+      "max_repairs": 4,
+      "max_seconds": 6995
+    },
+    "subjects": [
+      "/Users/nolos/Desktop/Ant Game/package.json",
+      "/Users/nolos/Desktop/Ant Game/package-lock.json",
+      "/Users/nolos/Desktop/Ant Game/index.html",
+      "/Users/nolos/Desktop/Ant Game/src/main.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/styles.css",
+      "/Users/nolos/Desktop/Ant Game/tokens.css",
+      "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+      "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+      "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+      "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+      "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Menu.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Learning.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Ant.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+      "/Users/nolos/Desktop/Ant Game/public/world.json",
+      "/Users/nolos/Desktop/Ant Game/README.md",
+      "/Users/nolos/Desktop/Ant Game/docs/SOURCES.md",
+      "/Users/nolos/Desktop/Ant Game/src/components/Icons.tsx",
+      "/Users/nolos/Desktop/Ant Game/docs/GEOGRAPHY.md",
+      "/Users/nolos/Desktop/Ant Game/docs/CONTENT_REVIEW.md",
+      "/Users/nolos/Desktop/Ant Game/src/components/SourcePicker.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Fieldwork.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/MatchMenu.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/CooperationTour.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Specimen.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/ResearchMap.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/data/research.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/regional.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/specimens.ts",
+      "/Users/nolos/Desktop/Ant Game/public/research/global-2010.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/california-2025.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/provenance.json",
+      "/Users/nolos/Desktop/Ant Game/public/specimens/argentine-worker.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/specimens/meat-worker.jpg",
+      "/Users/nolos/Desktop/Ant Game/docs/MOBILE_ATLAS_VERIFICATION.md",
+      "/Users/nolos/Desktop/Ant Game/docs/DESIGN_STUDIES.html",
+      "/Users/nolos/Desktop/Ant Game/docs/ASSETS.md",
+      "/Users/nolos/Desktop/Ant Game/docs/SOURCE_PACK_RECOGNITION.md",
+      "/Users/nolos/Desktop/Ant Game/public/specimens/credits.json"
+    ],
+    "protected": [
+      "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+      "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-contract.json",
+      "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-receipt.json",
+      "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-repair-contract.json",
+      "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-final-receipt.json",
+      "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-bounded-contract.json",
+      "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-verified-receipt.json"
+    ],
+    "criteria": [
+      {
+        "id": "types",
+        "description": "Strict TypeScript compilation",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 120
+        }
+      },
+      {
+        "id": "lint",
+        "description": "Scoped source lint",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "lint"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 120
+        }
+      },
+      {
+        "id": "behavior-and-science",
+        "description": "Existing engine/content regression plus compatible transit, AI support, batch conservation, literal research fixtures and photo attribution.",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "test"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 120
+        }
+      },
+      {
+        "id": "player-objectives",
+        "description": "Chromium and WebKit flows: tutorial, all modes, drag/cancel, menu confirmations, grouped orders, research state preservation, sources, learning, fieldwork, focus/axe and short-landscape control visibility.",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "test:e2e"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 300
+        }
+      },
+      {
+        "id": "production",
+        "description": "Production bundle",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "build"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 180
+        }
+      }
+    ]
+  },
+  "contract_sha256": "ceb5943d4ba1c1c250bc0cba65357bde09c0c5d475777ab28cf3d79649ca2dd5",
+  "started_at": 1791941449.442274,
+  "protected": [
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+      "sha256": "ed0cdcf7655c89b44f807b57e16f1af5accaf904a57b8dcb57e09c6b3340ee71"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+      "sha256": "d705555b5ad12d1681abe7d47aa6766218ab62ef4c1c1c510b43e9e03c92ba2e"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+      "sha256": "841f67e6216d681479c68c47d828f116ef627b102a9536470b6a00a05f4bf7a6"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+      "sha256": "411976a429a712ec3dba4da772873a17329b54294966b2151bc390015ae1f860"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+      "sha256": "e75ae2e2390fc30166e7406c1ae06dfdd51f40a2292d5e23c38149fca46ce199"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+      "sha256": "538e956dadd4968747468c3880e12cfb403ed7969e17083b70d2e3081c4463f8"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+      "sha256": "16f968260a355c5baccdfa10fc3e1f57702635377529d3fb14a844a7d74b99b1"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+      "sha256": "16ca68493ff45681db42f16627dbae52d3a3afd8921ca465aac6b42f9d6547f3"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+      "sha256": "bb8e98584b87f8821f1d948d8b278a7bf53fce956442e422b2c0b3042db900eb"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+      "sha256": "ecef64b45d7362ee960ffea5e753e9ba9b95828f5d50ab0f7f306410e11a6ba5"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+      "sha256": "0941c9a2a51cda941aba544aa85c96c17bb4a4583f7c7f4a1e7fd280fd6c9319"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts",
+      "sha256": "e4152ae243d6fb5326e9efac854332c74116d64380f44aaa7f156e2570b45522"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-contract.json",
+      "sha256": "2b99a8a004da9d26eace6002b5ee83282dbed91fff6da3c756319232d9f68fd0"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-receipt.json",
+      "sha256": "c3a98afc509280179f7eab12d5e53fa475f1048abc4eec093a93cdbd5ce88500"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-repair-contract.json",
+      "sha256": "0f95b77e496cead569ddc621d563dad13821972a4e2ffea51cfdd59d2d93f452"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-final-receipt.json",
+      "sha256": "6c1e5778a0d4e25fad3a7a6cf08a23a0dad756b7415b622f5411564232f9fd96"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-bounded-contract.json",
+      "sha256": "e392d959f57b9859477d1ce42de68f1ddd582766568a2e32ce0d303412a7c6f9"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/mobile-atlas-verified-receipt.json",
+      "sha256": "d28a0e41683aa55db2cc63c8debb11286c69643ab05e4caaf6295808693165f4"
+    }
+  ],
+  "attempts": [
+    {
+      "number": 1,
+      "elapsed_seconds": 55.292441844940186,
+      "results": [
+        {
+          "id": "types",
+          "status": "pass",
+          "finding": "verifier exited 0",
+          "evidence": [
+            {
+              "path": "/Users/nolos/Desktop/Ant Game/output/verification/mobile-atlas/release/attempt-1/0.json",
+              "sha256": "8f3de81a1f1590d51723b9e7e7db104ef8cfa7ce4e36782a392b421f9c3158cf"
+            }
+          ]
+        },
+        {
+          "id": "lint",
+          "status": "pass",
+          "finding": "verifier exited 0",
+          "evidence": [
+            {
+              "path": "/Users/nolos/Desktop/Ant Game/output/verification/mobile-atlas/release/attempt-1/1.json",
+              "sha256": "a01c79398f964211f09f5aafe4435235356cc965ffc292b1f72981eaadb12759"
+            }
+          ]
+        },
+        {
+          "id": "behavior-and-science",
+          "status": "pass",
+          "finding": "verifier exited 0",
+          "evidence": [
+            {
+              "path": "/Users/nolos/Desktop/Ant Game/output/verification/mobile-atlas/release/attempt-1/2.json",
+              "sha256": "2563e8d7558967c1e1d191add277cefd5912282c003046faa6d51459673d99b7"
+            }
+          ]
+        },
+        {
+          "id": "player-objectives",
+          "status": "pass",
+          "finding": "verifier exited 0",
+          "evidence": [
+            {
+              "path": "/Users/nolos/Desktop/Ant Game/output/verification/mobile-atlas/release/attempt-1/3.json",
+              "sha256": "ea0108fdcfb54046fdb73e0aceb9f71509295d07beb913c38e97e50d5364f2b3"
+            }
+          ]
+        },
+        {
+          "id": "production",
+          "status": "pass",
+          "finding": "verifier exited 0",
+          "evidence": [
+            {
+              "path": "/Users/nolos/Desktop/Ant Game/output/verification/mobile-atlas/release/attempt-1/4.json",
+              "sha256": "5bfac70b1cdd4507fe5385720e17c86f4e96893785474b2d41d511c000231e80"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/package.json",
+          "sha256": "726eddbcba380ecd32c422ab5bd87183c16883991ad7969c84e5a8dd7a699414"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/package-lock.json",
+          "sha256": "c65097a101d1d792bb59a1b048b107751aa3269a3a6255a59f6abb3c040fbb79"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/index.html",
+          "sha256": "b7e9f03b47e186e68ceded5f7f7075573308d1454f880b034fa12f5122a66efb"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/main.tsx",
+          "sha256": "d1da1feb36534c4347d9174717a957e9332cf826604e97ff918af8cc8eb00624"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+          "sha256": "e052c986a3b7ec120eaff192d01835f8397b88947ecd9e0f7e797dbddf5d14f9"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/styles.css",
+          "sha256": "698aed6e8044db004a72139ecac0e9e4369496d4ddcd436a2e79e63f1fce8bad"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/tokens.css",
+          "sha256": "3d80a66c410f1e3427fb78f1e61b2e8abe40cdda2e642596815cab6b18b5b664"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+          "sha256": "5ae69f0df85bc4ba291bd426e81eab34ae0d659d59441d459dc848131b12e322"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+          "sha256": "12b9daa408a3b117e01d128fbac7aced8dce7eb1489f9aaef5d759824338e8ee"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+          "sha256": "e706f6c20a90d48334cba939ef0459006d3a9a243ee3d33a25cec044981e7221"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+          "sha256": "0cdb5ec6ba0a0804334e0f7d11c3430252959730909e21708f5092d8614a3600"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+          "sha256": "011c651865a99e45ac1cb066716e0d9ab739eb380b546f571201364bfc032e00"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Menu.tsx",
+          "sha256": "4a237f479415b55b7555832fd3c0aff2b4d1748771f57160766721e3afb39ed3"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Learning.tsx",
+          "sha256": "4a3aa7eec1940014110155a43895fb74c0ff704ac62ce239983e6c53a2d2ea74"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+          "sha256": "c4bff0dea8cd3de66de2fbfdc76cd7775215f996b50cc2a3679ddcd7ff359ba8"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Ant.tsx",
+          "sha256": "503f678dbec3a41adacc78a4f750b351232119756e7bcf75bb9e460d101455f1"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+          "sha256": "d941aeada717cc434fcdecb624d21f352711c714b17924492e4d5c04d84c9969"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/world.json",
+          "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/README.md",
+          "sha256": "c917a3a323355e032f98eb885de3357b3cf47a012967a7d0e3081e730f012df8"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/SOURCES.md",
+          "sha256": "5811d95e128e79053af6ea7d14a6574f9bb40153015c1d62229c2be79ff852bf"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Icons.tsx",
+          "sha256": "c0a8d798db0f5f84b610987802e78bb6648b083cfdb7473abddf50005093c0e4"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/GEOGRAPHY.md",
+          "sha256": "96f9a480d9ea00e6ff3c6ecf5e37640ef7940ab59a66726da8625e2045f6fae2"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/CONTENT_REVIEW.md",
+          "sha256": "0242a664e7a3b5db14397cc9a31899c98849591216f949531c359237b4c964af"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/SourcePicker.tsx",
+          "sha256": "a13a70fa39b0d44863c7ed7f0d0ca00c103f9b8448cd0e554e186004c023e76c"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Fieldwork.tsx",
+          "sha256": "16ac478f7c72db4760afc4ad2af41f101326ec1ad81be6d5a8afb1986238d40e"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/MatchMenu.tsx",
+          "sha256": "6b55a825f3a32a5e79ffee437867de14c6f20dd1724a1c825384225fd870395e"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/CooperationTour.tsx",
+          "sha256": "1942f7bec3be4454255256ce96333699ac10368324efbe47923d22515078dbfd"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/Specimen.tsx",
+          "sha256": "976c636324b5c2185e2e84ac4616eb782e96cdf674d780fa6b62d39632e422e7"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/components/ResearchMap.tsx",
+          "sha256": "3c9bb657370c14e8731a107d57dd5dae2a772e840d0791719c46c5e4d9d944c6"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/data/research.ts",
+          "sha256": "35f45deaf134e956d04164c3024931d13d74c36782f97b9afcfd144863f507b7"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/data/regional.ts",
+          "sha256": "e109d03ed944062dd7ae146d3547836a9fade70b839ac1d031b9fba123436e57"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/src/data/specimens.ts",
+          "sha256": "d38e8f7ae7bc286d08f73564bb695f8eef60e102f953d2df29da2e9c86925eac"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/research/global-2010.json",
+          "sha256": "7b1894eef034915d4a412a4098533c9e82fd14c26e2ad9663ee2ab92f520d1ae"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/research/california-2025.json",
+          "sha256": "cad77a9b89bbda6be832ba7d79c55bdbe522ab34c9739ea6d300f54ad31dddf3"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/research/provenance.json",
+          "sha256": "c51aa3b870f0b0a360869626d09f2c895043417d4e139a9ea5b41248e403a44d"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/specimens/argentine-worker.jpg",
+          "sha256": "05007b9e057b219038980fce0560938f3b8960aa64c1faeda0be5de9555e0477"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/specimens/meat-worker.jpg",
+          "sha256": "8ce9425cc217ff8f1b352ce7f624bc4b66b802a5a996484fceb42638bf31ab7e"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/MOBILE_ATLAS_VERIFICATION.md",
+          "sha256": "a9321dc01616d21c3ea2a041e1f6cee385b6e261cb096c538a61bd133f561efa"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/DESIGN_STUDIES.html",
+          "sha256": "8bb9b2d9eed0fa7b98eeacb3594e3af02c118a06b7d5fc25804f3187ebe6f8ac"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/ASSETS.md",
+          "sha256": "526e23ee63fba5859c5d8cd19e425836fc65592e3344386ba40c4e1b2674f725"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/docs/SOURCE_PACK_RECOGNITION.md",
+          "sha256": "5d0a9b211a7b0467ee9d9aafb59ecb8dcc95bc7ca57f142aeb3eea0258a4b36d"
+        },
+        {
+          "path": "/Users/nolos/Desktop/Ant Game/public/specimens/credits.json",
+          "sha256": "79b21878a2ce6badd9c539f31e1c28078868de5f9aaf24d280ebfa7c5c9f6215"
+        }
+      ]
+    }
+  ]
+}
