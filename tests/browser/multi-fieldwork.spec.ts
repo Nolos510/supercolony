@@ -9,6 +9,7 @@ test('three selected nests send one shared order and selection survives zoom', a
   await page.getByRole('checkbox', { name: /Shaded grove · California/ }).check();
   await page.getByRole('button', { name: 'Use selected nests' }).click();
   await expect(page.getByText('3 nests selected', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Orders', exact: true }).click();
   await page.getByText('Keyboard orders', { exact: true }).click();
   await page.getByLabel('Destination nest').selectOption('california-4');
   await page.getByRole('button', { name: 'Send swarms', exact: true }).click();

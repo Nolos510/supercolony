@@ -1,0 +1,34 @@
+{
+  "scope": "Approved regional rally, collapsible panels, habitat imagery and development successor after ef1ca24",
+  "automatic": {
+    "threshold": 20,
+    "batch": 10,
+    "checkSeconds": 1,
+    "minimumRemaining": 10
+  },
+  "development": {
+    "cost": 30,
+    "prepareSeconds": 20,
+    "growthMultiplier": 1.2,
+    "untilGatewayLoss": true
+  },
+  "habitatPhotos": 16,
+  "regionIds": [
+    "california",
+    "mediterranean",
+    "japan",
+    "africa",
+    "australia",
+    "newzealand",
+    "hawaii",
+    "southamerica"
+  ],
+  "nestRoles": 18,
+  "facts": 16,
+  "resources": 11,
+  "modeNestCounts": {
+    "war": 48,
+    "species": 12,
+    "ecologist": 42
+  }
+}

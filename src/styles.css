@@ -145,3 +145,123 @@ select { height:44px; padding-top:0; padding-bottom:0; } .map-layers button { mi
 .reading-tabs button { flex:1 1 auto; }
 
 .paused-indicator { max-width:calc(100% - 16px); white-space:normal; text-align:center; }
+
+/* Regional management: atlas panels open only when requested. */
+.game-layout { grid-template-columns:minmax(0,1fr); }
+.game-layout.inspector-open { grid-template-columns:minmax(0,1fr) 296px; }
+.details-header { align-items:center; }
+.details-header strong { font-size:14px; }
+.details-header button { padding-inline:10px; font-size:12px; }
+.region-progress { flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; padding:8px 24px; border-block:1px solid var(--color-line); background:var(--color-paper); font-size:13px; }
+.region-progress strong { white-space:nowrap; }
+.ownership-dots { display:flex; align-items:center; gap:8px; }
+.ownership-dot { width:15px; text-align:center; line-height:1.2; font-size:17px; }
+.ownership-dot.player { color:var(--color-player-dark); }
+.ownership-dot.ally { color:var(--color-player-dark); }
+.ownership-dot.rival { color:var(--color-rival-dark); }
+.ownership-dot.neutral { color:var(--color-neutral); }
+.region-ownership-legend { display:flex; flex-wrap:wrap; gap:12px; margin-left:auto; color:var(--color-muted); font-size:11px; }
+.region-proxy-status { color:var(--color-muted); font-size:12px; }
+.command-bar:not(.research-dock) { display:flex; flex-direction:column; align-items:stretch; gap:0; min-height:68px; padding:10px 24px max(10px,env(safe-area-inset-bottom)); }
+.compact-orders { display:flex; align-items:center; gap:12px; min-width:0; }
+.compact-orders .orders-toggle,.compact-orders .source-toggle,.compact-fraction > button { background:transparent; color:var(--color-chrome-text); border-color:var(--color-line-light); }
+.compact-orders .orders-toggle:hover,.compact-orders .source-toggle:hover,.compact-fraction > button:hover { background:var(--color-chrome-soft); }
+.orders-toggle[aria-expanded='true'] { background:var(--color-chrome-soft); }
+.compact-fraction { margin-left:auto; position:relative; }
+.compact-fraction > button { min-width:58px; }
+.fraction-options { position:absolute; bottom:calc(100% + 8px); right:0; display:flex; padding:8px; gap:6px; background:var(--color-paper); border:1px solid var(--color-line); border-radius:var(--radius-sm); box-shadow:0 4px 20px var(--color-shadow); }
+.fraction-options button { min-width:52px; padding:8px; }
+.fraction-options button[aria-pressed='true'] { background:var(--color-ink); color:var(--color-paper); }
+.send-short { display:none; }
+.expanded-orders { position:absolute; bottom:calc(100% - 1px); left:0; right:0; max-height:min(400px,50dvh); overflow-y:auto; overscroll-behavior:contain; padding:16px 24px; border-top:1px solid var(--color-line-light); background:var(--color-chrome); box-shadow:0 -6px 20px var(--color-shadow); display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,400px); align-items:start; gap:16px; }
+.regional-command-heading { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; }
+.regional-command-heading h3 { font-size:16px; }
+.regional-command-heading span { color:var(--color-chrome-muted); font-size:12px; }
+.regional-command-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.regional-command-actions button { font-size:14px; }
+.regional-command-actions .primary { background:var(--color-player); color:var(--color-ink); border-color:var(--color-player); }
+.regional-command-help,.auto-rally-help,.auto-rally-status,.regional-command-status,.fieldwork-hint { margin-top:8px; font-size:12px; line-height:1.5; color:var(--color-chrome-muted); }
+.auto-rally-toggle { display:flex; flex-direction:row; align-items:center; gap:10px; min-height:44px; width:fit-content; margin-top:6px; padding:4px 8px 4px 0; font-size:14px; color:var(--color-chrome-text); cursor:pointer; }
+.auto-rally-toggle input { width:22px; height:22px; margin:0; accent-color:var(--color-player); }
+input:focus-visible,summary:focus-visible { outline:3px solid var(--color-focus); outline-offset:3px; }
+.regional-command-status,.auto-rally-status { color:var(--color-chrome-text); }
+.expanded-orders .keyboard-orders { margin:0; }
+.expanded-orders .keyboard-orders summary { padding:8px; min-height:44px; border:1px solid var(--color-line-light); border-radius:var(--radius-sm); }
+.expanded-orders .keyboard-orders[open] .order-fields { position:static; width:100%; box-shadow:none; margin-top:8px; grid-template-columns:minmax(0,1fr); }
+.growth-detail,.foraging-development,.nest-setting { padding-block:18px; border-bottom:1px solid var(--color-line); font-size:14px; }
+.growth-values { display:grid; gap:10px; margin:0 0 12px; }
+.growth-values > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 8px; }
+.growth-values dt { font-size:12px; color:var(--color-muted); }
+.growth-values dd { margin:0; font-size:13px; font-variant-numeric:tabular-nums; }
+.growth-reason { margin-bottom:8px; font-weight:500; }
+.foraging-development h3,.nest-setting h3 { font-family:var(--font-display); font-size:22px; margin-bottom:10px; }
+.foraging-development p + p,.nest-setting p + p { margin-top:10px; }
+.develop-button { width:100%; white-space:normal; margin-top:12px; background:var(--color-ink); color:var(--color-paper); }
+.develop-button:hover { background:var(--color-player-dark); }
+.development-requirement { font-size:12px; margin:8px 0 12px; }
+.development-status { display:grid; gap:6px; padding:12px; background:var(--color-paper-deep); border-left:3px solid var(--color-player-dark); margin-bottom:12px; }
+.foraging-context { margin-top:12px; }
+.terrain-detail a { margin-top:10px; display:inline-flex; min-height:44px; align-items:center; }
+.habitat-gallery { padding-top:20px; margin-top:20px; border-top:1px solid var(--color-line); }
+.habitat-gallery h3 { font-family:var(--font-display); font-size:24px; margin-bottom:12px; }
+.habitat-switch { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.habitat-switch button { flex:1 1 auto; font-size:13px; padding-inline:8px; }
+.habitat-figure { margin:0; }
+.habitat-photo { display:block; width:100%; height:auto; max-height:340px; object-fit:contain; background:var(--color-paper-deep); }
+.inspector .habitat-photo { max-height:230px; }
+.habitat-credits { padding-top:12px; font-size:13px; overflow-wrap:anywhere; }
+.habitat-credits > strong,.habitat-credits > span { display:block; }
+.habitat-credits > p { margin-block:8px; }
+.habitat-credits > span { margin-block:5px; }
+.habitat-asset-notes summary { display:flex; align-items:center; min-height:44px; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+.habitat-asset-notes p { margin-block:8px; }
+.habitat-unavailable { padding:20px; background:var(--color-paper-deep); }
+.resource-access-note { font-size:13px; color:var(--color-muted); margin-top:8px; }
+@media (max-width:999px), (max-height:599px) {
+  .game-layout.inspector-open { grid-template-columns:minmax(0,1fr); }
+  .region-progress { padding-inline:16px; }
+  .region-ownership-legend { display:none; }
+  .command-bar:not(.research-dock) { padding-inline:16px; }
+}
+@media (max-width:600px) {
+  .region-progress { padding:6px 8px; gap:6px 10px; font-size:12px; }
+  .ownership-dots { gap:6px; }
+  .ownership-dot { width:12px; font-size:14px; }
+  .region-proxy-status { font-size:11px; }
+  .command-bar:not(.research-dock) { padding:8px 8px max(8px,env(safe-area-inset-bottom)); }
+  .compact-orders { gap:6px; flex-wrap:wrap; }
+  .compact-orders > button { font-size:13px; padding:8px; }
+  .compact-orders .selection-count { display:none; }
+  .compact-fraction > button { font-size:13px; min-width:48px; padding:8px; }
+  .compact-orders .send-button { flex:1 0 auto; gap:4px; }
+  .send-wide { display:none; }
+  .send-short { display:inline; }
+  .compact-orders .charge-status { flex:1; min-width:95px; gap:2px; font-size:11px; }
+  .compact-orders .charge-status span { display:none; }
+  .expanded-orders { display:block; max-height:42dvh; padding:12px; }
+  .expanded-orders .keyboard-orders { margin-top:10px; }
+  .expanded-orders .keyboard-orders[open] .order-fields { position:static; width:100%; box-shadow:none; border-radius:4px; margin-top:8px; grid-template-columns:minmax(0,1fr); }
+  .regional-command-actions button { font-size:13px; flex:1; padding-inline:8px; }
+  .habitat-photo { max-height:280px; }
+  .notice { bottom:80px; }
+}
+@media (max-height:500px) and (min-width:601px) {
+  .region-progress { padding:4px 12px; font-size:11px; }
+  .ownership-dot { font-size:13px; }
+  .command-bar:not(.research-dock) { min-height:52px; padding:4px 12px max(4px,env(safe-area-inset-bottom)); }
+  .compact-orders { gap:8px; }
+  .expanded-orders { max-height:30dvh; overflow-y:auto; }
+  .expanded-orders .keyboard-orders[open] .order-fields { position:static; width:100%; }
+  .selection-count { display:none; }
+}
+
+.region-progress-name { color:var(--color-muted); font-size:12px; }
+.habitat-credits a { display:inline-flex; align-items:center; min-height:44px; }
+@media (max-width:600px) {
+  .reading-header { display:grid; grid-template-columns:minmax(0,1fr) auto; }
+  .reading-header h2 { grid-column:1 / -1; grid-row:2; padding:4px 4px 8px; }
+  .reading-header .reading-back { justify-self:start; }
+  .reading-header .reading-resume { max-width:none; }
+}
+/* Expanded commands stay within the map when the desktop inspector is open. */
+.game-surface:has(.game-layout.inspector-open) .expanded-orders { right:296px; }

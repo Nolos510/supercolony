@@ -3,6 +3,33 @@ import type { FactEntry, ResourceEntry, SpeciesId, SpeciesProfile } from '../gam
 // Editorial review dates describe this bundled catalog, not live monitoring.
 export const resources: ResourceEntry[] = [
   {
+    id: 'argentine-diet', title: 'Linking nutrition and behavioural dominance: carbohydrate scarcity limits aggression and activity in Argentine ants',
+    organization: 'Grover and colleagues · Proceedings of the Royal Society B',
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC2291163/',
+    group: 'research', type: 'paper', year: 2007, reviewedAt: '2026-10-13',
+    summary: 'An experiment connecting carbohydrate and prey availability with brood production, worker survival, activity, and aggression.',
+    regionLabel: 'Argentine-ant experiments · broader species context', regionIds: ['global'],
+    topics: ['foraging', 'biodiversity'], speciesIds: ['argentine'],
+  },
+  {
+    id: 'meat-trails', title: 'Route selection but not trail clearing are influenced by detour length in the Australian meat ants',
+    organization: 'Luo and colleagues · Insectes Sociaux',
+    url: 'https://link.springer.com/article/10.1007/s00040-018-0658-z',
+    group: 'research', type: 'paper', year: 2019, reviewedAt: '2026-10-13',
+    summary: 'Meat-ant experiments examine route choice and clearing around obstacles on trails to food.',
+    regionLabel: 'Australia · meat-ant foraging', regionIds: ['australia'],
+    topics: ['foraging', 'terrain'], speciesIds: ['meat'], accessNote: 'Abstract freely available; full text may require institutional access.',
+  },
+  {
+    id: 'meat-food', title: 'Colony-level aggression escalates with the value of food resources',
+    organization: 'Han, Phillips & Elgar · BMC Ecology and Evolution',
+    url: 'https://link.springer.com/article/10.1186/s12862-023-02117-x',
+    group: 'research', type: 'paper', year: 2023, reviewedAt: '2026-10-13',
+    summary: 'Field experiments show how meat-ant colonies adjust foraging and contests according to nutritional history and food value.',
+    regionLabel: 'Serendip Sanctuary, Victoria · Australian experiments', regionIds: ['australia'],
+    topics: ['foraging', 'terrain'], speciesIds: ['meat'],
+  },
+  {
     id: 'global-study', title: 'The global expansion of a single ant supercolony',
     organization: 'Van Wilgenburg, Torres & Tsutsui · Evolutionary Applications',
     url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/',
@@ -77,6 +104,24 @@ export const resources: ResourceEntry[] = [
 ];
 
 export const facts: FactEntry[] = [
+  {
+    id: 'foraging-development', title: 'Food access changes the colony story', topic: 'foraging',
+    summary: 'Foraging networks connect workers with resources their colonies need.',
+    detail: 'Argentine-ant diet experiments link food availability with colony performance. Meat ants use persistent food trails and adjust foraging to nutritional requirements. Our regional upgrade costs 30 worker game units, takes 20 game seconds, and raises owned-nest growth by 20% while its gateway remains yours. Those costs, timings, percentages, and gateway dependency are game rules, not measured reproductive effects. Human food subsidies can also increase ecological pressure; Ecologist explores reducing them.',
+    resourceIds: ['argentine-diet', 'meat-trails', 'meat-food', 'doc-nz'], speciesIds: ['argentine', 'meat'], regionIds: ['global', 'australia'],
+  },
+  {
+    id: 'game-growth', title: 'What the growth number means', topic: 'foraging',
+    summary: 'Game growth replenishes commandable worker reserves; it is not a measured birth rate.',
+    detail: 'Argentine ants have a base game growth of 0.95 units per second; meat ants have 0.32. The display rounds rates to two decimals. Unclaimed nests do not grow, full reserves stop replenishment, and pausing freezes it. Real colonies develop through brood and move workers among connected nests. Food access influences colony performance, but it does not justify our numerical balance settings.',
+    resourceIds: ['uc-ipm', 'argentine-diet', 'meat-food'], speciesIds: ['argentine', 'meat'], regionIds: ['global'],
+  },
+  {
+    id: 'nest-settings', title: 'Reading the simulated landscape', topic: 'terrain',
+    summary: 'Place names describe fictional settings; terrain classes describe game combat.',
+    detail: 'A gateway connects regional transport routes and provides a rally point. Garden edges, clearings, groves, leaf litter, and habitat margins evoke different surroundings. Open terrain gives more workers room to engage; complex terrain introduces bottlenecks. The names, sites, and combat values are simulated. Habitat photographs show real representative landscapes, not a photographed game nest or proof of ants at that location.',
+    resourceIds: ['terrain-study', 'uc-ipm'], speciesIds: ['argentine', 'meat'], regionIds: ['global'],
+  },
   {
     id: 'native-range', title: 'At home in South America', topic: 'biodiversity',
     summary: 'Argentine ants belong to a South American river basin.',

@@ -10,6 +10,7 @@ import Inspector from './components/Inspector';
 import SourcePicker from './components/SourcePicker';
 import MatchMenu from './components/MatchMenu';
 import CooperationTour from './components/CooperationTour';
+import RegionalCommands, { RegionProgress } from './components/RegionalCommands';
 
 import Learning, { ResourceLink } from './components/Learning';
 import { Icon } from './components/Icons';
@@ -31,10 +32,10 @@ function Results({ onRestart, onMenu, onContinue }: { onRestart: () => void; onM
     <p>{state.mode === 'ecologist' ? `You retained ${Math.round(habitat(state) * 100)}% of the starting native habitat.` : `You currently hold ${territory(state).player} of ${state.nodes.length} nests.`} {reviewing ? 'Your match is paused while you explore.' : state.mode === 'ecologist' ? 'The five-minute habitat survey is complete.' : 'The match ended because one colony had no nests or swarms left.'}</p>
     <dl className="result-stats">
       <div><dt>Capture events</dt><dd>{state.stats.captures}</dd><dd className="stat-definition">Unclaimed or rival nests taken, including recaptures.</dd></div>
-      <div><dt>{state.mode === 'ecologist' ? 'Interventions used' : 'Swarms sent'}</dt><dd>{state.mode === 'ecologist' ? state.stats.interventions : state.stats.orders}</dd><dd className="stat-definition">{state.mode === 'ecologist' ? 'Accepted habitat, food, or transport actions.' : 'Successful dispatch commands, including reinforcements.'}</dd></div>
+      <div><dt>{state.mode === 'ecologist' ? 'Interventions used' : 'Manual swarms sent'}</dt><dd>{state.mode === 'ecologist' ? state.stats.interventions : state.stats.orders}</dd><dd className="stat-definition">{state.mode === 'ecologist' ? 'Accepted habitat, food, or transport actions.' : 'Accepted manual dispatches, including rally and reinforcements. Automatic rally is counted separately.'}</dd></div>
       <div><dt>Topics encountered</dt><dd>{state.discovered.length}</dd><dd className="stat-definition">Unique science topics linked to match events. This does not measure learning.</dd></div>
     </dl>
-    <p className="support-summary">Reinforcements: {state.stats.reinforcementOrders} orders · {state.stats.reinforcementWorkers} workers sent. These orders targeted your own or cooperating nests.</p><h3>Three things to take with you</h3><div className="result-discoveries">{discoveries.map(f => <article key={f.id}><h4>{f.title}</h4><p>{f.summary}</p><ResourceLink resource={resources.find(r => r.id === f.resourceIds[0])!}>Explore further</ResourceLink></article>)}</div>
+    <p className="support-summary">Manual reinforcements: {state.stats.reinforcementOrders} orders · {state.stats.reinforcementWorkers} workers sent. These orders targeted your own or cooperating nests.</p><p className="support-summary">Automatic rally: {state.stats.automaticRallyOrders} swarms · {state.stats.automaticRallyWorkers} workers moved. Foraging development: {state.stats.developmentOrders} investments · {state.stats.developmentWorkers} worker units committed. Automatic swarms are separate from manual orders.</p><h3>Three things to take with you</h3><div className="result-discoveries">{discoveries.map(f => <article key={f.id}><h4>{f.title}</h4><p>{f.summary}</p><ResourceLink resource={resources.find(r => r.id === f.resourceIds[0])!}>Explore further</ResourceLink></article>)}</div>
     <section className="result-involvement"><h3>Keep following the ants</h3><div className="next-steps">
       <article><h4>Explore Argentine ants</h4><p>AntWeb offers specimen images, taxonomy, and recorded localities for research.</p><ResourceLink resource={antweb}>Compare Argentine-ant specimens</ResourceLink></article>
       <article><h4>Share an ant photo</h4><p>iNaturalist lets you share a photo, date, and location for community identification.</p><ResourceLink resource={observation}>Learn to record an observation</ResourceLink></article>
@@ -64,6 +65,11 @@ export default function App() {
   const [notice, setNotice] = useState('');
   const [matchRevision, setMatchRevision] = useState(0);
   const [cooperationSeen, setCooperationSeen] = useState(false);
+  const [inspectorOpen, setInspectorOpen] = useState(false);
+  const [ordersOpen, setOrdersOpen] = useState(false);
+  const [fractionOpen, setFractionOpen] = useState(false);
+  const [layoutRevision, setLayoutRevision] = useState(0);
+  const mainLayout = useRef<HTMLElement>(null);
   const [desktop, setDesktop] = useState(() => matchMedia('(min-width: 1000px) and (min-height: 600px)').matches);
   const detailsDialog = useRef<HTMLDialogElement>(null);
   const detailsScroll = useRef<HTMLDivElement>(null);
@@ -79,6 +85,7 @@ export default function App() {
   const sourceNode = owned.find(n => n.id === selectedSources[0]) ?? owned[0] ?? node;
   const targetNode = state.nodes.find(n => n.id === destination && n.id !== sourceNode.id) ?? state.nodes.find(n => n.id !== sourceNode.id)!;
   const counts = territory(state);
+  const commandRegion = view ?? node.regionId;
   const timeLeft = state.duration === null ? null : Math.max(0, state.duration - Math.floor(state.time));
   const unitPreview = owned.filter(n => selectedSources.includes(n.id) && n.id !== targetNode.id).reduce((sum, n) => sum + Math.floor(n.units * fraction), 0);
   useEffect(() => { gameStore.pause(true); return startClock(); }, []);
@@ -93,14 +100,41 @@ export default function App() {
     if (!dialog) return;
     dialog.close();
     if (!ended && screen === 'details') dialog.showModal();
-    else if (!ended && desktop && screen === 'play' && !research) dialog.show();
-  }, [screen, desktop, research, ended]);
+    else if (!ended && desktop && inspectorOpen && screen === 'play' && !research) dialog.show();
+  }, [screen, desktop, research, ended, inspectorOpen]);
   useEffect(() => {
     const valid = sourceIds.filter(id => state.nodes.some(n => n.id === id && n.owner === 'player'));
     if (valid.length !== sourceIds.length) setSourceIds(valid);
   }, [sourceIds, state.nodes]);
   useEffect(() => { if (detailsScroll.current) detailsScroll.current.scrollTop = 0; }, [matchRevision, node.id]);
   useEffect(() => { if (screen === 'details' && fieldworkTarget.current) { fieldworkTarget.current = false; requestAnimationFrame(() => detailsScroll.current?.querySelector('.fieldwork')?.scrollIntoView({ block: 'start' })); } }, [screen]);
+  useEffect(() => {
+    const dialog = detailsDialog.current, main = mainLayout.current;
+    if (!dialog || !main) return;
+    if (!desktop || !inspectorOpen || screen !== 'play' || research) { dialog.style.top = ''; dialog.style.bottom = ''; return; }
+    const position = () => { const rect = main.getBoundingClientRect(); dialog.style.top = `${rect.top}px`; dialog.style.bottom = `${Math.max(0, innerHeight - rect.bottom)}px`; };
+    const observer = new ResizeObserver(position); observer.observe(main); position();
+    return () => observer.disconnect();
+  }, [desktop, inspectorOpen, screen, research]);
+  function changeView(next: string | null) {
+    setView(next); setLayoutRevision(v => v + 1);
+    if (next && node.regionId !== next) { const gateway = state.nodes.find(n => n.regionId === next && n.gateway); if (gateway) setSelected(gateway.id); }
+  }
+  function details() {
+    if (view && !state.nodes.some(n => n.regionId === view)) { learn('guide', undefined, undefined, view); return; }
+    setLayoutRevision(v => v + 1); setFractionOpen(false);
+    if (desktop) setInspectorOpen(v => !v); else open('details');
+  }
+  function selectRegion() {
+    const ids = gameStore.getState().nodes.filter(n => n.regionId === commandRegion && n.owner === 'player').map(n => n.id);
+    setSourceIds(ids); notify(`${ids.length} regional nests selected. Choose a destination to send.`);
+  }
+  function rally() {
+    const result = gameStore.rally(commandRegion, fraction);
+    notify(result.error ?? `${result.sentFromIds.length} swarms rallying to the gateway.${result.skipped.length ? ` ${result.skipped.length} sources waiting.` : ''}`);
+  }
+  function automatic(enabled: boolean) { const error = gameStore.autoRally(commandRegion, enabled); notify(error ?? (enabled ? 'Auto rally on: wait for 20 workers, send 10, keep at least 10.' : 'Auto rally off.')); }
+  function develop(regionId: string) { const resume = gameStore.getState().status === 'paused'; const error = gameStore.develop(regionId, resume); if (!error && screen === 'details') play(); notify(error ?? 'Foraging network preparing: 20 game seconds.'); }
   function notify(message: string) {
     setNotice(message); if (noticeTimer.current) clearTimeout(noticeTimer.current);
     noticeTimer.current = setTimeout(() => setNotice(''), 4500);
@@ -125,13 +159,13 @@ export default function App() {
     setSelected(source); setSourceIds([source]); setDestination(mode === 'species' ? 'australia-1' : 'california-1');
     setView(mode === 'species' ? 'australia' : null); setMatchRevision(v => v + 1);
     setNavigation({ ...initialNavigation, screen: 'play', returnTo: 'play' });
-    setHasStarted(true); setCooperationSeen(false); setNotice(''); setTutorial(withTutorial ? 'intro' : null);
+    setHasStarted(true); setCooperationSeen(false); setInspectorOpen(false); setOrdersOpen(false); setFractionOpen(false); setLayoutRevision(v => v + 1); setNotice(''); setTutorial(withTutorial ? 'intro' : null);
     if (withTutorial) gameStore.pause(true);
   }
   function exit() {
     gameStore.start('war'); gameStore.pause(true); setHasStarted(false); setTutorial(null);
     setNavigation(initialNavigation); setSourceIds(['california-0']); setSelected('california-0'); setView(null);
-    setMatchRevision(v => v + 1);
+    setMatchRevision(v => v + 1); setInspectorOpen(false); setOrdersOpen(false); setFractionOpen(false); setLayoutRevision(v => v + 1);
   }
   function learn(tab: 'guide' | 'resources', fact?: string, species?: SpeciesId, region?: string) { open('learn', { tab, fact, species, region }); }
   function choose(id: string, _order = false, additive = false) {
@@ -155,7 +189,7 @@ export default function App() {
     return error;
   }
   function switchLayer(layer: 'game' | 'research') {
-    gameStore.pause(true); setNavigation(n => ({ ...n, layer }));
+    setFractionOpen(false); setLayoutRevision(v => v + 1); gameStore.pause(true); setNavigation(n => ({ ...n, layer }));
   }
   const overlay = screen !== 'play' || ended;
   return <div className="app-shell">
@@ -171,24 +205,37 @@ export default function App() {
         {state.mode === 'ecologist' ? <span className="habitat-status">Habitat <strong>{Math.round(habitat(state) * 100)}%</strong> · goal 60%</span> : <div className="network-counts" aria-label="Nest ownership"><span>● You <strong>{counts.player}</strong></span>{state.mode === 'war' && <span>◐ Cooperating <strong>{counts.ally}</strong></span>}<span>◆ Rival <strong>{counts.rival}</strong></span></div>}
         <div className="map-layers" aria-label="Map layer"><button aria-pressed={!research} onClick={() => research && (hasStarted ? switchLayer('game') : exit())}>Game</button><button aria-pressed={research} onClick={() => switchLayer('research')}>Research</button></div>
       </section>
-      <main className={`game-layout ${research ? 'research-layout' : ''}`} id="battlefield">
+      <main ref={mainLayout} className={`game-layout ${research ? 'research-layout' : ''} ${desktop && inspectorOpen && !research ? 'inspector-open' : ''}`} id="battlefield">
         <h1 className="sr-only">SUPERColony strategy game</h1>
         <div className="battlefield-wrap">
-          {!research && <div className="map-toolbar"><label className="region-switch"><span className="sr-only">Explore region</span><select value={view ?? 'world'} onChange={e => setView(e.target.value === 'world' ? null : e.target.value)} aria-label="Map view"><option value="world">World map</option>{regions.map(r => <option value={r.id} key={r.id}>{r.shortName}</option>)}</select></label><button onClick={() => open('details')}>Nest details <Icon name="zoom" size={16} /></button></div>}
-          {research ? <Suspense fallback={<div className="map-load" role="status">Loading research…</div>}><ResearchMap /></Suspense> : <Map state={state} view={view} selected={state.mode === 'ecologist' ? [node.id] : selectedSources} onSelect={choose} onZoom={setView} onOrder={(from, to) => order([from], to)} onGroupOrder={order} onSelection={setSourceIds} active={screen === 'play' && state.status === 'running' && tutorial !== 'intro'} />}
-          {tutorial && !research && <section className="tutorial" aria-label="Interactive tutorial"><h2>{tutorial === 'intro' ? 'Your first trail' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'Watch your decision unfold' : state.mode === 'ecologist' ? 'Protect a patch of habitat' : 'Choose a destination'}</h2><p>{tutorial === 'intro' ? state.mode === 'ecologist' ? 'Observe a habitat, choose a response, then record what changes.' : 'Choose a percentage. Drag from your nest to another, then release to send.' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'Your trails continue across every region. Explore the science whenever you like.' : state.mode === 'ecologist' ? 'Open Nest details to begin fieldwork.' : 'Sweep across your nests to collect sources. Drop on a destination to send.'}</p><div>{tutorial === 'intro' ? <button className="primary" onClick={() => { setTutorial('active'); setView(state.mode === 'species' ? 'australia' : 'california'); gameStore.pause(false); }}>Begin tutorial <Icon name="arrow" /></button> : (state.stats.orders > 0 || state.stats.interventions > 0) && <button className="primary" onClick={() => setTutorial(null)}>Finish tutorial <Icon name="arrow" /></button>}<button className="text-button" onClick={() => { setTutorial(null); gameStore.pause(false); }}>Skip tutorial</button></div></section>}
+          {!research && <div className="map-toolbar"><label className="region-switch"><span className="sr-only">Explore region</span><select value={view ?? 'world'} onChange={e => changeView(e.target.value === 'world' ? null : e.target.value)} aria-label="Map view"><option value="world">World map</option>{regions.map(r => <option value={r.id} key={r.id}>{r.shortName}</option>)}</select></label><button className="details-toggle" onClick={details} aria-expanded={desktop ? inspectorOpen : screen === 'details'} aria-controls="nest-details">Nest details <span aria-hidden="true">{desktop && inspectorOpen ? '◂' : '▸'}</span></button></div>}
+          {!research && <RegionProgress state={state} regionId={commandRegion} showRegionName={!view} />}
+          {research ? <Suspense fallback={<div className="map-load" role="status">Loading research…</div>}><ResearchMap /></Suspense> : <Map state={state} view={view} selected={state.mode === 'ecologist' ? [node.id] : selectedSources} onSelect={choose} onZoom={changeView} gestureRevision={layoutRevision} onOrder={(from, to) => order([from], to)} onGroupOrder={order} onSelection={setSourceIds} active={screen === 'play' && state.status === 'running' && tutorial !== 'intro'} />}
+          {tutorial && !research && <section className="tutorial" aria-label="Interactive tutorial"><h2>{tutorial === 'intro' ? 'Your first trail' : state.stats.orders > 0 || state.stats.interventions > 0 ? 'Watch your decision unfold' : state.mode === 'ecologist' ? 'Protect a patch of habitat' : 'Choose a destination'}</h2><p>{tutorial === 'intro' ? state.mode === 'ecologist' ? 'Observe a habitat, choose a response, then record what changes.' : 'Choose a percentage. Drag from your nest to another, then release to send.' : state.stats.orders > 0 || state.stats.interventions > 0 ? state.mode === 'ecologist' ? 'Orders explains the fieldwork controls. Nest details reveals habitat context. Both panels collapse to give the map room.' : 'Open Orders for Select region, Rally, and Auto rally. Nest details reveals growth and habitat context. Both panels collapse to give the map room.' : state.mode === 'ecologist' ? 'Open Nest details to begin fieldwork.' : 'Sweep across your nests to collect sources. Drop to send, or open Orders for a regional rally. Nest details opens the inspector.'}</p><div>{tutorial === 'intro' ? <button className="primary" onClick={() => { setTutorial('active'); setView(state.mode === 'species' ? 'australia' : 'california'); gameStore.pause(false); }}>Begin tutorial <Icon name="arrow" /></button> : (state.stats.orders > 0 || state.stats.interventions > 0) && <button className="primary" onClick={() => setTutorial(null)}>Finish tutorial <Icon name="arrow" /></button>}<button className="text-button" onClick={() => { setTutorial(null); gameStore.pause(false); }}>Skip tutorial</button></div></section>}
           {state.status === 'paused' && !tutorial && !research && <div className="paused-indicator"><Icon name="pause" size={14} />Paused · press Resume to play</div>}
         </div>
-        {!research && <div className="inspector-space" />}
+        {desktop && inspectorOpen && !research && <div className="inspector-space" />}
       </main>
-      <footer className={`command-bar ${research ? 'research-dock' : ''}`}>
-        {research ? <><span>Research view · match paused</span><button onClick={() => hasStarted ? switchLayer('game') : exit()}>{hasStarted ? 'Back to map' : 'Back to home'} <Icon name="arrow" /></button></> : state.mode !== 'ecologist' ? <><div className="command-selection"><button onClick={() => open('sources')}>Choose sources ({selectedSources.length})</button><span className="selection-count">{selectedSources.length} {selectedSources.length === 1 ? 'nest' : 'nests'} selected</span><span className="drag-hint">Drag between nests to send</span></div><div className="fraction-picker" aria-label="Swarm strength">{[.25, .5, 1].map(f => <button key={f} aria-pressed={fraction === f} onClick={() => setFraction(f)}>{f * 100}%</button>)}</div><button className="primary send-button" onClick={() => order()} disabled={state.status !== 'running' || !selectedSources.length || research}>{selectedSources.length > 1 ? 'Send swarms' : 'Send swarm'} <Icon name="arrow" /></button><details className="keyboard-orders"><summary>Keyboard orders</summary><div className="order-fields"><label>Source nest<select aria-label="Source nest" value={sourceNode.id} onChange={e => choose(e.target.value)}>{owned.map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label><label>Destination nest<select aria-label="Destination nest" value={targetNode.id} onChange={e => setDestination(e.target.value)}>{state.nodes.filter(n => n.id !== sourceNode.id).map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label><span>{unitPreview} workers · {fraction * 100}% from each source</span></div></details></> : <><div className="command-selection"><strong>Fieldwork</strong><span>Observe → respond → follow up</span></div><div className="charge-status"><strong>{state.charges}/3 charges</strong><span>+1 in {Math.ceil(15 - state.chargeProgress)}s</span></div><button className="primary" onClick={() => { fieldworkTarget.current = true; open('details'); }}>Open fieldwork <Icon name="leaf" /></button></>}
+      <footer className={`command-bar ${research ? 'research-dock' : ''} ${ordersOpen ? 'orders-expanded' : 'orders-compact'}`}>
+        {research ? <><span>Research view · match paused</span><button onClick={() => hasStarted ? switchLayer('game') : exit()}>{hasStarted ? 'Back to map' : 'Back to home'} <Icon name="arrow" /></button></> : <>
+          <div className="compact-orders">
+            <button className="orders-toggle" aria-expanded={ordersOpen} aria-controls="expanded-orders" onClick={() => { setOrdersOpen(v => !v); setFractionOpen(false); setLayoutRevision(v => v + 1); }}>Orders <span aria-hidden="true">{ordersOpen ? '▾' : '▴'}</span></button>
+            {state.mode !== 'ecologist' ? <><button className="source-toggle" aria-label={`Choose sources (${selectedSources.length})`} onClick={() => open('sources')}>Sources ({selectedSources.length})</button><span className="selection-count">{selectedSources.length} {selectedSources.length === 1 ? 'nest' : 'nests'} selected</span>
+              <div className="compact-fraction"><button aria-expanded={fractionOpen} aria-controls="fraction-options" onClick={() => setFractionOpen(v => !v)}>{fraction * 100}%</button>{fractionOpen && <div id="fraction-options" className="fraction-options" role="group" aria-label="Workers per source">{[.25,.5,1].map(f => <button key={f} aria-pressed={fraction === f} onClick={() => { setFraction(f); setFractionOpen(false); }}>{f * 100}%</button>)}</div>}</div>
+              <button className="primary send-button" aria-label={selectedSources.length > 1 ? 'Send swarms' : 'Send swarm'} onClick={() => order()} disabled={state.status !== 'running' || !selectedSources.length}><span className="send-wide">{selectedSources.length > 1 ? 'Send swarms' : 'Send swarm'}</span><span className="send-short">Send</span><Icon name="arrow" /></button>
+            </> : <><div className="charge-status"><strong>{state.charges}/3 charges</strong><span>+1 in {Math.ceil(15 - state.chargeProgress)}s</span></div><button className="primary" onClick={() => { fieldworkTarget.current = true; open('details'); }}>Open fieldwork <Icon name="leaf" /></button></>}
+          </div>
+          {ordersOpen && <div id="expanded-orders" className="expanded-orders">
+            {state.mode !== 'ecologist' ? <><RegionalCommands state={state} regionId={commandRegion} fraction={fraction} onSelectRegion={selectRegion} onRally={rally} onAutoRally={automatic} /><details className="keyboard-orders"><summary>Keyboard orders</summary><div className="order-fields"><label>Source nest<select aria-label="Source nest" value={sourceNode.id} onChange={e => choose(e.target.value)}>{owned.map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label><label>Destination nest<select aria-label="Destination nest" value={targetNode.id} onChange={e => setDestination(e.target.value)}>{state.nodes.filter(n => n.id !== sourceNode.id).map(n => <option key={n.id} value={n.id}>{n.name} · {regions.find(r => r.id === n.regionId)?.shortName}</option>)}</select></label><span>{unitPreview} workers · {fraction * 100}% from each source</span></div></details></> : <p className="fieldwork-hint">Open Fieldwork to observe a site, choose a response, and record a follow-up. Nest details explains the habitat and its representative surroundings.</p>}
+          </div>}
+        </>}
       </footer>
       <div className={`notice ${notice ? 'show' : ''}`} role="status" aria-live="polite">{notice}</div>
     </div>
-    <dialog ref={detailsDialog} className={`details-dialog ${screen === 'details' ? 'details-full' : 'details-sidebar'}`} aria-label="Nest details" onCancel={e => { e.preventDefault(); play(); }}>
+    <dialog id="nest-details" ref={detailsDialog} className={`details-dialog ${screen === 'details' ? 'details-full' : 'details-sidebar'}`} aria-label="Nest details" onCancel={e => { e.preventDefault(); play(); }}>
+      {desktop && screen === 'play' && <div className="details-header"><strong>Nest details</strong><button onClick={() => { setInspectorOpen(false); setLayoutRevision(v => v + 1); }}>Hide details <span aria-hidden="true">◂</span></button></div>}
       {screen === 'details' && <header className="details-header"><button onClick={() => play()}>Back to map <Icon name="arrow" /></button>{state.mode === 'ecologist' && <button aria-label={state.status === 'running' ? 'Pause fieldwork' : 'Resume fieldwork'} onClick={() => gameStore.pause(state.status === 'running')}>{state.status === 'running' ? 'Pause fieldwork' : 'Resume fieldwork'}</button>}</header>}
-      <div ref={detailsScroll} className="details-scroll"><Inspector key={matchRevision} visible={screen === 'details' || desktop && screen === 'play' && !research && !ended} detailed state={state} node={node} view={view} onIntervene={intervene} onGuide={id => learn('guide', id)} onSpecies={id => learn('guide', undefined, id)} onRegion={id => learn('guide', undefined, undefined, id)} onCooperation={() => open('cooperation')} /></div>
+      <div ref={detailsScroll} className="details-scroll"><Inspector key={matchRevision} visible={screen === 'details' || desktop && inspectorOpen && screen === 'play' && !research && !ended} detailed state={state} node={node} view={view} onIntervene={intervene} onDevelop={develop} onGuide={id => learn('guide', id)} onSpecies={id => learn('guide', undefined, id)} onRegion={id => learn('guide', undefined, undefined, id)} onCooperation={() => open('cooperation')} /></div>
     </dialog>
     {screen === 'home' && <Menu onStart={start} onLearn={() => learn('resources')} />}
     {screen === 'menu' && <MatchMenu modeName={scenarios[state.mode].name} onResume={() => play(true)} onRestart={() => start(state.mode, state.playerSpecies, false)} onExit={exit} onReview={() => open('review')} />}

@@ -1,7 +1,7 @@
 import { regions, scenarios } from './scenarios';
 import type {
-  BatchCommandResult, CombatResult, CommandResult, FleetState, GameState, Intervention,
-  ModeId, NestState, Owner, SpeciesId, Terrain, TrailState,
+  BatchCommandResult, CombatResult, CommandResult, FleetState, GameState, GrowthInfo, Intervention,
+  ModeId, NestState, Owner, RallyInfo, SpeciesId, Terrain, TrailState,
 } from './types';
 
 const TICK = 0.1;
@@ -16,6 +16,11 @@ const WORKERS: Record<SpeciesId, { growth: number; strength: number; capacity: n
 const POSITIONS: [number, number][] = [[20, 38], [40, 25], [67, 23], [27, 69], [55, 61], [81, 70]];
 const LOCAL_PAIRS: [number, number][] = [[0, 1], [1, 2], [0, 3], [1, 4], [2, 4], [3, 4], [4, 5], [2, 5]];
 const PLACE_NAMES = ['Gateway nest', 'Garden edge', 'Open clearing', 'Shaded grove', 'Leaf-litter trail', 'Habitat margin'];
+/** Frozen game balance; these values are not measurements of ant populations. */
+export const REGIONAL_BALANCE = {
+  autoThreshold: 20, autoBatch: 10, developmentCost: 30,
+  preparationSeconds: 20, growthMultiplier: 1.2,
+} as const;
 
 /** Simulated recognition compatibility; it does not identify surveyed supercolonies. */
 export function compatibleOwners(first: Owner, second: Owner): boolean {
@@ -33,6 +38,8 @@ function copy(state: GameState): GameState {
     edges: state.edges.map(edge => ({ ...edge })),
     fleets: state.fleets.map(fleet => ({ ...fleet, path: [...fleet.path] })),
     effects: state.effects.map(effect => ({ ...effect })),
+    autoRally: { ...state.autoRally },
+    developments: Object.fromEntries(Object.entries(state.developments).map(([regionId, development]) => [regionId, { ...development }])),
     events: state.events.map(event => ({ ...event })),
     discovered: [...state.discovered], stats: { ...state.stats },
   };
@@ -48,8 +55,9 @@ function record(state: GameState, message: string, factId: string) {
 
 function node(id: string, regionId: string, index: number, owner: Owner, species: SpeciesId): NestState {
   const [x, y] = POSITIONS[index % POSITIONS.length];
+  const name = PLACE_NAMES[index % PLACE_NAMES.length];
   return {
-    id, name: PLACE_NAMES[index % PLACE_NAMES.length], regionId, x, y, owner, colonyId: colonyId(owner, id), species,
+    id, name, roleId: name.toLowerCase().replace(/ /g, '-'), regionId, x, y, owner, colonyId: colonyId(owner, id), species,
     units: owner === 'neutral' ? 8 + index * 2 : species === 'meat' ? 24 : 44,
     capacity: WORKERS[species].capacity, growth: WORKERS[species].growth,
     terrain: index === 3 || index === 4 ? 'complex' : 'open',
@@ -75,7 +83,8 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
       const site = node(`australia-${i}`, 'australia', i, owner, species);
       site.x = 13 + (i % 4) * 24;
       site.y = 22 + Math.floor(i / 4) * 27;
-      site.name = ['Port verge', 'Sandy clearing', 'Scrub edge', 'Garden bed', 'Dry creek', 'Open track', 'Leaf litter', 'Woodland floor', 'Native nest', 'Bark corridor', 'Rocky refuge', 'Meat-ant mound'][i];
+      site.name = ['Port verge', 'Sandy clearing', 'Scrub edge', 'Garden bed', 'Dry creek', 'Open track', 'Leaf litter', 'Woodland floor', 'Established nest', 'Bark corridor', 'Rocky refuge', 'Gravel mound'][i];
+      site.roleId = site.name.toLowerCase().replace(/ /g, '-');
       site.terrain = [4, 6, 7, 10, 11].includes(i) ? 'complex' : 'open';
       site.gateway = i === 0;
       if (owner === 'neutral') site.units = 6 + i;
@@ -124,10 +133,10 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
   const state: GameState = {
     mode, playerSpecies, seed: normalizedSeed, rng: normalizedSeed || 1,
     time: 0, duration: scenarios[mode].duration, status: 'running', aiEnabled: true,
-    nodes, edges, fleets: [], effects: [], charges: 3, chargeProgress: 0,
+    nodes, edges, fleets: [], effects: [], charges: 3, chargeProgress: 0, autoRally: {}, developments: {},
     initialHabitat: nodes.reduce((sum, site) => sum + site.habitat, 0),
     events: [], discovered: [], nextFleetId: 1,
-    stats: { orders: 0, captures: 0, interventions: 0, losses: 0, reinforcementOrders: 0, reinforcementWorkers: 0 },
+    stats: { orders: 0, captures: 0, interventions: 0, losses: 0, reinforcementOrders: 0, reinforcementWorkers: 0, automaticRallyOrders: 0, automaticRallyWorkers: 0, developmentOrders: 0, developmentWorkers: 0 },
   };
   record(state, mode === 'ecologist' ? 'Protect habitat while the simulated invasion unfolds.' : mode === 'species' ? 'More workers or stronger workers? Terrain changes the contest.' : 'Your nests share one network. Select a nest to issue an order.', mode === 'ecologist' ? 'biodiversity' : mode === 'species' ? 'species' : 'supercolonies');
   return state;
@@ -190,10 +199,13 @@ function route(state: GameState, fromId: string, toId: string, owner: Owner, spe
   return undefined;
 }
 
-function dispatch(state: GameState, source: NestState, path: string[], fraction: number) {
-  const units = Math.floor(source.units * fraction);
+function dispatchUnits(state: GameState, source: NestState, path: string[], units: number) {
   source.units -= units;
   state.fleets.push({ id: state.nextFleetId++, owner: source.owner, colonyId: source.colonyId, species: source.species, units, path, legIndex: 0, elapsed: 0 });
+}
+
+function dispatch(state: GameState, source: NestState, path: string[], fraction: number) {
+  dispatchUnits(state, source, path, Math.floor(source.units * fraction));
 }
 
 export function send(state: GameState, fromId: string, toId: string, fraction: number): CommandResult {
@@ -246,6 +258,132 @@ export function sendMany(state: GameState, sourceIds: string[], toId: string, fr
     state: next, sentFromIds, skipped,
     ...(sentFromIds.length ? {} : { error: 'No swarms were sent. Review the selected source nests.' }),
   };
+}
+
+function regionalGateway(state: GameState, regionId: string): NestState | undefined {
+  return state.nodes.find(site => site.regionId === regionId && site.gateway);
+}
+
+/** Uses the engine's routes so the waiting preview agrees with actual orders. */
+export function rallyInfo(state: GameState, regionId: string, fraction = 1): RallyInfo {
+  const gateway = regionalGateway(state, regionId);
+  const gatewayOwned = gateway?.owner === 'player';
+  const eligibleSourceIds: string[] = [];
+  const waitingSourceIds: string[] = [];
+  const blockedSourceIds: string[] = [];
+  const validFraction = Number.isFinite(fraction) && fraction > 0 && fraction <= 1;
+  for (const source of state.nodes) {
+    if (source.regionId !== regionId || source.owner !== 'player' || source.gateway) continue;
+    if (!gateway || !route(state, source.id, gateway.id, 'player', source.species)) {
+      blockedSourceIds.push(source.id);
+      continue;
+    }
+    if (source.units < REGIONAL_BALANCE.autoThreshold) waitingSourceIds.push(source.id);
+    if (validFraction && Math.floor(source.units * fraction) >= 1) eligibleSourceIds.push(source.id);
+  }
+  return {
+    gatewayId: gateway?.id, gatewayOwned,
+    autoEnabled: gatewayOwned && !!state.autoRally[regionId],
+    eligibleSourceIds, waitingSourceIds, blockedSourceIds,
+    canRally: state.status === 'running' && state.mode !== 'ecologist' && gatewayOwned && eligibleSourceIds.length > 0,
+  };
+}
+
+/** A rally is a batch of ordinary orders; cooperating nests remain AI-controlled. */
+export function rallyRegion(state: GameState, regionId: string, fraction: number): BatchCommandResult {
+  const reject = (error: string): BatchCommandResult => ({ state, error, sentFromIds: [], skipped: [] });
+  if (state.status !== 'running') return reject('Resume the match before rallying workers.');
+  if (state.mode === 'ecologist') return reject('Choose a habitat intervention in Ecologist mode.');
+  if (!Number.isFinite(fraction) || fraction <= 0 || fraction > 1) return reject('Choose a worker share between 1% and 100%.');
+  const gateway = regionalGateway(state, regionId);
+  if (!gateway) return reject('Choose a region with a gateway on this map.');
+  if (gateway.owner !== 'player') return reject('Capture this region’s gateway before rallying workers.');
+  const sources = state.nodes.filter(site => site.regionId === regionId && site.owner === 'player' && !site.gateway).map(site => site.id);
+  return sendMany(state, sources, gateway.id, fraction);
+}
+
+/** Configuration can change while paused; swarms launch only during game ticks. */
+export function setAutoRally(state: GameState, regionId: string, enabled: boolean): CommandResult {
+  if (state.mode === 'ecologist') return { state, error: 'Automatic rally is available in combat modes.' };
+  if (!['running', 'paused'].includes(state.status)) return { state, error: 'Start a new match before changing automatic rally.' };
+  if (typeof enabled !== 'boolean') return { state, error: 'Choose whether automatic rally is on or off.' };
+  const gateway = regionalGateway(state, regionId);
+  if (!gateway) return { state, error: 'Choose a region with a gateway on this map.' };
+  if (enabled && gateway.owner !== 'player') return { state, error: 'Capture this region’s gateway before enabling automatic rally.' };
+  if (!!state.autoRally[regionId] === enabled) return { state };
+  const next = copy(state);
+  if (enabled) next.autoRally[regionId] = true;
+  else delete next.autoRally[regionId];
+  return { state: next };
+}
+
+export function developRegion(state: GameState, regionId: string): CommandResult {
+  if (state.mode === 'ecologist') return { state, error: 'Foraging development is available in combat modes.' };
+  if (state.status !== 'running') return { state, error: 'Resume the match before improving a foraging network.' };
+  const gateway = regionalGateway(state, regionId);
+  if (!gateway) return { state, error: 'Choose a region with a gateway on this map.' };
+  if (gateway.owner !== 'player') return { state, error: 'Capture this region’s gateway before improving its foraging network.' };
+  if (state.developments[regionId]) return { state, error: 'This region already has a foraging development.' };
+  if (gateway.units < REGIONAL_BALANCE.developmentCost) return { state, error: 'The gateway needs 30 worker game units to fund this improvement.' };
+  const next = copy(state);
+  next.nodes.find(site => site.id === gateway.id)!.units -= REGIONAL_BALANCE.developmentCost;
+  next.developments[regionId] = {
+    gatewayId: gateway.id, startedAt: next.time, readyAt: next.time + REGIONAL_BALANCE.preparationSeconds,
+  };
+  next.stats.developmentOrders++;
+  next.stats.developmentWorkers += REGIONAL_BALANCE.developmentCost;
+  record(next, '30 worker game units committed to a foraging network. Preparation takes 20 game seconds; gateway loss removes the improvement.', 'foraging-development');
+  return { state: next };
+}
+
+/** Growth replenishes game reserves, not measured births or real population rates. */
+export function growthInfo(state: GameState, site: NestState): GrowthInfo {
+  const investment = state.mode !== 'ecologist' && site.owner === 'player' ? state.developments[site.regionId] : undefined;
+  const development = investment && state.nodes.some(gateway => gateway.id === investment.gatewayId && gateway.gateway && gateway.owner === 'player')
+    ? investment : undefined;
+  const phase: GrowthInfo['development'] = !development ? 'none' : state.time + 1e-8 < development.readyAt ? 'preparing' : 'active';
+  const foodMultiplier = activeEffect(state, site.id, 'food') && site.species === 'argentine' ? 0.15 : 1;
+  const multiplier = foodMultiplier * (phase === 'active' ? REGIONAL_BALANCE.growthMultiplier : 1);
+  const reason: GrowthInfo['reason'] = state.status === 'paused' ? 'paused'
+    : state.status !== 'running' ? 'finished'
+      : site.owner === 'neutral' ? 'unclaimed'
+        : site.units >= site.capacity ? 'capacity' : 'growing';
+  const base = Number.isFinite(site.growth) ? Math.max(0, site.growth) : 0;
+  return {
+    base, current: reason === 'growing' ? base * multiplier : 0,
+    capacity: site.capacity, multiplier, reason, development: phase,
+    developmentRemaining: development ? Math.max(0, development.readyAt - state.time) : 0,
+  };
+}
+
+function invalidateGateway(state: GameState, site: NestState) {
+  if (!site.gateway || site.owner === 'player') return;
+  delete state.autoRally[site.regionId];
+  delete state.developments[site.regionId];
+}
+
+function validateRegionalState(state: GameState) {
+  for (const regionId of Object.keys(state.autoRally)) {
+    if (regionalGateway(state, regionId)?.owner !== 'player') delete state.autoRally[regionId];
+  }
+  for (const [regionId, development] of Object.entries(state.developments)) {
+    const gateway = regionalGateway(state, regionId);
+    if (!gateway || gateway.owner !== 'player' || gateway.id !== development.gatewayId) delete state.developments[regionId];
+  }
+}
+
+function autoRally(state: GameState) {
+  if (state.mode === 'ecologist') return;
+  for (const source of state.nodes) {
+    if (!state.autoRally[source.regionId] || source.owner !== 'player' || source.gateway || source.units < REGIONAL_BALANCE.autoThreshold) continue;
+    const gateway = regionalGateway(state, source.regionId);
+    if (!gateway || gateway.owner !== 'player') continue;
+    const path = route(state, source.id, gateway.id, 'player', source.species);
+    if (!path) continue;
+    dispatchUnits(state, source, path, REGIONAL_BALANCE.autoBatch);
+    state.stats.automaticRallyOrders++;
+    state.stats.automaticRallyWorkers += REGIONAL_BALANCE.autoBatch;
+  }
 }
 
 export function intervene(state: GameState, nodeId: string, kind: Intervention): CommandResult {
@@ -336,6 +474,8 @@ function arrive(state: GameState, fleet: FleetState, site: NestState): boolean {
   if (result.ownerChanged) {
     site.owner = fleet.owner; site.colonyId = fleet.colonyId; site.species = fleet.species;
     site.capacity = WORKERS[fleet.species].capacity; site.growth = WORKERS[fleet.species].growth;
+    // Invalidate at the actual loss, including a loss followed by same-tick recapture.
+    invalidateGateway(state, site);
     if (fleet.owner === 'player') {
       state.stats.captures++;
       record(state, `${site.name} joins your colony network.`, state.mode === 'species' ? 'terrain' : 'recognition');
@@ -381,10 +521,8 @@ function growAndEcology(state: GameState, dt: number) {
   for (const site of state.nodes) {
     const habitatEffect = activeEffect(state, site.id, 'habitat');
     const foodEffect = activeEffect(state, site.id, 'food');
-    if (site.owner !== 'neutral' && site.units < site.capacity) {
-      const growthMultiplier = foodEffect && site.species === 'argentine' ? 0.15 : 1;
-      site.units = Math.min(site.capacity, site.units + Math.max(0, site.growth) * growthMultiplier * dt);
-    }
+    const growth = growthInfo(state, site);
+    if (growth.current > 0) site.units = Math.min(site.capacity, site.units + growth.current * dt);
     if (state.mode !== 'ecologist') continue;
     const invasive = site.owner === 'rival' && site.species === 'argentine';
     let change = invasive ? -0.0036 * (0.45 + site.units / 110) : 0.0002;
@@ -438,8 +576,11 @@ export function advance(state: GameState, seconds: number): GameState {
     next.time = Math.round((next.time + TICK) * 10) / 10;
     if (next.mode === 'ecologist' && next.duration !== null) next.time = Math.min(next.duration, next.time);
     next.effects = next.effects.filter(effect => effect.expires > next.time);
+    validateRegionalState(next);
     growAndEcology(next, TICK);
     moveFleets(next, TICK);
+    // Integer game seconds only; no UI or wall-clock timer controls rallying.
+    if (Math.round(next.time * 10) % 10 === 0) autoRally(next);
     if (Math.round(next.time * 10) % 160 === 0) ai(next);
     if (next.mode === 'ecologist') {
       if (next.charges < 3) {

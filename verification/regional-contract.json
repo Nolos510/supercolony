@@ -1,0 +1,152 @@
+{
+  "version": 2,
+  "task_id": "supercolony-regional-management",
+  "outcome": "Regional one-shot and20/10 automatic rally, readable ownership progress and collapsible controls,16credited habitat photographs, explained growth/settings, and gateway-funded development in both combat modes.",
+  "scope": "User-approved successor after completed ef1ca24. New scope permits a new budget; original scope was completed/pushed, not a failed-run reset. Preflight began2026-10-14T02:01:42Z, total absolute deadline2026-10-14T05:01:42Z; helper receives only remaining time. Assets/sources/balance and acceptance fixtures frozen before feature changes. Legacy browser setup expands Orders before Keyboard orders because the approved default is compact; original physics/source/capture assertions remain. Both combat modes have regional rally/development; Ecologist only content/layout improvements. Same atlas tokens/no runtime dependency/backend/hosting. Comfy and8000 excluded. Physical iPhone Brave is explicit human acceptance.",
+  "limits": {
+    "max_repairs": 8,
+    "max_seconds": 10187
+  },
+  "subjects": [
+    "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Ant.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/CooperationTour.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Fieldwork.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Icons.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Learning.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/MatchMenu.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Menu.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/ResearchMap.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/SourcePicker.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Specimen.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/data/habitats.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/regional.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/research.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/specimens.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+    "/Users/nolos/Desktop/Ant Game/src/main.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/styles.css",
+    "/Users/nolos/Desktop/Ant Game/src/components/HabitatGallery.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/RegionalCommands.tsx",
+    "/Users/nolos/Desktop/Ant Game/README.md",
+    "/Users/nolos/Desktop/Ant Game/docs/REGIONAL_VERIFICATION.md",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/australia-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/australia-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/hawaii-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/hawaii-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/japan-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/japan-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/newzealand-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/newzealand-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/africa-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/africa-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/california-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/california-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/mediterranean-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/mediterranean-open.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/southamerica-complex.jpg",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/southamerica-open.jpg"
+  ],
+  "protected": [
+    "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/regional.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/habitats.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/regional.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+    "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+    "/Users/nolos/Desktop/Ant Game/verification/regional-acceptance.json",
+    "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+    "/Users/nolos/Desktop/Ant Game/src/data/nestRoles.ts",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/west/credits.json",
+    "/Users/nolos/Desktop/Ant Game/public/habitats/east/credits.json",
+    "/Users/nolos/Desktop/Ant Game/docs/HABITAT_WEST_SOURCES.md",
+    "/Users/nolos/Desktop/Ant Game/docs/HABITAT_EAST_SOURCES.md",
+    "/Users/nolos/Desktop/Ant Game/docs/REGIONAL_SOURCE_PACK.md"
+  ],
+  "criteria": [
+    {
+      "id": "types",
+      "description": "Strict TypeScript compilation",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "typecheck"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "lint",
+      "description": "Scoped source lint",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "lint"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "behavior-and-science",
+      "description": "Existing regressions plus exact rally threshold/batches, partial/friendly routing, source conservation, gateway loss including same-tick recapture, development timing/cost/multipliers, role metadata and16verified photo hashes.",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 120
+      }
+    },
+    {
+      "id": "player-objectives",
+      "description": "Chromium and WebKit all prior modes/navigation plus compact panel toggles, regional selection/direct overseas send/rally/auto, development both species,16decoded photos/credits, progress and habitat-only Ecologist.",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test:e2e"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 300
+      }
+    },
+    {
+      "id": "production",
+      "description": "Production bundle",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "build"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 180
+      }
+    }
+  ]
+}

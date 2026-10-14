@@ -1,0 +1,11 @@
+# Regional management source pack
+
+Frozen before feature implementation, reviewed2026-10-13. Sixteen real habitat photographs: [western sources](HABITAT_WEST_SOURCES.md) and [eastern sources](HABITAT_EAST_SOURCES.md). Each pair has individual source/rights/locality evidence and acquired/final hashes. East dimensions were read from the final JPEGs with native sips. Institutional credits remain explicit where an individual photographer was not named. Official Commons renditions are disclosed; their hashes are not claimed to identify unfetched full-resolution originals. Original acquired source/evidence files remain in ignored output/habitat-preflight-*; runtime assets and credits are bundled.
+
+Open/complex habitat assignments illustrate visible surroundings rather than measured combat arenas. Inland Mediterranean woodland is labeled with its real Montes de Toledo locality; it does not claim to show a coastal Marseille nest. No image establishes ant occurrence, colony identity, or a current battlefront. No generated or noncommercial-only image is included. Existing worker photographs are unchanged.
+
+The three additional scientific resources are Grover and colleagues2007 (Argentine-ant diet, DOI10.1098/rspb.2007.1065), Luo and colleagues2019 (meat-ant route choice/clearing, DOI10.1007/s00040-018-0658-z; abstract free, full text may require access), and Han, Phillips & Elgar2023 (meat-ant food value/foraging, DOI10.1186/s12862-023-02117-x). Publisher/primary author-lab identities and experimental findings were checked; PMC sometimes returns a challenge, so indexed primary content and the author's institutional publication list corroborate the Grover entry.
+
+Foraging development's30 worker-unit cost,20s preparation,+20% regional growth, and gateway dependency are game-balanced rules. They do not estimate reproductive rates or treatment effectiveness. Base growth remains0.95 for Argentine ants and0.32 for meat ants. Automation waits for20, sends exactly10 once per eligible source per game second, and never commands cooperating AI.
+
+The18 nest-role entries are original explanations of fictional scene labels. Stable IDs and the terrain class remain separate. Species Clash's Established nest / Gravel mound names replace labels that could imply native status or current species identity.

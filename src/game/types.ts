@@ -24,10 +24,10 @@ export interface ResourceEntry {
   group: 'research' | 'participate' | 'support';
   type: 'paper' | 'official-guide' | 'citizen-science' | 'conservation-group';
   summary: string; regionLabel: string; regionIds: string[]; topics: string[];
-  speciesIds: SpeciesId[]; reviewedAt: string; year?: number;
+  speciesIds: SpeciesId[]; reviewedAt: string; year?: number; accessNote?: string;
 }
 export interface NestState {
-  id: string; name: string; regionId: string; x: number; y: number;
+  id: string; name: string; roleId: string; regionId: string; x: number; y: number;
   owner: Owner; colonyId: string; species: SpeciesId; units: number; capacity: number; growth: number;
   terrain: Terrain; habitat: number; gateway: boolean;
 }
@@ -41,10 +41,11 @@ export interface GameEvent { id: number; time: number; message: string; factId: 
 export interface GameState {
   mode: ModeId; playerSpecies: SpeciesId; seed: number; rng: number;
   time: number; duration: number | null; status: MatchStatus; aiEnabled: boolean;
+  autoRally: Record<string, boolean>; developments: Record<string, RegionalDevelopment>;
   nodes: NestState[]; edges: TrailState[]; fleets: FleetState[];
   effects: EffectState[]; charges: number; chargeProgress: number;
   initialHabitat: number; events: GameEvent[]; discovered: string[];
-  nextFleetId: number; stats: { orders: number; captures: number; interventions: number; losses: number; reinforcementOrders: number; reinforcementWorkers: number };
+  nextFleetId: number; stats: { orders: number; captures: number; interventions: number; losses: number; reinforcementOrders: number; reinforcementWorkers: number; automaticRallyOrders: number; automaticRallyWorkers: number; developmentOrders: number; developmentWorkers: number };
 }
 export interface SpecimenAsset {
   id: string; speciesId: SpeciesId; path: string; label: string; scientificName: string;
@@ -66,3 +67,9 @@ export interface BatchCommandResult extends CommandResult {
   skipped: { sourceId: string; reason: string }[];
 }
 export interface CombatResult { defenderRemaining: number; attackerRemaining: number; ownerChanged: boolean }
+
+export interface RegionalDevelopment { gatewayId: string; startedAt: number; readyAt: number }
+export interface GrowthInfo { base: number; current: number; capacity: number; multiplier: number; reason: 'growing' | 'paused' | 'unclaimed' | 'capacity' | 'finished'; development: 'none' | 'preparing' | 'active'; developmentRemaining: number }
+export interface RallyInfo { gatewayId?: string; gatewayOwned: boolean; autoEnabled: boolean; eligibleSourceIds: string[]; waitingSourceIds: string[]; blockedSourceIds: string[]; canRally: boolean }
+export interface NestRoleEntry { id: string; name: string; description: string; purpose: string }
+export interface HabitatPhotoAsset { id: string; regionId: string; terrain: Terrain; path: string; caption: string; locality: string; creator: string; sourceUrl: string; imageUrl: string; license: string; licenseUrl: string; rightsEvidenceURL: string; reviewedAt: string; changes: string; sha256: string; originalSha256: string; width: number; height: number }

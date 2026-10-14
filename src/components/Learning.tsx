@@ -6,6 +6,7 @@ import type { ResourceEntry, SpeciesId } from '../game/types';
 import { Icon } from './Icons';
 import { gameStore } from '../game/store';
 import Specimen, { SpeciesComparison } from './Specimen';
+import HabitatGallery from './HabitatGallery';
 
 export function ResourceLink({ resource, children }: { resource: ResourceEntry; children?: ReactNode }) {
   const label = typeof children === 'string' ? children : resource.title;
@@ -23,7 +24,7 @@ const matches = (query: string, ...values: string[]) => values.join(' ').toLower
 
 function Sources({ ids }: { ids: string[] }) {
   const entries = resources.filter(resource => ids.includes(resource.id));
-  return <section className="article-sources" aria-label="Supporting sources"><h3>Follow the evidence</h3>{entries.map(resource => <div key={resource.id}><span>{resource.organization}{resource.year ? ` · ${resource.year}` : ''}</span><ResourceLink resource={resource}>{`Read the research: ${resource.title}`}</ResourceLink></div>)}</section>;
+  return <section className="article-sources" aria-label="Supporting sources"><h3>Follow the evidence</h3>{entries.map(resource => <div key={resource.id}><span>{resource.organization}{resource.year ? ` · ${resource.year}` : ''}</span><ResourceLink resource={resource}>{`Read the research: ${resource.title}`}</ResourceLink>{resource.accessNote && <p className="resource-access-note">{resource.accessNote}</p>}</div>)}</section>;
 }
 
 interface LearningProps {
@@ -95,6 +96,7 @@ export default function Learning({ tab, focusFact, focusSpecies, focusRegion, on
         </>}
         {area && <><span className="fact-topic">{area.country}{area.nativeRange ? ' · Native range' : ' · Introduced range context'}</span><p className="article-lead">{area.overview}</p>
           {context && <><section><h3>Environment</h3><p>{context.environment}</p></section><section><h3>Ecological stakes</h3><p>{context.ecologicalStakes}</p></section><section><h3>In this game</h3><p>{context.gameAbstraction}</p></section></>}
+          <HabitatGallery key={area.id} regionId={area.id} />
           <Sources ids={context?.sourceIds ?? area.sourceIds} />
           {context && <section className="article-sources" aria-label="Regional research"><h3>Regional research</h3>{context.sourceUrls.map(source => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" onClick={() => gameStore.pause(true)} aria-label={`${source.label} (opens in a new tab)`}>{source.label} <span aria-hidden="true">↗</span></a>)}<p className="reading-caption">Reviewed {reviewedDate(context.reviewedAt)}</p></section>}
         </>}
@@ -111,7 +113,7 @@ export default function Learning({ tab, focusFact, focusSpecies, focusRegion, on
           {filtersOpen && <div id="resource-filter-controls" className="resource-filters"><label>Topic<select name="resource-topic" value={topic} onChange={event => setTopic(event.target.value)}><option value="all">All topics</option>{Array.from(new Set(resources.flatMap(entry => entry.topics))).sort().map(id => <option key={id} value={id}>{id.replaceAll('-', ' ')}</option>)}</select></label><label>Region<select name="resource-region" value={region} onChange={event => setRegion(event.target.value)}><option value="all">Worldwide & all regions</option>{regions.map(entry => <option key={entry.id} value={entry.id}>{entry.name}</option>)}</select></label></div>}
           {(Object.keys(resourceGroups) as (keyof typeof resourceGroups)[]).map(group => {
             const entries = filteredResources.filter(entry => entry.group === group);
-            return entries.length ? <section className="resource-group" key={group}><h3>{resourceGroups[group]}</h3>{entries.map(entry => <article className="resource-entry" key={entry.id}><div className="resource-meta">{entry.organization}<span>{entry.type.replaceAll('-', ' ')}{entry.year ? ` · ${entry.year}` : ''}</span></div><h4><ResourceLink resource={entry} /></h4><p>{entry.summary}</p><footer><span>{entry.regionLabel}</span><span>Reviewed {reviewedDate(entry.reviewedAt)}</span></footer></article>)}</section> : null;
+            return entries.length ? <section className="resource-group" key={group}><h3>{resourceGroups[group]}</h3>{entries.map(entry => <article className="resource-entry" key={entry.id}><div className="resource-meta">{entry.organization}<span>{entry.type.replaceAll('-', ' ')}{entry.year ? ` · ${entry.year}` : ''}</span></div><h4><ResourceLink resource={entry} /></h4><p>{entry.summary}</p>{entry.accessNote && <p className="resource-access-note">{entry.accessNote}</p>}<footer><span>{entry.regionLabel}</span><span>Reviewed {reviewedDate(entry.reviewedAt)}</span></footer></article>)}</section> : null;
           })}
           <p className="reading-caption">Organization listings imply no partnership. Community observations support identification; they are not official invasive-species reports. Support links are optional and lead to the organization’s own site.</p>
         </>}

@@ -25,7 +25,7 @@ function ant(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number,
   ctx.restore();
 }
 
-export default function BattlefieldMap({ state, view, selected, onSelect, onZoom, onGroupOrder, onSelection, active = true }: { state: GameState; view: string | null; selected: string[]; onSelect: (id: string, order?: boolean, additive?: boolean) => void; onZoom: (region: string | null) => void; onOrder: (from: string, to: string) => void; onGroupOrder: (sources: string[], target: string) => void; onSelection: (sources: string[]) => void; active?: boolean }) {
+export default function BattlefieldMap({ state, view, selected, onSelect, onZoom, onGroupOrder, onSelection, gestureRevision = 0, active = true }: { state: GameState; view: string | null; selected: string[]; onSelect: (id: string, order?: boolean, additive?: boolean) => void; onZoom: (region: string | null) => void; onOrder: (from: string, to: string) => void; onGroupOrder: (sources: string[], target: string) => void; onSelection: (sources: string[]) => void; active?: boolean; gestureRevision?: number }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const geometry = useRef<Geography | null>(null);
   const selectedRef = useRef(selected);
@@ -151,7 +151,23 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     if (preview.current) preview.current.hidden = true;
     viewport.current?.classList.remove('ordering');
   }
-  useEffect(() => { clearGesture(true); return () => clearGesture(true); }, [view, active]); // A view/menu/pause change cancels the order.
+  useEffect(() => { clearGesture(true); return () => clearGesture(true); }, [view, active, gestureRevision]); // A view/menu/pause change cancels the order.
+  useEffect(() => {
+    const surface = viewport.current;
+    if (!surface) return;
+    let width = surface.clientWidth, height = surface.clientHeight;
+    const cancel = () => { if (gesture.current) { suppressClick.current = true; clearGesture(true); } };
+    const observer = new ResizeObserver(entries => {
+      const rect = entries[0].contentRect;
+      if (rect.width !== width || rect.height !== height) cancel();
+      width = rect.width; height = rect.height;
+    });
+    const anotherPointer = (event: PointerEvent) => { if (gesture.current && event.pointerId !== gesture.current.id) cancel(); };
+    observer.observe(surface);
+    window.addEventListener('resize', cancel);
+    window.addEventListener('pointerdown', anotherPointer, true);
+    return () => { observer.disconnect(); window.removeEventListener('resize', cancel); window.removeEventListener('pointerdown', anotherPointer, true); };
+  }, []);
   function hit(g: Gesture, x: number, y: number) {
     return g.targets.filter(t => Math.abs(t.x - x) <= Math.max(22, t.width / 2) && Math.abs(t.y - y) <= Math.max(22, t.height / 2)).sort((a, b) => Math.hypot(a.x - x, a.y - y) - Math.hypot(b.x - x, b.y - y))[0];
   }

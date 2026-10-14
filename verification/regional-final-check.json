@@ -1,0 +1,8 @@
+{
+  "task_id": "supercolony-regional-final",
+  "decision": "complete",
+  "reason": "all criteria have passing evidence",
+  "attempts": 1,
+  "repairs_used": 0,
+  "scope": "pinned command execution and evidence integrity; review assertions and semantic truth need independent proof"
+}

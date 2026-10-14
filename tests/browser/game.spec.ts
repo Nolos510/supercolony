@@ -13,6 +13,7 @@ test('tutorial, real orders, shared world/region state, and source access', asyn
   await page.getByRole('button', { name: 'World view', exact: true }).click();
   expect(await page.evaluate(() => JSON.stringify(window.__supercolony.getState()))).toBe(before);
   await page.getByRole('button', { name: 'Resume match' }).click();
+  await page.getByRole('button', { name: 'Orders', exact: true }).click();
   await page.getByText('Keyboard orders', { exact: true }).click();
   await page.getByLabel('Source nest').selectOption('california-0');
   await page.getByLabel('Destination nest').selectOption('california-4');

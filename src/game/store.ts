@@ -1,4 +1,4 @@
-import { createGame, advance, send, sendMany, intervene } from './engine';
+import { createGame, advance, send, sendMany, intervene, rallyRegion, setAutoRally as configureAutoRally, developRegion } from './engine';
 import type { GameState, ModeId, SpeciesId, Intervention } from './types';
 
 let current: GameState;
@@ -21,6 +21,9 @@ export const gameStore = {
   sendMany(from: string[], to: string, fraction: number) {
     const command = sendMany(current, from, to, fraction); current = command.state; publish(); return command;
   },
+  rally(regionId: string, fraction: number) { const command = rallyRegion(current, regionId, fraction); current = command.state; publish(); return command; },
+  autoRally(regionId: string, enabled: boolean) { const command = configureAutoRally(current, regionId, enabled); current = command.state; publish(); return command.error; },
+  develop(regionId: string, resume = false) { const candidate = resume && current.status === 'paused' ? { ...current, status: 'running' as const } : current; const command = developRegion(candidate, regionId); if (!command.error) current = command.state; publish(); return command.error; },
   intervene(nodeId: string, kind: Intervention) {
     const command = intervene(current, nodeId, kind); current = command.state; publish(); return command.error;
   },
