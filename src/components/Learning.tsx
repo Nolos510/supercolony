@@ -7,6 +7,9 @@ import { Icon } from './Icons';
 import { gameStore } from '../game/store';
 import Specimen, { SpeciesComparison } from './Specimen';
 import HabitatGallery from './HabitatGallery';
+import { learningActivities, visualSummaries } from '../data/atlasLearning';
+import VisualSummary from './VisualSummary';
+import LearningActivity from './LearningActivity';
 
 export function ResourceLink({ resource, children }: { resource: ResourceEntry; children?: ReactNode }) {
   const label = typeof children === 'string' ? children : resource.title;
@@ -14,7 +17,7 @@ export function ResourceLink({ resource, children }: { resource: ResourceEntry; 
 }
 
 type Category = 'topics' | 'species' | 'regions' | 'resources';
-type Article = { kind: 'fact' | 'species' | 'region'; id: string };
+type Article = { kind: 'fact' | 'species' | 'region' | 'activity'; id: string };
 const categoryNames: Record<Category, string> = { topics: 'Topics', species: 'Species', regions: 'Regions', resources: 'Resources' };
 const resourceGroups = { research: 'Research & documentation', participate: 'Observe & participate', support: 'Conservation & support' };
 const reviewedDate = (date: string) => new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(date));
@@ -30,9 +33,10 @@ function Sources({ ids }: { ids: string[] }) {
 interface LearningProps {
   tab: 'guide' | 'resources'; focusFact?: string; focusSpecies?: SpeciesId; focusRegion?: string;
   onClose: () => void; onCooperation?: () => void; returnLabel?: string; restorePrevious?: boolean;
+  onExploreSpecimen?: (speciesId: SpeciesId) => void; onStory?: () => void;
 }
 
-export default function Learning({ tab, focusFact, focusSpecies, focusRegion, onClose, onCooperation, returnLabel = 'Back to map', restorePrevious = false }: LearningProps) {
+export default function Learning({ tab, focusFact, focusSpecies, focusRegion, onClose, onCooperation, onExploreSpecimen, onStory, returnLabel = 'Back to map', restorePrevious = false }: LearningProps) {
   const dialog = useRef<HTMLDialogElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -46,6 +50,7 @@ export default function Learning({ tab, focusFact, focusSpecies, focusRegion, on
   const [topic, setTopic] = useState(initial?.topic ?? 'all');
   const [region, setRegion] = useState(initial?.region ?? 'all');
   const [filtersOpen, setFiltersOpen] = useState(initial?.filtersOpen ?? false);
+  const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   useEffect(() => { dialog.current?.showModal(); }, []);
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
@@ -59,8 +64,10 @@ export default function Learning({ tab, focusFact, focusSpecies, focusRegion, on
 
   function openArticle(next: Article) {
     if (!article) indexScroll.current = scroller.current?.scrollTop ?? 0;
+    setDirection('forward');
     setArticle(next);
   }
+  function backToIndex() { setDirection('back'); setArticle(null); }
   function changeCategory(next: Category) {
     indexScroll.current = 0;
     setCategory(next); setArticle(null); setQuery('');
@@ -70,28 +77,30 @@ export default function Learning({ tab, focusFact, focusSpecies, focusRegion, on
   const profile = article?.kind === 'species' ? species[article.id as SpeciesId] : undefined;
   const area = article?.kind === 'region' ? regions.find(entry => entry.id === article.id) : undefined;
   const context = area ? regionalContexts.find(entry => entry.regionId === area.id) : undefined;
-  const title = fact?.title ?? profile?.name ?? area?.name ?? (category === 'resources' ? 'Learn & get involved' : 'Field guide');
+  const activity = article?.kind === 'activity' ? learningActivities.find(entry => entry.id === article.id) : undefined;
+  const summary = fact ? visualSummaries.find(entry => entry.factId === fact.id) : undefined;
+  const title = fact?.title ?? profile?.name ?? area?.name ?? activity?.title ?? (category === 'resources' ? 'Learn & get involved' : 'Field guide');
   const filteredFacts = facts.filter(entry => matches(query, entry.title, entry.summary, entry.topic));
   const filteredSpecies = Object.values(species).filter(entry => matches(query, entry.name, entry.scientificName, entry.description));
   const filteredRegions = regions.filter(entry => matches(query, entry.name, entry.country, entry.overview));
   const filteredResources = resources.filter(entry => matches(query, entry.title, entry.organization, entry.summary, entry.regionLabel) && (topic === 'all' || entry.topics.includes(topic)) && (region === 'all' || entry.regionIds.includes(region) || entry.regionIds.includes('global')));
   const resultCount = category === 'topics' ? filteredFacts.length : category === 'species' ? filteredSpecies.length : category === 'regions' ? filteredRegions.length : filteredResources.length;
 
-  return <dialog ref={dialog} className="learning-dialog reading-dialog" aria-label={category === 'resources' ? 'Learn & get involved' : 'Field guide'} onCancel={event => { event.preventDefault(); if (article) setArticle(null); else onClose(); }}>
+  return <dialog ref={dialog} className="learning-dialog reading-dialog atlas-learning" aria-label={category === 'resources' ? 'Learn & get involved' : 'Field guide'} onCancel={event => { event.preventDefault(); if (article) backToIndex(); else onClose(); }}>
     <header className="reading-header">
-      <button className="reading-back" onClick={() => article ? setArticle(null) : onClose()} aria-label={article ? 'Back to index' : category === 'resources' ? 'Close resources' : 'Close field guide'}><span aria-hidden="true">←</span> {article ? 'Index' : 'Back'}</button>
+      <button className="reading-back" onClick={() => article ? backToIndex() : onClose()} aria-label={article ? 'Back to index' : category === 'resources' ? 'Close resources' : 'Close field guide'}><span aria-hidden="true">←</span> {article ? 'Index' : 'Back'}</button>
       <h2 ref={heading} tabIndex={-1}>{title}</h2>
       <button className="reading-resume" onClick={onClose}>{returnLabel} <Icon name="play" size={16} /></button>
     </header>
     <div ref={scroller} className="reading-scroll">
-      {article ? <article className="reading-article">
-        {fact && <><span className="fact-topic">{fact.topic.replaceAll('-', ' ')}</span><p className="article-lead">{fact.summary}</p><p>{fact.detail}</p><Sources ids={fact.resourceIds} />
+      {article ? <article key={`${article.kind}-${article.id}`} className={`reading-article atlas-${direction}`}>
+        {fact && <><span className="fact-topic">{fact.topic.replaceAll('-', ' ')}</span><p className="article-lead">{fact.summary}</p>{summary && <VisualSummary summary={summary} />}<p>{fact.detail}</p><Sources ids={fact.resourceIds} />
           <div className="article-related">{fact.speciesIds.map(id => <button key={id} onClick={() => openArticle({ kind: 'species', id })}>Meet {species[id].name} <Icon name="arrow" size={16} /></button>)}{fact.regionIds.filter(id => id !== 'global').map(id => <button key={id} onClick={() => openArticle({ kind: 'region', id })}>{regions.find(entry => entry.id === id)?.name} context <Icon name="arrow" size={16} /></button>)}</div>
           {(fact.id === 'recognition' || fact.id === 'supercolonies') && onCooperation && <button onClick={onCooperation}>How cooperation works <Icon name="arrow" size={16} /></button>}
         </>}
-        {profile && <><p className="scientific-name">{profile.scientificName}</p><p className="article-lead">{profile.description}</p><Specimen speciesId={profile.id} />
+        {profile && <><p className="scientific-name">{profile.scientificName}</p><p className="article-lead">{profile.description}</p><Specimen speciesId={profile.id} onExplore={onExploreSpecimen} />
           <dl className="species-facts"><div><dt>Worker size</dt><dd>{profile.sizeLabel}</dd></div><div><dt>Worker forms</dt><dd>{profile.workerForms ?? 'Multiple species; varies'}</dd></div><div><dt>In the game</dt><dd>{profile.strengthLabel}</dd></div></dl>
-          {profile.id !== 'native' && <SpeciesComparison />}
+          {profile.id !== 'native' && <SpeciesComparison onExplore={onExploreSpecimen} />}
           <Sources ids={profile.resourceIds} />
         </>}
         {area && <><span className="fact-topic">{area.country}{area.nativeRange ? ' · Native range' : ' · Introduced range context'}</span><p className="article-lead">{area.overview}</p>
@@ -100,8 +109,10 @@ export default function Learning({ tab, focusFact, focusSpecies, focusRegion, on
           <Sources ids={context?.sourceIds ?? area.sourceIds} />
           {context && <section className="article-sources" aria-label="Regional research"><h3>Regional research</h3>{context.sourceUrls.map(source => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" onClick={() => gameStore.pause(true)} aria-label={`${source.label} (opens in a new tab)`}>{source.label} <span aria-hidden="true">↗</span></a>)}<p className="reading-caption">Reviewed {reviewedDate(context.reviewedAt)}</p></section>}
         </>}
-        {!fact && !profile && !area && <div className="empty-state"><h3>This entry is unavailable</h3><button onClick={() => setArticle(null)}>Browse the index</button></div>}
-      </article> : <div className="learn-index">
+        {activity && <LearningActivity activity={activity} onBack={backToIndex} />}
+        {!fact && !profile && !area && !activity && <div className="empty-state"><h3>This entry is unavailable</h3><button onClick={backToIndex}>Browse the index</button></div>}
+      </article> : <div className={`learn-index atlas-${direction}`}>
+        <section className="learning-explore" aria-label="Learn by exploring"><div><span className="eyebrow">Try a field activity</span><p>Look closer. Change a passage. Check the evidence.</p></div><div className="learning-activity-links">{learningActivities.map(entry => <button key={entry.id} aria-label={entry.title} onClick={() => openArticle({ kind: 'activity', id: entry.id })}>{entry.title} <Icon name="arrow" size={16} /></button>)}{onStory && <button aria-label="General Mandible" onClick={onStory}>General Mandible <Icon name="arrow" size={16} /></button>}</div></section>
         <nav className="reading-tabs" aria-label="Learning categories">{(Object.keys(categoryNames) as Category[]).map(id => <button key={id} aria-pressed={category === id} onClick={() => changeCategory(id)}>{categoryNames[id]}</button>)}</nav>
         <label className="learning-search">Search {categoryNames[category].toLowerCase()}<input type="search" name="learning-search" autoComplete="off" value={query} onChange={event => setQuery(event.target.value)} placeholder="Try terrain, Hawaii, or identification…" /></label>
         {category === 'topics' && <><p className="reading-intro">Short discoveries, with a path to the evidence.</p>{Array.from(new Set(filteredFacts.map(entry => entry.topic))).map(id => <section className="topic-index" key={id}><h3>{id.replaceAll('-', ' ')}</h3>{filteredFacts.filter(entry => entry.topic === id).map(entry => <button className="learn-row" key={entry.id} aria-label={entry.title} onClick={() => openArticle({ kind: 'fact', id: entry.id })}><span><strong>{entry.title}</strong><span>{entry.summary}</span></span><Icon name="arrow" size={18} /></button>)}</section>)}{onCooperation && <button className="learn-row" onClick={onCooperation}><span><strong>How cooperation works</strong><span>Recognition, research, and reinforcing a friendly nest.</span></span><Icon name="arrow" size={18} /></button>}</>}

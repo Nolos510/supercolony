@@ -7,8 +7,8 @@ import globalData from '../../public/research/global-2010.json';
 const samplePoint = (lon: number, lat: number) => [20 + (lon + 180) / 360 * 340, 10 + (80 - lat) / 150 * 100];
 
 const steps = [
-  { title: 'Recognition connects nests', body: 'Ants use chemical cues in colony recognition. Some sampled Argentine-ant populations tolerated one another; others fought. Our cooperating colonies turn that finding into a game rule.' },
-  { title: 'See what was tested', body: 'The 2010 study compared samples collected in 2008–2009. Its lines show reported pairs, not today’s borders. Untested relationships remain unknown.' },
+  { title: 'Recognition connects nests', body: 'Ants use chemical cues in colony recognition. Our US1 player cooperates with the F, AU, NZ, J and H1 reference networks. This friendship is a game simplification, including pairs that were not directly tested.' },
+  { title: 'See what was tested', body: 'The 2010 study compared samples collected in 2008–2009. Its lines show reported pairs, not today’s borders. US1–AU had 4 aggressive trials out of 50. The three independent rivals are not automatically friendly to one another.' },
   { title: 'Help a cooperating nest', body: 'Cooperating colonies command their own workers. Drop a swarm on their nest to reinforce it. Those workers join its reserves. Passing through keeps your swarm moving.' },
 ];
 

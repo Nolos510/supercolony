@@ -1,0 +1,114 @@
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V4
+ * Field atlas: one reading column, mechanism diagrams, hands-on evidence, captioned fiction.
+ * Existing tokens and system fonts retained. All activities are optional and untimed.
+ */
+.atlas-learning .learning-explore { display: grid; gap: var(--space-lg); padding: var(--space-lg); margin-bottom: var(--space-xl); border-left: 3px solid var(--color-player-dark); background: var(--color-water); }
+.learning-explore > div > p { margin-top: var(--space-sm); font-size: 15px; }
+.learning-activity-links { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.learning-activity-links button { justify-content: space-between; font-size: 14px; white-space: normal; overflow-wrap: anywhere; }
+.learning-activity-links button svg { flex: 0 0 auto; }
+.visual-summary { margin: var(--space-xl) 0; padding: var(--space-lg); border-block: 1px solid var(--color-line); background: var(--color-paper-deep); }
+.visual-summary-heading { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-sm); color: var(--color-muted); font-size: 11px; }
+.visual-summary-heading > span:last-child { text-align: right; }
+.visual-summary svg { display: block; width: 100%; height: auto; margin: var(--space-sm) auto; max-height: 210px; }
+.summary-line, .summary-worker { fill: none; stroke: var(--color-ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.summary-worker ellipse, .summary-worker circle { fill: var(--color-ink); }
+.summary-player { fill: var(--color-player); stroke: var(--color-player-dark); stroke-width: 2; }
+.summary-rival { fill: var(--color-rival); stroke: var(--color-rival-dark); stroke-width: 2; }
+.summary-land { fill: var(--color-land); stroke: var(--color-habitat); stroke-width: 2; }
+.summary-player-line { fill: none; stroke: var(--color-player-dark); stroke-width: 3; stroke-linecap: round; }
+.summary-unknown { fill: none; stroke: var(--color-muted); stroke-width: 2; stroke-dasharray: 4 5; }
+.summary-block { fill: none; stroke: var(--color-rival-dark); stroke-width: 4; }
+.summary-labels { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-md); list-style: none; padding: 0; margin: var(--space-sm) 0 var(--space-lg); }
+.summary-labels li { min-width: 0; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.summary-labels li > span { display: block; font-size: 11px; color: var(--color-muted); margin-bottom: var(--space-xs); }
+.visual-summary figcaption { font-size: 16px; line-height: 1.5; font-weight: 600; }
+.learning-activity { min-width: 0; }
+.atlas-learning .reading-article button { min-width: 0; max-width: 100%; min-height: 44px; white-space: normal; overflow-wrap: anywhere; }
+.learning-activity button { min-width: 44px; white-space: normal; overflow-wrap: anywhere; }
+.learning-activity .activity-intro { margin-top: 0; color: var(--color-muted); }
+.activity-specimen { position: relative; margin: var(--space-lg) 0; background: var(--color-panel); }
+.activity-specimen img { display: block; width: 100%; height: auto; }
+.activity-specimen .activity-hotspot { position: absolute; transform: translate(-50%,-50%); border: 2px solid var(--color-player-dark); background: var(--color-panel); color: var(--color-ink); width: 44px; height: 44px; min-width: 44px; padding: 0; border-radius: 50%; font-size: 15px; font-weight: 600; }
+.activity-specimen .activity-hotspot[aria-pressed='true'] { background: var(--color-player-dark); color: var(--color-panel); }
+.activity-specimen .activity-hotspot:active { transform: translate(-50%,-50%) scale(.96); }
+.activity-parts { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.activity-parts button { font-size: 14px; }
+.activity-observation { padding: var(--space-lg); border-left: 3px solid var(--color-player-dark); background: var(--color-water); }
+.activity-question { margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-line); }
+.learning-activity .activity-question h3 { margin: var(--space-sm) 0 var(--space-lg); font-size: 22px; }
+.activity-choices { display: grid; gap: var(--space-sm); }
+.activity-choices button { justify-content: flex-start; text-align: left; padding: var(--space-md) var(--space-lg); }
+.activity-feedback, .activity-complete { margin-top: var(--space-lg); padding: var(--space-lg); background: var(--color-paper-deep); border-left: 3px solid var(--color-habitat); }
+.activity-feedback > strong { display: block; font-size: 16px; }
+.activity-feedback p { margin-block: var(--space-sm) var(--space-lg); }
+.learning-activity .activity-complete h3 { margin-top: 0; }
+.activity-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-xl); }
+.activity-sources { margin-top: var(--space-xl); border-top: 1px solid var(--color-line); padding-top: var(--space-lg); }
+.learning-activity .activity-sources h3 { font: 600 15px var(--font-body); margin: 0 0 var(--space-md); }
+.activity-sources a { display: block; padding-block: var(--space-sm); min-height: 44px; overflow-wrap: anywhere; }
+.terrain-lab { padding: var(--space-lg); background: var(--color-paper-deep); }
+.terrain-lab label { font-size: 15px; }
+.terrain-lab input[type='range'] { accent-color: var(--color-player-dark); height: 44px; width: 100%; margin: 0; cursor: pointer; }
+.terrain-lab svg { display: block; width: 100%; height: auto; max-height: 250px; margin-top: var(--space-md); }
+.terrain-wall { fill: var(--color-land); stroke: var(--color-habitat); stroke-width: 2; }
+.terrain-waiting { fill: var(--color-player); stroke: var(--color-player-dark); stroke-width: 2; }
+.terrain-admitted { fill: var(--color-player-dark); }
+.terrain-opponent { fill: var(--color-rival); stroke: var(--color-rival-dark); stroke-width: 2; }
+.recognition-selectors { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-md); }
+.recognition-selectors label { font-size: 15px; }
+.recognition-result { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr); gap: var(--space-md); align-items: start; margin-top: var(--space-lg); padding: var(--space-lg); background: var(--color-paper-deep); }
+.recognition-result > div { display: grid; justify-items: center; gap: var(--space-sm); text-align: center; min-width: 0; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.recognition-result strong { font-size: 15px; }
+.recognition-sample, .recognition-evidence-symbol { color: var(--color-player-dark); font-size: 40px; line-height: 1; }
+.recognition-high .recognition-evidence-symbol { color: var(--color-rival-dark); }
+.recognition-unknown .recognition-evidence-symbol { color: var(--color-muted); }
+.story-dialog[open] { display: flex; flex-direction: column; }
+.story-dialog .reading-header button { white-space: normal; overflow-wrap: anywhere; }
+.story-content { width: min(100%,760px); margin: auto; padding: var(--space-xl); }
+.comic-scene-heading { margin-bottom: var(--space-lg); }
+.comic-scene-heading h3 { font: 700 30px/1.15 var(--font-display); margin-top: var(--space-sm); overflow-wrap: anywhere; }
+.comic-art { position: relative; aspect-ratio: 3 / 2; overflow: clip; background: var(--color-paper-deep); }
+.comic-art img { position: absolute; width: 200%; height: 200%; max-width: none; left: 0; top: 0; }
+.comic-panel-1 img, .comic-panel-3 img { left: -100%; }
+.comic-panel-2 img, .comic-panel-3 img { top: -100%; }
+.comic-scene[data-playing='true'] .comic-art img { animation: atlas-story-art 7s var(--ease-out) 1 both; }
+.comic-art-unavailable { padding: var(--space-xl); background: var(--color-paper-deep); }
+.comic-narration { margin-block: var(--space-lg); font-size: 18px; }
+.comic-dialogue { margin: var(--space-lg) 0; padding-left: var(--space-lg); border-left: 3px solid var(--color-rival-dark); font: 600 23px/1.4 var(--font-display); }
+.comic-field-note { padding: var(--space-lg); margin-top: var(--space-xl); border-left: 3px solid var(--color-habitat); background: var(--color-paper-deep); }
+.comic-field-note p { margin-block: var(--space-sm) var(--space-md); }
+.comic-field-note a { display: block; padding-block: var(--space-sm); min-height: 44px; overflow-wrap: anywhere; }
+.comic-controls { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin: var(--space-xl) 0 var(--space-md); }
+.comic-controls button, .vignette-selector button { white-space: normal; min-width: 44px; overflow-wrap: anywhere; }
+.comic-credit { margin-top: var(--space-lg); color: var(--color-muted); font-size: 11px; line-height: 1.6; }
+.vignette-selector { display: grid; gap: var(--space-sm); margin-bottom: var(--space-xl); }
+.vignette-selector button { justify-content: flex-start; text-align: left; }
+.atlas-learning .atlas-forward { animation: atlas-read-forward 160ms var(--ease-out) both; }
+.atlas-learning .atlas-back { animation: atlas-read-back 160ms var(--ease-out) both; }
+.activity-feedback { animation: atlas-learning-feedback 150ms var(--ease-out) both; }
+@keyframes atlas-read-forward { from { transform: translateX(8px); } to { transform: translateX(0); } }
+@keyframes atlas-read-back { from { transform: translateX(-8px); } to { transform: translateX(0); } }
+@keyframes atlas-learning-feedback { from { transform: translateY(4px); } to { transform: translateY(0); } }
+@keyframes atlas-story-art { from { opacity: .94; transform: scale(1); } to { opacity: 1; transform: scale(1.012); } }
+@media (max-width: 600px) {
+  .atlas-learning .learning-explore { padding: var(--space-md); }
+  .learning-activity-links { display: grid; grid-template-columns: minmax(0,1fr); }
+  .visual-summary { padding: var(--space-md); }
+  .visual-summary-heading > span:last-child { display: none; }
+  .summary-labels { gap: var(--space-sm); }
+  .summary-labels li { font-size: 12px; }
+  .recognition-selectors { grid-template-columns: minmax(0,1fr); }
+  .recognition-result { grid-template-columns: minmax(0,1fr); }
+  .recognition-result > div { padding-block: var(--space-sm); }
+  .recognition-result > div:nth-child(2) { border-block: 1px solid var(--color-line); }
+  .story-dialog { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; }
+  .story-content { padding: var(--space-lg); }
+  .comic-scene-heading h3 { font-size: 25px; }
+  .comic-controls { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .comic-dialogue { font-size: 21px; }
+  .comic-narration { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-learning .atlas-forward, .atlas-learning .atlas-back, .activity-feedback, .comic-scene[data-playing='true'] .comic-art img { animation: none; }
+}

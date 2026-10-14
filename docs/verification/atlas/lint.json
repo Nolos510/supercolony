@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "criterion_id": "lint",
+  "contract_sha256": "9a836d7bf6600c0633cdae68c3a5d669eb3be7367fd30eeccb2bd069d38f32ed",
+  "argv": [
+    "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+    "run",
+    "lint"
+  ],
+  "cwd": "/Users/nolos/Desktop/Ant Game",
+  "started_at": 1792005731.675889,
+  "returncode": 0,
+  "timed_out": false,
+  "error": null,
+  "stdout": "\n> supercolony@1.0.0 lint\n> eslint .\n\n",
+  "stderr": "",
+  "finished_at": 1792005732.65455
+}

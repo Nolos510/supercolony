@@ -1,0 +1,1283 @@
+{
+  "reviewedAt": "2026-10-14T18:25:50.848Z",
+  "scope": "Independent learning/comic rendered inspection; not protected npm completion checks",
+  "cases": [
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "height": 1000,
+      "errors": [],
+      "activities": [
+        {
+          "name": "Anatomy detective",
+          "hotspot": "Gaster. The rounded rear body region lies beyond the waist.",
+          "targets": [
+            {
+              "name": "Anatomy hotspot: antennae",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mandibles",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: head",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mesosoma",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: waist",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: gaster",
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "researchLinks": [
+            {
+              "href": "https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all",
+              "target": "_blank",
+              "label": "Read the research: AntWeb · Argentine-ant specimens (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html",
+              "target": "_blank",
+              "label": "Read the research: Meet the Argentine ant (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Trail bottlenecks",
+          "slider": "2 of 12 workers can enter together in this illustration. Narrowing the passage reduces simultaneous participation.",
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+              "target": "_blank",
+              "label": "Read the research: Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Recognition detective",
+          "unknown": true,
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+              "target": "_blank",
+              "label": "Read the research: The global expansion of a single ant supercolony (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        }
+      ],
+      "introPanels": [
+        {
+          "title": "Before the empire",
+          "narration": "Our story begins on a South American riverbank. General Mandible has ambitious plans. The workers have lunch plans.",
+          "fieldNote": "Argentine ants are native to the Paraná drainage. At home, they are part of an ecosystem. Native-range presence is not an invasion."
+        },
+        {
+          "title": "An unconventional fleet",
+          "narration": "A plant pot leaves the nursery. The General calls it a naval operation. Nobody asked the human carrying it.",
+          "fieldNote": "Human transport can move Argentine ants between distant places. Our pot journey is fictional, not a documented route from Paraná to California."
+        },
+        {
+          "title": "The California briefing",
+          "narration": "Our fictional campaign opens near the Berkeley reference sample. One gateway, a few trails, and a very large ego.",
+          "fieldNote": "US1 is the Berkeley population sampled in 2008–2009. Your local nests, ownership, workers, and battles are game abstractions."
+        },
+        {
+          "title": "An awkward family reunion",
+          "narration": "A familiar scent can open a trail. An unfamiliar colony can make that introduction considerably less friendly.",
+          "fieldNote": "The global study reported tolerance among some populations and aggression between others. Unknown comparisons remain unknown. The General does not run real ants."
+        }
+      ],
+      "introReplay": true,
+      "playingAnimation": "atlas-story-art",
+      "pauseStopsMotion": true,
+      "boundedPlayback": true,
+      "visualSummary": true,
+      "articleLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "articleFocus": {
+        "tag": "BUTTON",
+        "text": "Back to map",
+        "outlineWidth": "3px",
+        "outlineStyle": "solid"
+      },
+      "matchPreserved": true,
+      "vignettes": [
+        {
+          "title": "The plant-pot admiral",
+          "narration": "No ocean-going ant trail. No tiny engines. Just an enormous supply chain and some accidental passengers.",
+          "fieldNote": "Checking plants, soil, materials, and equipment before moving them helps prevent accidental spread. Follow local official guidance."
+        },
+        {
+          "title": "Send the cavalry",
+          "narration": "The General orders a magnificent charge. The rock corridor admits a rather less magnificent number of workers at once.",
+          "fieldNote": "In the terrain experiments, meat ants won every tested arena; complex arenas reduced their fatalities. The game uses balanced values to illustrate participation limits."
+        },
+        {
+          "title": "A very scented rebellion",
+          "narration": "Three banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.",
+          "fieldNote": "Distinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile."
+        }
+      ],
+      "staticReducedMotion": true,
+      "storyFocus": {
+        "tag": "A",
+        "text": "Read the research: The global expansion of a single ant supercolony ↗",
+        "outlineWidth": "3px",
+        "outlineStyle": "solid"
+      },
+      "storyLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "storyEnlargedLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "staticReducedMotionImmediateSample": false,
+      "focusConfirmation": {
+        "engine": "chromium",
+        "width": 1440,
+        "media": true,
+        "settledReducedMotion": true,
+        "artAnimation": "none",
+        "modal": {
+          "open": true,
+          "modal": true
+        },
+        "optionTabFocus": {
+          "tag": "BUTTON",
+          "text": "Skip story",
+          "outlineStyle": "solid"
+        },
+        "keyboardSkip": true
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "errors": [],
+      "activities": [
+        {
+          "name": "Anatomy detective",
+          "hotspot": "Gaster. The rounded rear body region lies beyond the waist.",
+          "targets": [
+            {
+              "name": "Anatomy hotspot: antennae",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mandibles",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: head",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mesosoma",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: waist",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: gaster",
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "researchLinks": [
+            {
+              "href": "https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all",
+              "target": "_blank",
+              "label": "Read the research: AntWeb · Argentine-ant specimens (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html",
+              "target": "_blank",
+              "label": "Read the research: Meet the Argentine ant (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Trail bottlenecks",
+          "slider": "2 of 12 workers can enter together in this illustration. Narrowing the passage reduces simultaneous participation.",
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+              "target": "_blank",
+              "label": "Read the research: Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Recognition detective",
+          "unknown": true,
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+              "target": "_blank",
+              "label": "Read the research: The global expansion of a single ant supercolony (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        }
+      ],
+      "introPanels": [
+        {
+          "title": "Before the empire",
+          "narration": "Our story begins on a South American riverbank. General Mandible has ambitious plans. The workers have lunch plans.",
+          "fieldNote": "Argentine ants are native to the Paraná drainage. At home, they are part of an ecosystem. Native-range presence is not an invasion."
+        },
+        {
+          "title": "An unconventional fleet",
+          "narration": "A plant pot leaves the nursery. The General calls it a naval operation. Nobody asked the human carrying it.",
+          "fieldNote": "Human transport can move Argentine ants between distant places. Our pot journey is fictional, not a documented route from Paraná to California."
+        },
+        {
+          "title": "The California briefing",
+          "narration": "Our fictional campaign opens near the Berkeley reference sample. One gateway, a few trails, and a very large ego.",
+          "fieldNote": "US1 is the Berkeley population sampled in 2008–2009. Your local nests, ownership, workers, and battles are game abstractions."
+        },
+        {
+          "title": "An awkward family reunion",
+          "narration": "A familiar scent can open a trail. An unfamiliar colony can make that introduction considerably less friendly.",
+          "fieldNote": "The global study reported tolerance among some populations and aggression between others. Unknown comparisons remain unknown. The General does not run real ants."
+        }
+      ],
+      "introReplay": true,
+      "playingAnimation": "atlas-story-art",
+      "pauseStopsMotion": true,
+      "visualSummary": true,
+      "articleLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "articleFocus": {
+        "tag": "BUTTON",
+        "text": "Back to map",
+        "outlineWidth": "3px",
+        "outlineStyle": "solid"
+      },
+      "matchPreserved": true,
+      "vignettes": [
+        {
+          "title": "The plant-pot admiral",
+          "narration": "No ocean-going ant trail. No tiny engines. Just an enormous supply chain and some accidental passengers.",
+          "fieldNote": "Checking plants, soil, materials, and equipment before moving them helps prevent accidental spread. Follow local official guidance."
+        },
+        {
+          "title": "Send the cavalry",
+          "narration": "The General orders a magnificent charge. The rock corridor admits a rather less magnificent number of workers at once.",
+          "fieldNote": "In the terrain experiments, meat ants won every tested arena; complex arenas reduced their fatalities. The game uses balanced values to illustrate participation limits."
+        },
+        {
+          "title": "A very scented rebellion",
+          "narration": "Three banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.",
+          "fieldNote": "Distinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile."
+        }
+      ],
+      "staticReducedMotion": true,
+      "storyFocus": {
+        "tag": "A",
+        "text": "Read the research: The global expansion of a single ant supercolony ↗",
+        "outlineWidth": "3px",
+        "outlineStyle": "solid"
+      },
+      "storyLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "storyEnlargedLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "staticReducedMotionImmediateSample": false,
+      "focusConfirmation": {
+        "engine": "chromium",
+        "width": 390,
+        "media": true,
+        "settledReducedMotion": true,
+        "artAnimation": "none",
+        "modal": {
+          "open": true,
+          "modal": true
+        },
+        "optionTabFocus": {
+          "tag": "BUTTON",
+          "text": "Skip story",
+          "outlineStyle": "solid"
+        },
+        "keyboardSkip": true
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 320,
+      "height": 720,
+      "errors": [],
+      "activities": [
+        {
+          "name": "Anatomy detective",
+          "hotspot": "Gaster. The rounded rear body region lies beyond the waist.",
+          "targets": [
+            {
+              "name": "Anatomy hotspot: antennae",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mandibles",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: head",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mesosoma",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: waist",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: gaster",
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "researchLinks": [
+            {
+              "href": "https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all",
+              "target": "_blank",
+              "label": "Read the research: AntWeb · Argentine-ant specimens (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html",
+              "target": "_blank",
+              "label": "Read the research: Meet the Argentine ant (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Trail bottlenecks",
+          "slider": "2 of 12 workers can enter together in this illustration. Narrowing the passage reduces simultaneous participation.",
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+              "target": "_blank",
+              "label": "Read the research: Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Recognition detective",
+          "unknown": true,
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+              "target": "_blank",
+              "label": "Read the research: The global expansion of a single ant supercolony (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        }
+      ],
+      "introPanels": [
+        {
+          "title": "Before the empire",
+          "narration": "Our story begins on a South American riverbank. General Mandible has ambitious plans. The workers have lunch plans.",
+          "fieldNote": "Argentine ants are native to the Paraná drainage. At home, they are part of an ecosystem. Native-range presence is not an invasion."
+        },
+        {
+          "title": "An unconventional fleet",
+          "narration": "A plant pot leaves the nursery. The General calls it a naval operation. Nobody asked the human carrying it.",
+          "fieldNote": "Human transport can move Argentine ants between distant places. Our pot journey is fictional, not a documented route from Paraná to California."
+        },
+        {
+          "title": "The California briefing",
+          "narration": "Our fictional campaign opens near the Berkeley reference sample. One gateway, a few trails, and a very large ego.",
+          "fieldNote": "US1 is the Berkeley population sampled in 2008–2009. Your local nests, ownership, workers, and battles are game abstractions."
+        },
+        {
+          "title": "An awkward family reunion",
+          "narration": "A familiar scent can open a trail. An unfamiliar colony can make that introduction considerably less friendly.",
+          "fieldNote": "The global study reported tolerance among some populations and aggression between others. Unknown comparisons remain unknown. The General does not run real ants."
+        }
+      ],
+      "introReplay": true,
+      "playingAnimation": "atlas-story-art",
+      "pauseStopsMotion": true,
+      "visualSummary": true,
+      "articleLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "articleFocus": {
+        "tag": "BUTTON",
+        "text": "Back to map",
+        "outlineWidth": "3px",
+        "outlineStyle": "solid"
+      },
+      "matchPreserved": true,
+      "vignettes": [
+        {
+          "title": "The plant-pot admiral",
+          "narration": "No ocean-going ant trail. No tiny engines. Just an enormous supply chain and some accidental passengers.",
+          "fieldNote": "Checking plants, soil, materials, and equipment before moving them helps prevent accidental spread. Follow local official guidance."
+        },
+        {
+          "title": "Send the cavalry",
+          "narration": "The General orders a magnificent charge. The rock corridor admits a rather less magnificent number of workers at once.",
+          "fieldNote": "In the terrain experiments, meat ants won every tested arena; complex arenas reduced their fatalities. The game uses balanced values to illustrate participation limits."
+        },
+        {
+          "title": "A very scented rebellion",
+          "narration": "Three banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.",
+          "fieldNote": "Distinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile."
+        }
+      ],
+      "staticReducedMotion": true,
+      "storyFocus": {
+        "tag": "A",
+        "text": "Read the research: The global expansion of a single ant supercolony ↗",
+        "outlineWidth": "3px",
+        "outlineStyle": "solid"
+      },
+      "storyLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "storyEnlargedLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "staticReducedMotionImmediateSample": false,
+      "focusConfirmation": {
+        "engine": "chromium",
+        "width": 320,
+        "media": true,
+        "settledReducedMotion": true,
+        "artAnimation": "none",
+        "modal": {
+          "open": true,
+          "modal": true
+        },
+        "optionTabFocus": {
+          "tag": "BUTTON",
+          "text": "Skip story",
+          "outlineStyle": "solid"
+        },
+        "keyboardSkip": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "height": 1000,
+      "errors": [],
+      "activities": [
+        {
+          "name": "Anatomy detective",
+          "hotspot": "Gaster. The rounded rear body region lies beyond the waist.",
+          "targets": [
+            {
+              "name": "Anatomy hotspot: antennae",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mandibles",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: head",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mesosoma",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: waist",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: gaster",
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "researchLinks": [
+            {
+              "href": "https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all",
+              "target": "_blank",
+              "label": "Read the research: AntWeb · Argentine-ant specimens (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html",
+              "target": "_blank",
+              "label": "Read the research: Meet the Argentine ant (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Trail bottlenecks",
+          "slider": "2 of 12 workers can enter together in this illustration. Narrowing the passage reduces simultaneous participation.",
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+              "target": "_blank",
+              "label": "Read the research: Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Recognition detective",
+          "unknown": true,
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+              "target": "_blank",
+              "label": "Read the research: The global expansion of a single ant supercolony (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        }
+      ],
+      "introPanels": [
+        {
+          "title": "Before the empire",
+          "narration": "Our story begins on a South American riverbank. General Mandible has ambitious plans. The workers have lunch plans.",
+          "fieldNote": "Argentine ants are native to the Paraná drainage. At home, they are part of an ecosystem. Native-range presence is not an invasion."
+        },
+        {
+          "title": "An unconventional fleet",
+          "narration": "A plant pot leaves the nursery. The General calls it a naval operation. Nobody asked the human carrying it.",
+          "fieldNote": "Human transport can move Argentine ants between distant places. Our pot journey is fictional, not a documented route from Paraná to California."
+        },
+        {
+          "title": "The California briefing",
+          "narration": "Our fictional campaign opens near the Berkeley reference sample. One gateway, a few trails, and a very large ego.",
+          "fieldNote": "US1 is the Berkeley population sampled in 2008–2009. Your local nests, ownership, workers, and battles are game abstractions."
+        },
+        {
+          "title": "An awkward family reunion",
+          "narration": "A familiar scent can open a trail. An unfamiliar colony can make that introduction considerably less friendly.",
+          "fieldNote": "The global study reported tolerance among some populations and aggression between others. Unknown comparisons remain unknown. The General does not run real ants."
+        }
+      ],
+      "introReplay": true,
+      "playingAnimation": "atlas-story-art",
+      "pauseStopsMotion": true,
+      "visualSummary": true,
+      "articleLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "articleFocus": {
+        "tag": "DIALOG",
+        "text": "← IndexOne colony, many nestsBack to map supercoloniesA supercolony is a network of cooperating nests.At a glanceField note · visual summary1Many nests2Shared network3Other coloniesA supercolony connects nests; it does not make all ants allies.The 2010 study found mutual tolerance among sampled major colonies across several continents. Other sampled colonies were aggressive toward them. These historical findings do not define today’s borders.Follow the evidenceVan Wilgenburg, Torres & Tsutsui · Evolutionary Applications · 2010Read the research: The global expansion of a single ant supercolony ↗Meet Argentine ant How cooperation works",
+        "outlineWidth": "3px",
+        "outlineStyle": "auto"
+      },
+      "matchPreserved": true,
+      "vignettes": [
+        {
+          "title": "The plant-pot admiral",
+          "narration": "No ocean-going ant trail. No tiny engines. Just an enormous supply chain and some accidental passengers.",
+          "fieldNote": "Checking plants, soil, materials, and equipment before moving them helps prevent accidental spread. Follow local official guidance."
+        },
+        {
+          "title": "Send the cavalry",
+          "narration": "The General orders a magnificent charge. The rock corridor admits a rather less magnificent number of workers at once.",
+          "fieldNote": "In the terrain experiments, meat ants won every tested arena; complex arenas reduced their fatalities. The game uses balanced values to illustrate participation limits."
+        },
+        {
+          "title": "A very scented rebellion",
+          "narration": "Three banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.",
+          "fieldNote": "Distinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile."
+        }
+      ],
+      "staticReducedMotion": true,
+      "storyFocus": {
+        "tag": "BODY",
+        "text": "Skip to the battlefieldGame menuSUPERColonySupercolony WarLearnResumeNo time limit● You 2◐ Cooperating 6◆ Rival 12GameResearchSUPERColony strategy gameExplore regionWorld mapCaliforniaMediterraneanJapanSouthern AfricaAustraliaNew ZealandHawaiiSouth AmericaNest details ▸CaliforniaYours 2/6●◐◆●◆◆● Yours◐ Cooperating◆ Rival○ UnclaimedA planet connected by tiny travelersThe living world7 regions. One continuous match.Pacific OceanAtlantic OceanIndian Ocean●66CaliforniaExplore region ○48MediterraneanExplore region ○48JapanExplore region ◆20Southern AfricaExplore region ○48AustraliaExplore region ○66New ZealandExplore region ○20HawaiiExplore region Your colony ●Cooperating ◐Rival colony ◆Unclaimed ○┄ Human-assisted dispersalGeography: Natural Earth · Match state: simulatedPaused · press Resume to playOrders ▴Sources (1)1 nest selected50%Send swarmSendSimulated nest · CaliforniaGateway nest●Your colony66worker game units0.00current growth / secBase game growth0.95 units / secCurrent game growth0.00 units / secReserve capacity110 game unitsPaused · replenishment resumes with play.Game growth replenishes commandable worker reserves. It is a balance value, not a measured birth rate.What growth means Your regional developmentCommit 30 worker game units at Gateway nest. Prepare for 20 game seconds to gain +20% growth at your regional nests.Resume & improve networkThis action resumes play and starts preparation.Losing the gateway removes this improvement, without refund. Cooperating and rival nests receive no bonus. Cost, preparation, and growth bonus are game rules.Argentine-ant experiments link food availability with colony performance.Read foraging research ↗Food access & ecological pressure Occupant networkBerkeley · US1RecognitionFriendly game relationship with US1Historical reference originBerkeley · US1 · 2008–2009The main-network friendship is a game simplification. Captures change occupants; historical reference origins stay fixed. Independent rivals never become allies just because both oppose you.Gateway nestA regional transport connector and rally point.Mustering workers here prepares them for connected trails and dispersal routes.Read the landscape Open terrainMore workers can engage at once. This site also connects regional transport.Read terrain research ↗Argentine antLinepithema humileSpecies & anatomy Coastal CaliforniaSeasonally dry coastal habitats make moisture important. The 2025 San Diego resurvey found different invasion patterns across soils with different water retention.At the surveyed sites, native-ant richness was lower where Argentine ants were detected. This local association does not establish a statewide trend.Read regional profile Field noteOne colony, many nestsA supercolony is a network of cooperating nests.Read the research ↗Open field guide Nests, workers, terrain values, and affiliations here are simulated. Research maps record separate, dated observations.← Back to guideGeneral MandibleSkip storyThe plant-pot admiralSend the cavalryA very scented rebellionA field-atlas diversionA very scented rebellionThree banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.“A rebellion! They must have a group chat.”The field notebookDistinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile.Read the research: The global expansion of a single ant supercolony ↗Previous panelPlay storyNext panelReplay storyRead at your own pace, or play a short panel sequence.Original SUPERColony comic artwork · generated with OpenAI image generation. Fictional costumes, dialogue, and campaigns. Not a specimen photograph, historical reconstruction, or surveyed habitat.",
+        "outlineWidth": "3px",
+        "outlineStyle": "none"
+      },
+      "storyLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "storyEnlargedLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "staticReducedMotionImmediateSample": false,
+      "focusConfirmation": {
+        "engine": "webkit",
+        "width": 1440,
+        "media": true,
+        "settledReducedMotion": true,
+        "artAnimation": "none",
+        "modal": {
+          "open": true,
+          "modal": true
+        },
+        "optionTabFocus": {
+          "tag": "BUTTON",
+          "text": "Skip story",
+          "outlineStyle": "solid"
+        },
+        "keyboardSkip": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "errors": [],
+      "activities": [
+        {
+          "name": "Anatomy detective",
+          "hotspot": "Gaster. The rounded rear body region lies beyond the waist.",
+          "targets": [
+            {
+              "name": "Anatomy hotspot: antennae",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mandibles",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: head",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mesosoma",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: waist",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: gaster",
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "researchLinks": [
+            {
+              "href": "https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all",
+              "target": "_blank",
+              "label": "Read the research: AntWeb · Argentine-ant specimens (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html",
+              "target": "_blank",
+              "label": "Read the research: Meet the Argentine ant (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Trail bottlenecks",
+          "slider": "2 of 12 workers can enter together in this illustration. Narrowing the passage reduces simultaneous participation.",
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+              "target": "_blank",
+              "label": "Read the research: Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Recognition detective",
+          "unknown": true,
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+              "target": "_blank",
+              "label": "Read the research: The global expansion of a single ant supercolony (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        }
+      ],
+      "introPanels": [
+        {
+          "title": "Before the empire",
+          "narration": "Our story begins on a South American riverbank. General Mandible has ambitious plans. The workers have lunch plans.",
+          "fieldNote": "Argentine ants are native to the Paraná drainage. At home, they are part of an ecosystem. Native-range presence is not an invasion."
+        },
+        {
+          "title": "An unconventional fleet",
+          "narration": "A plant pot leaves the nursery. The General calls it a naval operation. Nobody asked the human carrying it.",
+          "fieldNote": "Human transport can move Argentine ants between distant places. Our pot journey is fictional, not a documented route from Paraná to California."
+        },
+        {
+          "title": "The California briefing",
+          "narration": "Our fictional campaign opens near the Berkeley reference sample. One gateway, a few trails, and a very large ego.",
+          "fieldNote": "US1 is the Berkeley population sampled in 2008–2009. Your local nests, ownership, workers, and battles are game abstractions."
+        },
+        {
+          "title": "An awkward family reunion",
+          "narration": "A familiar scent can open a trail. An unfamiliar colony can make that introduction considerably less friendly.",
+          "fieldNote": "The global study reported tolerance among some populations and aggression between others. Unknown comparisons remain unknown. The General does not run real ants."
+        }
+      ],
+      "introReplay": true,
+      "playingAnimation": "atlas-story-art",
+      "pauseStopsMotion": true,
+      "visualSummary": true,
+      "articleLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "articleFocus": {
+        "tag": "DIALOG",
+        "text": "← IndexOne colony, many nestsBack to map supercoloniesA supercolony is a network of cooperating nests.At a glanceField note · visual summary1Many nests2Shared network3Other coloniesA supercolony connects nests; it does not make all ants allies.The 2010 study found mutual tolerance among sampled major colonies across several continents. Other sampled colonies were aggressive toward them. These historical findings do not define today’s borders.Follow the evidenceVan Wilgenburg, Torres & Tsutsui · Evolutionary Applications · 2010Read the research: The global expansion of a single ant supercolony ↗Meet Argentine ant How cooperation works",
+        "outlineWidth": "3px",
+        "outlineStyle": "auto"
+      },
+      "matchPreserved": true,
+      "vignettes": [
+        {
+          "title": "The plant-pot admiral",
+          "narration": "No ocean-going ant trail. No tiny engines. Just an enormous supply chain and some accidental passengers.",
+          "fieldNote": "Checking plants, soil, materials, and equipment before moving them helps prevent accidental spread. Follow local official guidance."
+        },
+        {
+          "title": "Send the cavalry",
+          "narration": "The General orders a magnificent charge. The rock corridor admits a rather less magnificent number of workers at once.",
+          "fieldNote": "In the terrain experiments, meat ants won every tested arena; complex arenas reduced their fatalities. The game uses balanced values to illustrate participation limits."
+        },
+        {
+          "title": "A very scented rebellion",
+          "narration": "Three banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.",
+          "fieldNote": "Distinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile."
+        }
+      ],
+      "staticReducedMotion": true,
+      "storyFocus": {
+        "tag": "BODY",
+        "text": "Skip to the battlefieldGame menuSUPERColonySupercolony WarLearnResumeNo time limit● You 2◐ Cooperating 6◆ Rival 12GameResearchSUPERColony strategy gameExplore regionWorld mapCaliforniaMediterraneanJapanSouthern AfricaAustraliaNew ZealandHawaiiSouth AmericaNest details ▸CaliforniaYours 2/6●◐◆●◆◆● Yours◐ Cooperating◆ Rival○ UnclaimedA planet connected by tiny travelersThe living world7 regions. One continuous match.Pacific OceanAtlantic OceanIndian Ocean●66CaliforniaExplore region ○48MediterraneanExplore region ○48JapanExplore region ◆20Southern AfricaExplore region ○48AustraliaExplore region ○66New ZealandExplore region ○20HawaiiExplore region Your colony ●Cooperating ◐Rival colony ◆Unclaimed ○┄ Human-assisted dispersalGeography: Natural Earth · Match state: simulatedPaused · press Resume to playOrders ▴Sources (1)1 nest selected50%Send swarmSendSimulated nest · CaliforniaGateway nest●Your colony66worker game units0.00current growth / secBase game growth0.95 units / secCurrent game growth0.00 units / secReserve capacity110 game unitsPaused · replenishment resumes with play.Game growth replenishes commandable worker reserves. It is a balance value, not a measured birth rate.What growth means Your regional developmentCommit 30 worker game units at Gateway nest. Prepare for 20 game seconds to gain +20% growth at your regional nests.Resume & improve networkThis action resumes play and starts preparation.Losing the gateway removes this improvement, without refund. Cooperating and rival nests receive no bonus. Cost, preparation, and growth bonus are game rules.Argentine-ant experiments link food availability with colony performance.Read foraging research ↗Food access & ecological pressure Occupant networkBerkeley · US1RecognitionFriendly game relationship with US1Historical reference originBerkeley · US1 · 2008–2009The main-network friendship is a game simplification. Captures change occupants; historical reference origins stay fixed. Independent rivals never become allies just because both oppose you.Gateway nestA regional transport connector and rally point.Mustering workers here prepares them for connected trails and dispersal routes.Read the landscape Open terrainMore workers can engage at once. This site also connects regional transport.Read terrain research ↗Argentine antLinepithema humileSpecies & anatomy Coastal CaliforniaSeasonally dry coastal habitats make moisture important. The 2025 San Diego resurvey found different invasion patterns across soils with different water retention.At the surveyed sites, native-ant richness was lower where Argentine ants were detected. This local association does not establish a statewide trend.Read regional profile Field noteOne colony, many nestsA supercolony is a network of cooperating nests.Read the research ↗Open field guide Nests, workers, terrain values, and affiliations here are simulated. Research maps record separate, dated observations.← Back to guideGeneral MandibleSkip storyThe plant-pot admiralSend the cavalryA very scented rebellionA field-atlas diversionA very scented rebellionThree banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.“A rebellion! They must have a group chat.”The field notebookDistinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile.Read the research: The global expansion of a single ant supercolony ↗Previous panelPlay storyNext panelReplay storyRead at your own pace, or play a short panel sequence.Original SUPERColony comic artwork · generated with OpenAI image generation. Fictional costumes, dialogue, and campaigns. Not a specimen photograph, historical reconstruction, or surveyed habitat.",
+        "outlineWidth": "3px",
+        "outlineStyle": "none"
+      },
+      "storyLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "storyEnlargedLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "staticReducedMotionImmediateSample": false,
+      "focusConfirmation": {
+        "engine": "webkit",
+        "width": 390,
+        "media": true,
+        "settledReducedMotion": true,
+        "artAnimation": "none",
+        "modal": {
+          "open": true,
+          "modal": true
+        },
+        "optionTabFocus": {
+          "tag": "BUTTON",
+          "text": "Skip story",
+          "outlineStyle": "solid"
+        },
+        "keyboardSkip": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "height": 720,
+      "errors": [],
+      "activities": [
+        {
+          "name": "Anatomy detective",
+          "hotspot": "Gaster. The rounded rear body region lies beyond the waist.",
+          "targets": [
+            {
+              "name": "Anatomy hotspot: antennae",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mandibles",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: head",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: mesosoma",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: waist",
+              "width": 44,
+              "height": 44
+            },
+            {
+              "name": "Anatomy hotspot: gaster",
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "researchLinks": [
+            {
+              "href": "https://www.antweb.org/description.do?genus=linepithema&regionName=Americas&species=humile&statusSet=all",
+              "target": "_blank",
+              "label": "Read the research: AntWeb · Argentine-ant specimens (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://ipm.ucanr.edu/TOOLS/ANTKEY/argentine.html",
+              "target": "_blank",
+              "label": "Read the research: Meet the Argentine ant (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Trail bottlenecks",
+          "slider": "2 of 12 workers can enter together in this illustration. Narrowing the passage reduces simultaneous participation.",
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+              "target": "_blank",
+              "label": "Read the research: Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        },
+        {
+          "name": "Recognition detective",
+          "unknown": true,
+          "researchLinks": [
+            {
+              "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3352483/",
+              "target": "_blank",
+              "label": "Read the research: The global expansion of a single ant supercolony (opens in a new tab)",
+              "rel": "noopener noreferrer"
+            }
+          ],
+          "completed": true,
+          "replayed": true,
+          "layout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          },
+          "axe": [],
+          "enlargedLayout": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1
+          }
+        }
+      ],
+      "introPanels": [
+        {
+          "title": "Before the empire",
+          "narration": "Our story begins on a South American riverbank. General Mandible has ambitious plans. The workers have lunch plans.",
+          "fieldNote": "Argentine ants are native to the Paraná drainage. At home, they are part of an ecosystem. Native-range presence is not an invasion."
+        },
+        {
+          "title": "An unconventional fleet",
+          "narration": "A plant pot leaves the nursery. The General calls it a naval operation. Nobody asked the human carrying it.",
+          "fieldNote": "Human transport can move Argentine ants between distant places. Our pot journey is fictional, not a documented route from Paraná to California."
+        },
+        {
+          "title": "The California briefing",
+          "narration": "Our fictional campaign opens near the Berkeley reference sample. One gateway, a few trails, and a very large ego.",
+          "fieldNote": "US1 is the Berkeley population sampled in 2008–2009. Your local nests, ownership, workers, and battles are game abstractions."
+        },
+        {
+          "title": "An awkward family reunion",
+          "narration": "A familiar scent can open a trail. An unfamiliar colony can make that introduction considerably less friendly.",
+          "fieldNote": "The global study reported tolerance among some populations and aggression between others. Unknown comparisons remain unknown. The General does not run real ants."
+        }
+      ],
+      "introReplay": true,
+      "playingAnimation": "atlas-story-art",
+      "pauseStopsMotion": true,
+      "visualSummary": true,
+      "articleLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "articleFocus": {
+        "tag": "DIALOG",
+        "text": "← IndexOne colony, many nestsBack to map supercoloniesA supercolony is a network of cooperating nests.At a glanceField note · visual summary1Many nests2Shared network3Other coloniesA supercolony connects nests; it does not make all ants allies.The 2010 study found mutual tolerance among sampled major colonies across several continents. Other sampled colonies were aggressive toward them. These historical findings do not define today’s borders.Follow the evidenceVan Wilgenburg, Torres & Tsutsui · Evolutionary Applications · 2010Read the research: The global expansion of a single ant supercolony ↗Meet Argentine ant How cooperation works",
+        "outlineWidth": "3px",
+        "outlineStyle": "auto"
+      },
+      "matchPreserved": true,
+      "vignettes": [
+        {
+          "title": "The plant-pot admiral",
+          "narration": "No ocean-going ant trail. No tiny engines. Just an enormous supply chain and some accidental passengers.",
+          "fieldNote": "Checking plants, soil, materials, and equipment before moving them helps prevent accidental spread. Follow local official guidance."
+        },
+        {
+          "title": "Send the cavalry",
+          "narration": "The General orders a magnificent charge. The rock corridor admits a rather less magnificent number of workers at once.",
+          "fieldNote": "In the terrain experiments, meat ants won every tested arena; complex arenas reduced their fatalities. The game uses balanced values to illustrate participation limits."
+        },
+        {
+          "title": "A very scented rebellion",
+          "narration": "Three banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.",
+          "fieldNote": "Distinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile."
+        }
+      ],
+      "staticReducedMotion": true,
+      "storyFocus": {
+        "tag": "BODY",
+        "text": "Skip to the battlefieldGame menuSUPERColonySupercolony WarLearnResumeNo time limit● You 2◐ Cooperating 6◆ Rival 12GameResearchSUPERColony strategy gameExplore regionWorld mapCaliforniaMediterraneanJapanSouthern AfricaAustraliaNew ZealandHawaiiSouth AmericaNest details ▸CaliforniaYours 2/6●◐◆●◆◆● Yours◐ Cooperating◆ Rival○ UnclaimedA planet connected by tiny travelersThe living world7 regions. One continuous match.Pacific OceanAtlantic OceanIndian Ocean●66CaliforniaExplore region ○48MediterraneanExplore region ○48JapanExplore region ◆20Southern AfricaExplore region ○48AustraliaExplore region ○66New ZealandExplore region ○20HawaiiExplore region Your colony ●Cooperating ◐Rival colony ◆Unclaimed ○┄ Human-assisted dispersalGeography: Natural Earth · Match state: simulatedPaused · press Resume to playOrders ▴Sources (1)1 nest selected50%Send swarmSendSimulated nest · CaliforniaGateway nest●Your colony66worker game units0.00current growth / secBase game growth0.95 units / secCurrent game growth0.00 units / secReserve capacity110 game unitsPaused · replenishment resumes with play.Game growth replenishes commandable worker reserves. It is a balance value, not a measured birth rate.What growth means Your regional developmentCommit 30 worker game units at Gateway nest. Prepare for 20 game seconds to gain +20% growth at your regional nests.Resume & improve networkThis action resumes play and starts preparation.Losing the gateway removes this improvement, without refund. Cooperating and rival nests receive no bonus. Cost, preparation, and growth bonus are game rules.Argentine-ant experiments link food availability with colony performance.Read foraging research ↗Food access & ecological pressure Occupant networkBerkeley · US1RecognitionFriendly game relationship with US1Historical reference originBerkeley · US1 · 2008–2009The main-network friendship is a game simplification. Captures change occupants; historical reference origins stay fixed. Independent rivals never become allies just because both oppose you.Gateway nestA regional transport connector and rally point.Mustering workers here prepares them for connected trails and dispersal routes.Read the landscape Open terrainMore workers can engage at once. This site also connects regional transport.Read terrain research ↗Argentine antLinepithema humileSpecies & anatomy Coastal CaliforniaSeasonally dry coastal habitats make moisture important. The 2025 San Diego resurvey found different invasion patterns across soils with different water retention.At the surveyed sites, native-ant richness was lower where Argentine ants were detected. This local association does not establish a statewide trend.Read regional profile Field noteOne colony, many nestsA supercolony is a network of cooperating nests.Read the research ↗Open field guide Nests, workers, terrain values, and affiliations here are simulated. Research maps record separate, dated observations.← Back to guideGeneral MandibleSkip storyThe plant-pot admiralSend the cavalryA very scented rebellionA field-atlas diversionA very scented rebellionThree banners. Three rival identities. The General sees a conspiracy. The field notebook sees several untested relationships.“A rebellion! They must have a group chat.”The field notebookDistinct rival populations are not automatically allied. Game AI acts only on its allowed relationships; unreported research pairs are never labeled friendly or hostile.Read the research: The global expansion of a single ant supercolony ↗Previous panelPlay storyNext panelReplay storyReduced motion: read at your own pace with the panel controls.Original SUPERColony comic artwork · generated with OpenAI image generation. Fictional costumes, dialogue, and campaigns. Not a specimen photograph, historical reconstruction, or surveyed habitat.",
+        "outlineWidth": "3px",
+        "outlineStyle": "none"
+      },
+      "storyLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "storyEnlargedLayout": {
+        "documentOverflow": false,
+        "containerOverflow": false,
+        "scrollers": 1
+      },
+      "staticReducedMotionImmediateSample": false,
+      "focusConfirmation": {
+        "engine": "webkit",
+        "width": 320,
+        "media": true,
+        "settledReducedMotion": true,
+        "artAnimation": "none",
+        "modal": {
+          "open": true,
+          "modal": true
+        },
+        "optionTabFocus": {
+          "tag": "BUTTON",
+          "text": "Skip story",
+          "outlineStyle": "solid"
+        },
+        "keyboardSkip": true
+      }
+    }
+  ],
+  "findings": [
+    {
+      "file": "src/components/Menu.tsx",
+      "message": "Meet General Mandible accessible name includes subtitle; frozen exact-name fixture requires explicit aria-label."
+    }
+  ],
+  "notes": [
+    "Initial emulateMedia sampling occurred before the queued media-change event; settled state confirmed in all six cases.",
+    "WebKit default plain Tab skips native buttons under its Mac keyboard preference; Option+Tab and direct keyboard activation were separately observed."
+  ]
+}

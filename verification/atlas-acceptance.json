@@ -1,0 +1,29 @@
+{
+  "baseline": "e5cb50c885185daacb59b014a5e1127a24c7d0a0",
+  "startedAt": "2026-10-14T17:33:35Z",
+  "deadline": "2026-10-14T23:33:35Z",
+  "repairLimit": 8,
+  "warRegions": ["california", "mediterranean", "japan", "africa", "australia", "newzealand", "hawaii"],
+  "populations": ["US1", "US2", "F", "AU", "NZ", "J", "H1", "H2", "SA"],
+  "mainNetwork": ["US1", "F", "AU", "NZ", "J", "H1"],
+  "rivals": ["US2", "H2", "SA"],
+  "reserves": {
+    "california": [66, 32, 32, 30, 16, 18],
+    "mediterranean": [48, 10, 32, 30, 16, 18],
+    "japan": [48, 10, 32, 30, 16, 18],
+    "africa": [20, 10, 32, 30, 16, 18],
+    "australia": [48, 10, 32, 30, 16, 18],
+    "newzealand": [66, 32, 32, 30, 16, 18],
+    "hawaii": [20, 10, 32, 30, 16, 18]
+  },
+  "regionalRoles": ["gateway-nest", "garden-edge", "open-clearing", "shaded-grove", "leaf-litter-trail", "habitat-margin"],
+  "speciesRoles": ["port-verge", "sandy-clearing", "scrub-edge", "garden-bed", "dry-creek", "open-track", "leaf-litter", "woodland-floor", "established-nest", "bark-corridor", "rocky-refuge", "gravel-mound"],
+  "habitatAssignments": 60,
+  "visualSummaries": 16,
+  "activities": ["anatomy", "terrain", "recognition"],
+  "introPanels": 4,
+  "vignettes": 3,
+  "distributionRecords": 162,
+  "distributionSnapshot": "2022-06-15",
+  "viewports": [[1440,1000],[768,1024],[320,568],[375,667],[390,844],[414,896],[844,390]]
+}

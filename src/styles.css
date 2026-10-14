@@ -1,9 +1,11 @@
-/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · integrated atlas styles */
 /* Hallmark · macrostructure: Map / Diagram · tone: curious, precise · theme: custom hybrid
  * Primary task: command a swarm, discover a real biological idea, follow the evidence.
  * Nav: compact command bar · Footer: active order bar · Enrichment: native map and ant illustration.
  */
 @import '../tokens.css';
+@import './atlas-map.css';
+@import './atlas-learning.css';
 * { box-sizing: border-box; }
 html, body { margin: 0; overflow-x: clip; }
 body { font-family: var(--font-body); color: var(--color-ink); background: var(--color-paper); -webkit-font-smoothing: antialiased; }
@@ -76,7 +78,7 @@ dialog { background: var(--color-paper); color: var(--color-ink); border: 1px so
 .specimen-figure { margin: 16px 0; }.specimen-photo { display: block; width: 100%; height: auto; max-height: 360px; object-fit: contain; background: var(--color-panel); outline: 1px solid oklch(0 0 0 / .1); }.specimen-figure.compact .specimen-photo { max-height: 180px; }.specimen-credits { font-size: 12px; margin-top: 10px; display: grid; gap: 4px; line-height: 1.5; }.specimen-credits a { overflow-wrap: anywhere; }.specimen-viewer { margin-top: 12px; display: grid; gap: 4px; }.specimen-viewer span { font-size: 12px; color: var(--color-muted); }.illustrated-specimen { color: var(--color-muted); }.ant-specimen { width: 100%; height: 180px; }.illustrated-specimen figcaption { font-size: 13px; }.comparison-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }.comparison-photos h4 { font-size: 16px; }.species-facts { display: grid; gap: 12px; border-block: 1px solid var(--color-line); padding-block: 16px; }.species-facts dt { font-size: 13px; color: var(--color-muted); }.species-facts dd { margin: 4px 0 0; }.anatomy-diagram { width: 100%; max-height: 280px; margin-top: 16px; color: var(--color-ink); }.anatomy-marker circle { fill: var(--color-paper); stroke: var(--color-muted); }.anatomy-marker.selected circle { fill: var(--color-ink); }.anatomy-marker text { fill: var(--color-ink); font: bold 15px var(--font-body); }.anatomy-marker.selected text { fill: var(--color-paper); }.anatomy-controls { display: flex; flex-wrap: wrap; gap: 8px; }.anatomy-controls button { font-size: 14px; }.anatomy-description { padding: 16px; background: var(--color-paper-deep); }
 /* Menus and fieldwork. */
 .dialog-header { display: flex; align-items: center; justify-content: space-between; padding: 24px; gap: 16px; border-bottom: 1px solid var(--color-line); }.dialog-header h2 { font-size: 28px; margin-top: 6px; }.match-menu { width: min(480px,calc(100vw - 32px)); }.match-menu-actions { display: grid; gap: 12px; padding: 24px; }.match-menu-actions button { justify-content: space-between; }.match-confirmation { padding: 24px; font-size: 16px; }.confirmation-actions { display: flex; gap: 12px; margin-top: 24px; }
-.menu-dialog { width: min(940px,calc(100vw - 32px)); }.menu-dialog[open] { display: grid; grid-template-columns: .8fr 1.2fr; }.menu-art { padding: 32px; background: var(--color-land); display: flex; flex-direction: column; justify-content: center; }.specimen-caption { font-size: 12px; letter-spacing: .08em; }.menu-art-caption { font-family: var(--font-display); font-size: 28px; line-height: 1.25; margin-top: 32px; }.trail-doodle { display: none; }.menu-content { padding: 32px 40px; }.menu-brand { color: var(--color-player-dark); font-size: 24px; gap: 8px; }.menu-content h1 { font-size: 48px; line-height: 1.05; margin: 24px 0 16px; }.menu-intro { font-size: 16px; color: var(--color-muted); }.mode-picker { display: grid; gap: 8px; margin-block: 24px; }.mode-option { justify-content: flex-start; width: 100%; gap: 12px; font-size: 16px; padding: 12px 16px; }.mode-option.selected { background: var(--color-paper-deep); color: var(--color-ink); border-color: var(--color-ink); }.mode-radio { border: 1px solid currentColor; width: 12px; height: 12px; border-radius: 50%; margin-left: auto; }.selected .mode-radio { background: currentColor; }.mode-description { font-size: 14px; margin-bottom: 16px; min-height: 44px; }.species-picker { display: flex; gap: 8px; margin-bottom: 16px; }.species-picker button { white-space: normal; flex: 1; font-size: 14px; }.start-button { width: 100%; }.menu-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between; margin-top: 12px; font-size: 12px; }.menu-content > .science-caption { margin-top: 12px; }
+.menu-dialog { width: min(940px,calc(100vw - 32px)); }.menu-dialog[open] { display: grid; grid-template-columns: .8fr 1.2fr; }.menu-art { padding: 32px; background: var(--color-land); display: flex; flex-direction: column; justify-content: center; }.specimen-caption { font-size: 12px; letter-spacing: .08em; }.menu-art-caption { font-family: var(--font-display); font-size: 28px; line-height: 1.25; margin-top: 32px; }.trail-doodle { display: none; }.menu-content { padding: 32px 40px; }.menu-brand { color: var(--color-player-dark); font-size: 24px; gap: 8px; }.menu-content h1 { font-size: 48px; line-height: 1.05; margin: 24px 0 16px; }.menu-intro { font-size: 16px; color: var(--color-muted); }.mode-picker { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; margin-block: 24px; }.mode-option { justify-content: flex-start; width: 100%; min-width: 0; white-space: normal; text-align: left; gap: 12px; font-size: 16px; padding: 12px 16px; }.mode-option.selected { background: var(--color-paper-deep); color: var(--color-ink); border-color: var(--color-ink); }.mode-radio { border: 1px solid currentColor; width: 12px; height: 12px; border-radius: 50%; margin-left: auto; }.selected .mode-radio { background: currentColor; }.mode-description { font-size: 14px; margin-bottom: 16px; min-height: 44px; }.species-picker { display: flex; gap: 8px; margin-bottom: 16px; }.species-picker button { white-space: normal; flex: 1; font-size: 14px; }.start-button { width: 100%; }.menu-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between; margin-top: 12px; font-size: 12px; }.menu-content > .science-caption { margin-top: 12px; }
 .source-dialog { width: min(640px,calc(100vw - 32px)); height: min(800px,calc(100dvh - 32px)); }.source-dialog[open] { display: flex; flex-direction: column; }.source-dialog > p { font-size: 15px; padding: 16px 24px; }.source-options { flex: 1; min-height: 0; overflow-y: auto; padding: 0 24px; }.source-option { display: flex; flex-direction: row; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--color-line); font-size: 16px; }.source-option input { width: 24px; height: 24px; accent-color: var(--color-player-dark); }.source-option small { display: block; font-size: 13px; color: var(--color-muted); margin-top: 4px; }.source-actions { padding: 16px 24px; border-top: 1px solid var(--color-line); display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
 .cooperation-dialog { width: min(640px,calc(100vw - 32px)); }.cooperation-body { padding: 24px; font-size: 18px; }.cooperation-body > p { margin-block: 16px; }.cooperation-visual { background: var(--color-water); min-height: 130px; padding: 24px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; }.tour-nest { width: 60px; height: 60px; border: 2px solid var(--color-player-dark); border-radius: 50%; display: grid; place-content: center; background: var(--color-player); font-size: 28px; color: var(--color-player-dark); }.tour-nest.ally { background: var(--color-paper); border-style: double; }.tour-nest small { font-size: 11px; }.tour-rival { color: var(--color-rival-dark); }.tour-data-label { flex-basis: 100%; text-align: center; font-size: 13px; }.cooperation-actions { display: flex; padding: 16px 24px; gap: 8px; border-top: 1px solid var(--color-line); justify-content: space-between; }
 .fieldwork { border-block: 1px solid var(--color-line); padding: 20px 0; margin: 20px 0; font-size: 15px; }.fieldwork h3 { display: flex; justify-content: space-between; font-size: 20px; }.fieldwork h3 span { font-size: 13px; color: var(--color-muted); }.fieldwork h4 { font-size: 18px; margin-bottom: 8px; }.fieldwork p { margin-block: 12px; }.fieldwork-choices { display: grid; gap: 8px; margin-block: 12px; }.fieldwork-choices button { justify-content: space-between; font-size: 15px; white-space: normal; text-align: left; }.fieldwork-step,.fieldwork-observation { padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--color-line); }
@@ -265,3 +267,73 @@ input:focus-visible,summary:focus-visible { outline:3px solid var(--color-focus)
 }
 /* Expanded commands stay within the map when the desktop inspector is open. */
 .game-surface:has(.game-layout.inspector-open) .expanded-orders { right:296px; }
+
+/* Atlas refinement · preserve the existing token system.
+ * Panel/page/confirmation timing adapted from Transitions.dev, Jakub Antalík,
+ * pinned f63fdc7980bced60281d54439a28aade9d1067bb; see docs/ATLAS_ART_AND_MOTION.md.
+ */
+.game-layout.inspector-open { grid-template-columns:minmax(0,1fr) var(--inspector-width,296px); }
+.details-sidebar { width:var(--inspector-width,296px); overflow:visible; }
+.game-surface:has(.game-layout.inspector-open) .expanded-orders { right:var(--inspector-width,296px); }
+.details-resize { position:absolute; z-index:4; left:-22px; top:0; bottom:0; width:44px; display:flex; justify-content:center; align-items:center; cursor:col-resize; touch-action:none; user-select:none; }
+.details-resize::before { content:''; width:6px; height:72px; border:1px solid var(--color-line); border-radius:4px; background:var(--color-paper-deep); }
+.details-resize > span { position:absolute; font-size:18px; color:var(--color-muted); }
+.details-resize:hover::before,.details-resize:focus-visible::before { background:var(--color-player); }
+.details-resize:focus-visible { outline:3px solid var(--color-focus); outline-offset:-5px; }
+.details-header { min-width:0; background:var(--color-paper); }
+.details-header > strong { margin-right:auto; }
+.details-reset { width:44px; min-width:44px; padding:8px; }
+.details-sidebar .details-header button { padding-inline:8px; }
+.details-sidebar .details-scroll { background:var(--color-paper); }
+.details-sidebar .inspector { padding-inline:20px; }
+.details-sidebar[open] .inspector { animation:atlas-panel-in 180ms var(--ease-out) both; }
+.expanded-orders { animation:atlas-orders-in 160ms var(--ease-out) both; }
+.development-status { animation:atlas-confirm 220ms var(--ease-out) both; }
+.inspector > .habitat-gallery { margin-top:0; padding-top:0; border:0; }
+.inspector .habitat-gallery h3 { font-size:20px; }
+.menu-story-art { width:100%; aspect-ratio:3/2; background-image:url('/story/general-mandible.png'); background-size:200% 200%; background-position:0% 100%; border:1px solid var(--color-line); margin:18px 0 12px; }
+.menu-art .compact .specimen-photo { max-height:132px; }
+.menu-illustration-credit { font-size:11px; color:var(--color-ink); margin-bottom:12px; }
+.nest-transit { padding-block:16px; border-block:1px solid var(--color-line); font-size:14px; margin-top:16px; }
+.nest-transit h3 { font:600 15px var(--font-body); margin-bottom:8px; }
+.menu-art .specimen-credits { font-size:11px; }
+.menu-art .specimen-viewer { margin-top:8px; }
+.menu-art-caption { font-family:var(--font-display); font-size:24px; line-height:1.1; }
+.menu-art .trail-doodle { display:none; }
+.story-invitation { justify-content:flex-start; gap:12px; width:100%; margin-top:18px; padding:8px; background:var(--color-paper-deep); text-align:left; }
+.story-invitation > span:not(.story-thumb) { display:grid; gap:3px; min-width:0; white-space:normal; font-size:14px; }
+.story-invitation small { color:var(--color-muted); font-size:12px; font-weight:400; }
+.story-invitation > svg { margin-left:auto; }
+.story-thumb { width:62px; height:44px; flex:0 0 62px; background-image:url('/story/general-mandible.png'); background-size:200% 200%; background-position:0 0; border-radius:var(--radius-sm); }
+.screen-load { position:fixed; inset:0; display:grid; place-content:center; background:var(--color-paper); z-index:30; }
+.regional-status-line { display:flex; flex-wrap:wrap; align-items:center; gap:0 12px; background:var(--color-paper); border-block:1px solid var(--color-line); }
+.regional-status-line .region-progress { flex:1 1 auto; border:0; }
+.paused-inline { display:inline-flex; align-items:center; gap:6px; font-size:11px; margin:4px 16px 4px auto; padding:4px 8px; border:1px solid var(--color-line); color:var(--color-ink); }
+@keyframes atlas-panel-in { from { transform:translateX(10px); } to { transform:translateX(0); } }
+@keyframes atlas-orders-in { from { transform:translateY(8px); } to { transform:translateY(0); } }
+@keyframes atlas-confirm { from { transform:scale(.985); } to { transform:scale(1); } }
+.regional-command-actions button:not(.primary) { background:var(--color-chrome-soft); color:var(--color-chrome-text); border-color:var(--color-line-light); }
+.regional-command-actions button:not(.primary):hover { background:var(--color-player-dark); }
+.inspector-link { min-width:0; white-space:normal; overflow-wrap:anywhere; }
+@media (max-width:999px),(max-height:599px) {
+  .game-layout.inspector-open { grid-template-columns:minmax(0,1fr); }
+  .game-surface:has(.game-layout.inspector-open) .expanded-orders { right:0; }
+  .details-resize { display:none; }
+}
+@media (max-width:600px) {
+  .story-invitation { margin-top:12px; }
+  .menu-content { padding-top:max(20px,env(safe-area-inset-top)); }
+  .story-invitation > span:not(.story-thumb) { font-size:13px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .details-sidebar[open] .inspector,.expanded-orders,.development-status { animation:none; transition:none; }
+}
+
+/* Keep mode labels readable when phone text is enlarged. */
+.mode-option > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
+.mode-option .mode-radio { flex-shrink: 0; }
+/* Keep both reading routes visible when phone text is enlarged. */
+@media (max-width: 600px) {
+  .atlas-learning .reading-header { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .atlas-learning .reading-header button { min-width: 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+}

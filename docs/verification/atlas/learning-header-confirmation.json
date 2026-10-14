@@ -1,0 +1,483 @@
+{
+  "reviewedAt": "2026-10-14T19:19:16.866Z",
+  "scope": "Supplemental missing resource-filter/article coverage; original index and full learning evidence retained",
+  "cases": [
+    {
+      "engine": "chromium",
+      "width": 320,
+      "height": 720,
+      "screens": [
+        {
+          "screen": "home",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "resource-filters",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "species-article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "parana-setting",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        }
+      ],
+      "errors": [],
+      "links": [
+        {
+          "href": "https://link.springer.com/article/10.1007/s00040-018-0658-z",
+          "label": "Route selection but not trail clearing are influenced by detour length in the Australian meat ants (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://link.springer.com/article/10.1186/s12862-023-02117-x",
+          "label": "Colony-level aggression escalates with the value of food resources (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+          "label": "Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ],
+      "filterKeyboard": {
+        "value": "terrain",
+        "focus": {
+          "tag": "SELECT",
+          "outline": "solid"
+        }
+      },
+      "parana": {
+        "photo": "/habitats/atlas-west/southamerica-gateway-nest.jpg",
+        "credits": "Predelta National Park, La Azotea near Diamante, Entre Ríos, Argentina\n\nA small river vessel beside a wooded bank and waterside access structures in Predelta National Park.\n\nThe vessel and access structures illustrate a human transport edge in the Paraná basin, not a recorded dispersal route.\n\nPhoto: Consejo General de Educación de Entre Ríos\nPhotograph source ↗ · CC BY-SA 4.0 ↗\nReviewed Oct 14, 2026\n\nRepresentative habitat; the game nest is fictional.\n\nImage notes"
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "screens": [
+        {
+          "screen": "home",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "resource-filters",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "species-article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "parana-setting",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        }
+      ],
+      "errors": [],
+      "links": [
+        {
+          "href": "https://link.springer.com/article/10.1007/s00040-018-0658-z",
+          "label": "Route selection but not trail clearing are influenced by detour length in the Australian meat ants (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://link.springer.com/article/10.1186/s12862-023-02117-x",
+          "label": "Colony-level aggression escalates with the value of food resources (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+          "label": "Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ],
+      "filterKeyboard": {
+        "value": "terrain",
+        "focus": {
+          "tag": "SELECT",
+          "outline": "solid"
+        }
+      },
+      "parana": {
+        "photo": "/habitats/atlas-west/southamerica-gateway-nest.jpg",
+        "credits": "Predelta National Park, La Azotea near Diamante, Entre Ríos, Argentina\n\nA small river vessel beside a wooded bank and waterside access structures in Predelta National Park.\n\nThe vessel and access structures illustrate a human transport edge in the Paraná basin, not a recorded dispersal route.\n\nPhoto: Consejo General de Educación de Entre Ríos\nPhotograph source ↗ · CC BY-SA 4.0 ↗\nReviewed Oct 14, 2026\n\nRepresentative habitat; the game nest is fictional.\n\nImage notes"
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "height": 720,
+      "screens": [
+        {
+          "screen": "home",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "resource-filters",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "species-article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "parana-setting",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        }
+      ],
+      "errors": [],
+      "links": [
+        {
+          "href": "https://link.springer.com/article/10.1007/s00040-018-0658-z",
+          "label": "Route selection but not trail clearing are influenced by detour length in the Australian meat ants (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://link.springer.com/article/10.1186/s12862-023-02117-x",
+          "label": "Colony-level aggression escalates with the value of food resources (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+          "label": "Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ],
+      "filterKeyboard": {
+        "value": "terrain",
+        "focus": {
+          "tag": "SELECT",
+          "outline": "solid"
+        }
+      },
+      "parana": {
+        "photo": "/habitats/atlas-west/southamerica-gateway-nest.jpg",
+        "credits": "Predelta National Park, La Azotea near Diamante, Entre Ríos, Argentina\n\nA small river vessel beside a wooded bank and waterside access structures in Predelta National Park.\n\nThe vessel and access structures illustrate a human transport edge in the Paraná basin, not a recorded dispersal route.\n\nPhoto: Consejo General de Educación de Entre Ríos\nPhotograph source ↗ · CC BY-SA 4.0 ↗\nReviewed Oct 14, 2026\n\nRepresentative habitat; the game nest is fictional.\n\nImage notes"
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "screens": [
+        {
+          "screen": "home",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 0,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "resource-filters",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "species-article",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        },
+        {
+          "screen": "parana-setting",
+          "normal": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "enlarged": {
+            "documentOverflow": false,
+            "containerOverflow": false,
+            "scrollers": 1,
+            "clipped": []
+          },
+          "violations": []
+        }
+      ],
+      "errors": [],
+      "links": [
+        {
+          "href": "https://link.springer.com/article/10.1007/s00040-018-0658-z",
+          "label": "Route selection but not trail clearing are influenced by detour length in the Australian meat ants (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://link.springer.com/article/10.1186/s12862-023-02117-x",
+          "label": "Colony-level aggression escalates with the value of food resources (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10500280/",
+          "label": "Complex battlefields favor strong soldiers over large armies in social animal warfare (opens in a new tab)",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ],
+      "filterKeyboard": {
+        "value": "terrain",
+        "focus": {
+          "tag": "SELECT",
+          "outline": "solid"
+        }
+      },
+      "parana": {
+        "photo": "/habitats/atlas-west/southamerica-gateway-nest.jpg",
+        "credits": "Predelta National Park, La Azotea near Diamante, Entre Ríos, Argentina\n\nA small river vessel beside a wooded bank and waterside access structures in Predelta National Park.\n\nThe vessel and access structures illustrate a human transport edge in the Paraná basin, not a recorded dispersal route.\n\nPhoto: Consejo General de Educación de Entre Ríos\nPhotograph source ↗ · CC BY-SA 4.0 ↗\nReviewed Oct 14, 2026\n\nRepresentative habitat; the game nest is fictional.\n\nImage notes"
+      }
+    }
+  ],
+  "findings": []
+}

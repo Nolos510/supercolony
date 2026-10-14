@@ -1,0 +1,870 @@
+[
+  {
+    "engine": "chromium",
+    "width": 1440,
+    "height": 1000,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chromium",
+    "width": 768,
+    "height": 1024,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chromium",
+    "width": 320,
+    "height": 568,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chromium",
+    "width": 375,
+    "height": 667,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "height": 844,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chromium",
+    "width": 414,
+    "height": 896,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chromium",
+    "width": 844,
+    "height": 390,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 1440,
+    "height": 1000,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 768,
+    "height": 1024,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 320,
+    "height": 568,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 375,
+    "height": 667,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "height": 844,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 414,
+    "height": 896,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "width": 844,
+    "height": 390,
+    "checks": [
+      {
+        "label": "compact",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "orders",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "details",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "specimen",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "global-2010",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "distribution-2022",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "california-2025",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      },
+      {
+        "label": "reading-enlarged",
+        "overflow": false,
+        "controls": [],
+        "axe": []
+      }
+    ],
+    "errors": []
+  }
+]

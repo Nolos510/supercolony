@@ -49,14 +49,15 @@ test('research, cooperation walkthrough, and real specimens preserve a paused ma
   const before = await page.evaluate(() => JSON.stringify(window.__supercolony.getState()));
   await page.getByRole('button', { name: 'Research', exact: true }).click();
   await expect(page.getByText('2008–2009', { exact: false }).first()).toBeVisible();
-  await page.getByLabel('Research dataset').selectOption('california-resurvey');
+  await page.getByLabel('Research dataset').selectOption('california-2025');
   await expect(page.getByText(/2022–2024/).first()).toBeVisible();
   await page.getByRole('button', { name: 'Game', exact: true }).click();
   expect(await page.evaluate(() => JSON.stringify(window.__supercolony.getState()))).toBe(before);
   await page.getByRole('button', { name: 'Learn', exact: true }).click();
   await page.getByRole('button', { name: 'Species', exact: true }).click();
   await page.getByRole('button', { name: /Argentine ant/ }).first().click();
-  await expect(page.getByRole('link', { name: /Explore a real specimen/ }).first()).toHaveAttribute('href', 'https://biomedisa.info/antscan/specimen/1040/');
+  await expect(page.getByRole('button', { name: 'Explore this ant', exact: true }).first()).toBeVisible();
+  await expect(page.getByRole('link', { name: /Micro-CT research viewer/ }).first()).toHaveAttribute('href', 'https://biomedisa.info/antscan/specimen/1040/');
   await expect(page.locator('img.specimen-photo').first()).toBeVisible();
   const audit = await new AxeBuilder({ page }).analyze(); expect(audit.violations).toEqual([]);
 });

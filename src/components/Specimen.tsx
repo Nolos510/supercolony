@@ -6,19 +6,20 @@ import { gameStore } from '../game/store';
 import Ant from './Ant';
 import { Icon } from './Icons';
 
-export default function Specimen({ speciesId, compact = false }: { speciesId: SpeciesId; compact?: boolean }) {
+export default function Specimen({ speciesId, compact = false, onExplore }: { speciesId: SpeciesId; compact?: boolean; onExplore?: (speciesId: SpeciesId) => void }) {
   const asset = specimens.find(entry => entry.speciesId === speciesId);
   const [failedId, setFailedId] = useState<string>();
   const profile = species[speciesId];
   if (!asset) return <figure className="specimen-figure illustrated-specimen">{speciesId === 'native' ? <Icon name="leaf" size={48} /> : <Ant large />}<figcaption>{speciesId === 'native' ? 'Native habitat and invertebrate communities: a game proxy, not one identified species.' : 'Illustrative worker drawing.'}</figcaption></figure>;
   return <figure className={`specimen-figure ${compact ? 'compact' : ''}`}>
-    {failedId === asset.id ? <div className="specimen-unavailable"><Ant large /><p>Photograph could not be loaded.</p></div> : <img className="specimen-photo" src={asset.path} alt={`${asset.label}: ${asset.scientificName}`} width="640" height="400" loading="lazy" onError={() => setFailedId(asset.id)} />}
+    {failedId === asset.id ? <div className="specimen-unavailable"><Ant large /><p>Photograph could not be loaded.</p></div> : <img className="specimen-photo" src={asset.path} alt={`${asset.label}: ${asset.scientificName}`} width={speciesId === 'argentine' ? 1156 : 3008} height={speciesId === 'argentine' ? 808 : 2000} loading="lazy" onError={() => setFailedId(asset.id)} />}
     <figcaption className="specimen-credits"><strong>{asset.label}</strong><span>Photo: {asset.photographer}</span><span><a href={asset.sourceUrl} target="_blank" rel="noopener noreferrer" onClick={() => gameStore.pause(true)} aria-label={`${profile.name} photo source (opens in a new tab)`}>Photo source ↗</a> · <a href={asset.licenseUrl} target="_blank" rel="noopener noreferrer" onClick={() => gameStore.pause(true)} aria-label={`${asset.license} photograph license (opens in a new tab)`}>{asset.license} ↗</a>{asset.specimenCode ? ` · ${asset.specimenCode}` : ''}</span></figcaption>
-    {asset.viewerUrl && <div className="specimen-viewer"><a className="research-link" href={asset.viewerUrl} target="_blank" rel="noopener noreferrer" onClick={() => gameStore.pause(true)} aria-label="Explore a real specimen (opens in a new tab)">Explore a real specimen ↗</a><span>Different worker specimen · Antscan micro-CT</span></div>}
+    {onExplore && <div className="specimen-viewer"><button className="specimen-explore-button" onClick={() => onExplore(speciesId)}>Explore this ant <Icon name="zoom" size={16} /></button><span>Zoom the photograph, find body parts, and compare workers.</span></div>}
+    {!compact && asset.viewerUrl && <div className="specimen-advanced-inline"><strong>Advanced research</strong><a href={asset.viewerUrl} target="_blank" rel="noopener noreferrer" onClick={() => gameStore.pause(true)} aria-label="Micro-CT research viewer (opens in a new tab)">Micro-CT slice viewer ↗</a><span>Internal slices of a different worker, OKENT0105450.</span></div>}
   </figure>;
 }
 
-const anatomy = [
+export const anatomy = [
   { name: 'Antennae', detail: 'Jointed feelers at the front of the head.', x: 75, y: 65 },
   { name: 'Mandibles', detail: 'Paired jaws at the front of the head.', x: 105, y: 135 },
   { name: 'Head', detail: 'The front body region, carrying the eyes, antennae, and mandibles.', x: 167, y: 116 },
@@ -27,12 +28,12 @@ const anatomy = [
   { name: 'Gaster', detail: 'The rounded rear portion of the body.', x: 462, y: 125 },
 ];
 
-export function SpeciesComparison() {
-  const [part, setPart] = useState(0);
+export function AntAnatomy({ selectedPart, onSelectPart }: { selectedPart?: number; onSelectPart?: (part: number) => void } = {}) {
+  const [localPart, setLocalPart] = useState(0);
+  const part = selectedPart ?? localPart;
+  const setPart = (next: number) => { setLocalPart(next); onSelectPart?.(next); };
   const selected = anatomy[part];
   return <section className="species-comparison" aria-label="Species and anatomy comparison">
-    <h3>Compare the workers</h3><p>Both playable species have one worker form. These photographs are shown at different scales.</p>
-    <div className="comparison-photos"><div><h4>Argentine ant</h4><Specimen speciesId="argentine" compact /></div><div><h4>Australian meat ant</h4><Specimen speciesId="meat" compact /></div></div>
     <h3>Find the body parts</h3>
     <svg className="anatomy-diagram" viewBox="0 0 600 260" role="img" aria-label={`Illustrative worker anatomy. Selected part: ${selected.name}. Numbered labels match the buttons below.`}>
       <g fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -45,4 +46,8 @@ export function SpeciesComparison() {
     <div className="anatomy-controls">{anatomy.map((entry, index) => <button key={entry.name} aria-pressed={part === index} onClick={() => setPart(index)}>{index + 1}. {entry.name}</button>)}</div>
     <p className="anatomy-description" aria-live="polite"><strong>{selected.name}.</strong> {selected.detail}</p><p className="reading-caption">Original schematic for orientation. It does not show diagnostic differences or a three-dimensional model. Use the specimen photographs and research for identification.</p>
   </section>;
+}
+
+export function SpeciesComparison({ onExplore }: { onExplore?: (speciesId: SpeciesId) => void } = {}) {
+  return <section className="species-comparison" aria-label="Species comparison"><h3>Compare the workers</h3><p>Both playable species have one worker form. These photographs are shown at different scales.</p><div className="comparison-photos"><div><h4>Argentine ant</h4><Specimen speciesId="argentine" compact onExplore={onExplore} /></div><div><h4>Australian meat ant</h4><Specimen speciesId="meat" compact onExplore={onExplore} /></div></div><AntAnatomy /></section>;
 }

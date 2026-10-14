@@ -1,0 +1,173 @@
+{
+  "id": "distribution-2022",
+  "title": "Argentine-ant regional distribution · GABI snapshot",
+  "species": "Linepithema humile",
+  "sourceTaxon": "Linepithema.humile",
+  "authors": [
+    "Mark K. L. Wong",
+    "Evan P. Economo",
+    "Benoit Guénard"
+  ],
+  "datasetTitle": "Data supporting: The global spread and invasion capacities of alien ants",
+  "datasetDoi": "10.6084/m9.figshare.21666191.v1",
+  "datasetVersion": 1,
+  "datasetPublishedAt": "2023-01-06T15:57:00Z",
+  "publicationYear": 2023,
+  "paperDoi": "10.1016/j.cub.2022.12.020",
+  "paperUrl": "https://www.sciencedirect.com/science/article/pii/S0960982222019200",
+  "sourceUrl": "https://figshare.com/articles/dataset/Data_supporting_The_global_spread_and_invasion_capacities_of_alien_ants/21666191/1",
+  "metadataUrl": "https://api.figshare.com/v2/articles/21666191/versions/1",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "reviewedAt": "2026-10-14",
+  "snapshotDate": "2022-06-15",
+  "observationPeriod": "Individual observation dates are not supplied; GABI extraction on 15 June 2022",
+  "method": "Filter Dataset 1 for exact source taxon Linepithema.humile; join Dataset 2 by exact region name. Preserve every reported status and note.",
+  "precision": "One published regional reference anchor per geographic region; not GPS occurrence points, nest locations, range boundaries, or current status.",
+  "recordCount": 162,
+  "statusCounts": {
+    "established.outdoors": 106,
+    "native": 22,
+    "established.indoors": 26,
+    "border.interception": 8
+  },
+  "statusDefinitions": {
+    "native": "Reported by this dataset as within the species native region.",
+    "established.outdoors": "Recorded in the wild outside a reported native region.",
+    "established.indoors": "Recorded in indoor settings such as buildings or greenhouses outside a reported native region.",
+    "border.interception": "Recorded from border interception outside a reported native region; not proof of establishment."
+  },
+  "classificationPolicy": "Display reported classifications without editorial reclassification. Broad South and Central American regional labels can differ from narrower native-range treatments; a native label for a region does not establish that every part of that region is native range.",
+  "caveats": [
+    "This is a fixed 2022 database snapshot published in 2023, not current or live observations.",
+    "Regional anchors locate the named regions only. Marker position does not locate an ant record, simulated nest, or battlefront.",
+    "Presence and establishment categories do not identify supercolonies or establish cooperation, aggression, fronts, or alliances.",
+    "Individual observation dates, exact collection coordinates, and record-level literature citations are not included in these deposited CSVs; underlying references are available from GABI.",
+    "Do not infer absence from a missing regional row; surveillance and reporting vary.",
+    "Dataset CC BY 4.0 is independently declared on Figshare. No journal figure, Antmaps screenshot, or Antmaps geometry is redistributed."
+  ],
+  "transformations": [
+    "Exact taxon filtering; one-to-one region-name join; numeric latitude/longitude parsing.",
+    "Original region, status, note and realm retained without scientific reclassification.",
+    "Stable ASCII IDs added; source attribution and regional-anchor precision labels added.",
+    "No geographic boundary geometry inferred from reference coordinates."
+  ],
+  "derivedFile": "/research/distribution-2022.json",
+  "derivedSha256": "95033f5299e46b68cbcc4102e874d0df57e6164c4a636ed34b8e395bf0b9f6d8",
+  "files": [
+    {
+      "fileId": 38408042,
+      "name": "Dataset_1_alien_ant_species_records.csv",
+      "downloadUrl": "https://ndownloader.figshare.com/files/38408042",
+      "sizeBytes": 806208,
+      "md5": "d9643b4d0df98ac0cb634700984ab694",
+      "sha256": "91a81ba1f84a9ac967e5ef983546704fb90bfcbf4a95d4ead68ffe6cebbd8843"
+    },
+    {
+      "fileId": 38408045,
+      "name": "Dataset_2_regions_and_realms.csv",
+      "downloadUrl": "https://ndownloader.figshare.com/files/38408045",
+      "sizeBytes": 22251,
+      "md5": "ddb577775ab3538ec5e231caac18de60",
+      "sha256": "062a5e15f131030eadd65d1323c72900f624aaf30a0fda39966d7046412d443d"
+    }
+  ],
+  "relatedRecognitionStudies": [
+    {
+      "id": "california-recognition",
+      "title": "The Effect of Diet on Colony Recognition and Cuticular Hydrocarbon Profiles of the Invasive Argentine Ant, Linepithema humile",
+      "authors": [
+        "Ellen van Wilgenburg",
+        "Mario Mariotta IV",
+        "Neil Durie Tsutsui"
+      ],
+      "publicationYear": 2022,
+      "publishedAt": "2022-03-29",
+      "observationPeriod": "Calendar collection dates not reported in article; behavioral experiment spans ten weeks",
+      "regionIds": [
+        "california"
+      ],
+      "speciesIds": [
+        "argentine"
+      ],
+      "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9026800/",
+      "publisherUrl": "https://www.mdpi.com/2075-4450/13/4/335",
+      "doi": "10.3390/insects13040335",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsEvidenceUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9026800/fullTextXML",
+      "reviewedAt": "2026-10-14",
+      "method": "Paired-worker behavioral assays comparing dietary-treatment nests from UC Irvine CAL with Mason Regional Park CAL and Lake Skinner LS reference workers.",
+      "finding": "Field feeding treatments preserved tolerance toward same-CAL reference ants and aggression toward Lake Skinner workers. Food similarity alone did not merge these colonies.",
+      "caveat": "No calendar observation year is asserted. These local pairings do not refresh the 2008–2009 Berkeley–Lake Hodges or cross-continental comparisons.",
+      "reuse": "Original concise text only; no article figure or experimental data asset copied.",
+      "resourceId": "california-recognition",
+      "rightsEvidenceSha256": "4d03cc0cdfae1cc093deac7dec40fbf9ac5d6b78d4556c66504ed7cf6dba5580"
+    },
+    {
+      "id": "mediterranean-recognition",
+      "title": "Long-term spread of Argentine ant (Hymenoptera: Formicidae) European supercolonies on three Mediterranean islands",
+      "authors": [
+        "S. Castro-Cobo",
+        "O. Blight",
+        "X. Espadaler",
+        "E. Angulo"
+      ],
+      "publicationYear": 2021,
+      "publishedAt": "2021-06-23",
+      "observationPeriod": "Ibiza and Formentera: 2004 and August–September 2016; Corsica: 2007–2008, with identity drawn from prior literature",
+      "regionIds": [
+        "mediterranean"
+      ],
+      "speciesIds": [
+        "argentine"
+      ],
+      "sourceUrl": "https://myrmecologicalnews.org/cms/index.php?option=com_content&view=category&id=1585&Itemid=439",
+      "paperUrl": "https://myrmecologicalnews.org/cms/index.php?option=com_download&view=download&filename=volume31/mn31_185-200_printable.pdf&format=raw",
+      "doi": "10.25849/myrmecol.news_031:185",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsEvidenceUrl": "https://myrmecologicalnews.org/cms/index.php?option=com_content&view=category&id=1585&Itemid=439",
+      "reviewedAt": "2026-10-14",
+      "method": "Island beach surveys; Main/Catalonian identity at Ibiza and Formentera assessed through paired aggression assays against reference populations.",
+      "finding": "Sampled island populations included distinct Main and Catalonian identities. Regional occurrence and recognition were measured separately.",
+      "caveat": "The 2021 publication does not make these observations current. Corsican membership was taken from earlier literature, not new 2021 aggression assays. No new California comparison was tested.",
+      "reuse": "Original concise text only; no map, aerial background, or article figure copied.",
+      "resourceId": "mediterranean-recognition"
+    },
+    {
+      "id": "japan-recognition",
+      "title": "Undesirable dispersal via a river pathway of a single Argentine ant supercolony newly invading an inland urban area of Japan",
+      "authors": [
+        "Daisuke Hayasaka",
+        "Kenshin Kato",
+        "Masayoshi K. Hiraiwa",
+        "Hiro Kasai",
+        "Kazutaka Osaki",
+        "Retsushi Aoki",
+        "Takuo Sawahata"
+      ],
+      "publicationYear": 2023,
+      "publishedAt": "2023-11-30",
+      "observationPeriod": "Distribution survey July–December 2022; aggression assays September–December 2022",
+      "regionIds": [
+        "japan"
+      ],
+      "speciesIds": [
+        "argentine"
+      ],
+      "sourceUrl": "https://www.nature.com/articles/s41598-023-47734-0",
+      "doi": "10.1038/s41598-023-47734-0",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsEvidenceUrl": "https://www.nature.com/articles/s41598-023-47734-0#rightslink",
+      "reviewedAt": "2026-10-14",
+      "method": "Five-on-five aggression assays comparing Nara workers with Kobe LH1, LH2, LH3 and LH4 reference populations; 522 trials per reference pairing.",
+      "finding": "Nara workers tolerated Kobe LH2 workers and showed strong aggression toward LH1, LH3 and LH4 reference workers, supporting an LH2 identity for the sampled Nara population.",
+      "caveat": "This is local 2022 evidence, not a new California–Japan comparison. Its Google Maps-backed figure is not a rights-cleared geographic asset for this game.",
+      "reuse": "Original concise text only; no article figure or Google Maps background copied.",
+      "resourceId": "japan-recognition"
+    }
+  ],
+  "resourceId": "gabi-distribution"
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "engine": "chromium",
+    "url": "http://10.0.0.119:5173/",
+    "observedAt": "2026-10-14T19:24:20.767Z",
+    "http": 200,
+    "developmentBridge": false,
+    "nativeOwnedTap": true,
+    "regionalRallyAuto": true,
+    "habitatDecoded": true,
+    "specimenZoomAnatomyComparison": true,
+    "researchLayers": 3,
+    "summaryActivityComic": true,
+    "restartExitCancelFocus": true,
+    "modes": 3,
+    "errors": [],
+    "badResponses": [],
+    "overflow": false
+  },
+  {
+    "engine": "webkit",
+    "url": "http://10.0.0.119:5173/",
+    "observedAt": "2026-10-14T19:24:26.702Z",
+    "http": 200,
+    "developmentBridge": false,
+    "nativeOwnedTap": true,
+    "regionalRallyAuto": true,
+    "habitatDecoded": true,
+    "specimenZoomAnatomyComparison": true,
+    "researchLayers": 3,
+    "summaryActivityComic": true,
+    "restartExitCancelFocus": true,
+    "modes": 3,
+    "errors": [],
+    "badResponses": [],
+    "overflow": false
+  }
+]

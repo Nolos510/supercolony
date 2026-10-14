@@ -32,7 +32,7 @@ test('foraging development works for both species and exposes its game-growth ex
 });
 test('every region offers credited open and complex photographs in one reading scroller',async({page})=>{
  await page.setViewportSize({width:390,height:844});await start(page);await page.getByRole('button',{name:'Learn',exact:true}).click();await page.getByRole('button',{name:'Regions',exact:true}).click();
- for(const name of ['Coastal California','Mediterranean coast','Southern Japan','Southern Africa','Southern Australia','Northern New Zealand','Hawaiian Islands','Paraná basin · native range']){
+ for(const name of ['Coastal California','Mediterranean coast','Southern Japan','Southern Africa','Southern Australia','New Zealand','Hawaiian Islands','Paraná basin · native range']){
   await page.getByRole('button',{name,exact:true}).click();for(const terrain of ['Open habitat','Complex habitat']){await page.getByRole('button',{name:terrain,exact:true}).click();const photo=page.locator('img.habitat-photo');await photo.evaluate((img:HTMLImageElement)=>img.decode());expect(await photo.evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(600);await expect(page.getByRole('link',{name:/Habitat photograph source/})).toHaveAttribute('target','_blank');}
   await expect(page.getByText(/Representative habitat;.*fictional/).first()).toBeVisible();await page.getByRole('button',{name:'Back to index',exact:true}).click();
  }

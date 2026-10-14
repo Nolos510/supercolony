@@ -3,7 +3,7 @@ import { advance, compatibleOwners, createGame, send, sendMany } from '../src/ga
 const total = (s: ReturnType<typeof createGame>) => s.nodes.reduce((v, n) => v + n.units, 0) + s.fleets.reduce((v, f) => v + f.units, 0);
 it('seeds cooperation only in War and rejects commands from cooperating AI', () => {
   const s = createGame('war');
-  expect(s.nodes.filter(n => n.owner === 'ally').map(n => [n.id, n.units])).toEqual([['california-1', 32], ['newzealand-1', 32]]);
+  expect(s.nodes.filter(n => n.owner === 'ally').map(n => [n.id, n.units])).toEqual([['california-1', 32], ['mediterranean-1', 10], ['japan-1', 10], ['australia-1', 10], ['newzealand-1', 32], ['hawaii-1', 10]]);
   expect(createGame('species').nodes.some(n => n.owner === 'ally')).toBe(false);
   expect(createGame('ecologist').nodes.some(n => n.owner === 'ally')).toBe(false);
   expect(send(s, 'california-1', 'california-0', .5).error).toBeTruthy();
@@ -32,7 +32,7 @@ it('batch reinforcement excludes AI sources and simultaneous arrivals conserve w
 it('cooperating survivors do not prevent defeat, victory or simultaneous extinction', () => {
   for (const survivor of ['player', 'rival', 'neutral'] as const) {
     const s = createGame('war'); s.aiEnabled = false;
-    s.nodes.forEach(n => { if (n.owner !== 'ally') n.owner = survivor; });
+    s.nodes.forEach(n => { if (n.owner !== 'ally') { n.owner = survivor; n.colonyId = survivor === 'player' ? 'US1' : survivor === 'rival' ? 'US2' : `unclaimed-${n.id}`; } });
     expect(advance(s, .1).status).toBe(survivor === 'player' ? 'won' : survivor === 'rival' ? 'lost' : 'draw');
   }
 });
@@ -40,6 +40,8 @@ it('cooperating AI sends support without attacking its compatible network', () =
   const s = createGame('war'); s.nodes.forEach(n => { n.growth = 0; });
   s.nodes.find(n => n.id === 'california-0')!.units = 1;
   s.nodes.find(n => n.id === 'newzealand-0')!.units = 1;
+  s.nodes.find(n => n.id === 'newzealand-0')!.owner = 'player';
+  s.nodes.find(n => n.id === 'newzealand-0')!.colonyId = 'US1';
   const first = advance(s, 16);
   expect(first.fleets.some(f => f.owner === 'ally' && first.nodes.find(n => n.id === f.path.at(-1))?.owner === 'player')).toBe(true);
   const later = advance(s, 32);

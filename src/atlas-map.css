@@ -1,0 +1,131 @@
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V4 */
+/* Hallmark · component: field atlas, habitat and specimen surfaces · theme: retained custom hybrid
+ * Primary task: command on illustrated terrain, inspect real surroundings, follow dated evidence.
+ * Existing tokens remain unchanged. Motion: direct gesture transforms; reduced-motion static controls.
+ */
+.illustrated-region .map-node { box-shadow: 0 0 0 4px var(--color-paper-deep), 0 3px 10px var(--color-shadow); }
+.illustrated-region .map-heading { background: var(--color-paper); padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-line); border-radius: var(--radius-sm); }
+.illustrated-region .map-node-label > span { display: inline; padding: 3px 5px; background: var(--color-paper); border-radius: var(--radius-sm); line-height: 1.6; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.illustrated-region .map-node-label small { margin-top: var(--space-xs); }
+.region-locator { position: absolute; bottom: 28px; right: 16px; width: 180px; margin: 0; padding: var(--space-xs); background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-sm); pointer-events: none; }
+.region-locator svg { display: block; width: 100%; height: auto; }
+.region-locator figcaption { font-size: 10px; text-align: center; padding-top: var(--space-xs); color: var(--color-muted); }
+.compact-regional-board .region-locator { display: none; }
+.native-context-marker { position: absolute; z-index: 4; transform: translate(-50%,-50%); min-width: 44px; padding: var(--space-sm); font-size: 12px; border-style: dashed; background: var(--color-paper); }
+.native-context-marker:active { transform: translate(-50%,-50%) scale(.96); }
+.native-context-marker > span { display: grid; gap: var(--space-xs); text-align: left; }
+.native-context-marker small { font-size: 10px; color: var(--color-muted); font-weight: 400; }
+.locator-water { fill: var(--color-water); }.locator-land { fill: var(--color-land); stroke: var(--color-contour); stroke-width: .4; fill-rule: evenodd; }.locator-point { fill: var(--color-rival-dark); stroke: var(--color-paper); stroke-width: .6; }
+.illustrated-region .map-key { max-width: calc(100% - 240px); }
+.regional-context-card { max-height: calc(100% - 120px); overflow-y: auto; overscroll-behavior: contain; z-index: 5; }
+.habitat-gallery .habitat-switch { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-sm); }
+.habitat-gallery .habitat-switch button:first-child:nth-last-child(3) { grid-column: 1 / -1; }
+.habitat-gallery .habitat-switch button { min-width: 0; font-size: 12px; padding-inline: var(--space-xs); white-space: normal; overflow-wrap: anywhere; }
+.habitat-setting-picker { margin-block: var(--space-md); }
+.habitat-setting-picker label { display: grid; gap: var(--space-xs); font-size: 13px; }
+.habitat-setting-picker select { min-width: 0; max-width: 100%; font-size: 16px; }
+.habitat-setting-picker p { margin-top: var(--space-xs); color: var(--color-muted); font-size: 12px; }
+.habitat-alternative, .habitat-setting-note { font-size: 13px; line-height: 1.5; }
+.habitat-alternative { padding: var(--space-sm) 0; color: var(--color-muted); }
+.habitat-photo { object-fit: contain; max-height: 400px; width: 100%; height: auto; }
+.specimen-explore-button { width: 100%; justify-content: space-between; background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+.specimen-explore-button:hover { background: var(--color-player-dark); }
+.specimen-advanced-inline { display: grid; gap: var(--space-sm); padding: var(--space-md); margin-top: var(--space-md); background: var(--color-paper-deep); border-left: 2px solid var(--color-line); font-size: 13px; }
+.specimen-advanced-inline span { color: var(--color-muted); line-height: 1.5; }
+.specimen-explorer { position: fixed; inset: 12px max(12px,env(safe-area-inset-right)) 12px max(12px,env(safe-area-inset-left)); z-index: 40; width: min(1120px,calc(100vw - 24px)); margin-inline: auto; display: flex; flex-direction: column; min-height: 0; background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-md); box-shadow: 0 12px 56px var(--color-shadow); }
+.specimen-explorer-header { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: var(--space-lg); padding: var(--space-md) var(--space-xl); border-bottom: 1px solid var(--color-line); flex: 0 0 auto; }
+.specimen-explorer-header h2 { font-size: 28px; }
+.specimen-explorer-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: var(--space-xl); flex: 1; }
+.specimen-explorer-scroll > * { max-width: 860px; margin-inline: auto; }
+.specimen-explorer-intro h3, .specimen-worker-comparison h3 { font-family: var(--font-display); font-size: 25px; margin-bottom: var(--space-sm); }
+.specimen-explorer-intro > p { margin-block: var(--space-sm); }
+.specimen-species-picker { display: flex; flex-wrap: wrap; gap: var(--space-sm); padding-block: var(--space-md); }
+.specimen-photo-pane { --specimen-outline: oklch(0 0 0 / .1); position: relative; width: 100%; height: clamp(210px,44dvh,460px); overflow: hidden; touch-action: none; background: var(--color-paper-deep); outline: 1px solid var(--specimen-outline); cursor: grab; border-radius: var(--radius-sm); }
+.specimen-photo-pane:active { cursor: grabbing; }
+.specimen-photo-pane:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.specimen-photo-pane > img, .specimen-photo-layer { width: 100%; height: 100%; position: absolute; inset: 0; transform-origin: center; user-select: none; }
+.specimen-photo-pane img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.specimen-guide { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.specimen-guide circle { fill: none; stroke: var(--color-player-dark); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.specimen-guide .guide-halo { stroke: var(--color-paper); stroke-width: 6; }
+.specimen-guide text { fill: var(--color-paper); stroke: var(--color-ink); stroke-width: 2; paint-order: stroke; font: 600 32px var(--font-body); }
+.specimen-orientation-note { color: var(--color-muted); font-size: 13px; margin-top: var(--space-sm); }
+.specimen-zoom-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); padding-block: var(--space-md); }
+.specimen-zoom-controls button { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+.specimen-zoom-controls button:first-child, .specimen-zoom-controls button:nth-child(3) { min-width: 44px; font-size: 23px; padding: var(--space-xs); }
+.specimen-zoom-controls [role='status'] { min-width: 60px; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; }
+.specimen-explorer-credit { display: grid; gap: var(--space-sm); font-size: 13px; line-height: 1.5; border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-xl); }
+.specimen-explorer-credit > p { color: var(--color-muted); }
+.specimen-explorer .species-comparison { margin-block: var(--space-xl); }
+.specimen-explorer .anatomy-diagram { width: 100%; max-height: 300px; }
+.specimen-compare-toggle { width: 100%; min-width: 0; justify-content: space-between; margin-top: var(--space-lg); white-space: normal; overflow-wrap: anywhere; }
+.specimen-worker-comparison { margin-top: var(--space-xl); padding-top: var(--space-xl); border-top: 1px solid var(--color-line); }
+.specimen-advanced { margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--color-line); font-size: 14px; }
+.specimen-advanced summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+.specimen-advanced p { margin-block: var(--space-sm); }.specimen-advanced a { display: inline-flex; align-items: center; min-height: 44px; }
+.atlas-research-map { flex: 1; min-width: 0; min-height: 0; }
+.atlas-research-map .research-controls { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); padding: var(--space-sm) var(--space-lg); gap: var(--space-md); background: var(--color-paper); }
+.atlas-research-map .research-controls label { min-width: 0; }
+.atlas-research-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) minmax(240px,320px); }
+.research-geography { position: relative; min-width: 0; min-height: 0; display: grid; grid-template-rows: minmax(0,1fr) auto; background: var(--color-water); overflow: hidden; }
+.research-map-title { padding: var(--space-md) var(--space-lg); background: var(--color-paper); border-bottom: 1px solid var(--color-line); flex: 0 0 auto; }
+.research-map-title h2 { font-size: 24px; }.research-map-title p { margin-top: var(--space-xs); font-size: 12px; color: var(--color-muted); }
+.atlas-research-map .research-chart { width: 100%; height: 100%; max-height: none; min-height: 0; margin: 0; cursor: grab; touch-action: none; }
+.atlas-research-map .research-chart:active { cursor: grabbing; }.atlas-research-map .research-chart:focus-visible { outline: 3px solid var(--color-focus); outline-offset: -3px; }
+.research-coastline { fill: none; stroke: var(--color-contour); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.atlas-research-map .research-land { fill-rule: evenodd; vector-effect: non-scaling-stroke; }
+.atlas-research-map .research-link-line, .atlas-research-map .observation-point, .atlas-research-map .research-sample { vector-effect: non-scaling-stroke; }
+.atlas-research-map .distribution-marker { font-size: 13px; font-weight: 700; fill: var(--color-player-dark); paint-order: stroke; stroke: var(--color-paper); stroke-width: 1; }
+.atlas-research-map .distribution-marker.native { fill: var(--color-habitat); }.atlas-research-map .distribution-marker.established-outdoors { fill: var(--color-rival-dark); }
+.research-zoom-controls { position: absolute; right: 12px; top: 12px; display: flex; gap: var(--space-xs); align-items: center; z-index: 2; }
+.research-zoom-controls button { min-width: 44px; padding-inline: var(--space-sm); }.research-zoom-controls [role='status'] { font-variant-numeric: tabular-nums; width: 48px; text-align: center; font-size: 12px; background: var(--color-paper); padding-block: var(--space-sm); }
+.atlas-research-map .research-legend { margin: 0; padding: var(--space-sm) var(--space-lg); font-size: 12px; gap: var(--space-sm) var(--space-lg); background: var(--color-paper); border-top: 1px solid var(--color-line); }
+.recognition-legend-item { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.recognition-swatch { width: 20px; border-top: 2px solid var(--color-player-dark); flex: 0 0 auto; }
+.recognition-swatch.low { border-top-style: dotted; }.recognition-swatch.high { border-top-color: var(--color-rival-dark); }
+.atlas-research-map .research-link-line.low { stroke-dasharray: 2 4; stroke-linecap: round; }
+.research-inspection { min-height: 0; min-width: 0; overflow-y: auto; overscroll-behavior: contain; border-left: 1px solid var(--color-line); background: var(--color-paper); padding: var(--space-lg); }
+.research-inspection .research-period { padding: 0; font-size: 12px; }.research-inspection .research-record { margin-top: var(--space-md); padding-top: var(--space-md); font-size: 14px; }
+.research-inspection .research-record h3 { font-size: 21px; }.research-inspection .research-record p { margin-block: var(--space-sm); }.research-inspection .relationship-list li { display: grid; gap: var(--space-xs); font-size: 13px; }
+.research-inspection .research-source { margin-top: var(--space-lg); padding-top: var(--space-lg); font-size: 13px; }.research-inspection .research-source p { margin-block: var(--space-sm); }
+.research-inspection a { display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; font-size: 14px; }.research-inspection summary { min-height: 44px; cursor: pointer; display: flex; align-items: center; }
+.distribution-counts { margin-block: var(--space-lg); }.distribution-counts > div { display: flex; justify-content: space-between; gap: var(--space-sm); padding-block: var(--space-sm); border-bottom: 1px solid var(--color-line); }.distribution-counts dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; }
+@media (max-width: 900px) {
+  .atlas-research-body { grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,1fr) minmax(100px,32%); }
+  .research-inspection { border-left: 0; border-top: 1px solid var(--color-line); }
+  .research-map-title { padding-right: var(--space-lg); }.research-map-title h2 { font-size: 20px; }
+  .research-zoom-controls { top: auto; bottom: 64px; right: var(--space-sm); }
+}
+@media (max-width: 600px) {
+  .illustrated-region .map-heading { padding: var(--space-xs) var(--space-sm); max-width: 62%; }
+  .illustrated-region .map-heading h2 { font-size: 17px; }
+  .illustrated-region .map-node-label > span { font-size: 10px; }
+  .region-locator { width: 112px; bottom: 22px; right: 8px; }.region-locator figcaption { font-size: 8px; }
+  .native-context-marker { width: 44px; height: 44px; padding: 0; }
+  .native-context-marker > span { position: absolute; top: 48px; left: 50%; transform: translateX(-75%); width: 104px; padding: var(--space-xs); background: var(--color-paper); font-size: 10px; text-align: center; pointer-events: none; }
+  .native-context-marker small { font-size: 9px; }
+  .atlas-research-map .research-controls { grid-template-columns: repeat(2,minmax(0,1fr)); padding: var(--space-sm); gap: var(--space-sm); }
+  .atlas-research-map .research-controls > label:first-child { grid-column: 1 / -1; }
+  .atlas-research-map .research-controls select { font-size: 16px; }
+  .research-map-title { padding: var(--space-sm) var(--space-md); }.research-map-title h2 { font-size: 18px; }.research-map-title p { font-size: 11px; }
+  .research-inspection { padding: var(--space-md); }.atlas-research-map .research-legend { padding: var(--space-sm); font-size: 10px; gap: 4px 8px; }
+  .research-zoom-controls { bottom: 66px; }.research-zoom-controls button { font-size: 13px; }
+  .specimen-explorer { inset: 8px; width: calc(100vw - 16px); }
+  .specimen-explorer-header { padding: var(--space-sm) var(--space-md); gap: var(--space-sm); }.specimen-explorer-header h2 { font-size: 20px; }
+  .specimen-explorer-header button { font-size: 13px; padding-inline: var(--space-sm); }
+  .specimen-explorer-scroll { padding: var(--space-lg); }.specimen-photo-pane { height: clamp(210px,36dvh,340px); }
+  .specimen-zoom-controls { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); }
+  .specimen-zoom-controls button:first-child { grid-column: 1 / 3; }.specimen-zoom-controls span { grid-column: 3 / 5; }.specimen-zoom-controls button:nth-child(3) { grid-column: 5 / 7; }.specimen-zoom-controls button:nth-child(4) { grid-column: 1 / 4; }.specimen-zoom-controls button:nth-child(5) { grid-column: 4 / 7; }
+  .specimen-zoom-controls button { padding-inline: var(--space-xs); font-size: 13px; }
+  .specimen-explorer .comparison-photos { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-height: 450px) and (min-width: 600px) {
+  .atlas-research-body { grid-template-columns: minmax(0,1fr) minmax(230px,35%); grid-template-rows: minmax(0,1fr); }
+  .atlas-research-map .research-controls { padding-block: 4px; }.research-map-title { padding: 4px 8px; }.research-map-title h2 { font-size: 16px; }.research-map-title p { font-size: 10px; }
+  .research-zoom-controls { bottom: 44px; }.atlas-research-map .research-legend { font-size: 10px; padding: 4px 8px; }
+  .region-locator { display: none; }.illustrated-region .map-heading { top: 4px; padding: 2px 6px; }.illustrated-region .map-heading h2 { font-size: 16px; }
+  .specimen-photo-pane { height: 230px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .specimen-explorer button, .research-map button, .habitat-gallery button { transition: none; }
+}

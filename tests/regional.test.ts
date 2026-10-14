@@ -12,10 +12,10 @@ it('rallies a partial region without commanding allies or duplicating workers',(
  expect(site(arrived,'california-1').units).toBe(32); expect(stock(arrived)).toBeCloseTo(stock(s));
 });
 it('full-region arrivals keep stock above capacity and unavailable sources are reported',()=>{
- const s=cold();s.nodes.filter(n=>n.regionId==='california').forEach(n=>{n.owner='player';n.units=40;});
+ const s=cold();s.nodes.filter(n=>n.regionId==='california').forEach(n=>{n.owner='player';n.colonyId='US1';n.units=40;});
  const r=rallyRegion(s,'california',1),a=advance(r.state,40);
  expect(r.sentFromIds).toHaveLength(5);expect(site(a,'california-0').units).toBe(240);expect(stock(a)).toBeCloseTo(stock(s));
- const partial=cold();site(partial,'california-2').owner='player';site(partial,'california-1').owner='rival';
+ const partial=cold();site(partial,'california-2').owner='player';site(partial,'california-2').colonyId='US1';site(partial,'california-1').owner='rival';site(partial,'california-1').colonyId='US2';
  const p=rallyRegion(partial,'california',.5);expect(p.sentFromIds).toContain('california-3');expect(p.skipped.map(n=>n.sourceId)).toContain('california-2');
 });
 it('rejects foreign gateways, invalid fractions/regions, paused orders and Ecologist',()=>{
@@ -34,7 +34,7 @@ it('automatic rally waits for20, sends exact10 once per second, and excludes all
  s=advance(s,1);expect(site(s,'california-3').units).toBeCloseTo(12.52);expect(site(s,'california-1').units).toBe(50);
 });
 it('automatic blocked sources wait without consuming reserves and paused time freezes',()=>{
- let s=cold();site(s,'california-2').owner='player';site(s,'california-2').units=25;site(s,'california-1').owner='rival';site(s,'california-3').units=10;
+ let s=cold();site(s,'california-2').owner='player';site(s,'california-2').colonyId='US1';site(s,'california-2').units=25;site(s,'california-1').owner='rival';site(s,'california-1').colonyId='US2';site(s,'california-3').units=10;
  s=setAutoRally(s,'california',true).state;const info=rallyInfo(s,'california');expect(info.blockedSourceIds).toContain('california-2');
  s=advance(s,2);expect(s.fleets).toHaveLength(0);expect(site(s,'california-2').units).toBe(25);
  s.status='paused';expect(advance(s,100)).toEqual(s);expect(setAutoRally(s,'california',false).state.autoRally.california).toBeFalsy();
@@ -50,21 +50,21 @@ it('development costs30, prepares20s, and boosts both species only at owned regi
  }
 });
 it('growth explains unclaimed, capacity, paused, active and unchanged base rates',()=>{
- const s=createGame('war');const n=site(s,'california-0');expect(growthInfo(s,n).base).toBe(.95);expect(growthInfo(s,site(s,'california-4')).reason).toBe('unclaimed');
+ const s=createGame('war');const n=site(s,'california-0');expect(growthInfo(s,n).base).toBe(.95);expect(growthInfo(s,site(s,'mediterranean-0')).reason).toBe('unclaimed');
  n.units=n.capacity;expect(growthInfo(s,n).current).toBe(0);expect(growthInfo(s,n).reason).toBe('capacity');s.status='paused';expect(growthInfo(s,n).current).toBe(0);
  const low=createGame('species','meat');expect(developRegion(low,'australia').error).toBeTruthy();expect(growthInfo(low,site(low,'australia-0')).base).toBe(.32);
 });
 it('gateway captures invalidate preparing and active upgrades and auto rally without refund',()=>{
  for(const seconds of [0,21]){
   let s=cold();s=developRegion(s,'california').state;s=setAutoRally(s,'california',true).state;s=advance(s,seconds);
-  s.fleets=[];s.fleets.push({id:900,owner:'rival',colonyId:'simulated-rival-network',species:'argentine',units:200,path:['california-3','california-0'],legIndex:0,elapsed:7.9});
+  s.fleets=[];s.fleets.push({id:900,owner:'rival',colonyId:'US2',species:'argentine',units:200,path:['california-3','california-0'],legIndex:0,elapsed:7.9});
   const a=advance(s,.1);expect(site(a,'california-0').owner).toBe('rival');expect(a.autoRally.california).toBeFalsy();expect(a.developments.california).toBeUndefined();expect(a.stats.developmentWorkers).toBe(30);
-  site(a,'california-0').owner='player';site(a,'california-0').units=40;expect(a.autoRally.california).toBeFalsy();expect(developRegion(a,'california').error).toBeUndefined();
+  site(a,'california-0').owner='player';site(a,'california-0').colonyId='US1';site(a,'california-0').units=40;expect(a.autoRally.california).toBeFalsy();expect(developRegion(a,'california').error).toBeUndefined();
  }
 });
 it('same-tick gateway loss and recapture still removes development and automation',()=>{
  let s=cold();s=developRegion(s,'california').state;s=setAutoRally(s,'california',true).state;
- s.fleets=[{id:901,owner:'rival',colonyId:'simulated-rival-network',species:'argentine',units:100,path:['california-3','california-0'],legIndex:0,elapsed:7.9},{id:902,owner:'player',colonyId:'simulated-player-network',species:'argentine',units:200,path:['california-3','california-0'],legIndex:0,elapsed:7.9}];
+ s.fleets=[{id:901,owner:'rival',colonyId:'US2',species:'argentine',units:100,path:['california-3','california-0'],legIndex:0,elapsed:7.9},{id:902,owner:'player',colonyId:'US1',species:'argentine',units:200,path:['california-3','california-0'],legIndex:0,elapsed:7.9}];
  const a=advance(s,.1);expect(site(a,'california-0').owner).toBe('player');expect(a.autoRally.california).toBeFalsy();expect(a.developments.california).toBeUndefined();
 });
 it('automation/development replay identically across view-independent clock chunks and restart',()=>{

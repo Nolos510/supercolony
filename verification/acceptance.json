@@ -7,13 +7,12 @@
     "africa",
     "australia",
     "newzealand",
-    "hawaii",
-    "southamerica"
+    "hawaii"
   ],
   "nestsPerWorldRegion": 6,
   "speciesNests": 12,
   "facts": 16,
-  "resources": 11,
+  "resources": 18,
   "ecologyTarget": 0.6,
   "chargeCapacity": 3,
   "chargeRegenerationSeconds": 15,

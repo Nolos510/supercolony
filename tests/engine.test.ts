@@ -3,11 +3,13 @@ import { createGame, advance, send, intervene, resolveCombat, territory, habitat
 import acceptance from '../verification/acceptance.json';
 
 describe('simulation contract', () => {
-  it('contains all eight War regions, six sites each, and a twelve-site species scenario', () => {
+  it('contains seven introduced War regions, six sites each, and a twelve-site species scenario', () => {
     const s = createGame('war');
     expect(s.duration).toBe(acceptance.combatDurationSeconds);
     expect(createGame('ecologist').duration).toBe(acceptance.durationSeconds);
     expect(createGame('ecologist').nodes.some(n => n.regionId === 'southamerica')).toBe(false);
+    expect(s.nodes.some(n => n.regionId === 'southamerica')).toBe(false);
+    expect(s.nodes).toHaveLength(42);
     for (const region of acceptance.worldRegions) expect(s.nodes.filter(n => n.regionId === region)).toHaveLength(6);
     expect(createGame('species', 'meat').nodes).toHaveLength(12);
   });
@@ -60,7 +62,7 @@ describe('simulation contract', () => {
   });
   it('ends combat only when a colony has no nests or surviving fleets', () => {
     for (const owner of ['player', 'rival'] as const) {
-      const s = createGame('war'); s.aiEnabled = false; s.nodes.forEach(n => { n.owner = owner; });
+      const s = createGame('war'); s.aiEnabled = false; s.nodes.forEach(n => { n.owner = owner; n.colonyId = owner === 'player' ? 'US1' : 'US2'; });
       expect(advance(s, 1).status).toBe(owner === 'player' ? 'won' : 'lost');
     }
     const empty = createGame('species'); empty.aiEnabled = false;
@@ -70,7 +72,7 @@ describe('simulation contract', () => {
   it('does not end combat at five minutes or 60 percent territory', () => {
     for (const mode of ['war', 'species'] as const) {
       const s = createGame(mode); s.aiEnabled = false;
-      s.nodes.forEach((n, i) => { n.owner = i < Math.ceil(s.nodes.length * .7) ? 'rival' : 'player'; });
+      s.nodes.forEach((n, i) => { n.owner = i < Math.ceil(s.nodes.length * .7) ? 'rival' : 'player'; if (mode === 'war') n.colonyId = n.owner === 'player' ? 'US1' : 'US2'; });
       const later = advance(s, 900);
       expect(later.status).toBe('running'); expect(later.time).toBe(900);
       expect(later.duration).toBeNull();

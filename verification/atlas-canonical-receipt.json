@@ -1,0 +1,733 @@
+{
+  "version": 1,
+  "contract": {
+    "version": 2,
+    "task_id": "supercolony-atlas-canonical-2026-10-14",
+    "outcome": "Approved field-atlas revision functions and looks polished with documented-colony gameplay, local specimens,60habitat assignments, dated maps,16visualsummaries,3activities and General Mandible story; no invented evidence or dependency changes. Final delivery requires receipt/build/screenshots/handoff and private-repository push.",
+    "scope": "Baselinee5cb50c, frozen sources/assets/interfaces/fixtures2026-10-14; root integration with isolated engine/interface/learning lanes. Original preflightstart17:33:35Z/deadline23:33:35Z; remaining budget only, initial plus8sharedrepairs. No Comfy/8000/backend/runtime dependencies/globaltokenchanges. Linked successor of atlas-receipt.json: reviewed presentation-alias migration only, zero attempts used; docs/ATLAS_CONTRACT_CORRECTION.md explains; protect linter/build config.",
+    "limits": {
+      "max_repairs": 8,
+      "max_seconds": 19703
+    },
+    "subjects": [
+      "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/styles.css",
+      "/Users/nolos/Desktop/Ant Game/src/atlas-map.css",
+      "/Users/nolos/Desktop/Ant Game/src/atlas-learning.css",
+      "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+      "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+      "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/colonies.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/habitats.ts",
+      "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/ResearchMap.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Specimen.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/SpecimenExplorer.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/HabitatGallery.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Learning.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/VisualSummary.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/LearningActivity.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Story.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/Menu.tsx",
+      "/Users/nolos/Desktop/Ant Game/src/components/CooperationTour.tsx"
+    ],
+    "protected": [
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_ART_AND_MOTION.md",
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_FIXTURE_REVIEW.md",
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_HABITAT_EAST.md",
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_HABITAT_WEST.md",
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_INTERFACE_CONTRACT.md",
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_RESEARCH_SOURCE_PACK.md",
+      "/Users/nolos/Desktop/Ant Game/package-lock.json",
+      "/Users/nolos/Desktop/Ant Game/package.json",
+      "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-bark.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-creek.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-established.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-garden.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-gateway.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-gravel.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-litter.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-rock.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-sand.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-track.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/credits.json",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-garden.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-gateway.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-litter.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-garden.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-gateway.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-litter.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-garden.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-gateway.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-litter.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-garden-edge.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-gateway-nest.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-habitat-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-leaf-litter-trail.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-open-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-shaded-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-garden-edge.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-gateway-nest.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-habitat-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-leaf-litter-trail.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-open-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-shaded-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/credits.json",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-garden-edge.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-gateway-nest.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-habitat-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-leaf-litter-trail.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-open-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-shaded-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-garden-edge.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-gateway-nest.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-habitat-margin.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-leaf-litter-trail.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-open-clearing.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-shaded-grove.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/australia-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/australia-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/credits.json",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/hawaii-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/hawaii-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/japan-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/japan-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/newzealand-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/east/newzealand-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/africa-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/africa-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/california-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/california-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/credits.json",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/mediterranean-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/mediterranean-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/southamerica-complex.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/habitats/west/southamerica-open.jpg",
+      "/Users/nolos/Desktop/Ant Game/public/research/california-2025.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/california-geography-source.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/california-geography.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/distribution-2022-source.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/distribution-2022.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/global-2010.json",
+      "/Users/nolos/Desktop/Ant Game/public/research/provenance.json",
+      "/Users/nolos/Desktop/Ant Game/public/story/general-mandible.png",
+      "/Users/nolos/Desktop/Ant Game/public/world.json",
+      "/Users/nolos/Desktop/Ant Game/src/data/atlasLearning.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/atlasStory.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/nestRoles.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/regional.ts",
+      "/Users/nolos/Desktop/Ant Game/src/data/research.ts",
+      "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/atlas.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/atlas.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/regional.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/habitats.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/regional.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+      "/Users/nolos/Desktop/Ant Game/tokens.css",
+      "/Users/nolos/Desktop/Ant Game/tsconfig.json",
+      "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+      "/Users/nolos/Desktop/Ant Game/verification/atlas-acceptance.json",
+      "/Users/nolos/Desktop/Ant Game/eslint.config.js",
+      "/Users/nolos/Desktop/Ant Game/vite.config.ts",
+      "/Users/nolos/Desktop/Ant Game/docs/ATLAS_CONTRACT_CORRECTION.md"
+    ],
+    "criteria": [
+      {
+        "id": "typecheck",
+        "description": "Protected typecheck including approved atlas acceptance and regression fixtures",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "typecheck"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 180
+        }
+      },
+      {
+        "id": "lint",
+        "description": "Protected lint including approved atlas acceptance and regression fixtures",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "lint"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 180
+        }
+      },
+      {
+        "id": "test",
+        "description": "Protected test including approved atlas acceptance and regression fixtures",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "test"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 180
+        }
+      },
+      {
+        "id": "test:e2e",
+        "description": "Protected test:e2e including approved atlas acceptance and regression fixtures",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "test:e2e"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 1200
+        }
+      },
+      {
+        "id": "build",
+        "description": "Protected build including approved atlas acceptance and regression fixtures",
+        "verifier": {
+          "kind": "command",
+          "argv": [
+            "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+            "run",
+            "build"
+          ],
+          "cwd": "/Users/nolos/Desktop/Ant Game",
+          "timeout_seconds": 180
+        }
+      },
+      {
+        "id": "rendered-objective",
+        "description": "Approved atlas identity, purposeful interactions, credited photos and dates, documented colony separation, responsive and accessible primary paths observed in Chromium/WebKit; production and handoff evidence prepared",
+        "verifier": {
+          "kind": "review",
+          "rubric": "Independent rendered browser/tool evidence at1440/768/320/375/390/414/short landscape; inspect specimen/photo fit, rich terrain, source-separated research projection,16 diagrams,3distinct activities,4intro+3vignettes; keyboard/focus44px/reducedmotion/enlargedtext/one reading scroller; pause/state/gesture/menu paths. Review actual screenshots and automated output, identify exact artifact hashes and limitations. No physical iPhone or enjoyment claim. Preserve tokens/source/asset hashes; build and delivery instructions present."
+        }
+      }
+    ]
+  },
+  "contract_sha256": "1875323d780d301fc033cd57890defadfd3846311e0fd2d097d559ea8fcf4e3d",
+  "started_at": 1792001108.171984,
+  "protected": [
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_ART_AND_MOTION.md",
+      "sha256": "0f7ee641ed967faecaf284c0ee9ce16cd7de736643605471440e2f0fc50b40d4"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_FIXTURE_REVIEW.md",
+      "sha256": "5939c2ab7eb814b75d7b14b69ca38977f8e9405282fc45d4a4f7138b56d24c07"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_HABITAT_EAST.md",
+      "sha256": "be8653fa9889fb1b69933f8132c67df750e291db248e8e596859a4c3239ea63d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_HABITAT_WEST.md",
+      "sha256": "5477557a11e47e0554a7d56ac626773f5f4912a759816223bb20c90c656e93ba"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_INTERFACE_CONTRACT.md",
+      "sha256": "3cb5ad450d1c25c58ca18bd5a3396a8788affe2df4ae1a69f7f1db5d223cd5bd"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_RESEARCH_SOURCE_PACK.md",
+      "sha256": "775c1c7a28a35e3d0b62ed8dfc2a8ff6989c52c2cf7c114ad68adcee3bda03c1"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/package-lock.json",
+      "sha256": "2dc21bcb15583a306fd1c6634953cdc75ee0ed3420781cb32b7ce8118809be27"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/package.json",
+      "sha256": "c1ae729120e13832756e0e4e244b5a7851f722c19e2d4d39af24a5dbe137f811"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+      "sha256": "e75ae2e2390fc30166e7406c1ae06dfdd51f40a2292d5e23c38149fca46ce199"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-bark.jpg",
+      "sha256": "aa3704a6f4e29ab8089237aa75579d6e0311fcf66ab4b2ed588035848faf5e1f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-clearing.jpg",
+      "sha256": "7a4711e2fbbfca15884519e503cbc0b330c14a1e80857016c7d151282fd8b35f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-creek.jpg",
+      "sha256": "93fc27ea5e57a58599b189e2379d63a583be142748a7a36840601d4d716dd003"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-established.jpg",
+      "sha256": "5b0b2c6612706015d1f778e66a3f260e5b1371a8a81d0c2eeb0692835d9d2572"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-garden.jpg",
+      "sha256": "9dc282a274040c945aba0cc0097a2624503ed1fcba53aad932c66fcdae92f98b"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-gateway.jpg",
+      "sha256": "12f91b2e340c959037fff37047af89b45cc27ac6efff8893eac5ec51ad3fe376"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-gravel.jpg",
+      "sha256": "3b50987c0b6b507f39a348acda30bcee45298a28b2d9158b7abf7941966249f1"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-grove.jpg",
+      "sha256": "4339332b0f85fe03523a1257d243c8d1b42406c471e2a6ce0b7e03653fab940a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-litter.jpg",
+      "sha256": "ced254a78dbe714d4d8d3ae7d1c308ceee656ae866255f1d805950922e613f29"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-margin.jpg",
+      "sha256": "7b00ca0bac74af8f98e3118920fef3d6d83a2d8218b71e14f6c55c8f778504a8"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-rock.jpg",
+      "sha256": "b8bffcc888d3c205eadaf6838ab36fd1a8411c50e32772ba0ce29ff8c1591627"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-sand.jpg",
+      "sha256": "8665467d4529e29e485ae50b13fcb6d5018bdc2268e2d3d39c68d371a8bf0488"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/au-track.jpg",
+      "sha256": "85b868574347ddb7f0c3c89dc33abdc3f2417f8de370db61d40139aab4cf09e1"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/credits.json",
+      "sha256": "fbd8ece9d1017916228e0b31fe926c49704a52ecc3f5205a03775a2cca04b023"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-clearing.jpg",
+      "sha256": "76f1aadbd9b940f5f5008b6fd94d4802e72519fec4dc4743a5d5346d1a6f270a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-garden.jpg",
+      "sha256": "ecd303d8e16d549bb663dda9eeaf835422026f0c77d0391bb3ec5b681bbdfae7"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-gateway.jpg",
+      "sha256": "535faccbc0e1b33746a6cc85daed0c7f11d95bb858decfb7aa5ff9e1dfb54404"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-grove.jpg",
+      "sha256": "1c1fe3f5b1d0f9cdcc26917268e3c45d4b53b5030ef41789c612ab83733d7c9f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-litter.jpg",
+      "sha256": "4a0bbcad248a628a9ea654d58f3fe928ba5046ca85413feda510320827b0fa47"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/hawaii-margin.jpg",
+      "sha256": "e473fd2a5c4e14dcd70cba31d9b82b2fb153c0e529f2d4a139e5f128d9bff365"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-clearing.jpg",
+      "sha256": "50fd04fdec0ba44640a28db97baec9382e3ff8d37844eff15ee5eb228739fdc0"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-garden.jpg",
+      "sha256": "a1ae8385ab2f77bf6226cdf0b1cf9b52b4f39631eec6711d8a605a946e5bda33"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-gateway.jpg",
+      "sha256": "8d0a7f17d48f01bb0751fa03b145889f4973f2930652114e78e458173ee760e9"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-grove.jpg",
+      "sha256": "780396bb51e60ffd701f6ff748fe6fb9969759f04a6bc7287fd56402331255a5"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-litter.jpg",
+      "sha256": "4e63f40480c7140226aa99f7f349d990394ac7b3774cd9e1db938a49ab694f08"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/japan-margin.jpg",
+      "sha256": "cca68810f4e749222919b92141833fb4eb948c6a87c5c76577092805846098a2"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-clearing.jpg",
+      "sha256": "712df3d50a1be5eb8b1d087b5866a7f3a778b2a5b5b655f64910a6223541568d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-garden.jpg",
+      "sha256": "8cab19c462610555f7e70626b075aa3bfd2febbcf786c251e8ca035ff02fadbe"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-gateway.jpg",
+      "sha256": "7734168ab15e98aae914297c0ec40950db65b50289e3390429b29eedcd7b9b2e"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-grove.jpg",
+      "sha256": "d04254efeab52f791d843e1a90cd5167a8068ae9c37e1f10dd115f250f1fd286"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-litter.jpg",
+      "sha256": "7e883cc6653fac1e9e6e9ba4beb4930977b740c710e6ed50ca62ec1d94e15aa7"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-east/nz-margin.jpg",
+      "sha256": "c0e4402e4baea8624330db3eaedba444056e233f9abd64ebe19a9b62a981baad"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-garden-edge.jpg",
+      "sha256": "acc257763fa97f152706496d321d3e4a0fafde063824b6ba700e58c899161080"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-gateway-nest.jpg",
+      "sha256": "1030d37d8657de175da036fa50e69638c4c3ccba2913cb7bcd9b0ca7b3f2728f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-habitat-margin.jpg",
+      "sha256": "fc88c6241bc6a65db40fd1f27c7d36d8a9070d238195f5c29e3b15f36b623a9d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-leaf-litter-trail.jpg",
+      "sha256": "b2ab8be67e0a3028e029e5a027905fb180c4e939229449c5361c5738a09e02f6"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-open-clearing.jpg",
+      "sha256": "47637e37afeb9580baf5df77376eef652db3637a7a14f9a4961be065e8015456"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/africa-shaded-grove.jpg",
+      "sha256": "7a183e0050f6617f189e08198a44b4a6be4b799ff7e24ddd44c127753b6e8a75"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-garden-edge.jpg",
+      "sha256": "9a0f0ce4d0ac282abd61e4c35cee03b15347d36dfaacddce8cdf322f33610738"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-gateway-nest.jpg",
+      "sha256": "84c010fd4cb93b1f6df07e79892206432238093ca6acde177c8e872d9ad84d3d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-habitat-margin.jpg",
+      "sha256": "354d90a5e601d2dcde17a5760e84e692563eebcb32aa1b90bb108d6406ec930d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-leaf-litter-trail.jpg",
+      "sha256": "1b5f83872fec38e38721d6a7973b8cc64205b6038b9a69b1444e0051374cfee8"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-open-clearing.jpg",
+      "sha256": "f71effee1d83c7cb76bc5ecd471bfb49d96030deeed28878e2df904f56a0b107"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/california-shaded-grove.jpg",
+      "sha256": "74bb235ba0d2cbd7c4c8949486efd6d7790420a6e6c5d53e2674e5bd1e5d40da"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/credits.json",
+      "sha256": "98af85a1202d4161d8cc5c3914ed4b8c4a2f3fe75bef2469ab49d752edbbb98b"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-garden-edge.jpg",
+      "sha256": "5839f9f6f519d818f862c95d53b737cfe0e0e5217a4118a3eb2ea27c7f9ffb6a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-gateway-nest.jpg",
+      "sha256": "fa2417450bcf7747b1060a44c7f41b7dd5857c77b0e2f3ca6585fb35bad300aa"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-habitat-margin.jpg",
+      "sha256": "bcc33500817fca213537a0bb8a227c188e88154c96cc2202b1e2e434dd13ae16"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-leaf-litter-trail.jpg",
+      "sha256": "e7152ea2da06d0734a706ea71b2497a21c8f6592e6a18458ade2fe1e53cd4d2b"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-open-clearing.jpg",
+      "sha256": "0cdecaf8c6814c07805b37298c473770e519cdde12b04f8744ac343539ac035f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/mediterranean-shaded-grove.jpg",
+      "sha256": "a0973a0d04b60594564166f5e3e54f7a17b4e98f1db5da6aad02062da1b5b5bb"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-garden-edge.jpg",
+      "sha256": "4e1a3de717f8c47a14ad9d11ca7c680ba02550bee7decc07ff2f1b453bc907e4"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-gateway-nest.jpg",
+      "sha256": "ae5af74e0128ed8394581e7369afa67be3d2e1ecd1fa0f78c1d17507f312d4a5"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-habitat-margin.jpg",
+      "sha256": "ceae1036f6ad216013793c79de0f8f075ca0b207865401f455715d1950d15b43"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-leaf-litter-trail.jpg",
+      "sha256": "14b46a034e383ae2009a246fd08e83c356fc9d133a71795cbdcb9586329e916f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-open-clearing.jpg",
+      "sha256": "5571d47ed007fb94209ec83ed152f5641558bcd82ce1f33aba210621d87bdba6"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/atlas-west/southamerica-shaded-grove.jpg",
+      "sha256": "53d6a7e99bd93893c0ed08914044cdb730ccb2968c739a1044544d523298fb49"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/australia-complex.jpg",
+      "sha256": "4339332b0f85fe03523a1257d243c8d1b42406c471e2a6ce0b7e03653fab940a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/australia-open.jpg",
+      "sha256": "7a4711e2fbbfca15884519e503cbc0b330c14a1e80857016c7d151282fd8b35f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/credits.json",
+      "sha256": "1a051c3aaa850726ca8ecd9bc685764577db0117a55b3bd4423751cacaafce4b"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/hawaii-complex.jpg",
+      "sha256": "1c1fe3f5b1d0f9cdcc26917268e3c45d4b53b5030ef41789c612ab83733d7c9f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/hawaii-open.jpg",
+      "sha256": "76f1aadbd9b940f5f5008b6fd94d4802e72519fec4dc4743a5d5346d1a6f270a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/japan-complex.jpg",
+      "sha256": "780396bb51e60ffd701f6ff748fe6fb9969759f04a6bc7287fd56402331255a5"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/japan-open.jpg",
+      "sha256": "50fd04fdec0ba44640a28db97baec9382e3ff8d37844eff15ee5eb228739fdc0"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/newzealand-complex.jpg",
+      "sha256": "c0e4402e4baea8624330db3eaedba444056e233f9abd64ebe19a9b62a981baad"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/east/newzealand-open.jpg",
+      "sha256": "712df3d50a1be5eb8b1d087b5866a7f3a778b2a5b5b655f64910a6223541568d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/africa-complex.jpg",
+      "sha256": "fc88c6241bc6a65db40fd1f27c7d36d8a9070d238195f5c29e3b15f36b623a9d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/africa-open.jpg",
+      "sha256": "47637e37afeb9580baf5df77376eef652db3637a7a14f9a4961be065e8015456"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/california-complex.jpg",
+      "sha256": "74bb235ba0d2cbd7c4c8949486efd6d7790420a6e6c5d53e2674e5bd1e5d40da"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/california-open.jpg",
+      "sha256": "c07c3394ada9c9d33d422c0777f0be68e9d78800a0c538062fa6ac725208cbef"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/credits.json",
+      "sha256": "c489f2dc8accd6c92269c943131fdb7a1bdc95de9ad43dee8316cbe8a841ed8c"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/mediterranean-complex.jpg",
+      "sha256": "e7152ea2da06d0734a706ea71b2497a21c8f6592e6a18458ade2fe1e53cd4d2b"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/mediterranean-open.jpg",
+      "sha256": "0cdecaf8c6814c07805b37298c473770e519cdde12b04f8744ac343539ac035f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/southamerica-complex.jpg",
+      "sha256": "8a3b11f29e1e85a8e629487979c870f5609e9a015ebf0ff7d6bd0731a204f7c2"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/habitats/west/southamerica-open.jpg",
+      "sha256": "5571d47ed007fb94209ec83ed152f5641558bcd82ce1f33aba210621d87bdba6"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/california-2025.json",
+      "sha256": "cad77a9b89bbda6be832ba7d79c55bdbe522ab34c9739ea6d300f54ad31dddf3"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/california-geography-source.json",
+      "sha256": "1df7e5a361e21a33279d343e4e2fce02f00163fa2a97e87488527857b7fa5e6f"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/california-geography.json",
+      "sha256": "d488f5cba41a829a5668b863ea8519071c0635925301196c345b43ad9524b9eb"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/distribution-2022-source.json",
+      "sha256": "23258647d6ca19450272a9d9a21a9553b1fa7d2695c005ceb48bb1533289ca06"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/distribution-2022.json",
+      "sha256": "95033f5299e46b68cbcc4102e874d0df57e6164c4a636ed34b8e395bf0b9f6d8"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/global-2010.json",
+      "sha256": "7b1894eef034915d4a412a4098533c9e82fd14c26e2ad9663ee2ab92f520d1ae"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/research/provenance.json",
+      "sha256": "c51aa3b870f0b0a360869626d09f2c895043417d4e139a9ea5b41248e403a44d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/story/general-mandible.png",
+      "sha256": "cde0d5c433145a7e5b41e33f666b8d016f1ec520b965d6976162770b579af275"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/public/world.json",
+      "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/data/atlasLearning.ts",
+      "sha256": "8b1e1030d22480220e0e7d8f70fb5d490350d0a61816d8215fba7ad9f0497835"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/data/atlasStory.ts",
+      "sha256": "1b6482175fe8b565effac7a732725723959f25b3089197f6732c8acfd9901a8c"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/data/content.ts",
+      "sha256": "777395306e70f415838bc1a4284026f0d153ba3d4df74cd9d819a930ebe92733"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/data/nestRoles.ts",
+      "sha256": "cdc024c589d361a391b8e3743d48f1b1e37e0380fb272d065df0766dfc3a0bc5"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/data/regional.ts",
+      "sha256": "1f3d0851ff7aa3b2f59683ed760c98de687d429c095b18a8d8783c8145df9cd2"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/data/research.ts",
+      "sha256": "ab5a69803c59f34f7d618e0f823ed0a979c033388622961e38fd946f7c1a56ca"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+      "sha256": "623e84b632c4c2499f0e4dbdff64a7f3be3bea1fb688794e0fb3dd96d25a13b3"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/atlas.test.ts",
+      "sha256": "781515be158578546751ea028595b6f91d99cb65d588312fcddacd10e4e9687d"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+      "sha256": "16ca68493ff45681db42f16627dbae52d3a3afd8921ca465aac6b42f9d6547f3"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/atlas.spec.ts",
+      "sha256": "5748e82869017f91b9aa095f69ce9189e7f86248caec7ae8d94e19c0d9f3f27b"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+      "sha256": "9b1f0b8d85bb07fce1b7fdb81b4927a5865d93e814ebb8394bc277a3ee128a5e"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts",
+      "sha256": "f32275378057f21d5387aa0e7570dd2d172699b21aaab2fab4bc6209b0a48f6a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+      "sha256": "6ad8994074fa7a0874445279dcedb3516fe0d6ba5c1a8c9e250a4ca241d39cb6"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+      "sha256": "16f968260a355c5baccdfa10fc3e1f57702635377529d3fb14a844a7d74b99b1"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/regional.spec.ts",
+      "sha256": "dfbeced8413b86442f5cdf7a074c8e040b06e45ec56c63e26b95ee5cadba1e4e"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts",
+      "sha256": "538e956dadd4968747468c3880e12cfb403ed7969e17083b70d2e3081c4463f8"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+      "sha256": "d705555b5ad12d1681abe7d47aa6766218ab62ef4c1c1c510b43e9e03c92ba2e"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+      "sha256": "b066b5109b914acd45a7a6479bebcc1ea18eeb30bac2e6e72a3bad206718ecde"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/habitats.test.ts",
+      "sha256": "b51718f5d38fabbea996bcfc9a5e7cadfa7dbf75481a25446a94ecc878cc13cd"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+      "sha256": "9614326021fa5225c40dfd4120d166404ef467f75385eab6197372ea78ffd711"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/regional.test.ts",
+      "sha256": "add846c426a6fe4341354e1e02eb0eda1e2ccd53ffe07178801017a7634e23b4"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+      "sha256": "74d19b5f71caace854aa2164b8f67fe4cb659e0b76b637d434b5c6bda748860a"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tokens.css",
+      "sha256": "3d80a66c410f1e3427fb78f1e61b2e8abe40cdda2e642596815cab6b18b5b664"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/tsconfig.json",
+      "sha256": "8a4590eec183445198d9df13fc49e7844f112910a7f7970241cdee89f062cf2e"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/acceptance.json",
+      "sha256": "fb4511c797635fec3c678901d9607941ee73e290af516a98f3fcce441615f15c"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/verification/atlas-acceptance.json",
+      "sha256": "14ef574d5caf246929971e5ba5b136c278f15b6d6c0af977f6ad9ae9c89a59a4"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/eslint.config.js",
+      "sha256": "22c7ae1d4668816015df027aa092934ea9752236a4978d945e7baf99886e1266"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/vite.config.ts",
+      "sha256": "b8271634c51fd4f5e946fbd246871ad40c71bdbdd36df039206db4f3d5a27018"
+    },
+    {
+      "path": "/Users/nolos/Desktop/Ant Game/docs/ATLAS_CONTRACT_CORRECTION.md",
+      "sha256": "49de436eeb467241553f35062cddab5fe8d8dd4b029b09aa6177a8c9a50128a1"
+    }
+  ],
+  "attempts": []
+}

@@ -3,21 +3,23 @@ import { regions } from '../game/scenarios';
 import { facts, resources, species } from '../data/content';
 import { regionalContexts } from '../data/regional';
 import { nestRoles } from '../data/nestRoles';
-import { growthInfo, REGIONAL_BALANCE } from '../game/engine';
+import { growthInfo, nestRelation, REGIONAL_BALANCE } from '../game/engine';
 import { Icon } from './Icons';
 import { ResourceLink } from './Learning';
 import Fieldwork from './Fieldwork';
 import Specimen from './Specimen';
 import HabitatGallery from './HabitatGallery';
+import { colonies, colonyRelation } from '../data/colonies';
 
 interface InspectorProps {
   state: GameState; node: NestState; view: string | null; detailed?: boolean; visible?: boolean;
   onIntervene: (kind: Intervention) => string | undefined; onGuide: (id?: string) => void;
   onSpecies?: (id: SpeciesId) => void; onRegion?: (id: string) => void; onCooperation?: () => void;
   onDevelop?: (regionId: string) => void;
+  onExploreSpecimen?: (id: SpeciesId) => void;
 }
 
-export default function Inspector({ state, node, detailed, visible = true, onIntervene, onGuide, onSpecies, onRegion, onCooperation, onDevelop }: InspectorProps) {
+export default function Inspector({ state, node, detailed, visible = true, onIntervene, onGuide, onSpecies, onRegion, onCooperation, onDevelop, onExploreSpecimen }: InspectorProps) {
   const profile = species[node.species];
   const region = regions.find(entry => entry.id === node.regionId)!;
   const context = regionalContexts.find(entry => entry.regionId === region.id);
@@ -34,9 +36,15 @@ export default function Inspector({ state, node, detailed, visible = true, onInt
   const growthReasons = { growing: 'Replenishing worker reserves.', paused: 'Paused · replenishment resumes with play.', unclaimed: 'Unclaimed · no workers replenish here.', capacity: 'At reserve capacity · replenishment is stopped.', finished: 'Match ended · replenishment is stopped.' };
   const ownerLabel = state.mode === 'ecologist' ? node.owner === 'rival' ? 'Invasive pressure' : 'Native community proxy' : node.owner === 'player' ? 'Your colony' : node.owner === 'ally' ? 'Cooperating colony' : node.owner === 'rival' ? 'Rival colony' : 'Unclaimed nest';
   const symbols = { player: '●', ally: '◐', rival: '◆', neutral: '○' };
+  const occupant = colonies.find(c => c.id === node.colonyId);
+  const origin = colonies.find(c => c.id === node.sourcePopulationId);
+  const relationship = state.mode === 'war' ? node.owner === 'neutral' ? 'Unclaimed · no occupant affiliation' : ({ friendly: 'Friendly game relationship with US1', hostile: 'Hostile game relationship with US1', unknown: 'Unknown · no reported pairing with US1' }[colonyRelation('US1', node.colonyId)]) : state.mode === 'ecologist' ? 'Ecological proxy' : node.owner === 'player' ? 'Your species network' : node.owner === 'rival' ? 'Opposing species network' : 'Unaffiliated';
+  const localFleets = state.fleets.filter(f => f.path.includes(node.id));
+  const waitingFleets = localFleets.filter(f => { const next = state.nodes.find(n => n.id === f.path[f.legIndex + 1]); return f.withdrawing && next && nestRelation(state, f, next) === 'unknown'; });
   return <aside className={`inspector expanded ${detailed ? 'full-details' : ''}`} aria-label="Selected nest details">
     <div className="inspector-heading"><span className="eyebrow">{state.mode === 'ecologist' ? 'Selected habitat' : 'Simulated nest'} · {region.shortName}</span><h2>{node.name}</h2><span className={`ownership ${node.owner}`}><span aria-hidden="true">{symbols[node.owner]}</span>{ownerLabel}</span></div>
     <div className="nest-metrics"><div><strong>{Math.floor(node.units)}</strong><span>worker game units</span></div><div><strong>{state.mode === 'ecologist' ? `${Math.round(node.habitat * 100)}%` : growth.current.toFixed(2)}</strong><span>{state.mode === 'ecologist' ? 'native habitat score' : 'current growth / sec'}</span></div></div>
+    {visible && <HabitatGallery key={`${node.regionId}-${node.id}`} regionId={node.regionId} terrain={node.terrain} roleId={node.roleId} scenario={state.mode === 'species' ? 'species' : 'regional'} />}
     <section className="growth-detail" aria-label="Game growth">
       <dl className="growth-values"><div><dt>Base game growth</dt><dd><span>{growth.base.toFixed(2)}</span> units / sec</dd></div><div><dt>Current game growth</dt><dd><span>{growth.current.toFixed(2)}</span> units / sec</dd></div><div><dt>Reserve capacity</dt><dd>{growth.capacity} game units</dd></div></dl>
       <p className="growth-reason">{growthReasons[growth.reason]}</p>
@@ -45,7 +53,7 @@ export default function Inspector({ state, node, detailed, visible = true, onInt
     </section>
     {state.mode !== 'ecologist' && <section className="foraging-development" aria-label="Foraging development">
       <h3>Your regional development</h3>
-      {regionalGrowth.development === 'active' ? <p className="development-status"><strong>Foraging network active</strong><span>+20% growth at your nests in this region while {gateway?.name ?? 'the gateway'} stays yours.</span></p> : regionalGrowth.development === 'preparing' ? <p className="development-status"><strong>Preparing foraging network</strong><span>{Math.ceil(regionalGrowth.developmentRemaining)} game seconds remaining. Preparation pauses with play.</span></p> : <>
+      {regionalGrowth.development === 'active' ? <p key="active" className="development-status"><strong>Foraging network active</strong><span>+20% growth at your nests in this region while {gateway?.name ?? 'the gateway'} stays yours.</span></p> : regionalGrowth.development === 'preparing' ? <p key="preparing" className="development-status"><strong>Preparing foraging network</strong><span>{Math.ceil(regionalGrowth.developmentRemaining)} game seconds remaining. Preparation pauses with play.</span></p> : <>
         <p>Commit {REGIONAL_BALANCE.developmentCost} worker game units at {gateway?.name ?? 'the gateway'}. Prepare for {REGIONAL_BALANCE.preparationSeconds} game seconds to gain +20% growth at your regional nests.</p>
         <button className="develop-button" disabled={!canDevelop} onClick={() => onDevelop?.(node.regionId)}>{state.status === 'paused' ? 'Resume & improve network' : 'Improve foraging network'}</button>
         <p className="development-requirement">{gateway?.owner !== 'player' ? `Own ${gateway?.name ?? 'the gateway'} to develop this region.` : gateway.units < REGIONAL_BALANCE.developmentCost ? `Gateway reserves: ${Math.floor(gateway.units)}/${REGIONAL_BALANCE.developmentCost} required.` : state.status === 'paused' ? 'This action resumes play and starts preparation.' : state.status !== 'running' ? 'Start a new match to invest in development.' : `Gateway reserves: ${Math.floor(gateway.units)}. One improvement per region.`}</p>
@@ -55,15 +63,17 @@ export default function Inspector({ state, node, detailed, visible = true, onInt
       {foragingSource?.accessNote && <p className="resource-access-note">{foragingSource.accessNote}</p>}
       <div className="field-note-links">{foragingSource && <ResourceLink resource={foragingSource}>Read foraging research</ResourceLink>}<button className="text-button" onClick={() => onGuide('foraging-development')}>Food access & ecological pressure <Icon name="arrow" size={16} /></button></div>
     </section>}
-    <dl className="nest-affiliation"><div><dt>Colony network</dt><dd>{node.colonyId.replaceAll('-', ' ')}</dd></div><div><dt>Recognition</dt><dd>{state.mode === 'ecologist' ? 'Ecological proxy' : node.owner === 'player' || node.owner === 'ally' ? 'Compatible with your colony' : node.owner === 'rival' ? 'Opposing colony' : 'Unaffiliated'}</dd></div></dl>
+    <dl className="nest-affiliation"><div><dt>Occupant network</dt><dd>{occupant?.label ?? (node.owner === 'neutral' ? 'Unclaimed setting' : node.colonyId.replaceAll('-', ' '))}</dd></div><div><dt>Recognition</dt><dd>{relationship}</dd></div>{origin && <div><dt>Historical reference origin</dt><dd>{origin.label} · {origin.observationPeriod}</dd></div>}</dl>
+    {state.mode === 'war' && <p className="reading-caption">The main-network friendship is a game simplification. Captures change occupants; historical reference origins stay fixed. Independent rivals never become allies just because both oppose you.</p>}
+    {localFleets.length > 0 && <section className="nest-transit"><h3>Along these trails</h3><p>{localFleets.length} {localFleets.length === 1 ? 'swarm' : 'swarms'} in transit · {Math.floor(localFleets.reduce((sum, f) => sum + f.units, 0))} worker game units.</p>{waitingFleets.length > 0 && <p>{waitingFleets.length} returning {waitingFleets.length === 1 ? 'swarm is' : 'swarms are'} waiting because its next landing has an unknown recognition relationship. Workers stay intact until occupancy changes.</p>}</section>}
     {node.owner === 'ally' && <div className="cooperation-note"><p>This colony runs its own nests. Your reinforcements join its reserves; passage through a friendly nest keeps your swarm moving.</p>{onCooperation && <button className="text-button" onClick={onCooperation}>How cooperation works <Icon name="arrow" size={16} /></button>}</div>}
     <section className="nest-setting"><h3>{role?.name ?? node.name}</h3><p>{role?.description ?? 'A fictional setting in this regional network.'}</p>{role && <p>{role.purpose}</p>}<button className="text-button" onClick={() => onGuide('nest-settings')}>Read the landscape <Icon name="arrow" size={16} /></button></section>
     <div className="terrain-detail"><Icon name="leaf" /><div><strong>{node.terrain === 'complex' ? 'Complex habitat' : 'Open terrain'}</strong><span>{node.terrain === 'complex' ? 'Bottlenecks limit how many workers fight at once.' : 'More workers can engage at once.'}{node.gateway ? ' This site also connects regional transport.' : ''}</span>{terrainSource && <ResourceLink resource={terrainSource}>Read terrain research</ResourceLink>}</div></div>
     {state.mode === 'ecologist' && <div className="intervention-tools"><Fieldwork key={node.id} state={state} node={node} onApply={onIntervene} /></div>}
     <div className="species-name"><h3>{profile.name}</h3><p>{profile.scientificName}</p></div>
-    {visible && <Specimen speciesId={node.species} compact />}
+    {visible && <Specimen speciesId={node.species} compact onExplore={onExploreSpecimen} />}
     <button className="inspector-link" onClick={() => onSpecies ? onSpecies(node.species) : onGuide('species')}>Species & anatomy <Icon name="arrow" size={16} /></button>
-    <section className="region-context"><h3>{region.name}</h3><p>{context?.environment ?? region.overview}</p>{context && <p>{context.ecologicalStakes}</p>}{visible && <HabitatGallery key={`${node.regionId}-${node.id}`} regionId={node.regionId} terrain={node.terrain} />}<button className="text-button" onClick={() => onRegion ? onRegion(region.id) : onGuide(region.nativeRange ? 'native-range' : factId)}>Read regional profile <Icon name="arrow" size={16} /></button></section>
+    <section className="region-context"><h3>{region.name}</h3><p>{context?.environment ?? region.overview}</p>{context && <p>{context.ecologicalStakes}</p>}<button className="text-button" onClick={() => onRegion ? onRegion(region.id) : onGuide(region.nativeRange ? 'native-range' : factId)}>Read regional profile <Icon name="arrow" size={16} /></button></section>
     <section className="field-note"><div className="field-note-title"><Icon name="book" /><h3>Field note</h3></div><h4>{fact.title}</h4><p>{fact.summary}</p><div className="field-note-links">{source && <ResourceLink resource={source}>Read the research</ResourceLink>}<button className="text-button" onClick={() => onGuide(fact.id)}>Open field guide <Icon name="arrow" size={16} /></button></div></section>
     <p className="reading-caption">Nests, workers, terrain values, and affiliations here are simulated. Research maps record separate, dated observations.</p>
   </aside>;

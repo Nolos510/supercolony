@@ -1,0 +1,91 @@
+{
+  "id": "noaa-enc-california",
+  "title": "Coastal San Diego land and shoreline geography",
+  "organization": "NOAA Office of Coast Survey",
+  "sourceUrl": "https://www.nauticalcharts.noaa.gov/learn/encdirect/",
+  "catalogUrl": "https://www.fisheries.noaa.gov/inport/item/39973/full-list",
+  "serviceUrl": "https://encdirect.noaa.gov/arcgis/rest/services/encdirect/enc_approach/MapServer",
+  "license": "CC0 1.0 / public-domain NOAA chart-derived geography",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "rightsEvidenceUrl": "https://www.nauticalcharts.noaa.gov/data/data-licensing.html",
+  "reviewedAt": "2026-10-14",
+  "acquiredAt": "2026-10-14",
+  "sourceTemporalCoverage": "Mixed chart-source dates, preserved per feature where supplied; extraction date is not a shoreline survey date.",
+  "crs": "EPSG:4326 / WGS 84 longitude, latitude in decimal degrees",
+  "scaleBand": "Approach, 1:50,001–1:150,000",
+  "queryEnvelope": [
+    -117.33,
+    32.6,
+    -117.15,
+    32.97
+  ],
+  "featureExtent": [
+    -117.634225,
+    32.383386,
+    -116.802533,
+    33.475036
+  ],
+  "featureCount": 103,
+  "featureCounts": {
+    "land": 18,
+    "coastline": 85
+  },
+  "chartIds": [
+    "US4CA1BX.000",
+    "US4CA1CX.000",
+    "US4CA73M.000",
+    "US4CA74M.000"
+  ],
+  "sources": [
+    {
+      "kind": "land",
+      "layerId": 238,
+      "layerUrl": "https://encdirect.noaa.gov/arcgis/rest/services/encdirect/enc_approach/MapServer/238",
+      "queryUrl": "https://encdirect.noaa.gov/arcgis/rest/services/encdirect/enc_approach/MapServer/238/query?where=1%3D1&geometry=-117.33%2C32.60%2C-117.15%2C32.97&geometryType=esriGeometryEnvelope&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=true&geometryPrecision=6&maxAllowableOffset=2.5e-05&f=geojson",
+      "responseSha256": "1c1a32ec6b036727ceffa681918de14b6feeaff4fbb974aef9bc081ce573ccb7",
+      "responseBytes": 161881,
+      "featureCount": 18
+    },
+    {
+      "kind": "coastline",
+      "layerId": 88,
+      "layerUrl": "https://encdirect.noaa.gov/arcgis/rest/services/encdirect/enc_approach/MapServer/88",
+      "queryUrl": "https://encdirect.noaa.gov/arcgis/rest/services/encdirect/enc_approach/MapServer/88/query?where=1%3D1&geometry=-117.33%2C32.60%2C-117.15%2C32.97&geometryType=esriGeometryEnvelope&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&returnGeometry=true&geometryPrecision=6&maxAllowableOffset=2.5e-05&f=geojson",
+      "responseSha256": "395fbc26c527aa58560f449de17f29f380cad86bed8c70464021832283869615",
+      "responseBytes": 118547,
+      "featureCount": 85
+    }
+  ],
+  "transformations": [
+    "Queried NOAA ENC Direct to GIS Approach layers 238 (land polygons) and 88 (coastline polylines), requesting WGS 84 GeoJSON.",
+    "Server generalization requested at 0.000025 degrees and coordinate rounding at six decimal places; these are rendering settings, not claimed survey accuracy.",
+    "Selected intersecting features retained whole; no geometry snapped to ant observations and no hand-drawn land or survey boundary added.",
+    "Properties reduced to feature kind, NOAA source IDs, chart cell, name and reported source dates/indicators; chart geometry is preserved as returned.",
+    "Display should clip to a study-site viewport and project both geometry and published ant GPS coordinates through the same transform."
+  ],
+  "derivedFile": "/research/california-geography.json",
+  "derivedSha256": "d488f5cba41a829a5668b863ea8519071c0635925301196c345b43ad9524b9eb",
+  "derivedBytes": 272465,
+  "validation": {
+    "uniqueFeatureIds": 103,
+    "queryCountVerified": true,
+    "finiteWgs84Coordinates": 10124,
+    "publishedSiteLandCoverage": {
+      "TPSR": {
+        "landCoveredSites": 111,
+        "totalSites": 111
+      },
+      "PLECA": {
+        "landCoveredSites": 184,
+        "totalSites": 184
+      }
+    }
+  },
+  "caveats": [
+    "A geographic backdrop only: it contains no ant occurrence, colony identity, battlefield, habitat classification, research-site boundary, or soil polygons.",
+    "NOAA chart geometry has mixed source dates and does not reconstruct the historical shoreline for either survey period.",
+    "Whole intersecting chart features extend beyond the query envelope; fit the ant-study coordinates and clip the viewport rather than fitting the full feature extent.",
+    "This converted GIS product is not certified for navigation.",
+    "No commercial aerial basemap, author map raster, California State Parks geometry, or generated geographic imagery is bundled."
+  ]
+}

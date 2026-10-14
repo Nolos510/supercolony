@@ -1,53 +1,59 @@
 import type { ModeId, RegionDefinition, ScenarioDefinition } from './types';
+import { globalSamples } from '../data/research';
 
-/** Geographic anchors locate documented regions; playable nest sites are simulated. */
+function referenceAnchor(sampleId: string): [number, number] {
+  const sample = globalSamples.find(item => item.id === sampleId)!;
+  return [sample.lon, sample.lat];
+}
+
+/** Historical reference markers locate regions; playable settings remain schematic. */
 export const regions: RegionDefinition[] = [
   {
     id: 'california', name: 'Coastal California', shortName: 'California', country: 'United States',
-    anchor: [-118.24, 34.05],
-    overview: 'California has documented Argentine-ant supercolonies. The nests and ownership shown here are a game scenario, not surveyed boundaries.',
+    anchor: referenceAnchor('US1'),
+    overview: 'The regional marker follows the historical Berkeley US1 reference. California has documented Argentine-ant supercolonies; local game settings and ownership are not surveyed nests or boundaries.',
     sourceIds: ['global-study', 'uc-ipm'],
   },
   {
     id: 'mediterranean', name: 'Mediterranean coast', shortName: 'Mediterranean', country: 'Southern Europe',
-    anchor: [5.37, 43.3],
+    anchor: referenceAnchor('F'),
     overview: 'Mediterranean populations feature in research on expansive supercolonies and recognition across distant populations. This network is simulated.',
     sourceIds: ['global-study'],
   },
   {
     id: 'japan', name: 'Southern Japan', shortName: 'Japan', country: 'Japan',
-    anchor: [135.5, 34.69],
-    overview: 'Japanese populations have been studied for relationships to other introduced Argentine-ant populations. Game frontlines do not show current field boundaries.',
+    anchor: referenceAnchor('J'),
+    overview: 'The regional marker follows the historical Iwakuni J reference. Other Japanese populations have newer local studies; game frontlines do not show current field boundaries.',
     sourceIds: ['global-study'],
   },
   {
     id: 'africa', name: 'Southern Africa', shortName: 'Southern Africa', country: 'South Africa',
-    anchor: [18.42, -33.93],
-    overview: 'Argentine ants occur in southern Africa. Presence alone does not establish membership in a worldwide supercolony; the playable network is fictional.',
+    anchor: referenceAnchor('SA'),
+    overview: 'The regional marker uses the disclosed approximate Stellenbosch SA reference. Its historical recognition tests differ from the main network; settings and ownership remain simulated.',
     sourceIds: ['global-study'],
   },
   {
     id: 'australia', name: 'Southern Australia', shortName: 'Australia', country: 'Australia',
-    anchor: [138.6, -34.93],
-    overview: 'Australian experiments explored how terrain changes contests between Argentine ants and native meat ants. This battlefield abstracts that finding.',
+    anchor: referenceAnchor('AU'),
+    overview: 'The regional marker follows the historical Melbourne AU reference. The separate Australian Species Clash battlefield illustrates terrain experiments without claiming that this is their collection site.',
     sourceIds: ['terrain-study', 'global-study'],
   },
   {
-    id: 'newzealand', name: 'Northern New Zealand', shortName: 'New Zealand', country: 'New Zealand',
-    anchor: [174.76, -36.85],
-    overview: 'New Zealand conservation guidance documents Argentine ants and ecological impacts. All nest positions in this scenario are simulated.',
+    id: 'newzealand', name: 'New Zealand', shortName: 'New Zealand', country: 'New Zealand',
+    anchor: referenceAnchor('NZ'),
+    overview: 'The regional marker follows the historical Wellington NZ reference. New Zealand conservation guidance documents Argentine ants and ecological impacts; game nest positions remain simulated.',
     sourceIds: ['doc-nz', 'global-study'],
   },
   {
     id: 'hawaii', name: 'Hawaiian Islands', shortName: 'Hawaii', country: 'United States',
-    anchor: [-155.58, 19.62],
-    overview: 'Argentine ants occur in Hawaii. In-game dispersal links represent human-assisted movement as an abstraction, not documented active shipping routes.',
+    anchor: referenceAnchor('H1'),
+    overview: 'The regional marker follows the historical Kipuka Nene H1 reference. H2 has a different reported recognition response. Transport links are game abstractions, not documented active shipping routes.',
     sourceIds: ['global-study'],
   },
   {
     id: 'southamerica', name: 'Paraná basin · native range', shortName: 'South America', country: 'Northern Argentina · Paraná drainage',
     anchor: [-58.81, -27.49], nativeRange: true,
-    overview: 'Argentine ants are native to lowland river corridors in the Paraná drainage, including parts of northern Argentina, Paraguay, Uruguay and southern Brazil. Native-range presence is not an invasion. This playable nest network is simulated.',
+    overview: 'Argentine ants are native to lowland river corridors in the Paraná drainage, including parts of northern Argentina, Paraguay, Uruguay and southern Brazil. Native-range presence is not an invasion. This region provides story and research context rather than a playable War network.',
     sourceIds: ['antweb'],
   },
 ];
@@ -56,7 +62,7 @@ export const scenarios: Record<ModeId, ScenarioDefinition> = {
   war: {
     id: 'war', name: 'Supercolony War',
     description: 'Connect your nests. Build a swarm. Follow the network around the world.',
-    objective: 'Eliminate the rival colony by taking its last nest and defeating its remaining swarms.',
+    objective: 'Eliminate the rival colonies by taking their last nests and defeating their remaining swarms.',
     learning: 'Colony recognition, budding, native range, and human-assisted dispersal.', duration: null,
   },
   species: {

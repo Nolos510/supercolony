@@ -1,6 +1,7 @@
 import { regions, scenarios } from './scenarios';
+import { colonyRelation, referencePopulation } from '../data/colonies';
 import type {
-  BatchCommandResult, CombatResult, CommandResult, FleetState, GameState, GrowthInfo, Intervention,
+  BatchCommandResult, ColonyRelation, CombatResult, CommandResult, FleetState, GameState, GrowthInfo, Intervention,
   ModeId, NestState, Owner, RallyInfo, SpeciesId, Terrain, TrailState,
 } from './types';
 
@@ -16,19 +17,48 @@ const WORKERS: Record<SpeciesId, { growth: number; strength: number; capacity: n
 const POSITIONS: [number, number][] = [[20, 38], [40, 25], [67, 23], [27, 69], [55, 61], [81, 70]];
 const LOCAL_PAIRS: [number, number][] = [[0, 1], [1, 2], [0, 3], [1, 4], [2, 4], [3, 4], [4, 5], [2, 5]];
 const PLACE_NAMES = ['Gateway nest', 'Garden edge', 'Open clearing', 'Shaded grove', 'Leaf-litter trail', 'Habitat margin'];
+const WAR_RESERVES: Record<string, readonly number[]> = {
+  california: [66, 32, 32, 30, 16, 18],
+  mediterranean: [48, 10, 32, 30, 16, 18],
+  japan: [48, 10, 32, 30, 16, 18],
+  africa: [20, 10, 32, 30, 16, 18],
+  australia: [48, 10, 32, 30, 16, 18],
+  newzealand: [66, 32, 32, 30, 16, 18],
+  hawaii: [20, 10, 32, 30, 16, 18],
+};
 /** Frozen game balance; these values are not measurements of ant populations. */
 export const REGIONAL_BALANCE = {
   autoThreshold: 20, autoBatch: 10, developmentCost: 30,
   preparationSeconds: 20, growthMultiplier: 1.2,
 } as const;
 
-/** Simulated recognition compatibility; it does not identify surveyed supercolonies. */
+/** Ownership compatibility remains the policy for Species Clash and Ecologist. */
 export function compatibleOwners(first: Owner, second: Owner): boolean {
   return first === second || (first === 'player' || first === 'ally') && (second === 'player' || second === 'ally');
 }
 
+type ColonyActor = Pick<NestState, 'owner' | 'colonyId' | 'species'>;
+
+/** Unclaimed reserves are a game obstacle; they do not assert a colony relationship. */
+export function nestRelation(state: GameState, first: ColonyActor, second: ColonyActor): ColonyRelation {
+  if (second.owner === 'neutral') return 'hostile';
+  if (state.mode === 'war') return colonyRelation(first.colonyId, second.colonyId);
+  return compatibleOwners(first.owner, second.owner) ? 'friendly' : 'hostile';
+}
+
+export function compatibleNests(state: GameState, first: ColonyActor, second: ColonyActor): boolean {
+  return nestRelation(state, first, second) === 'friendly';
+}
+
 function colonyId(owner: Owner, nestId: string): string {
   return owner === 'neutral' ? `simulated-${nestId}` : `simulated-${owner}-network`;
+}
+
+function warOwner(regionId: string, index: number, populationId: string): Owner {
+  if (regionId === 'africa') return 'rival';
+  if (regionId === 'california' && [0, 3].includes(index)) return 'player';
+  if (index === 1) return 'ally';
+  return ['US2', 'H2', 'SA'].includes(populationId) ? 'rival' : 'neutral';
 }
 
 function copy(state: GameState): GameState {
@@ -98,7 +128,7 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
       }
     }
   } else {
-    regions.filter(region => mode !== 'ecologist' || !region.nativeRange).forEach((region, regionIndex) => {
+    regions.filter(region => !region.nativeRange).forEach((region, regionIndex) => {
       for (let i = 0; i < 6; i++) {
         let owner: Owner = i === 2 ? 'rival' : i === 3 ? 'player' : 'neutral';
         if (i === 0) owner = [0, 5].includes(regionIndex) ? 'player' : [1, 2, 4].includes(regionIndex) ? 'rival' : 'neutral';
@@ -107,14 +137,15 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
           owner = i === 0 || i === 2 ? 'rival' : 'player';
           species = owner === 'rival' ? 'argentine' : region.id === 'australia' ? 'meat' : 'native';
         }
-        if (mode === 'war' && i === 1 && ['california', 'newzealand'].includes(region.id)) owner = 'ally';
+        const sourcePopulationId = mode === 'war' ? referencePopulation(region.id, i) : undefined;
+        if (mode === 'war') owner = warOwner(region.id, i, sourcePopulationId!);
         const site = node(`${region.id}-${i}`, region.id, i, owner, species);
-        if (mode === 'war' && i === 0) site.units = owner === 'player' ? 66 : owner === 'rival' ? 48 : 20;
-        if (mode === 'war' && i === 2) site.units = 32;
-        if (mode === 'war' && i === 3) site.units = 30;
-        if (mode === 'war' && owner === 'ally') site.units = 32;
+        if (mode === 'war') {
+          site.units = WAR_RESERVES[region.id][i];
+          if (owner !== 'neutral') site.colonyId = sourcePopulationId!;
+        }
         if (mode === 'ecologist') site.units = owner === 'rival' ? 65 : 18;
-        nodes.push(site);
+        nodes.push(sourcePopulationId ? { ...site, sourcePopulationId } : site);
       }
       edges.push(...localEdges(region.id));
     });
@@ -123,7 +154,6 @@ export function createGame(mode: ModeId, playerSpecies: SpeciesId = 'argentine',
       ['mediterranean', 'africa', 24], ['mediterranean', 'japan', 34],
       ['japan', 'australia', 27], ['australia', 'newzealand', 20], ['hawaii', 'japan', 28],
     ];
-    if (mode === 'war') connections.push(['southamerica', 'california', 31], ['southamerica', 'mediterranean', 34]);
     const presentRegions = new Set(nodes.map(site => site.regionId));
     connections.filter(([from, to]) => presentRegions.has(from) && presentRegions.has(to)).forEach(([from, to, travelSeconds]) => edges.push({
       id: `dispersal-${from}-${to}`, from: `${from}-0`, to: `${to}-0`, kind: 'overseas', travelSeconds,
@@ -166,7 +196,9 @@ function edgeBetween(state: GameState, from: string, to: string): TrailState | u
 }
 
 /** Shortest-time route; a hostile nest may be the destination, never a shortcut. */
-function route(state: GameState, fromId: string, toId: string, owner: Owner, species: SpeciesId): string[] | undefined {
+function route(state: GameState, fromId: string, toId: string, actor: ColonyActor): string[] | undefined {
+  const destination = state.nodes.find(site => site.id === toId);
+  if (!destination || nestRelation(state, actor, destination) === 'unknown') return undefined;
   const distances = new Map<string, number>([[fromId, 0]]);
   const previous = new Map<string, string>();
   const remaining = new Set(state.nodes.map(site => site.id));
@@ -185,11 +217,11 @@ function route(state: GameState, fromId: string, toId: string, owner: Owner, spe
       return path;
     }
     for (const edge of state.edges) {
-      if (!mayUseEdge(state, edge, species)) continue;
+      if (!mayUseEdge(state, edge, actor.species)) continue;
       const next = edge.from === current ? edge.to : edge.to === current ? edge.from : undefined;
       if (!next || !remaining.has(next)) continue;
       const site = state.nodes.find(item => item.id === next)!;
-      if (next !== toId && !compatibleOwners(site.owner, owner)) continue;
+      if (next !== toId && !compatibleNests(state, actor, site)) continue;
       const tentative = shortest + edge.travelSeconds;
       if (tentative < (distances.get(next) ?? Infinity)) {
         distances.set(next, tentative); previous.set(next, current);
@@ -218,13 +250,15 @@ export function send(state: GameState, fromId: string, toId: string, fraction: n
   if (source.owner !== 'player') return { state, error: 'Select a nest belonging to your colony first.' };
   if (fromId === toId) return { state, error: 'Choose a different destination nest.' };
   if (Math.floor(source.units * fraction) < 1) return { state, error: 'This nest needs more workers before it can send a swarm.' };
-  const path = route(state, fromId, toId, 'player', source.species);
+  const relation = nestRelation(state, source, target);
+  if (relation === 'unknown') return { state, error: 'Recognition between these colonies is unknown. No workers were sent for an unreported relationship.' };
+  const path = route(state, fromId, toId, source);
   if (!path) return { state, error: 'No open route. Capture the connecting nest or wait for transport to reopen.' };
   const next = copy(state);
   dispatch(next, next.nodes.find(site => site.id === fromId)!, path, fraction);
   next.stats.orders++;
   const units = Math.floor(source.units * fraction);
-  const reinforcement = compatibleOwners(source.owner, target.owner);
+  const reinforcement = relation === 'friendly';
   if (reinforcement) {
     next.stats.reinforcementOrders++;
     next.stats.reinforcementWorkers += units;
@@ -274,7 +308,7 @@ export function rallyInfo(state: GameState, regionId: string, fraction = 1): Ral
   const validFraction = Number.isFinite(fraction) && fraction > 0 && fraction <= 1;
   for (const source of state.nodes) {
     if (source.regionId !== regionId || source.owner !== 'player' || source.gateway) continue;
-    if (!gateway || !route(state, source.id, gateway.id, 'player', source.species)) {
+    if (!gateway || !compatibleNests(state, source, gateway) || !route(state, source.id, gateway.id, source)) {
       blockedSourceIds.push(source.id);
       continue;
     }
@@ -298,8 +332,16 @@ export function rallyRegion(state: GameState, regionId: string, fraction: number
   const gateway = regionalGateway(state, regionId);
   if (!gateway) return reject('Choose a region with a gateway on this map.');
   if (gateway.owner !== 'player') return reject('Capture this region’s gateway before rallying workers.');
-  const sources = state.nodes.filter(site => site.regionId === regionId && site.owner === 'player' && !site.gateway).map(site => site.id);
-  return sendMany(state, sources, gateway.id, fraction);
+  const sources = state.nodes.filter(site => site.regionId === regionId && site.owner === 'player' && !site.gateway);
+  const friendly = sources.filter(site => compatibleNests(state, site, gateway));
+  const incompatible = sources.filter(site => !compatibleNests(state, site, gateway)).map(site => ({
+    sourceId: site.id,
+    reason: nestRelation(state, site, gateway) === 'unknown'
+      ? 'Recognition is unknown; this source cannot reinforce the gateway.'
+      : 'This colony cannot reinforce the gateway.',
+  }));
+  const result = sendMany(state, friendly.map(site => site.id), gateway.id, fraction);
+  return { ...result, skipped: [...result.skipped, ...incompatible] };
 }
 
 /** Configuration can change while paused; swarms launch only during game ticks. */
@@ -356,8 +398,8 @@ export function growthInfo(state: GameState, site: NestState): GrowthInfo {
   };
 }
 
-function invalidateGateway(state: GameState, site: NestState) {
-  if (!site.gateway || site.owner === 'player') return;
+function invalidateGateway(state: GameState, site: NestState, capturedFromPlayer = false) {
+  if (!site.gateway || site.owner === 'player' && !capturedFromPlayer) return;
   delete state.autoRally[site.regionId];
   delete state.developments[site.regionId];
 }
@@ -377,8 +419,8 @@ function autoRally(state: GameState) {
   for (const source of state.nodes) {
     if (!state.autoRally[source.regionId] || source.owner !== 'player' || source.gateway || source.units < REGIONAL_BALANCE.autoThreshold) continue;
     const gateway = regionalGateway(state, source.regionId);
-    if (!gateway || gateway.owner !== 'player') continue;
-    const path = route(state, source.id, gateway.id, 'player', source.species);
+    if (!gateway || gateway.owner !== 'player' || !compatibleNests(state, source, gateway)) continue;
+    const path = route(state, source.id, gateway.id, source);
     if (!path) continue;
     dispatchUnits(state, source, path, REGIONAL_BALANCE.autoBatch);
     state.stats.automaticRallyOrders++;
@@ -434,8 +476,8 @@ function ai(state: GameState) {
   for (const source of ready) {
     if (source.owner === 'ally') {
       // Give depleted player nests dependable help before choosing an attack.
-      const support = state.nodes.filter(site => site.owner === 'player' && site.units < Math.min(24, site.capacity * 0.3))
-        .map(site => ({ site, path: route(state, source.id, site.id, source.owner, source.species) }))
+      const support = state.nodes.filter(site => site.owner === 'player' && compatibleNests(state, source, site) && site.units < Math.min(24, site.capacity * 0.3))
+        .map(site => ({ site, path: route(state, source.id, site.id, source) }))
         .filter((candidate): candidate is { site: NestState; path: string[] } => !!candidate.path)
         .sort((first, second) => first.site.units - second.site.units || first.path.length - second.path.length);
       if (support.length) {
@@ -446,7 +488,10 @@ function ai(state: GameState) {
     if (random(state) > 0.35) continue;
     const adjacent = state.edges.filter(edge => (edge.from === source.id || edge.to === source.id) && mayUseEdge(state, edge, source.species));
     const candidates = adjacent.map(edge => ({ edge, site: state.nodes.find(item => item.id === (edge.from === source.id ? edge.to : edge.from))! }))
-      .filter(({ site }) => source.owner === 'ally' ? site.owner === 'rival' : !compatibleOwners(site.owner, source.owner));
+      .filter(({ site }) => {
+        if (source.owner === 'ally' && site.owner !== 'rival') return false;
+        return nestRelation(state, source, site) === 'hostile';
+      });
     if (!candidates.length) continue;
     const fraction = 0.6 + random(state) * 0.2;
     candidates.sort((a, b) => {
@@ -463,7 +508,7 @@ function ai(state: GameState) {
 }
 
 function arrive(state: GameState, fleet: FleetState, site: NestState): boolean {
-  if (compatibleOwners(site.owner, fleet.owner)) {
+  if (compatibleNests(state, fleet, site)) {
     if (fleet.legIndex === fleet.path.length - 2) { site.units += fleet.units; return true; }
     return false;
   }
@@ -475,13 +520,13 @@ function arrive(state: GameState, fleet: FleetState, site: NestState): boolean {
     site.owner = fleet.owner; site.colonyId = fleet.colonyId; site.species = fleet.species;
     site.capacity = WORKERS[fleet.species].capacity; site.growth = WORKERS[fleet.species].growth;
     // Invalidate at the actual loss, including a loss followed by same-tick recapture.
-    invalidateGateway(state, site);
+    invalidateGateway(state, site, wasPlayer);
     if (fleet.owner === 'player') {
       state.stats.captures++;
       record(state, `${site.name} joins your colony network.`, state.mode === 'species' ? 'terrain' : 'recognition');
     } else if (wasPlayer) {
       state.stats.losses++;
-      record(state, `${site.name} was taken by the rival colony.`, state.mode === 'ecologist' ? 'biodiversity' : 'recognition');
+      record(state, `${site.name} was taken by a rival colony.`, state.mode === 'ecologist' ? 'biodiversity' : 'recognition');
     } else if (fleet.owner === 'ally') {
       record(state, `${site.name} joins the cooperating network.`, 'recognition');
     }
@@ -497,19 +542,42 @@ function moveFleets(state: GameState, dt: number) {
     if (!edge) {
       // A malformed route is returned to its current nest instead of deleting workers.
       const origin = state.nodes.find(site => site.id === fleet.path[fleet.legIndex]);
-      if (origin && compatibleOwners(origin.owner, fleet.owner)) origin.units += fleet.units;
+      if (origin && compatibleNests(state, fleet, origin)) origin.units += fleet.units;
+      else surviving.push(fleet);
       continue;
     }
     if (edge.kind === 'overseas' && (fleet.species === 'native' || state.mode === 'ecologist' && fleet.species !== 'argentine')) {
       const origin = state.nodes.find(site => site.id === fleet.path[fleet.legIndex]);
-      if (origin && compatibleOwners(origin.owner, fleet.owner)) origin.units += fleet.units;
+      if (origin && compatibleNests(state, fleet, origin)) origin.units += fleet.units;
+      else surviving.push(fleet);
       continue;
     }
     if (blocked(state, edge)) { surviving.push(fleet); continue; }
     const travelSeconds = edge.travelSeconds * (fleet.species === 'meat' ? 1.15 : 1);
+    const previousElapsed = fleet.elapsed;
     fleet.elapsed += dt;
     if (fleet.elapsed + 1e-8 < travelSeconds) { surviving.push(fleet); continue; }
     const destination = state.nodes.find(site => site.id === fleet.path[fleet.legIndex + 1])!;
+    if (nestRelation(state, fleet, destination) === 'unknown') {
+      if (!fleet.withdrawing) {
+        // Include the failed arrival, then retrace only the route already travelled.
+        // Do not increment legIndex afterwards: the return starts on its first edge.
+        fleet.path = [destination.id, ...fleet.path.slice(0, fleet.legIndex + 1).reverse()];
+        fleet.legIndex = 0;
+        fleet.elapsed = 0;
+        fleet.withdrawing = true;
+        record(state, 'An unreported recognition relationship blocked arrival. The swarm is returning along its traversed route.', 'recognition');
+      } else {
+        // A changed return destination may also be unknown. Wait for a known
+        // relationship instead of deleting workers or bouncing indefinitely.
+        if (previousElapsed + 1e-8 < travelSeconds) {
+          record(state, 'The return path has an unknown recognition relationship. Workers wait without fighting until its destination changes.', 'recognition');
+        }
+        fleet.elapsed = travelSeconds;
+      }
+      surviving.push(fleet);
+      continue;
+    }
     if (arrive(state, fleet, destination)) continue;
     fleet.legIndex++; fleet.elapsed = 0;
     surviving.push(fleet);
@@ -552,14 +620,18 @@ function finishSurvey(state: GameState) {
 }
 
 function evaluateElimination(state: GameState) {
-  const alive = (owner: Owner) => state.nodes.some(site => site.owner === owner)
-    || state.fleets.some(fleet => fleet.owner === owner && fleet.units > 0);
+  const belongs = (actor: ColonyActor, owner: Owner) => actor.owner === owner
+    && (state.mode !== 'war' || owner !== 'rival' || colonyRelation('US1', actor.colonyId) !== 'friendly');
+  const alive = (owner: Owner) => state.nodes.some(site => belongs(site, owner))
+    || state.fleets.some(fleet => belongs(fleet, owner) && fleet.units > 0);
   const playerAlive = alive('player');
   const rivalAlive = alive('rival');
   if (playerAlive && rivalAlive) return;
   state.status = playerAlive ? 'won' : rivalAlive ? 'lost' : 'draw';
   const message = state.status === 'won'
-    ? 'The rival colony has no nests or workers in transit. Your colony survives.'
+    ? state.mode === 'war'
+      ? 'The rival colonies have no nests or workers in transit. Your colony survives.'
+      : 'The rival colony has no nests or workers in transit. Your colony survives.'
     : state.status === 'lost'
       ? 'Your colony has no nests or workers in transit. Review the expedition and try a new strategy.'
       : 'Neither colony has nests or workers in transit. The expedition ends without a surviving colony.';

@@ -1,0 +1,1398 @@
+{
+  "stage": "after-compact",
+  "observedAt": "2026-10-14T19:03:31.674Z",
+  "reports": [
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 228.796875,
+          "width": 320,
+          "height": 271.203125,
+          "left": 0,
+          "right": 320,
+          "top": 228.796875,
+          "bottom": 500
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 32.390625,
+              "y": 309.84375,
+              "width": 44,
+              "height": 44,
+              "left": 32.390625,
+              "right": 76.390625,
+              "top": 309.84375,
+              "bottom": 353.84375
+            },
+            "label": {
+              "x": 17.96875,
+              "y": 362.84375,
+              "width": 72.84375,
+              "height": 20,
+              "left": 17.96875,
+              "right": 90.8125,
+              "top": 362.84375,
+              "bottom": 382.84375
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 138,
+              "y": 309.84375,
+              "width": 44,
+              "height": 44,
+              "left": 138,
+              "right": 182,
+              "top": 309.84375,
+              "bottom": 353.84375
+            },
+            "label": {
+              "x": 124.375,
+              "y": 362.84375,
+              "width": 71.234375,
+              "height": 20,
+              "left": 124.375,
+              "right": 195.609375,
+              "top": 362.84375,
+              "bottom": 382.84375
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 243.59375,
+              "y": 309.84375,
+              "width": 44,
+              "height": 44,
+              "left": 243.59375,
+              "right": 287.59375,
+              "top": 309.84375,
+              "bottom": 353.84375
+            },
+            "label": {
+              "x": 227.546875,
+              "y": 362.84375,
+              "width": 76.09375,
+              "height": 20,
+              "left": 227.546875,
+              "right": 303.640625,
+              "top": 362.84375,
+              "bottom": 382.84375
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 32.390625,
+              "y": 407.484375,
+              "width": 44,
+              "height": 44,
+              "left": 32.390625,
+              "right": 76.390625,
+              "top": 407.484375,
+              "bottom": 451.484375
+            },
+            "label": {
+              "x": 17.015625,
+              "y": 460.484375,
+              "width": 74.75,
+              "height": 20,
+              "left": 17.015625,
+              "right": 91.765625,
+              "top": 460.484375,
+              "bottom": 480.484375
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 138,
+              "y": 407.484375,
+              "width": 44,
+              "height": 44,
+              "left": 138,
+              "right": 182,
+              "top": 407.484375,
+              "bottom": 451.484375
+            },
+            "label": {
+              "x": 122.890625,
+              "y": 460.484375,
+              "width": 74.21875,
+              "height": 20,
+              "left": 122.890625,
+              "right": 197.109375,
+              "top": 460.484375,
+              "bottom": 480.484375
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 243.59375,
+              "y": 407.484375,
+              "width": 44,
+              "height": 44,
+              "left": 243.59375,
+              "right": 287.59375,
+              "top": 407.484375,
+              "bottom": 451.484375
+            },
+            "label": {
+              "x": 225.9375,
+              "y": 460.484375,
+              "width": 79.3125,
+              "height": 20,
+              "left": 225.9375,
+              "right": 305.25,
+              "top": 460.484375,
+              "bottom": 480.484375
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": false,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 200,
+          "width": 375,
+          "height": 399,
+          "left": 0,
+          "right": 375,
+          "top": 200,
+          "bottom": 599
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 41.75,
+              "y": 329.609375,
+              "width": 44,
+              "height": 44,
+              "left": 41.75,
+              "right": 85.75,
+              "top": 329.609375,
+              "bottom": 373.609375
+            },
+            "label": {
+              "x": 27.328125,
+              "y": 382.609375,
+              "width": 72.84375,
+              "height": 20,
+              "left": 27.328125,
+              "right": 100.171875,
+              "top": 382.609375,
+              "bottom": 402.609375
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 165.5,
+              "y": 329.609375,
+              "width": 44,
+              "height": 44,
+              "left": 165.5,
+              "right": 209.5,
+              "top": 329.609375,
+              "bottom": 373.609375
+            },
+            "label": {
+              "x": 151.875,
+              "y": 382.609375,
+              "width": 71.234375,
+              "height": 20,
+              "left": 151.875,
+              "right": 223.109375,
+              "top": 382.609375,
+              "bottom": 402.609375
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 289.25,
+              "y": 329.609375,
+              "width": 44,
+              "height": 44,
+              "left": 289.25,
+              "right": 333.25,
+              "top": 329.609375,
+              "bottom": 373.609375
+            },
+            "label": {
+              "x": 273.203125,
+              "y": 382.609375,
+              "width": 76.09375,
+              "height": 20,
+              "left": 273.203125,
+              "right": 349.296875,
+              "top": 382.609375,
+              "bottom": 402.609375
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 41.75,
+              "y": 473.25,
+              "width": 44,
+              "height": 44,
+              "left": 41.75,
+              "right": 85.75,
+              "top": 473.25,
+              "bottom": 517.25
+            },
+            "label": {
+              "x": 26.375,
+              "y": 526.25,
+              "width": 74.75,
+              "height": 20,
+              "left": 26.375,
+              "right": 101.125,
+              "top": 526.25,
+              "bottom": 546.25
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 165.5,
+              "y": 473.25,
+              "width": 44,
+              "height": 44,
+              "left": 165.5,
+              "right": 209.5,
+              "top": 473.25,
+              "bottom": 517.25
+            },
+            "label": {
+              "x": 150.390625,
+              "y": 526.25,
+              "width": 74.21875,
+              "height": 20,
+              "left": 150.390625,
+              "right": 224.609375,
+              "top": 526.25,
+              "bottom": 546.25
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 289.25,
+              "y": 473.25,
+              "width": 44,
+              "height": 44,
+              "left": 289.25,
+              "right": 333.25,
+              "top": 473.25,
+              "bottom": 517.25
+            },
+            "label": {
+              "x": 271.59375,
+              "y": 526.25,
+              "width": 79.3125,
+              "height": 20,
+              "left": 271.59375,
+              "right": 350.90625,
+              "top": 526.25,
+              "bottom": 546.25
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": false,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 200,
+          "width": 390,
+          "height": 576,
+          "left": 0,
+          "right": 390,
+          "top": 200,
+          "bottom": 776
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 79.390625,
+              "y": 409.078125,
+              "width": 44,
+              "height": 44,
+              "left": 79.390625,
+              "right": 123.390625,
+              "top": 409.078125,
+              "bottom": 453.078125
+            },
+            "label": {
+              "x": 64.96875,
+              "y": 462.078125,
+              "width": 72.84375,
+              "height": 20,
+              "left": 64.96875,
+              "right": 137.8125,
+              "top": 462.078125,
+              "bottom": 482.078125
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 141.796875,
+              "y": 353.671875,
+              "width": 44,
+              "height": 44,
+              "left": 141.796875,
+              "right": 185.796875,
+              "top": 353.671875,
+              "bottom": 397.671875
+            },
+            "label": {
+              "x": 128.171875,
+              "y": 406.671875,
+              "width": 71.234375,
+              "height": 20,
+              "left": 128.171875,
+              "right": 199.40625,
+              "top": 406.671875,
+              "bottom": 426.671875
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 226.03125,
+              "y": 345.140625,
+              "width": 44,
+              "height": 44,
+              "left": 226.03125,
+              "right": 270.03125,
+              "top": 345.140625,
+              "bottom": 389.140625
+            },
+            "label": {
+              "x": 209.984375,
+              "y": 398.140625,
+              "width": 76.09375,
+              "height": 20,
+              "left": 209.984375,
+              "right": 286.078125,
+              "top": 398.140625,
+              "bottom": 418.140625
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 101.234375,
+              "y": 541.21875,
+              "width": 44,
+              "height": 44,
+              "left": 101.234375,
+              "right": 145.234375,
+              "top": 541.21875,
+              "bottom": 585.21875
+            },
+            "label": {
+              "x": 85.859375,
+              "y": 594.21875,
+              "width": 74.75,
+              "height": 20,
+              "left": 85.859375,
+              "right": 160.609375,
+              "top": 594.21875,
+              "bottom": 614.21875
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 188.59375,
+              "y": 507.125,
+              "width": 44,
+              "height": 44,
+              "left": 188.59375,
+              "right": 232.59375,
+              "top": 507.125,
+              "bottom": 551.125
+            },
+            "label": {
+              "x": 173.484375,
+              "y": 560.125,
+              "width": 74.21875,
+              "height": 20,
+              "left": 173.484375,
+              "right": 247.703125,
+              "top": 560.125,
+              "bottom": 580.125
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 269.71875,
+              "y": 545.484375,
+              "width": 44,
+              "height": 44,
+              "left": 269.71875,
+              "right": 313.71875,
+              "top": 545.484375,
+              "bottom": 589.484375
+            },
+            "label": {
+              "x": 252.0625,
+              "y": 598.484375,
+              "width": 79.3125,
+              "height": 20,
+              "left": 252.0625,
+              "right": 331.375,
+              "top": 598.484375,
+              "bottom": 618.484375
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": true,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "chromium",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 172,
+          "width": 844,
+          "height": 166,
+          "left": 0,
+          "right": 844,
+          "top": 172,
+          "bottom": 338
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 53.953125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 53.953125,
+              "right": 97.953125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 36.390625,
+              "y": 291.625,
+              "width": 79.125,
+              "height": 21,
+              "left": 36.390625,
+              "right": 115.515625,
+              "top": 291.625,
+              "bottom": 312.625
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 192.375,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 192.375,
+              "right": 236.375,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 175.6875,
+              "y": 291.625,
+              "width": 77.359375,
+              "height": 21,
+              "left": 175.6875,
+              "right": 253.046875,
+              "top": 291.625,
+              "bottom": 312.625
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 330.78125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 330.78125,
+              "right": 374.78125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 311.421875,
+              "y": 291.625,
+              "width": 82.703125,
+              "height": 21,
+              "left": 311.421875,
+              "right": 394.125,
+              "top": 291.625,
+              "bottom": 312.625
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 469.203125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 469.203125,
+              "right": 513.203125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 450.578125,
+              "y": 291.625,
+              "width": 81.234375,
+              "height": 21,
+              "left": 450.578125,
+              "right": 531.8125,
+              "top": 291.625,
+              "bottom": 312.625
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 607.609375,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 607.609375,
+              "right": 651.609375,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 589.28125,
+              "y": 291.625,
+              "width": 80.640625,
+              "height": 21,
+              "left": 589.28125,
+              "right": 669.921875,
+              "top": 291.625,
+              "bottom": 312.625
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 746.03125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 746.03125,
+              "right": 790.03125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 724.90625,
+              "y": 291.625,
+              "width": 86.234375,
+              "height": 21,
+              "left": 724.90625,
+              "right": 811.140625,
+              "top": 291.625,
+              "bottom": 312.625
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": false,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 228.796875,
+          "width": 320,
+          "height": 271.203125,
+          "left": 0,
+          "right": 320,
+          "top": 228.796875,
+          "bottom": 500
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 32.390625,
+              "y": 309.84375,
+              "width": 44,
+              "height": 44,
+              "left": 32.390625,
+              "right": 76.390625,
+              "top": 309.84375,
+              "bottom": 353.84375
+            },
+            "label": {
+              "x": 17.970623016357422,
+              "y": 362.915771484375,
+              "width": 72.83999633789062,
+              "height": 19.65997314453125,
+              "left": 17.970623016357422,
+              "right": 90.81061935424805,
+              "top": 362.915771484375,
+              "bottom": 382.57574462890625
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 138,
+              "y": 309.84375,
+              "width": 44,
+              "height": 44,
+              "left": 138,
+              "right": 182,
+              "top": 309.84375,
+              "bottom": 353.84375
+            },
+            "label": {
+              "x": 124.38500213623047,
+              "y": 362.915771484375,
+              "width": 71.22998809814453,
+              "height": 19.65997314453125,
+              "left": 124.38500213623047,
+              "right": 195.614990234375,
+              "top": 362.915771484375,
+              "bottom": 382.57574462890625
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 243.59375,
+              "y": 309.84375,
+              "width": 44,
+              "height": 44,
+              "left": 243.59375,
+              "right": 287.59375,
+              "top": 309.84375,
+              "bottom": 353.84375
+            },
+            "label": {
+              "x": 227.55374145507812,
+              "y": 362.915771484375,
+              "width": 76.08001708984375,
+              "height": 19.65997314453125,
+              "left": 227.55374145507812,
+              "right": 303.6337585449219,
+              "top": 362.915771484375,
+              "bottom": 382.57574462890625
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 32.390625,
+              "y": 407.484375,
+              "width": 44,
+              "height": 44,
+              "left": 32.390625,
+              "right": 76.390625,
+              "top": 407.484375,
+              "bottom": 451.484375
+            },
+            "label": {
+              "x": 17.015625,
+              "y": 460.556396484375,
+              "width": 74.75,
+              "height": 19.65997314453125,
+              "left": 17.015625,
+              "right": 91.765625,
+              "top": 460.556396484375,
+              "bottom": 480.21636962890625
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 138,
+              "y": 407.484375,
+              "width": 44,
+              "height": 44,
+              "left": 138,
+              "right": 182,
+              "top": 407.484375,
+              "bottom": 451.484375
+            },
+            "label": {
+              "x": 122.8949966430664,
+              "y": 460.556396484375,
+              "width": 74.21001434326172,
+              "height": 19.65997314453125,
+              "left": 122.8949966430664,
+              "right": 197.10501098632812,
+              "top": 460.556396484375,
+              "bottom": 480.21636962890625
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 243.59375,
+              "y": 407.484375,
+              "width": 44,
+              "height": 44,
+              "left": 243.59375,
+              "right": 287.59375,
+              "top": 407.484375,
+              "bottom": 451.484375
+            },
+            "label": {
+              "x": 225.94375610351562,
+              "y": 460.556396484375,
+              "width": 79.29998779296875,
+              "height": 19.65997314453125,
+              "left": 225.94375610351562,
+              "right": 305.2437438964844,
+              "top": 460.556396484375,
+              "bottom": 480.21636962890625
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": false,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 200,
+          "width": 375,
+          "height": 399,
+          "left": 0,
+          "right": 375,
+          "top": 200,
+          "bottom": 599
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 41.75,
+              "y": 329.609375,
+              "width": 44,
+              "height": 44,
+              "left": 41.75,
+              "right": 85.75,
+              "top": 329.609375,
+              "bottom": 373.609375
+            },
+            "label": {
+              "x": 27.329998016357422,
+              "y": 382.681396484375,
+              "width": 72.83999633789062,
+              "height": 19.65997314453125,
+              "left": 27.329998016357422,
+              "right": 100.16999435424805,
+              "top": 382.681396484375,
+              "bottom": 402.34136962890625
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 165.5,
+              "y": 329.609375,
+              "width": 44,
+              "height": 44,
+              "left": 165.5,
+              "right": 209.5,
+              "top": 329.609375,
+              "bottom": 373.609375
+            },
+            "label": {
+              "x": 151.885009765625,
+              "y": 382.681396484375,
+              "width": 71.22998046875,
+              "height": 19.65997314453125,
+              "left": 151.885009765625,
+              "right": 223.114990234375,
+              "top": 382.681396484375,
+              "bottom": 402.34136962890625
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 289.25,
+              "y": 329.609375,
+              "width": 44,
+              "height": 44,
+              "left": 289.25,
+              "right": 333.25,
+              "top": 329.609375,
+              "bottom": 373.609375
+            },
+            "label": {
+              "x": 273.2099914550781,
+              "y": 382.681396484375,
+              "width": 76.08001708984375,
+              "height": 19.65997314453125,
+              "left": 273.2099914550781,
+              "right": 349.2900085449219,
+              "top": 382.681396484375,
+              "bottom": 402.34136962890625
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 41.75,
+              "y": 473.25,
+              "width": 44,
+              "height": 44,
+              "left": 41.75,
+              "right": 85.75,
+              "top": 473.25,
+              "bottom": 517.25
+            },
+            "label": {
+              "x": 26.375,
+              "y": 526.322021484375,
+              "width": 74.75,
+              "height": 19.65997314453125,
+              "left": 26.375,
+              "right": 101.125,
+              "top": 526.322021484375,
+              "bottom": 545.9819946289062
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 165.5,
+              "y": 473.25,
+              "width": 44,
+              "height": 44,
+              "left": 165.5,
+              "right": 209.5,
+              "top": 473.25,
+              "bottom": 517.25
+            },
+            "label": {
+              "x": 150.39498901367188,
+              "y": 526.322021484375,
+              "width": 74.21002197265625,
+              "height": 19.65997314453125,
+              "left": 150.39498901367188,
+              "right": 224.60501098632812,
+              "top": 526.322021484375,
+              "bottom": 545.9819946289062
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 289.25,
+              "y": 473.25,
+              "width": 44,
+              "height": 44,
+              "left": 289.25,
+              "right": 333.25,
+              "top": 473.25,
+              "bottom": 517.25
+            },
+            "label": {
+              "x": 271.6000061035156,
+              "y": 526.322021484375,
+              "width": 79.29998779296875,
+              "height": 19.65997314453125,
+              "left": 271.6000061035156,
+              "right": 350.8999938964844,
+              "top": 526.322021484375,
+              "bottom": 545.9819946289062
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": false,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 200,
+          "width": 390,
+          "height": 576,
+          "left": 0,
+          "right": 390,
+          "top": 200,
+          "bottom": 776
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 79.390625,
+              "y": 409.078125,
+              "width": 44,
+              "height": 44,
+              "left": 79.390625,
+              "right": 123.390625,
+              "top": 409.078125,
+              "bottom": 453.078125
+            },
+            "label": {
+              "x": 64.97062683105469,
+              "y": 462.150146484375,
+              "width": 72.83999633789062,
+              "height": 19.65997314453125,
+              "left": 64.97062683105469,
+              "right": 137.8106231689453,
+              "top": 462.150146484375,
+              "bottom": 481.81011962890625
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 141.796875,
+              "y": 353.671875,
+              "width": 44,
+              "height": 44,
+              "left": 141.796875,
+              "right": 185.796875,
+              "top": 353.671875,
+              "bottom": 397.671875
+            },
+            "label": {
+              "x": 128.181884765625,
+              "y": 406.743896484375,
+              "width": 71.22998046875,
+              "height": 19.65997314453125,
+              "left": 128.181884765625,
+              "right": 199.411865234375,
+              "top": 406.743896484375,
+              "bottom": 426.40386962890625
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 226.03125,
+              "y": 345.140625,
+              "width": 44,
+              "height": 44,
+              "left": 226.03125,
+              "right": 270.03125,
+              "top": 345.140625,
+              "bottom": 389.140625
+            },
+            "label": {
+              "x": 209.99124145507812,
+              "y": 398.212646484375,
+              "width": 76.08001708984375,
+              "height": 19.65997314453125,
+              "left": 209.99124145507812,
+              "right": 286.0712585449219,
+              "top": 398.212646484375,
+              "bottom": 417.87261962890625
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 101.234375,
+              "y": 541.21875,
+              "width": 44,
+              "height": 44,
+              "left": 101.234375,
+              "right": 145.234375,
+              "top": 541.21875,
+              "bottom": 585.21875
+            },
+            "label": {
+              "x": 85.859375,
+              "y": 594.290771484375,
+              "width": 74.75,
+              "height": 19.65997314453125,
+              "left": 85.859375,
+              "right": 160.609375,
+              "top": 594.290771484375,
+              "bottom": 613.9507446289062
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 188.59375,
+              "y": 507.125,
+              "width": 44,
+              "height": 44,
+              "left": 188.59375,
+              "right": 232.59375,
+              "top": 507.125,
+              "bottom": 551.125
+            },
+            "label": {
+              "x": 173.48873901367188,
+              "y": 560.197021484375,
+              "width": 74.21002197265625,
+              "height": 19.65997314453125,
+              "left": 173.48873901367188,
+              "right": 247.69876098632812,
+              "top": 560.197021484375,
+              "bottom": 579.8569946289062
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 269.71875,
+              "y": 545.484375,
+              "width": 44,
+              "height": 44,
+              "left": 269.71875,
+              "right": 313.71875,
+              "top": 545.484375,
+              "bottom": 589.484375
+            },
+            "label": {
+              "x": 252.06875610351562,
+              "y": 598.556396484375,
+              "width": 79.29998779296875,
+              "height": 19.65997314453125,
+              "left": 252.06875610351562,
+              "right": 331.3687438964844,
+              "top": 598.556396484375,
+              "bottom": 618.2163696289062
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": true,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "errors": [],
+      "geometry": {
+        "canvas": {
+          "x": 0,
+          "y": 172,
+          "width": 844,
+          "height": 166,
+          "left": 0,
+          "right": 844,
+          "top": 172,
+          "bottom": 338
+        },
+        "nodes": [
+          {
+            "id": "california-0",
+            "button": {
+              "x": 53.953125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 53.953125,
+              "right": 97.953125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 36.3911247253418,
+              "y": 291.697021484375,
+              "width": 79.12399291992188,
+              "height": 21.025970458984375,
+              "left": 36.3911247253418,
+              "right": 115.51511764526367,
+              "top": 291.697021484375,
+              "bottom": 312.7229919433594
+            }
+          },
+          {
+            "id": "california-1",
+            "button": {
+              "x": 192.375,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 192.375,
+              "right": 236.375,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 175.69850158691406,
+              "y": 291.697021484375,
+              "width": 77.35299682617188,
+              "height": 21.025970458984375,
+              "left": 175.69850158691406,
+              "right": 253.05149841308594,
+              "top": 291.697021484375,
+              "bottom": 312.7229919433594
+            }
+          },
+          {
+            "id": "california-2",
+            "button": {
+              "x": 330.78125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 330.78125,
+              "right": 374.78125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 311.437255859375,
+              "y": 291.697021484375,
+              "width": 82.68798828125,
+              "height": 21.025970458984375,
+              "left": 311.437255859375,
+              "right": 394.125244140625,
+              "top": 291.697021484375,
+              "bottom": 312.7229919433594
+            }
+          },
+          {
+            "id": "california-3",
+            "button": {
+              "x": 469.203125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 469.203125,
+              "right": 513.203125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 450.59063720703125,
+              "y": 291.697021484375,
+              "width": 81.2249755859375,
+              "height": 21.025970458984375,
+              "left": 450.59063720703125,
+              "right": 531.8156127929688,
+              "top": 291.697021484375,
+              "bottom": 312.7229919433594
+            }
+          },
+          {
+            "id": "california-4",
+            "button": {
+              "x": 607.609375,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 607.609375,
+              "right": 651.609375,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 589.2938842773438,
+              "y": 291.697021484375,
+              "width": 80.6309814453125,
+              "height": 21.025970458984375,
+              "left": 589.2938842773438,
+              "right": 669.9248657226562,
+              "top": 291.697021484375,
+              "bottom": 312.7229919433594
+            }
+          },
+          {
+            "id": "california-5",
+            "button": {
+              "x": 746.03125,
+              "y": 239.625,
+              "width": 44,
+              "height": 44,
+              "left": 746.03125,
+              "right": 790.03125,
+              "top": 239.625,
+              "bottom": 283.625
+            },
+            "label": {
+              "x": 724.916259765625,
+              "y": 291.697021484375,
+              "width": 86.22998046875,
+              "height": 21.025970458984375,
+              "left": 724.916259765625,
+              "right": 811.146240234375,
+              "top": 291.697021484375,
+              "bottom": 312.7229919433594
+            }
+          }
+        ],
+        "intersections": [],
+        "locatorVisible": false,
+        "locatorOverlaps": [],
+        "worldViewVisible": true,
+        "overflow": false
+      },
+      "flows": {
+        "ownedNativeTapSelected": "true",
+        "worldNodes": 7,
+        "nativeContextNodes": 0,
+        "nativeContextStatePreserved": true,
+        "firstRecentPeriodVisible": true,
+        "samplingPointControls": 1,
+        "researchStatePreserved": true
+      }
+    }
+  ]
+}

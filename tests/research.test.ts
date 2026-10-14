@@ -16,7 +16,7 @@ it('bundles literal California observations with dates and methods', () => {
   expect(new Set(californiaObservations.map(p => p.pointId)).size).toBe(295);
   expect(californiaObservations.filter(p => p.original)).toHaveLength(111);
   for (const p of californiaObservations) { expect(p.lon).toBeLessThan(-116); expect(p.lon).toBeGreaterThan(-118); expect(p.lat).toBeGreaterThan(32); expect(p.lat).toBeLessThan(34); expect(p.method.length).toBeGreaterThan(2); expect(p.status).toMatch(/^(present|not-detected)$/); }
-  expect(researchDatasets.map(d => d.publicationYear)).toEqual([2010, 2025]);
+  expect(researchDatasets.map(d => d.publicationYear)).toEqual([2010, 2025, 2023]);
 });
 it('provides eight regional contexts and attributed exact-species worker photographs', () => {
   expect(regionalContexts).toHaveLength(8);

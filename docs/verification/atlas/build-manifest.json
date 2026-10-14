@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "buildSourceReceipt": "verification/atlas-repair-receipt.json",
+  "files": [
+    {
+      "path": "assets/ResearchMap-P8mngego.js",
+      "sha256": "41b96ff4c0f72b656d6bafd348140ee055068c2d4222590afba400a0b0050db4",
+      "bytes": 421634
+    },
+    {
+      "path": "assets/SpecimenExplorer-DWHd1otX.js",
+      "sha256": "96d749deb87a4659118471af7c742378000243c21b6b483752713342ae0a9d8f",
+      "bytes": 7221
+    },
+    {
+      "path": "assets/Story-D2ti9KBX.js",
+      "sha256": "c368d3abd074ca145ae0e61bd49193edf39c827b94afc24428be9df3dddca454",
+      "bytes": 7154
+    },
+    {
+      "path": "assets/index-CCuvKjeY.js",
+      "sha256": "4eed195a6495a0c2281962b88c6d27245ed14fb09670faeabeb3b426eb879fde",
+      "bytes": 503986
+    },
+    {
+      "path": "assets/index-Df7lBby2.css",
+      "sha256": "772f35fd93051a55eee8086bda7bf6d85d9d0e0c048bf0a1506d37ec3613f724",
+      "bytes": 71609
+    },
+    {
+      "path": "assets/jsx-runtime-FPQf9emy.js",
+      "sha256": "9cf9682a779341180219f300fc2470257a6fa9e6cef62289fd53b07dd5de4247",
+      "bytes": 209632
+    },
+    {
+      "path": "habitats/atlas-east/au-bark.jpg",
+      "sha256": "aa3704a6f4e29ab8089237aa75579d6e0311fcf66ab4b2ed588035848faf5e1f",
+      "bytes": 301942
+    },
+    {
+      "path": "habitats/atlas-east/au-clearing.jpg",
+      "sha256": "7a4711e2fbbfca15884519e503cbc0b330c14a1e80857016c7d151282fd8b35f",
+      "bytes": 107311
+    },
+    {
+      "path": "habitats/atlas-east/au-creek.jpg",
+      "sha256": "93fc27ea5e57a58599b189e2379d63a583be142748a7a36840601d4d716dd003",
+      "bytes": 482149
+    },
+    {
+      "path": "habitats/atlas-east/au-established.jpg",
+      "sha256": "5b0b2c6612706015d1f778e66a3f260e5b1371a8a81d0c2eeb0692835d9d2572",
+      "bytes": 471036
+    },
+    {
+      "path": "habitats/atlas-east/au-garden.jpg",
+      "sha256": "9dc282a274040c945aba0cc0097a2624503ed1fcba53aad932c66fcdae92f98b",
+      "bytes": 559473
+    },
+    {
+      "path": "habitats/atlas-east/au-gateway.jpg",
+      "sha256": "12f91b2e340c959037fff37047af89b45cc27ac6efff8893eac5ec51ad3fe376",
+      "bytes": 230460
+    },
+    {
+      "path": "habitats/atlas-east/au-gravel.jpg",
+      "sha256": "3b50987c0b6b507f39a348acda30bcee45298a28b2d9158b7abf7941966249f1",
+      "bytes": 541401
+    },
+    {
+      "path": "habitats/atlas-east/au-grove.jpg",
+      "sha256": "4339332b0f85fe03523a1257d243c8d1b42406c471e2a6ce0b7e03653fab940a",
+      "bytes": 593934
+    },
+    {
+      "path": "habitats/atlas-east/au-litter.jpg",
+      "sha256": "ced254a78dbe714d4d8d3ae7d1c308ceee656ae866255f1d805950922e613f29",
+      "bytes": 583105
+    },
+    {
+      "path": "habitats/atlas-east/au-margin.jpg",
+      "sha256": "7b00ca0bac74af8f98e3118920fef3d6d83a2d8218b71e14f6c55c8f778504a8",
+      "bytes": 387925
+    },
+    {
+      "path": "habitats/atlas-east/au-rock.jpg",
+      "sha256": "b8bffcc888d3c205eadaf6838ab36fd1a8411c50e32772ba0ce29ff8c1591627",
+      "bytes": 664160
+    },
+    {
+      "path": "habitats/atlas-east/au-sand.jpg",
+      "sha256": "8665467d4529e29e485ae50b13fcb6d5018bdc2268e2d3d39c68d371a8bf0488",
+      "bytes": 280299
+    },
+    {
+      "path": "habitats/atlas-east/au-track.jpg",
+      "sha256": "85b868574347ddb7f0c3c89dc33abdc3f2417f8de370db61d40139aab4cf09e1",
+      "bytes": 499236
+    },
+    {
+      "path": "habitats/atlas-east/credits.json",
+      "sha256": "fbd8ece9d1017916228e0b31fe926c49704a52ecc3f5205a03775a2cca04b023",
+      "bytes": 78737
+    },
+    {
+      "path": "habitats/atlas-east/hawaii-clearing.jpg",
+      "sha256": "76f1aadbd9b940f5f5008b6fd94d4802e72519fec4dc4743a5d5346d1a6f270a",
+      "bytes": 476751
+    },
+    {
+      "path": "habitats/atlas-east/hawaii-garden.jpg",
+      "sha256": "ecd303d8e16d549bb663dda9eeaf835422026f0c77d0391bb3ec5b681bbdfae7",
+      "bytes": 336266
+    },
+    {
+      "path": "habitats/atlas-east/hawaii-gateway.jpg",
+      "sha256": "535faccbc0e1b33746a6cc85daed0c7f11d95bb858decfb7aa5ff9e1dfb54404",
+      "bytes": 283129
+    },
+    {
+      "path": "habitats/atlas-east/hawaii-grove.jpg",
+      "sha256": "1c1fe3f5b1d0f9cdcc26917268e3c45d4b53b5030ef41789c612ab83733d7c9f",
+      "bytes": 607171
+    },
+    {
+      "path": "habitats/atlas-east/hawaii-litter.jpg",
+      "sha256": "4a0bbcad248a628a9ea654d58f3fe928ba5046ca85413feda510320827b0fa47",
+      "bytes": 528762
+    },
+    {
+      "path": "habitats/atlas-east/hawaii-margin.jpg",
+      "sha256": "e473fd2a5c4e14dcd70cba31d9b82b2fb153c0e529f2d4a139e5f128d9bff365",
+      "bytes": 513867
+    },
+    {
+      "path": "habitats/atlas-east/japan-clearing.jpg",
+      "sha256": "50fd04fdec0ba44640a28db97baec9382e3ff8d37844eff15ee5eb228739fdc0",
+      "bytes": 343269
+    },
+    {
+      "path": "habitats/atlas-east/japan-garden.jpg",
+      "sha256": "a1ae8385ab2f77bf6226cdf0b1cf9b52b4f39631eec6711d8a605a946e5bda33",
+      "bytes": 475760
+    },
+    {
+      "path": "habitats/atlas-east/japan-gateway.jpg",
+      "sha256": "8d0a7f17d48f01bb0751fa03b145889f4973f2930652114e78e458173ee760e9",
+      "bytes": 300642
+    },
+    {
+      "path": "habitats/atlas-east/japan-grove.jpg",
+      "sha256": "780396bb51e60ffd701f6ff748fe6fb9969759f04a6bc7287fd56402331255a5",
+      "bytes": 424001
+    },
+    {
+      "path": "habitats/atlas-east/japan-litter.jpg",
+      "sha256": "4e63f40480c7140226aa99f7f349d990394ac7b3774cd9e1db938a49ab694f08",
+      "bytes": 545109
+    },
+    {
+      "path": "habitats/atlas-east/japan-margin.jpg",
+      "sha256": "cca68810f4e749222919b92141833fb4eb948c6a87c5c76577092805846098a2",
+      "bytes": 573460
+    },
+    {
+      "path": "habitats/atlas-east/nz-clearing.jpg",
+      "sha256": "712df3d50a1be5eb8b1d087b5866a7f3a778b2a5b5b655f64910a6223541568d",
+      "bytes": 280918
+    },
+    {
+      "path": "habitats/atlas-east/nz-garden.jpg",
+      "sha256": "8cab19c462610555f7e70626b075aa3bfd2febbcf786c251e8ca035ff02fadbe",
+      "bytes": 475911
+    },
+    {
+      "path": "habitats/atlas-east/nz-gateway.jpg",
+      "sha256": "7734168ab15e98aae914297c0ec40950db65b50289e3390429b29eedcd7b9b2e",
+      "bytes": 441428
+    },
+    {
+      "path": "habitats/atlas-east/nz-grove.jpg",
+      "sha256": "d04254efeab52f791d843e1a90cd5167a8068ae9c37e1f10dd115f250f1fd286",
+      "bytes": 599136
+    },
+    {
+      "path": "habitats/atlas-east/nz-litter.jpg",
+      "sha256": "7e883cc6653fac1e9e6e9ba4beb4930977b740c710e6ed50ca62ec1d94e15aa7",
+      "bytes": 570964
+    },
+    {
+      "path": "habitats/atlas-east/nz-margin.jpg",
+      "sha256": "c0e4402e4baea8624330db3eaedba444056e233f9abd64ebe19a9b62a981baad",
+      "bytes": 304407
+    },
+    {
+      "path": "habitats/atlas-west/africa-garden-edge.jpg",
+      "sha256": "acc257763fa97f152706496d321d3e4a0fafde063824b6ba700e58c899161080",
+      "bytes": 150978
+    },
+    {
+      "path": "habitats/atlas-west/africa-gateway-nest.jpg",
+      "sha256": "1030d37d8657de175da036fa50e69638c4c3ccba2913cb7bcd9b0ca7b3f2728f",
+      "bytes": 150774
+    },
+    {
+      "path": "habitats/atlas-west/africa-habitat-margin.jpg",
+      "sha256": "fc88c6241bc6a65db40fd1f27c7d36d8a9070d238195f5c29e3b15f36b623a9d",
+      "bytes": 458176
+    },
+    {
+      "path": "habitats/atlas-west/africa-leaf-litter-trail.jpg",
+      "sha256": "b2ab8be67e0a3028e029e5a027905fb180c4e939229449c5361c5738a09e02f6",
+      "bytes": 308832
+    },
+    {
+      "path": "habitats/atlas-west/africa-open-clearing.jpg",
+      "sha256": "47637e37afeb9580baf5df77376eef652db3637a7a14f9a4961be065e8015456",
+      "bytes": 429135
+    },
+    {
+      "path": "habitats/atlas-west/africa-shaded-grove.jpg",
+      "sha256": "7a183e0050f6617f189e08198a44b4a6be4b799ff7e24ddd44c127753b6e8a75",
+      "bytes": 277200
+    },
+    {
+      "path": "habitats/atlas-west/california-garden-edge.jpg",
+      "sha256": "9a0f0ce4d0ac282abd61e4c35cee03b15347d36dfaacddce8cdf322f33610738",
+      "bytes": 245701
+    },
+    {
+      "path": "habitats/atlas-west/california-gateway-nest.jpg",
+      "sha256": "84c010fd4cb93b1f6df07e79892206432238093ca6acde177c8e872d9ad84d3d",
+      "bytes": 124789
+    },
+    {
+      "path": "habitats/atlas-west/california-habitat-margin.jpg",
+      "sha256": "354d90a5e601d2dcde17a5760e84e692563eebcb32aa1b90bb108d6406ec930d",
+      "bytes": 141066
+    },
+    {
+      "path": "habitats/atlas-west/california-leaf-litter-trail.jpg",
+      "sha256": "1b5f83872fec38e38721d6a7973b8cc64205b6038b9a69b1444e0051374cfee8",
+      "bytes": 267520
+    },
+    {
+      "path": "habitats/atlas-west/california-open-clearing.jpg",
+      "sha256": "f71effee1d83c7cb76bc5ecd471bfb49d96030deeed28878e2df904f56a0b107",
+      "bytes": 119086
+    },
+    {
+      "path": "habitats/atlas-west/california-shaded-grove.jpg",
+      "sha256": "74bb235ba0d2cbd7c4c8949486efd6d7790420a6e6c5d53e2674e5bd1e5d40da",
+      "bytes": 525910
+    },
+    {
+      "path": "habitats/atlas-west/credits.json",
+      "sha256": "98af85a1202d4161d8cc5c3914ed4b8c4a2f3fe75bef2469ab49d752edbbb98b",
+      "bytes": 72127
+    },
+    {
+      "path": "habitats/atlas-west/mediterranean-garden-edge.jpg",
+      "sha256": "5839f9f6f519d818f862c95d53b737cfe0e0e5217a4118a3eb2ea27c7f9ffb6a",
+      "bytes": 242444
+    },
+    {
+      "path": "habitats/atlas-west/mediterranean-gateway-nest.jpg",
+      "sha256": "fa2417450bcf7747b1060a44c7f41b7dd5857c77b0e2f3ca6585fb35bad300aa",
+      "bytes": 121810
+    },
+    {
+      "path": "habitats/atlas-west/mediterranean-habitat-margin.jpg",
+      "sha256": "bcc33500817fca213537a0bb8a227c188e88154c96cc2202b1e2e434dd13ae16",
+      "bytes": 353551
+    },
+    {
+      "path": "habitats/atlas-west/mediterranean-leaf-litter-trail.jpg",
+      "sha256": "e7152ea2da06d0734a706ea71b2497a21c8f6592e6a18458ade2fe1e53cd4d2b",
+      "bytes": 379316
+    },
+    {
+      "path": "habitats/atlas-west/mediterranean-open-clearing.jpg",
+      "sha256": "0cdecaf8c6814c07805b37298c473770e519cdde12b04f8744ac343539ac035f",
+      "bytes": 360411
+    },
+    {
+      "path": "habitats/atlas-west/mediterranean-shaded-grove.jpg",
+      "sha256": "a0973a0d04b60594564166f5e3e54f7a17b4e98f1db5da6aad02062da1b5b5bb",
+      "bytes": 295113
+    },
+    {
+      "path": "habitats/atlas-west/southamerica-garden-edge.jpg",
+      "sha256": "4e1a3de717f8c47a14ad9d11ca7c680ba02550bee7decc07ff2f1b453bc907e4",
+      "bytes": 227703
+    },
+    {
+      "path": "habitats/atlas-west/southamerica-gateway-nest.jpg",
+      "sha256": "ae5af74e0128ed8394581e7369afa67be3d2e1ecd1fa0f78c1d17507f312d4a5",
+      "bytes": 129041
+    },
+    {
+      "path": "habitats/atlas-west/southamerica-habitat-margin.jpg",
+      "sha256": "ceae1036f6ad216013793c79de0f8f075ca0b207865401f455715d1950d15b43",
+      "bytes": 117698
+    },
+    {
+      "path": "habitats/atlas-west/southamerica-leaf-litter-trail.jpg",
+      "sha256": "14b46a034e383ae2009a246fd08e83c356fc9d133a71795cbdcb9586329e916f",
+      "bytes": 340010
+    },
+    {
+      "path": "habitats/atlas-west/southamerica-open-clearing.jpg",
+      "sha256": "5571d47ed007fb94209ec83ed152f5641558bcd82ce1f33aba210621d87bdba6",
+      "bytes": 246109
+    },
+    {
+      "path": "habitats/atlas-west/southamerica-shaded-grove.jpg",
+      "sha256": "53d6a7e99bd93893c0ed08914044cdb730ccb2968c739a1044544d523298fb49",
+      "bytes": 267002
+    },
+    {
+      "path": "habitats/east/australia-complex.jpg",
+      "sha256": "4339332b0f85fe03523a1257d243c8d1b42406c471e2a6ce0b7e03653fab940a",
+      "bytes": 593934
+    },
+    {
+      "path": "habitats/east/australia-open.jpg",
+      "sha256": "7a4711e2fbbfca15884519e503cbc0b330c14a1e80857016c7d151282fd8b35f",
+      "bytes": 107311
+    },
+    {
+      "path": "habitats/east/credits.json",
+      "sha256": "1a051c3aaa850726ca8ecd9bc685764577db0117a55b3bd4423751cacaafce4b",
+      "bytes": 13930
+    },
+    {
+      "path": "habitats/east/hawaii-complex.jpg",
+      "sha256": "1c1fe3f5b1d0f9cdcc26917268e3c45d4b53b5030ef41789c612ab83733d7c9f",
+      "bytes": 607171
+    },
+    {
+      "path": "habitats/east/hawaii-open.jpg",
+      "sha256": "76f1aadbd9b940f5f5008b6fd94d4802e72519fec4dc4743a5d5346d1a6f270a",
+      "bytes": 476751
+    },
+    {
+      "path": "habitats/east/japan-complex.jpg",
+      "sha256": "780396bb51e60ffd701f6ff748fe6fb9969759f04a6bc7287fd56402331255a5",
+      "bytes": 424001
+    },
+    {
+      "path": "habitats/east/japan-open.jpg",
+      "sha256": "50fd04fdec0ba44640a28db97baec9382e3ff8d37844eff15ee5eb228739fdc0",
+      "bytes": 343269
+    },
+    {
+      "path": "habitats/east/newzealand-complex.jpg",
+      "sha256": "c0e4402e4baea8624330db3eaedba444056e233f9abd64ebe19a9b62a981baad",
+      "bytes": 304407
+    },
+    {
+      "path": "habitats/east/newzealand-open.jpg",
+      "sha256": "712df3d50a1be5eb8b1d087b5866a7f3a778b2a5b5b655f64910a6223541568d",
+      "bytes": 280918
+    },
+    {
+      "path": "habitats/west/africa-complex.jpg",
+      "sha256": "fc88c6241bc6a65db40fd1f27c7d36d8a9070d238195f5c29e3b15f36b623a9d",
+      "bytes": 458176
+    },
+    {
+      "path": "habitats/west/africa-open.jpg",
+      "sha256": "47637e37afeb9580baf5df77376eef652db3637a7a14f9a4961be065e8015456",
+      "bytes": 429135
+    },
+    {
+      "path": "habitats/west/california-complex.jpg",
+      "sha256": "74bb235ba0d2cbd7c4c8949486efd6d7790420a6e6c5d53e2674e5bd1e5d40da",
+      "bytes": 525910
+    },
+    {
+      "path": "habitats/west/california-open.jpg",
+      "sha256": "c07c3394ada9c9d33d422c0777f0be68e9d78800a0c538062fa6ac725208cbef",
+      "bytes": 310126
+    },
+    {
+      "path": "habitats/west/credits.json",
+      "sha256": "c489f2dc8accd6c92269c943131fdb7a1bdc95de9ad43dee8316cbe8a841ed8c",
+      "bytes": 14400
+    },
+    {
+      "path": "habitats/west/mediterranean-complex.jpg",
+      "sha256": "e7152ea2da06d0734a706ea71b2497a21c8f6592e6a18458ade2fe1e53cd4d2b",
+      "bytes": 379316
+    },
+    {
+      "path": "habitats/west/mediterranean-open.jpg",
+      "sha256": "0cdecaf8c6814c07805b37298c473770e519cdde12b04f8744ac343539ac035f",
+      "bytes": 360411
+    },
+    {
+      "path": "habitats/west/southamerica-complex.jpg",
+      "sha256": "8a3b11f29e1e85a8e629487979c870f5609e9a015ebf0ff7d6bd0731a204f7c2",
+      "bytes": 413701
+    },
+    {
+      "path": "habitats/west/southamerica-open.jpg",
+      "sha256": "5571d47ed007fb94209ec83ed152f5641558bcd82ce1f33aba210621d87bdba6",
+      "bytes": 246109
+    },
+    {
+      "path": "index.html",
+      "sha256": "fec7dc78b4c090d6aa541e95cb54d9107b6ff80ea8f859d718f875a15da59823",
+      "bytes": 710
+    },
+    {
+      "path": "research/california-2025.json",
+      "sha256": "cad77a9b89bbda6be832ba7d79c55bdbe522ab34c9739ea6d300f54ad31dddf3",
+      "bytes": 105957
+    },
+    {
+      "path": "research/california-geography-source.json",
+      "sha256": "1df7e5a361e21a33279d343e4e2fce02f00163fa2a97e87488527857b7fa5e6f",
+      "bytes": 4568
+    },
+    {
+      "path": "research/california-geography.json",
+      "sha256": "d488f5cba41a829a5668b863ea8519071c0635925301196c345b43ad9524b9eb",
+      "bytes": 272465
+    },
+    {
+      "path": "research/distribution-2022-source.json",
+      "sha256": "23258647d6ca19450272a9d9a21a9553b1fa7d2695c005ceb48bb1533289ca06",
+      "bytes": 9746
+    },
+    {
+      "path": "research/distribution-2022.json",
+      "sha256": "95033f5299e46b68cbcc4102e874d0df57e6164c4a636ed34b8e395bf0b9f6d8",
+      "bytes": 55514
+    },
+    {
+      "path": "research/global-2010.json",
+      "sha256": "7b1894eef034915d4a412a4098533c9e82fd14c26e2ad9663ee2ab92f520d1ae",
+      "bytes": 5305
+    },
+    {
+      "path": "research/provenance.json",
+      "sha256": "c51aa3b870f0b0a360869626d09f2c895043417d4e139a9ea5b41248e403a44d",
+      "bytes": 2688
+    },
+    {
+      "path": "specimens/argentine-worker.jpg",
+      "sha256": "05007b9e057b219038980fce0560938f3b8960aa64c1faeda0be5de9555e0477",
+      "bytes": 129375
+    },
+    {
+      "path": "specimens/credits.json",
+      "sha256": "79b21878a2ce6badd9c539f31e1c28078868de5f9aaf24d280ebfa7c5c9f6215",
+      "bytes": 3699
+    },
+    {
+      "path": "specimens/meat-worker.jpg",
+      "sha256": "8ce9425cc217ff8f1b352ce7f624bc4b66b802a5a996484fceb42638bf31ab7e",
+      "bytes": 3185229
+    },
+    {
+      "path": "story/general-mandible.png",
+      "sha256": "cde0d5c433145a7e5b41e33f666b8d016f1ec520b965d6976162770b579af275",
+      "bytes": 3365776
+    },
+    {
+      "path": "world.json",
+      "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9",
+      "bytes": 138160
+    }
+  ]
+}

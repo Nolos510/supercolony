@@ -43,7 +43,7 @@ test('untimed combat, review explanations, ecological results and restart', asyn
       expect(await page.evaluate(() => window.__supercolony.getState().charges)).toBe(2);
     }
     if (mode !== 'Ecologist') {
-      await page.evaluate(() => { const s = window.__supercolony.getState(); s.aiEnabled = false; s.nodes.forEach((n, i) => { n.owner = i < Math.ceil(s.nodes.length * .7) ? 'rival' : 'player'; }); window.__supercolony.advance(900); });
+      await page.evaluate(() => { const s = window.__supercolony.getState(); s.aiEnabled = false; s.nodes.forEach((n, i) => { n.owner = i < Math.ceil(s.nodes.length * .7) ? 'rival' : 'player'; if (s.mode === 'war') n.colonyId = n.owner === 'player' ? 'US1' : 'US2'; }); window.__supercolony.advance(900); });
       expect(await page.evaluate(() => window.__supercolony.getState().status)).toBe('running');
       await expect(page.getByText('No time limit', { exact: true })).toBeVisible();
       await page.getByRole('button', { name: 'SUPERColony game menu', exact: true }).click();
@@ -54,7 +54,7 @@ test('untimed combat, review explanations, ecological results and restart', asyn
       await expect(page.getByRole('link', { name: /Compare Argentine-ant specimens/ })).toHaveAttribute('href', /antweb/);
       await page.getByRole('button', { name: 'Continue match', exact: true }).click();
       expect(await page.evaluate(() => window.__supercolony.getState().status)).toBe('running');
-      await page.evaluate(() => { window.__supercolony.getState().nodes.forEach(n => { n.owner = 'player'; }); window.__supercolony.getState().fleets = []; window.__supercolony.advance(1); });
+      await page.evaluate(() => { const s = window.__supercolony.getState(); s.nodes.forEach(n => { n.owner = 'player'; if (s.mode === 'war') n.colonyId = 'US1'; }); s.fleets = []; window.__supercolony.advance(1); });
     } else await page.evaluate(() => window.__supercolony.advance(300));
     await expect(page.getByRole('dialog', { name: 'Match results' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Play again', exact: true })).toBeVisible();
@@ -104,14 +104,14 @@ test('responsive layout, keyboard focus, reduced motion, and accessibility', asy
 });
 
 
-test('South America shows native-range context and shares world nest state', async ({ page }) => {
+test('South America shows native-range context without inventing War colonies', async ({ page }) => {
   await page.goto('/'); await page.getByRole('button', { name: 'Start match', exact: true }).click();
   await page.getByRole('button', { name: 'Skip tutorial' }).click();
   await page.getByRole('button', { name: 'Pause match' }).click();
   const before = await page.evaluate(() => JSON.stringify(window.__supercolony.getState()));
   await page.getByRole('button', { name: 'Zoom into South America', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Paraná basin · native range' })).toBeVisible();
-  await expect(page.locator('.map-node')).toHaveCount(6);
+  await expect(page.locator('.map-node')).toHaveCount(0);
   await page.getByRole('button', { name: 'World view', exact: true }).click();
   expect(await page.evaluate(() => JSON.stringify(window.__supercolony.getState()))).toBe(before);
 });

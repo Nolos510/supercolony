@@ -4,7 +4,7 @@ import { scenarios } from '../game/scenarios';
 import { Icon } from './Icons';
 import Specimen from './Specimen';
 
-export default function Menu({ onStart, onLearn, onResume }: { onStart: (mode: ModeId, species: SpeciesId) => void; onLearn: () => void; onResume?: () => void; onReview?: () => void }) {
+export default function Menu({ onStart, onLearn, onResume, onStory, onExploreSpecimen }: { onStart: (mode: ModeId, species: SpeciesId) => void; onLearn: () => void; onResume?: () => void; onReview?: () => void; onStory?: () => void; onExploreSpecimen?: (speciesId: SpeciesId) => void }) {
   const [mode, setMode] = useState<ModeId>('war');
   const [species, setSpecies] = useState<SpeciesId>('argentine');
   const dialog = useRef<HTMLDialogElement>(null);
@@ -12,7 +12,10 @@ export default function Menu({ onStart, onLearn, onResume }: { onStart: (mode: M
   useEffect(() => { dialog.current?.showModal(); startButton.current?.focus(); }, []);
   return <dialog ref={dialog} className="menu-dialog" aria-labelledby="menu-title" onCancel={e => { e.preventDefault(); onResume?.(); }}>
     <div className="menu-art">
-      <span className="specimen-caption">LINEPITHEMA HUMILE</span><Specimen speciesId="argentine" />
+      <span className="specimen-caption">FIELD ATLAS · LINEPITHEMA HUMILE</span>
+      <div className="menu-story-art" role="img" aria-label="Original comic illustration: General Mandible leads a worker trail through a fictional landscape." />
+      <p className="menu-illustration-credit">Original comic fiction · General Mandible</p>
+      <Specimen speciesId="argentine" compact onExplore={onExploreSpecimen} />
       <div className="trail-doodle"><span /><span /><span /><span /></div>
       <div className="menu-art-caption">One ant is tiny.<br />Their story spans the planet.</div>
     </div>
@@ -20,6 +23,7 @@ export default function Menu({ onStart, onLearn, onResume }: { onStart: (mode: M
       <div className="brand menu-brand"><Icon name="leaf" size={25} /><span translate="no">SUPER<span className="brand-light">Colony</span></span></div>
       <h1 id="menu-title">Small ants.<br />A bigger world.</h1>
       <p className="menu-intro">Follow the trails of one of nature’s most remarkable invaders. A little strategy. A lot to discover.</p>
+      {onStory && <button className="story-invitation" aria-label="Meet General Mandible" onClick={onStory}><span className="story-thumb" aria-hidden="true" /><span>Meet General Mandible<small>A tiny general. An enormous story.</small></span><Icon name="arrow" size={16} /></button>}
       <div className="mode-picker" aria-label="Choose a game mode">
         {(['war', 'species', 'ecologist'] as const).map(id => <button key={id} className={`mode-option ${mode === id ? 'selected' : ''}`} aria-pressed={mode === id} onClick={() => setMode(id)}>
           <span className="mode-icon" aria-hidden="true">{id === 'war' ? '◉' : id === 'species' ? '⚔' : <Icon name="leaf" />}</span>
