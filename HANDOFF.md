@@ -2,7 +2,7 @@
 
 ## Atlas delivery · 2026-10-14
 
-Workspace `/Users/nolos/Desktop/Ant Game`; private repository https://github.com/Nolos510/supercolony, branch `main`. Use `git log -1` for the delivery revision and `git status --short` for checkout changes. Previous regional-management delivery is preserved in [history](docs/history/HANDOFF_2026-10-13_regional-management.md).
+Workspace `/Users/nolos/Desktop/Ant Game`; private repository https://github.com/Nolos510/supercolony, branch `main`. Verified source commit `16985713fc7c389616f5af72a951418bea49f199` was pushed to private main and independently read back from GitHub. Use `git log -1` for the latest delivery/documentation revision and `git status --short` for checkout changes. Agent implementation and delivery are complete; human acceptance below remains. Previous regional-management delivery is preserved in [history](docs/history/HANDOFF_2026-10-13_regional-management.md).
 
 Direction: retained field atlas with paper reading surfaces, mineral-blue water, moss terrain, charcoal controls and cyan/amber symbols; richer original illustrated surroundings. Primary task: command swarms comfortably on a phone, inspect a nest, then follow its biology and evidence. Global tokens, balance coefficients, all three modes and React/Canvas architecture remain.
 
