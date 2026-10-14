@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "criterion_id": "typecheck",
+  "contract_sha256": "bc3435110fa7aec1e482f92f9664cdaf433acf4184225f4b7ef0f8f7a6a27c2a",
+  "argv": [
+    "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+    "run",
+    "typecheck"
+  ],
+  "cwd": "/Users/nolos/Desktop/Ant Game",
+  "started_at": 1792011640.670027,
+  "returncode": 0,
+  "timed_out": false,
+  "error": null,
+  "stdout": "\n> supercolony@1.0.0 typecheck\n> tsc --noEmit\n\n",
+  "stderr": "",
+  "finished_at": 1792011642.742521
+}

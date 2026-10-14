@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "criterion_id": "direction-guard-regression",
+  "contract_sha256": "bc3435110fa7aec1e482f92f9664cdaf433acf4184225f4b7ef0f8f7a6a27c2a",
+  "argv": [
+    "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/node",
+    "scripts/direction-guard.test.mjs"
+  ],
+  "cwd": "/Users/nolos/Desktop/Ant Game",
+  "started_at": 1792011746.157065,
+  "returncode": 0,
+  "timed_out": false,
+  "error": null,
+  "stdout": "TAP version 13\n# Subtest: matching reviewed renders can pass the direction gate\nok 1 - matching reviewed renders can pass the direction gate\n  ---\n  duration_ms: 2.642291\n  type: 'test'\n  ...\n# Subtest: replays the rejected delivery even when engineering checks passed\nok 2 - replays the rejected delivery even when engineering checks passed\n  ---\n  duration_ms: 1.214291\n  type: 'test'\n  ...\n# Subtest: missing reference cannot be replaced by confident prose\nok 3 - missing reference cannot be replaced by confident prose\n  ---\n  duration_ms: 1.106167\n  type: 'test'\n  ...\n# Subtest: source changes invalidate the rendered review\nok 4 - source changes invalidate the rendered review\n  ---\n  duration_ms: 1.281916\n  type: 'test'\n  ...\n# Subtest: missing required surface blocks completion\nok 5 - missing required surface blocks completion\n  ---\n  duration_ms: 0.711584\n  type: 'test'\n  ...\n# Subtest: unreviewed criterion is not a passing engineering result\nok 6 - unreviewed criterion is not a passing engineering result\n  ---\n  duration_ms: 0.722167\n  type: 'test'\n  ...\n# Subtest: overwritten screenshots invalidate the evidence\nok 7 - overwritten screenshots invalidate the evidence\n  ---\n  duration_ms: 0.92925\n  type: 'test'\n  ...\n# Subtest: a review without findings cannot pass\nok 8 - a review without findings cannot pass\n  ---\n  duration_ms: 0.74525\n  type: 'test'\n  ...\n1..8\n# tests 8\n# suites 0\n# pass 8\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 14.628375\n",
+  "stderr": "",
+  "finished_at": 1792011746.2298539
+}

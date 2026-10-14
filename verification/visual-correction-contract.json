@@ -1,0 +1,153 @@
+{
+  "version": 2,
+  "task_id": "supercolony-visual-correction-2026-10-14",
+  "outcome": "Actual playable world and regional boards match approved richer-atlas direction with original raster artwork, readable tactical overlays, compact mobile chrome and paper inspector; persistent direction guard blocks missing, failed and stale reviews. Technical evidence stays separate from human enjoyment/acceptance.",
+  "scope": "Correct rejected visual objective; original deadline 2026-10-14T23:33:35Z and 5 remaining shared repairs. This initial correction run consumes shared repair4. Existing receipt is historical engineering evidence, not approved-art proof. No engine/balance/research/token/dependency changes, hooks, CI, Comfy or port8000.",
+  "limits": {
+    "max_repairs": 4,
+    "max_seconds": 13387
+  },
+  "subjects": [
+    "/Users/nolos/Desktop/Ant Game/src/App.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/styles.css",
+    "/Users/nolos/Desktop/Ant Game/src/components/Map.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/Inspector.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/VisualSummary.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/components/TerrainBoard.tsx",
+    "/Users/nolos/Desktop/Ant Game/src/data/artboards.ts",
+    "/Users/nolos/Desktop/Ant Game/src/rich-terrain.css",
+    "/Users/nolos/Desktop/Ant Game/AGENTS.md",
+    "/Users/nolos/Desktop/Ant Game/docs/VISUAL_DIRECTION.md",
+    "/Users/nolos/Desktop/Ant Game/scripts/direction-guard.mjs",
+    "/Users/nolos/Desktop/Ant Game/verification/visual-direction-review.json",
+    "/Users/nolos/Desktop/Ant Game/HANDOFF.md",
+    "/Users/nolos/Desktop/Ant Game/package.json"
+  ],
+  "protected": [
+    "/Users/nolos/Desktop/Ant Game/tokens.css",
+    "/Users/nolos/Desktop/Ant Game/package-lock.json",
+    "/Users/nolos/Desktop/Ant Game/src/game/engine.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/scenarios.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/store.ts",
+    "/Users/nolos/Desktop/Ant Game/src/game/types.ts",
+    "/Users/nolos/Desktop/Ant Game/verification/visual-direction-acceptance.json",
+    "/Users/nolos/Desktop/Ant Game/docs/design/atlas-richer-terrain-approved.png",
+    "/Users/nolos/Desktop/Ant Game/scripts/direction-guard.test.mjs",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/rich-terrain.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/eslint.config.js",
+    "/Users/nolos/Desktop/Ant Game/playwright.config.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/content.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/recognition.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/regional.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/engine.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/atlas.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/research.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/habitats.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/batch.test.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/native-context.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/game.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/multi-fieldwork.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/regional.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/atlas.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/mobile-recognition.spec.ts",
+    "/Users/nolos/Desktop/Ant Game/tests/browser/review-a11y.spec.ts"
+  ],
+  "criteria": [
+    {
+      "id": "typecheck",
+      "description": "typecheck",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "typecheck"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 600
+      }
+    },
+    {
+      "id": "lint",
+      "description": "lint",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "lint"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 600
+      }
+    },
+    {
+      "id": "test",
+      "description": "test",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 600
+      }
+    },
+    {
+      "id": "test:e2e",
+      "description": "test:e2e",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "test:e2e"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 600
+      }
+    },
+    {
+      "id": "build",
+      "description": "build",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/npm",
+          "run",
+          "build"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 600
+      }
+    },
+    {
+      "id": "direction-guard-regression",
+      "description": "Reject reported drift, missing/stale evidence; pass only complete review",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/node",
+          "scripts/direction-guard.test.mjs"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 30
+      }
+    },
+    {
+      "id": "visual-direction",
+      "description": "Actual game screenshots resolve to exact approved reference without failed visual targets",
+      "verifier": {
+        "kind": "command",
+        "argv": [
+          "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/node",
+          "scripts/direction-guard.mjs"
+        ],
+        "cwd": "/Users/nolos/Desktop/Ant Game",
+        "timeout_seconds": 30
+      }
+    }
+  ]
+}

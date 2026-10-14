@@ -1,0 +1,405 @@
+{
+  "captures": [
+    {
+      "engine": "chromium",
+      "label": "1440x1000-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "768x1024-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-768x1024-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "768x1024-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-768x1024-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "320x568-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-320x568-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "320x568-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-320x568-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "375x667-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-375x667-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "375x667-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-375x667-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "390x844-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-390x844-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "390x844-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-390x844-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "414x896-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-414x896-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "414x896-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-414x896-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "844x390-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-844x390-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "844x390-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-844x390-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-inspector",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-inspector.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-mediterranean",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-mediterranean.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-japan",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-japan.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-africa",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-africa.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-australia",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-australia.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-newzealand",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-newzealand.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-hawaii",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-hawaii.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-southamerica",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-southamerica.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "1440x1000-terrain-summary",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-terrain-summary.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "390x844-terrain-summary",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-390x844-terrain-summary.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "chromium",
+      "label": "390x844-terrain-enlarged",
+      "path": "docs/screenshots/rich-visual/a5shipping-chromium-390x844-terrain-enlarged.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "768x1024-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-768x1024-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "768x1024-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-768x1024-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "320x568-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-320x568-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "320x568-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-320x568-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "375x667-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-375x667-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "375x667-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-375x667-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "390x844-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "390x844-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "414x896-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-414x896-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "414x896-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-414x896-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "844x390-california",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-844x390-california.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "844x390-world",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-844x390-world.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-inspector",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-inspector.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-mediterranean",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-mediterranean.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-japan",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-japan.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-africa",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-africa.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-australia",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-australia.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-newzealand",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-newzealand.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-hawaii",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-hawaii.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-southamerica",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-southamerica.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "1440x1000-terrain-summary",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-terrain-summary.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "390x844-terrain-summary",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-terrain-summary.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    },
+    {
+      "engine": "webkit",
+      "label": "390x844-terrain-enlarged",
+      "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-terrain-enlarged.png",
+      "overflow": false,
+      "clipped": [],
+      "small": []
+    }
+  ],
+  "findings": []
+}

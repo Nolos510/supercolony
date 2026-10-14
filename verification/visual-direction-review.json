@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-14T19:55:09.666448+00:00",
+  "artifactRevision": "67e8f200700175d1fd66275b51d3efee862e17ba; rejected shipping baseline before visual correction",
+  "reference": {
+    "path": "docs/design/atlas-richer-terrain-approved.png",
+    "sha256": "70f456abdef293488b0c1fa0bff44e8f31366737597469e45e52517611642162"
+  },
+  "artifactFiles": [
+    {
+      "path": "src/App.tsx",
+      "sha256": "1b264f5faff38adaa794ac5b97d86982be2698d083e104afd04fcc4eb1872610"
+    },
+    {
+      "path": "src/styles.css",
+      "sha256": "9945b07b5d0f8ee53ff0483ad4f9567a8fe189e7c1ae3596975a88039dd5cd0a"
+    },
+    {
+      "path": "src/rich-terrain.css",
+      "sha256": "e94cff1d7c47ac1400d416949df513e754cbf1c4e5e951a58b6671f5f7c0764b"
+    },
+    {
+      "path": "src/atlas-map.css",
+      "sha256": "1e8d22a266abf3fb53d6b57d9d917cb1075f9de81b768732ae172cd370991f76"
+    },
+    {
+      "path": "src/atlas-learning.css",
+      "sha256": "af21cb3ca4a32d72be7d3d89c4fed2704499e89a80eaa309c3aa2880bba4219f"
+    },
+    {
+      "path": "src/components/Map.tsx",
+      "sha256": "2877ee3af149ed7de228c6919d06e0faebc79267f0df3af08e42a2e5fe2d3974"
+    },
+    {
+      "path": "src/components/TerrainBoard.tsx",
+      "sha256": "90fd9dcc0d7dac7245b192498c300dae9144d90dcbc2e93f19a163f436b43e59"
+    },
+    {
+      "path": "src/components/Inspector.tsx",
+      "sha256": "32cecd5bf27f3758bf220a084d6c2388a69533cd63433dfdf5f34c6edca88de5"
+    },
+    {
+      "path": "src/components/VisualSummary.tsx",
+      "sha256": "0e1a126459de310ea30ba30a774bc888006a5878a0a9a3a570d6b17f900cc13a"
+    },
+    {
+      "path": "src/data/artboards.ts",
+      "sha256": "85f9903a96ce87b0cbfb4b50e5139c0372a4e46738468061a6ce704293f32d7c"
+    },
+    {
+      "path": "tokens.css",
+      "sha256": "3d80a66c410f1e3427fb78f1e61b2e8abe40cdda2e642596815cab6b18b5b664"
+    },
+    {
+      "path": "public/art/credits.json",
+      "sha256": "ae10f578edc44e39f8d2b7732f15ad8a2be17455e3ffb768cdc395e16b869348"
+    },
+    {
+      "path": "public/art/terrain-comparison.jpg",
+      "sha256": "11b4ee334ccd895cdfbcbbd7664c6b3bd268e2b3457a6c1436dd19c74333cd28"
+    },
+    {
+      "path": "public/art/world-terrain.jpg",
+      "sha256": "6da0b5b6801ccbb82274e6c8b2b4a69105bcdecd65888409371e57fb5188c443"
+    },
+    {
+      "path": "public/art/habitat-medallions.png",
+      "sha256": "d2140ccb1dc09a6d73462556ca53d81111792f9ebe5da2e238ada82faacae2e1"
+    },
+    {
+      "path": "public/art/terrain/california.jpg",
+      "sha256": "900eb45280203870507a5860808830fdad1f88ff0b0deba8ff4f4560308a7b9a"
+    },
+    {
+      "path": "public/art/terrain/australia.jpg",
+      "sha256": "73c064e06023953d926741da022565851450704f3d3bacbb865266a03cc3c39a"
+    },
+    {
+      "path": "public/art/terrain/mediterranean.jpg",
+      "sha256": "78e907f0910be95985ea5a8206a1799643827b212ea1c226a7376523883b2dc0"
+    },
+    {
+      "path": "public/art/terrain/southamerica.jpg",
+      "sha256": "d77395b477f24fa5a1be43a4921a186cdb05e18ebe4672cb6c8ae29a2d656087"
+    },
+    {
+      "path": "public/art/terrain/africa.jpg",
+      "sha256": "8f08e2445d713677b4c3adbd95bb970e78199b6a28231d2cc80122678e5430ad"
+    },
+    {
+      "path": "public/art/terrain/newzealand.jpg",
+      "sha256": "07782d8f0b1109bf10cd3a7da168a0f3414ac610eba98f3df4570f2a068bae16"
+    },
+    {
+      "path": "public/art/terrain/hawaii.jpg",
+      "sha256": "270f8e72ca90ad5eb4261117130513f5e73ea1ea31c32497895005b97ac8b8c3"
+    },
+    {
+      "path": "public/art/terrain/japan.jpg",
+      "sha256": "7d981f7890b7553e00c4921aa3667643b84f66b5cdf8239a49ea4a112ee49dfc"
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "world",
+      "status": "pass",
+      "finding": "Accurate Natural Earth outlines now contain decorative painted terrain, paper shores, compass and curved dispersal links; separated phone callouts retain anchor leaders. Current-view painting is explicitly synchronized, not inferred from DOM labels.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-world.png",
+          "sha256": "b5d54ae947d95ad5d83c08944d5159e7fb89cc7ccf5d15481674084483922f84"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-320x568-world.png",
+          "sha256": "b9dcc351f7c16386bbb82862caddbe45f7ee3a646c8865755e1975a448fe43b1"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-390x844-world.png",
+          "sha256": "9f50ebafa8084b033f5c6281359e73c6bc42b58845e42575eb60e70e606d3a5a"
+        }
+      ]
+    },
+    {
+      "id": "california-desktop",
+      "status": "pass",
+      "finding": "Detailed coastal scrub/oak/rock/surf illustration is the playing surface; medallions, ownership and reserve badges stay actionable above it.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-california.png",
+          "sha256": "f9044f223aa630531525ab6f5b8d801984ae5ed5936f6c4aac299ce859aba0b7"
+        }
+      ]
+    },
+    {
+      "id": "california-phone",
+      "status": "pass",
+      "finding": "Deliberate crop keeps coast and vegetation visible, six readable targets, compact logo/mode header and command dock. Short layouts use separate node placement.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-california.png",
+          "sha256": "c4fe9709908a56cb732633ed89a0aab994eb9134d107015b0c2bdd7599547288"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-320x568-california.png",
+          "sha256": "39626f0101ac2ffceef39268588d6a0b24e76a7f6ae1d9d8b766321075ab0907"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-320-enlarged-game.png",
+          "sha256": "6b1aeabb1febb9bb63c8acaa1e35cbc386f9722d4df3f73f01e701e28c33a55a"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-390-enlarged-game.png",
+          "sha256": "d2c0b55b6ab2f4ecfcfd136495d8035f4978df9e3896bf0f4205544ae058ae1b"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-844-enlarged-game.png",
+          "sha256": "63dc48e96cee189f325bcbf07ca58829fb5304a66e34334e82f2e955492c210e"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-320-enlarged-game.png",
+          "sha256": "54bd6e7684cc344b7a7a28d81b7419a47f3ec25e1eab1dd9b09e0350c187075f"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-390-enlarged-game.png",
+          "sha256": "1a4d0adde7effb72c3be82ceba19584da1604dac8bf6a7921bb55b845dabff62"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-844-enlarged-game.png",
+          "sha256": "63b930d0aa4eceb1fd0deabc0d62a1b9a47895d05196a1703cff397d0c6458d6"
+        }
+      ]
+    },
+    {
+      "id": "other-regions",
+      "status": "pass",
+      "finding": "Seven distinct additional region-inspired plates resolve, with separate river, fynbos, eucalypt, fern, olive and lava scenery. Paran\u00e1 remains nonplayable native-range context. Species Clash retains twelve visible44px nests in a four-column/three-row phone layout; Ecologist retains six habitats and its fieldwork dock.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-mediterranean.png",
+          "sha256": "5884192c7d3faaf3e8432ed348d85e07209fe7398294b135db176494cb3ab975"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-japan.png",
+          "sha256": "c5657fb77c4e0fdc58427c6fa52d6931c363b7e470321f32e111a55fe4cbffeb"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-africa.png",
+          "sha256": "24738133ead295ca6523b7df3566b0bc0fc48630b84f8d5956951a625f083175"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-australia.png",
+          "sha256": "235381fe695a1185dbc2a4f1ac1c62404721ecd5c61fc9e08a7eed9bb4abf6f8"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-newzealand.png",
+          "sha256": "202d1e8581c18b3002ae302dd84afe85eb8c64d5d6a1dd83a6ee30bdf80eb9e2"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-hawaii.png",
+          "sha256": "17b338dda5d18151e592d30cb906f0a6866cb3129069cf9312ee03a397173ef1"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-southamerica.png",
+          "sha256": "79e83715d0c8716d27a8760873738e8ff9c9dba079ea84f7776e0bfe5a0f0cd4"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-species-320.png",
+          "sha256": "47c27bd52a81d281f4c5e8ba47ba57e28e2dd296480e542b444329f5991c211f"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-ecologist-320.png",
+          "sha256": "cb895bf645857677dbff135e49fe725ff065918b5fef930aed880139d53eec9b"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-species-320.png",
+          "sha256": "5e726ceab2aed77d72f72457baa5b8de82c8e55ccf1fe278594bf2ba1bbb84bb"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-ecologist-320.png",
+          "sha256": "cfb4ceb6a4402186ddb785f249c55a7c5b2f4bc93ac1ce61a4575aa3c055f999"
+        }
+      ]
+    },
+    {
+      "id": "inspector",
+      "status": "pass",
+      "finding": "Resizable warm-paper panel prioritizes nest/species and credited real worker photograph, then reserves/growth and habitat detail. Resize focus is visible; picture is not generated species evidence.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-1440x1000-inspector.png",
+          "sha256": "017b26c337107ed95d347acfc1070a5341d749df90bec6fa2df77f944cd22124"
+        }
+      ]
+    },
+    {
+      "id": "terrain-summary",
+      "status": "pass",
+      "finding": "Loaded open/complex illustrations sit beside the original sourced labels, takeaway and experiment caveat; phone stacks the panels and 200% text uses one reading scroller.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-chromium-1440x1000-terrain-summary.png",
+          "sha256": "c61ae9881b5fe1a97ca593138c2d33ffdc298133fb5c98ae180018d758c0e3a6"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-terrain-summary.png",
+          "sha256": "2daf55e3257afed88e25190d48c0f396c26d8ee942b08453bedb7cf7d8478e1f"
+        },
+        {
+          "path": "docs/screenshots/rich-visual/a5shipping-webkit-390x844-terrain-enlarged.png",
+          "sha256": "4d25d6d7eb615c7a2a01d27918b95e4edee00cdb2dd27665fe4a0ee6e14d28bc"
+        }
+      ]
+    }
+  ],
+  "criteria": [
+    {
+      "id": "rich-illustration",
+      "status": "pass",
+      "finding": "Raster surroundings fill playable boards with detailed natural texture and depth, replacing the rejected procedural wash; all11 original art assets bundled."
+    },
+    {
+      "id": "landscape-trails",
+      "status": "pass",
+      "finding": "Curved sand paths and modest dotted signals connect actual graph edges; animated workers follow the same curves. Dispersal uses distinct dashed routes."
+    },
+    {
+      "id": "habitat-medallions",
+      "status": "pass",
+      "finding": "Illustrated setting motifs, separate owner symbols and current reserves are readable, selected outline is clear, buttons remain44px or larger."
+    },
+    {
+      "id": "paper-inspector",
+      "status": "pass",
+      "finding": "Paper and serif hierarchy retain verified specimen credits, readable metrics and habitat context; no global token change."
+    },
+    {
+      "id": "compact-chrome",
+      "status": "pass",
+      "finding": "Brand/mode plus Learn/Pause/Menu frame the map; Game/Research lives in one compact toolbar, source/fraction/Send/Orders stay accessible."
+    },
+    {
+      "id": "mobile-composition",
+      "status": "pass",
+      "finding": "Both engines captured1440,768,320,375,390,414 and shortlandscape;50final captures, no primary clipping/undersized target/overflow/serious axe finding, paused state invariant checked. Enlarged article excludes the intentionally inert underlying game from its control audit. Active-gameplay200% text also reflows without horizontal clipping, with vertical scrolling when needed. Globe-only phone World button keeps a44px accessible label; duplicate subtitle is removed while fictional-scene credit remains."
+    }
+  ],
+  "reviewer": {
+    "name": "Root integration owner",
+    "method": "Opened the exact approved concept and actual Chromium/WebKit desktop/phone screenshots with view_image; exercised integrated game through Cua and recorded Playwright DOM, axe and pause invariants. This is a review assertion, not authenticated human acceptance.",
+    "status": "pass"
+  },
+  "limitations": [
+    "Review is an actual rendered comparison by root, not authenticated human approval.",
+    "Physical iPhone Brave and enjoyment/visual acceptance remain human steps.",
+    "Illustrations are fictional surroundings, not specimen photographs or real vegetation/topography maps."
+  ],
+  "qaEvidence": {
+    "path": "docs/verification/rich-visual/browser-shipping-review.json",
+    "sha256": "799e3a014861e6e430ecfc1d68824b4bcd12cab8f99bc39b0053a8b5c0d2a7e2"
+  },
+  "extraEvidence": [
+    {
+      "path": "docs/verification/rich-visual/enlarged-game-review.json",
+      "sha256": "1dda8c7a5a5dfaf863d7b75c60ca4260b4b8ef022d6b28aec2279e4d77d1c070"
+    },
+    {
+      "path": "docs/verification/rich-visual/modes-review.json",
+      "sha256": "4d6845bc51f938d8ff5559a5f1ea1a6aef6e5dd3c71acb41ea2da4b345202753"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "reviewedAt": "2026-10-14T21:29:29.986Z",
+  "reports": [
+    {
+      "engine": "chromium",
+      "url": "http://10.0.0.119:5173/",
+      "status": 200,
+      "phone": {
+        "overflow": false,
+        "bridgePresent": false,
+        "nests": 6,
+        "art": 1536
+      },
+      "phonePath": "docs/screenshots/rich-visual/production-chromium-390-california.png",
+      "desktopPath": "docs/screenshots/rich-visual/production-chromium-1440-inspector.png",
+      "errors": [],
+      "failed": []
+    },
+    {
+      "engine": "webkit",
+      "url": "http://10.0.0.119:5173/",
+      "status": 200,
+      "phone": {
+        "overflow": false,
+        "bridgePresent": false,
+        "nests": 6,
+        "art": 1536
+      },
+      "phonePath": "docs/screenshots/rich-visual/production-webkit-390-california.png",
+      "desktopPath": "docs/screenshots/rich-visual/production-webkit-1440-inspector.png",
+      "errors": [],
+      "failed": []
+    }
+  ]
+}

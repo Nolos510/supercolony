@@ -1,0 +1,30 @@
+[
+  {
+    "engine": "chromium",
+    "mode": "Species Clash",
+    "nodes": 12,
+    "overlaps": [],
+    "path": "output/playwright/rich-visual/chromium-species-release-320.png"
+  },
+  {
+    "engine": "chromium",
+    "mode": "Ecologist",
+    "nodes": 6,
+    "overlaps": [],
+    "path": "output/playwright/rich-visual/chromium-ecologist-release-320.png"
+  },
+  {
+    "engine": "webkit",
+    "mode": "Species Clash",
+    "nodes": 12,
+    "overlaps": [],
+    "path": "output/playwright/rich-visual/webkit-species-release-320.png"
+  },
+  {
+    "engine": "webkit",
+    "mode": "Ecologist",
+    "nodes": 6,
+    "overlaps": [],
+    "path": "output/playwright/rich-visual/webkit-ecologist-release-320.png"
+  }
+]

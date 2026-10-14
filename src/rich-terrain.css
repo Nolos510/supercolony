@@ -1,0 +1,104 @@
+/* Hallmark · approved field atlas + richer terrain. Original scenery is the playing surface.
+ * Retained global tokens; immediate geometry/reserve updates; native, accessible nest buttons.
+ */
+.map-stage .terrain-plate { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; pointer-events:none; user-select:none; }
+.map-stage .terrain-edge-shade { position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 32px var(--color-shadow); }
+.map-stage .world-atlas-art { z-index:2; position:absolute; inset:var(--space-sm); pointer-events:none; border:1px solid var(--color-contour); box-shadow:inset 0 0 0 3px var(--color-water),inset 0 0 0 4px var(--color-line); }
+.map-stage .map-canvas { z-index:1; }
+.map-stage.illustrated-region .map-heading { top:var(--space-lg); left:var(--space-xl); max-width:32%; padding:var(--space-lg); background:color-mix(in oklch,var(--color-paper) 90%,transparent); border:0; border-radius:var(--radius-sm); }
+.map-stage .map-heading { z-index:2; }
+.map-stage .ocean-label { z-index:2; }
+.map-stage .map-heading h2 { font-size:clamp(24px,2.2vw,34px); line-height:1.05; font-weight:700; }
+.map-stage .map-heading .eyebrow { font-size:9px; letter-spacing:.18em; }
+.map-stage .map-heading p { margin-top:var(--space-sm); font-family:var(--font-display); font-size:17px; color:var(--color-ink); }
+.terrain-surroundings { display:block; max-width:220px; margin-top:var(--space-md); font-family:var(--font-display); font-size:12px; line-height:1.5; }
+.map-stage .back-world { top:var(--space-lg); right:var(--space-lg); z-index:5; background:var(--color-paper); border:1px solid var(--color-line); box-shadow:0 2px 8px var(--color-shadow); }
+.map-stage .map-node { width:64px; height:64px; border:3px solid var(--color-paper); color:var(--color-ink); box-shadow:0 2px 8px var(--color-shade),0 0 0 1px var(--color-ink); background:var(--color-paper); }
+.map-stage .map-node.player,.map-stage .map-node.rival,.map-stage .map-node.ally,.map-stage .map-node.neutral { background:var(--color-paper); border-color:var(--color-paper); }
+.map-stage .map-node-medallion { position:absolute; inset:0; border-radius:50%; background-image:url('/art/habitat-medallions.png'); background-size:300% 200%; background-repeat:no-repeat; pointer-events:none; }
+.map-stage .map-node:hover { filter:none; outline:2px solid var(--color-paper); outline-offset:3px; }
+.map-stage .map-node:focus-visible { outline:3px solid var(--color-focus); outline-offset:7px; }
+.map-stage .map-node.selected { outline:3px solid var(--color-player); outline-offset:2px; box-shadow:0 2px 12px var(--color-shade),0 0 0 2px var(--color-ink); }
+.map-stage .map-node .owner-glyph { position:absolute; top:-15px; left:50%; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; width:23px; height:23px; border-radius:50%; border:2px solid var(--color-ink); font-size:13px; line-height:1; background:var(--color-paper); color:var(--color-ink); box-shadow:0 0 0 2px var(--color-paper); }
+.map-stage .map-node.player .owner-glyph { background:var(--color-player); color:var(--color-player-dark); }
+.map-stage .map-node.ally .owner-glyph { background:var(--color-player); color:var(--color-ink); font-size:13px; }
+.map-stage .map-node.rival .owner-glyph { background:var(--color-rival); color:var(--color-rival-dark); }
+.map-stage .map-node .node-count { position:absolute; bottom:-4px; right:-9px; display:block; min-width:27px; padding:2px 5px; border:1px solid var(--color-paper); border-radius:var(--radius-sm); background:var(--color-ink); color:var(--color-paper); font-size:12px; line-height:1.2; font-variant-numeric:tabular-nums; }
+.map-stage.illustrated-region .map-node-label { top:39px; left:-88px; width:176px; }
+.map-stage.illustrated-region .map-node-label > span { display:inline-block; padding:3px 7px; background:var(--color-ink); color:var(--color-paper); font-family:var(--font-body); font-size:12px; font-weight:600; line-height:1.3; border-radius:var(--radius-sm); box-shadow:0 1px 4px var(--color-shadow); white-space:nowrap; }
+.map-stage.illustrated-region .map-node-label small { display:none; }
+.map-stage.illustrated-region .region-locator { bottom:var(--space-2xl); left:var(--space-lg); right:auto; width:150px; background:color-mix(in oklch,var(--color-paper) 94%,transparent); }
+.map-stage .map-key { z-index:4; padding:6px 10px; border-radius:var(--radius-sm); background:color-mix(in oklch,var(--color-paper) 94%,transparent); }
+.map-stage.illustrated-region .map-key { left:auto; right:var(--space-lg); max-width:calc(100% - 200px); }
+.map-stage .map-credit { z-index:4; padding:2px 5px; background:color-mix(in oklch,var(--color-paper) 92%,transparent); color:var(--color-ink); }
+.map-stage .atlas-compass { position:absolute; bottom:104px; left:var(--space-2xl); z-index:2; width:58px; text-align:center; pointer-events:none; font:13px var(--font-display); color:var(--color-ink); }
+.atlas-compass svg { display:block; width:58px; height:58px; fill:var(--color-ink); stroke:var(--color-ink); stroke-width:1; }
+.atlas-compass svg .compass-light { fill:var(--color-paper); }
+.atlas-compass svg circle { fill:var(--color-paper); }
+.map-stage.illustrated-region .atlas-compass { left:var(--space-xl); bottom:164px; }
+.map-stage.geographic-world .map-node { width:52px; height:52px; }
+.map-stage.geographic-world .map-node-label > span { display:inline-block; padding:3px 7px; border-radius:var(--radius-sm); background:var(--color-ink); color:var(--color-paper); }
+.map-stage.geographic-world .map-node-label { top:34px; }
+.map-stage.geographic-world .map-node-label button { border-color:var(--color-contour); box-shadow:0 2px 6px var(--color-shadow); }
+.map-stage .terrain-art-status { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:6; display:grid; gap:var(--space-md); max-width:85%; padding:var(--space-lg); background:var(--color-paper); border:1px solid var(--color-line); border-radius:var(--radius-sm); text-align:center; font-size:14px; }
+@media(min-width:1100px) and (min-height:750px) {
+  .map-stage.illustrated-region .map-node { width:72px; height:72px; }
+  .map-stage.illustrated-region .map-node-label { top:44px; }
+}
+@media(max-width:768px) {
+  .map-stage.illustrated-region .map-heading { top:var(--space-md); left:var(--space-md); max-width:48%; padding:var(--space-md); }
+  .map-stage .terrain-surroundings { display:none; }
+}
+@media(max-width:600px) {
+  .map-stage.illustrated-region .map-heading { top:var(--space-sm); left:var(--space-sm); max-width:66%; padding:var(--space-sm) var(--space-md); }
+  .map-stage.illustrated-region .map-heading h2 { font-size:23px; }
+  .map-stage .map-heading .eyebrow { display:none; }
+  .map-stage.illustrated-region .map-heading p { display:block; font-size:12px; margin-top:var(--space-xs); }
+  .map-stage .back-world { top:var(--space-sm); right:var(--space-sm); padding:var(--space-sm); font-size:11px; }
+  .map-stage .back-world svg { width:15px; }
+  .map-stage .map-node { width:52px; height:52px; }
+  .map-stage .map-node .owner-glyph { width:20px; height:20px; top:-13px; font-size:11px; }
+  .map-stage .map-node.ally .owner-glyph { font-size:12px; }
+  .map-stage .map-node .node-count { right:-6px; bottom:-4px; font-size:11px; min-width:24px; }
+  .map-stage.illustrated-region .map-node-label { top:32px; left:-60px; width:120px; }
+  .map-stage.illustrated-region .map-node-label > span { padding:3px 5px; font-size:10px; }
+  .map-stage.illustrated-region .region-locator { bottom:var(--space-xl); left:var(--space-sm); width:105px; }
+  .map-stage.illustrated-region .atlas-compass { display:none; }
+  .map-stage.geographic-world .atlas-compass { bottom:var(--space-3xl); left:var(--space-lg); width:40px; font-size:10px; }
+  .map-stage.geographic-world .atlas-compass svg { width:40px; height:40px; }
+  .map-stage.geographic-world .map-node { width:44px; height:44px; }
+  .map-stage.geographic-world .map-node-label { top:30px; }
+  .map-stage.geographic-world .map-node-label > span { font-size:10px; padding:2px 4px; }
+  .map-stage.geographic-world .map-node-wrap[data-region='newzealand'] .map-node-label { top:30px; left:-70px; width:90px; }
+  .map-stage.geographic-world[data-view='world'] .map-node-wrap[data-region='australia'] { transform:none; }
+  .map-stage.geographic-world .ocean-label { display:none; }
+  .map-stage.geographic-world .map-node-wrap[data-region='california'] .map-node-label { top:-53px; left:-50px; width:100px; }
+  .map-stage .map-credit { max-width:calc(100% - 16px); font-size:8px; }
+}
+@media(max-height:450px) and (min-width:600px) {
+  .map-stage.illustrated-region .map-heading { top:var(--space-xs); left:var(--space-sm); padding:var(--space-xs) var(--space-sm); }
+  .map-stage.illustrated-region .map-heading h2 { font-size:17px; }
+  .map-stage .map-heading .eyebrow,.map-stage .map-heading p,.map-stage .terrain-surroundings,.map-stage .atlas-compass { display:none; }
+  .map-stage .back-world { top:var(--space-xs); right:var(--space-sm); }
+  .map-stage.illustrated-region .map-node { width:44px; height:44px; }
+  .map-stage.illustrated-region .map-node-label { top:27px; font-size:10px; }
+  .map-stage.illustrated-region .map-key { display:none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .map-stage .map-node,.map-stage .map-node-label button { transition:none; }
+}
+@media(max-width:600px) {
+  .map-stage .back-world { width:44px; min-width:44px; height:44px; padding:8px; }
+  .map-stage .back-world .world-view-label { display:none; }
+  .map-stage .back-world svg { width:18px; height:18px; }
+  .map-stage.illustrated-region .map-heading p { display:none; }
+  .map-stage[data-mode='species'] .map-node { width:44px; height:44px; }
+  .map-stage[data-mode='species'] .map-node-label { top:28px; left:-38px; width:76px; }
+  .map-stage[data-mode='species'] .map-node-label > span { max-width:76px; font-size:10px; white-space:normal; line-height:1.2; }
+  .map-stage[data-mode='species'] .region-locator { display:none; }
+}
+@media(max-width:600px) {
+  .map-stage[data-mode='species'] .map-viewport { height:calc(100% - 16px); }
+  .map-stage[data-mode='species'] .map-node-label { top:24px; }
+  .map-stage[data-mode='species'] .map-credit { bottom:2px; font-size:8px; }
+}

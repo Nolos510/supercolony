@@ -1,8 +1,26 @@
 # SUPERColony current handoff
 
+## Rich-atlas corrective delivery · 2026-10-14 21:36 UTC
+
+The rejected procedural appearance is replaced in the playable game: eight painted regional plates, illustrated habitat medallions, winding trails/swarm paths, a textured geographic world view, compact phone controls, specimen-led paper Details and an illustrated terrain TLDR. This implements the pinned reference's central product direction. Decorative illustrations stay separate from licensed real habitat/specimen photographs and research evidence. Engine, balance, scientific data, global tokens and dependencies remain unchanged.
+
+Current contract/receipt: `verification/visual-reflow-contract.json` / `verification/visual-reflow-receipt.json`. Protected typecheck, lint,49unit/content tests,56browser cases (28Chromium+28WebKit),build,eight guard regressions and current visual-direction review pass. Final helper `check` passes. The earlier correction receipt passed before the independent200% reflow repair and is historical; the old atlas receipt never overrides the user's rejected visual result. Both repairs and budget continuity are documented in [the corrective verification report](docs/RICH_ATLAS_VERIFICATION.md).
+
+Final screenshots: `docs/screenshots/rich-visual/a5shipping-*` (60) and `production-*` (eight). Viewports1440,768,320/375/390/414px and844×390 landscape were inspected in Chromium/WebKit, plus active-game200% text and all three modes. LAN production smoke passes both engines at390px with full artwork decode, no runtime/asset errors, no overflow and no development bridge. Current phone link: **http://10.0.0.119:5173/**, sameLAN/Wi-Fi; refresh Brave. Source/art credits: [original artwork](docs/design/RICH_TERRAIN_ART.md), `public/art/credits.json`, existing scientific/photo packs. Archive: `output/releases/supercolony-rich-atlas-browser-build.zip`.
+
+Persistent correction gate: project `AGENTS.md`, `docs/VISUAL_DIRECTION.md`, `scripts/direction-guard.mjs` and `npm run verify:direction`. It requires a reviewed playable desktop/phone slice before expansion and fresh evidence after visual changes; stale, failed or incomplete reports block completion claims. It checks integrity rather than automatically judging taste. Human rejection invalidates affected acceptance. No hooks, CI or remote instruction fetching was added.
+
+Original deadline23:33:35Z retained; sharedrepair5completed, three unused. Private `Nolos510/supercolony` main receives source, art, current evidence and this handoff together; use `git log -1` for the delivery revision. Remaining human acceptance: physical iPhone Brave/toolbars/touch, native screen reader, enjoyment/balance and user visual review. Nonblocking build warning509.73kBentry/136.32kBgzip remains visible. Comfy untouched;8000reserved;5173only.
+
+## Correction history
+
+The user rejected the prior atlas delivery because the world stayed flat and the regional board used faint procedural decoration. Exact reapproved reference is `docs/design/atlas-richer-terrain-approved.png`, SHA256 `70f456abdef293488b0c1fa0bff44e8f31366737597469e45e52517611642162`. Historical rejected/pass reviews and contract successors remain in `verification/`; interim captures remain local. Root integrated the corrective slices and actually viewed desktop/phone renders before rollout. A cancelled WebKit Canvas loop and200%text clipping were discovered and fixed with frozen additive regressions before current closure.
+
+The section below is dated history of the prior engineering delivery, not the current art acceptance or current receipt. Current status is the corrective delivery above.
+
 ## Atlas delivery · 2026-10-14
 
-Workspace `/Users/nolos/Desktop/Ant Game`; private repository https://github.com/Nolos510/supercolony, branch `main`. Verified source commit `16985713fc7c389616f5af72a951418bea49f199` was pushed to private main and independently read back from GitHub. Use `git log -1` for the latest delivery/documentation revision and `git status --short` for checkout changes. Agent implementation and delivery are complete; human acceptance below remains. Previous regional-management delivery is preserved in [history](docs/history/HANDOFF_2026-10-13_regional-management.md).
+Workspace `/Users/nolos/Desktop/Ant Game`; private repository https://github.com/Nolos510/supercolony, branch `main`. Verified source commit `16985713fc7c389616f5af72a951418bea49f199` was pushed to private main and independently read back from GitHub. Use `git log -1` for the latest revision and `git status --short` for checkout changes. The following records historical engineering delivery; its visual outcome was subsequently rejected and is being corrected above. Previous regional-management delivery is preserved in [history](docs/history/HANDOFF_2026-10-13_regional-management.md).
 
 Direction: retained field atlas with paper reading surfaces, mineral-blue water, moss terrain, charcoal controls and cyan/amber symbols; richer original illustrated surroundings. Primary task: command swarms comfortably on a phone, inspect a nest, then follow its biology and evidence. Global tokens, balance coefficients, all three modes and React/Canvas architecture remain.
 

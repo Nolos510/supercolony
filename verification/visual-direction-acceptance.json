@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "reference": "docs/design/atlas-richer-terrain-approved.png",
+  "requiredSurfaces": ["world", "california-desktop", "california-phone", "other-regions", "inspector", "terrain-summary"],
+  "requiredCriteria": ["rich-illustration", "landscape-trails", "habitat-medallions", "paper-inspector", "compact-chrome", "mobile-composition"],
+  "viewports": [[1440,1000],[768,1024],[320,568],[375,667],[390,844],[414,896],[844,390]],
+  "deadline": "2026-10-14T23:33:35Z",
+  "remainingSharedRepairs": 5,
+  "baseline": "67e8f200700175d1fd66275b51d3efee862e17ba"
+}

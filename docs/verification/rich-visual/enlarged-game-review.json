@@ -1,0 +1,44 @@
+[
+  {
+    "engine": "chromium",
+    "width": 320,
+    "height": 568,
+    "clipping": [],
+    "path": "output/playwright/rich-visual/enlarged-release-chromium-320.png"
+  },
+  {
+    "engine": "chromium",
+    "width": 390,
+    "height": 844,
+    "clipping": [],
+    "path": "output/playwright/rich-visual/enlarged-release-chromium-390.png"
+  },
+  {
+    "engine": "chromium",
+    "width": 844,
+    "height": 390,
+    "clipping": [],
+    "path": "output/playwright/rich-visual/enlarged-release-chromium-844.png"
+  },
+  {
+    "engine": "webkit",
+    "width": 320,
+    "height": 568,
+    "clipping": [],
+    "path": "output/playwright/rich-visual/enlarged-release-webkit-320.png"
+  },
+  {
+    "engine": "webkit",
+    "width": 390,
+    "height": 844,
+    "clipping": [],
+    "path": "output/playwright/rich-visual/enlarged-release-webkit-390.png"
+  },
+  {
+    "engine": "webkit",
+    "width": 844,
+    "height": 390,
+    "clipping": [],
+    "path": "output/playwright/rich-visual/enlarged-release-webkit-844.png"
+  }
+]

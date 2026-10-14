@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "criterion_id": "visual-direction",
+  "contract_sha256": "bc3435110fa7aec1e482f92f9664cdaf433acf4184225f4b7ef0f8f7a6a27c2a",
+  "argv": [
+    "/Users/nolos/.local/share/mise/installs/node/22.22.1/bin/node",
+    "scripts/direction-guard.mjs"
+  ],
+  "cwd": "/Users/nolos/Desktop/Ant Game",
+  "started_at": 1792011746.230412,
+  "returncode": 0,
+  "timed_out": false,
+  "error": null,
+  "stdout": "PASS \u2014 recorded visual review is complete and matches the current files. Visual judgments remain review assertions; human acceptance is separate.\n",
+  "stderr": "",
+  "finished_at": 1792011746.3045802
+}

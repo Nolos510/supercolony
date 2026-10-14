@@ -49,6 +49,12 @@ Sixteen sourced **At a glance** diagrams summarize the field notes. Three option
 
 Desktop Details can be resized with its handle or keyboard and reset. Phones retain the dedicated Details screen. Transform-based panel/page/confirmation motion preserves readable text, focus and immediate reduced-motion states; frequent reserve updates and resizing stay immediate. Global tokens remain unchanged.
 
+## Richer playable atlas
+
+Eight original painted regional environments, illustrated habitat medallions, winding trails, a textured geographic world view, and specimen-led paper Details implement the approved richer-atlas direction in the actual game. The terrain field note includes a two-panel illustrated comparison. These illustrations are fictional; the real habitat and specimen photographs retain their individual credits. See [original art credits](docs/design/RICH_TERRAIN_ART.md).
+
+Visual changes follow [the pinned direction](docs/VISUAL_DIRECTION.md). Run `npm run verify:direction` after capturing and actually reviewing fresh game renders. It rejects missing, failed, or stale evidence; it does not automatically judge artistic quality or authenticate a reviewer. Future visual completion contracts must include this check.
+
 ## Architecture
 
 - React/TypeScript/Vite shell with a shared external store.
@@ -72,7 +78,7 @@ Browser tests use Playwright Chromium and WebKit (`npx playwright install chromi
 
 Results distinguish capture events (including recaptures), successful swarm orders or interventions, and science topics linked to events. Topics encountered is not a learning assessment. Nests currently held are reported separately.
 
-The current protected completion contract is `verification/atlas-repair-contract.json`; its receipt is `verification/atlas-repair-receipt.json`. Its first run is the shared first repair after the preserved initial attempt. Final check passes, with 49 unit/content tests and 50 browser cases. All declared command checks run through the completion helper. Earlier contracts and failed evidence remain historical. Final outcomes, screenshots, and human-device limits are recorded in [HANDOFF.md](HANDOFF.md) and [atlas verification evidence](docs/ATLAS_VERIFICATION.md). Human playtesting is still needed to judge enjoyment and learning.
+The current protected completion contract is `verification/visual-reflow-contract.json`; its receipt is `verification/visual-reflow-receipt.json`. All declared commands pass through the completion helper: typecheck, lint, 49 unit/content tests, 56 browser cases, build, eight direction-guard regressions, and the current rendered-direction evidence check. Earlier contracts remain historical; the earlier atlas delivery was rejected for its appearance. [Rich-atlas delivery evidence](docs/RICH_ATLAS_VERIFICATION.md) and [HANDOFF.md](HANDOFF.md) record the correction and remaining human acceptance. Physical iPhone Brave playtesting and enjoyment are not established by browser tests.
 
 ## iPhone Brave preview
 

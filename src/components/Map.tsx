@@ -7,6 +7,9 @@ import { resources } from '../data/content';
 import { ResourceLink } from './Learning';
 import { globalSamples } from '../data/research';
 import { nestRelation } from '../game/engine';
+import { atlasArtboards, habitatMedallionPosition } from '../data/artboards';
+import TerrainBoard from './TerrainBoard';
+import '../rich-terrain.css';
 
 type Polygon = number[][][];
 interface Geography { features: { geometry: { type: 'Polygon' | 'MultiPolygon'; coordinates: Polygon | Polygon[] } }[] }
@@ -24,78 +27,66 @@ export function geographicProjection(bounds: GeoBounds, width: number, height: n
   return (lon: number, lat: number): [number, number] => [left + (lon - bounds.west) * cosine * scale, top + (bounds.north - lat) * scale];
 }
 export const project = (lon: number, lat: number) => geographicProjection(WORLD_BOUNDS, 2, 1)(lon, lat).map((value, index) => value / (index === 0 ? 2 : 1));
+/** Only screen coordinates change: nest identities, trails and fixed-step travel remain in the engine. */
 function nestPoint(node: NestState, view: string | null, width = 880, height = 450): [number, number] {
   if (view) {
-    const regionalIndex = regionalRoleIds.indexOf(node.roleId);
-    if (regionalIndex !== -1) {
-      if (width >= 600 && height < 230) return [.09 + regionalIndex * .164, .54];
-      if (width <= 600 && height <= 400) return [.17 + regionalIndex % 3 * .33, regionalIndex < 3 ? .38 : .74];
+    const index = regionalRoleIds.indexOf(node.roleId);
+    if (index >= 0) {
+      if (width >= 600 && height < 230) return [.10 + index * .16, .50];
+      if (width <= 600 && height <= 390) return [.18 + index % 3 * .32, index < 3 ? .38 : .74];
+      const desktop: [number, number][] = [[.39,.58],[.38,.29],[.72,.42],[.57,.22],[.56,.79],[.80,.68]];
+      const phone: [number, number][] = [[.26,.60],[.29,.34],[.72,.44],[.58,.22],[.47,.81],[.78,.69]];
+      return (width <= 600 ? phone : desktop)[index];
     }
-    const speciesSetting = regionalIndex === -1;
-    if (speciesSetting && height < 230 && width >= 600) { const index = Number(node.id.split('-').at(-1)); return [.09 + (index % 6) * .162, .32 + Math.floor(index / 6) * .44]; }
-    return [.1 + node.x * .008, .12 + node.y * .0074];
+    const indexInMatch = Number(node.id.split('-').at(-1));
+    if (height < 230 && width >= 600) return [.09 + indexInMatch % 6 * .162, .32 + Math.floor(indexInMatch / 6) * .44];
+    if (width <= 600) return [.14 + indexInMatch % 4 * .24, .33 + Math.floor(indexInMatch / 4) * .25];
+    return [.18 + indexInMatch % 4 * .22, .25 + Math.floor(indexInMatch / 4) * .28];
   }
   const region = regions.find(r => r.id === node.regionId)!;
-  const point = geographicProjection(WORLD_BOUNDS, width, height)(...region.anchor);
+  const point = geographicProjection(WORLD_BOUNDS, width, height, .075)(...region.anchor);
+  if (width <= 600) {
+    // Small atlas callouts keep neighbouring regions touchable; fine leaders retain the geographic anchors.
+    if (height > 300) {
+      const callouts: Record<string, [number,number]> = { california:[.20,.30], hawaii:[.10,.46], mediterranean:[.50,.24], japan:[.84,.30], africa:[.51,.60], australia:[.72,.80], newzealand:[.91,.64] };
+      if (callouts[node.regionId]) return callouts[node.regionId];
+    }
+    const offsets: Record<string, [number, number]> = { california:[0,-.035], hawaii:[0,.015], mediterranean:[0,-.06], japan:[0,-.04], africa:[0,.045], australia:[-.06,.075], newzealand:[-.01,.18] };
+    const offset = offsets[node.regionId] ?? [0,0];
+    return [Math.max(26 / width, Math.min(1 - 26 / width, point[0] / width + offset[0])), point[1] / height + offset[1]];
+  }
   return [point[0] / width, point[1] / height];
 }
+
+type Curve = { a: [number, number]; b: [number, number]; c1: [number, number]; c2: [number, number] };
+function landscapeTrail(from: NestState, to: NestState, view: string | null, width: number, height: number): Curve {
+  const start = nestPoint(from, view, width, height), end = nestPoint(to, view, width, height);
+  const a: [number, number] = [start[0] * width, start[1] * height], b: [number, number] = [end[0] * width, end[1] * height];
+  const dx = b[0] - a[0], dy = b[1] - a[1], length = Math.max(1, Math.hypot(dx, dy));
+  const direction = from.id < to.id ? 1 : -1;
+  const bend = (view ? 1 : direction) * Math.min(view ? 90 : 120, length * (view ? .34 : .20));
+  const offset: [number, number] = [-dy / length * bend, dx / length * bend];
+  const c1: [number, number] = [a[0] + dx / 3 + offset[0], a[1] + dy / 3 + offset[1]];
+  const c2: [number, number] = [a[0] + dx * 2 / 3 + offset[0] * (view ? -1 : 1), a[1] + dy * 2 / 3 + offset[1] * (view ? -1 : 1)];
+  return { a, b, c1, c2 };
+}
+function traceTrail(ctx: CanvasRenderingContext2D, curve: Curve) {
+  ctx.beginPath(); ctx.moveTo(...curve.a); ctx.bezierCurveTo(...curve.c1, ...curve.c2, ...curve.b);
+}
+function alongTrail(curve: Curve, t: number): [number, number, number] {
+  const q = 1 - t;
+  const x = q ** 3 * curve.a[0] + 3 * q ** 2 * t * curve.c1[0] + 3 * q * t ** 2 * curve.c2[0] + t ** 3 * curve.b[0];
+  const y = q ** 3 * curve.a[1] + 3 * q ** 2 * t * curve.c1[1] + 3 * q * t ** 2 * curve.c2[1] + t ** 3 * curve.b[1];
+  const dx = 3 * q ** 2 * (curve.c1[0] - curve.a[0]) + 6 * q * t * (curve.c2[0] - curve.c1[0]) + 3 * t ** 2 * (curve.b[0] - curve.c2[0]);
+  const dy = 3 * q ** 2 * (curve.c1[1] - curve.a[1]) + 6 * q * t * (curve.c2[1] - curve.c1[1]) + 3 * t ** 2 * (curve.b[1] - curve.c2[1]);
+  return [x, y, Math.atan2(dy, dx)];
+}
+
 function geographicPaths(geography: Geography, point: (lon: number, lat: number) => [number, number]) {
   return geography.features.flatMap(feature => {
     const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates as Polygon] : feature.geometry.coordinates as Polygon[];
     return polygons.map(polygon => polygon.map(ring => ring.map(([lon, lat], index) => (index ? 'L' : 'M') + point(lon, lat).map(value => value.toFixed(2)).join(',')).join(' ') + ' Z').join(' '));
   });
-}
-type SceneColors = { land: string; paper: string; contour: string; habitat: string; ink: string; water: string; ochre: string; earth: string };
-/** Original illustrated surroundings; these coordinates never claim to be real nests. */
-function drawRegionalScene(ctx: CanvasRenderingContext2D, width: number, height: number, regionId: string, nodes: NestState[], colors: SceneColors) {
-  let seed = [...regionId].reduce((value, character) => value * 31 + character.charCodeAt(0), 7) >>> 0;
-  const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
-  const fillEllipse = (x: number, y: number, rx: number, ry: number, fill: string, alpha = 1) => {
-    ctx.globalAlpha = alpha; ctx.fillStyle = fill; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, -.25, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
-  };
-  ctx.fillStyle = colors.paper; ctx.fillRect(0, 0, width, height);
-  ctx.fillStyle = colors.land; ctx.globalAlpha = .72; ctx.fillRect(0, 0, width, height); ctx.globalAlpha = 1;
-  for (let i = 0; i < 18; i++) fillEllipse(random() * width, random() * height, 70 + random() * width / 6, 25 + random() * height / 8, i % 3 ? colors.paper : colors.habitat, .12);
-  for (let i = 0; i < 110; i++) {
-    const x = random() * width, y = random() * height;
-    ctx.strokeStyle = colors.contour; ctx.globalAlpha = .25; ctx.lineWidth = .5;
-    ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + 15, y - 6, x + 32, y); ctx.stroke();
-  }
-  ctx.globalAlpha = 1;
-  for (const node of nodes) {
-    const [nx, ny] = nestPoint(node, regionId, width, height), x = nx * width, y = ny * height;
-    const complex = node.terrain === 'complex';
-    fillEllipse(x, y, Math.max(42, width * .085), Math.max(23, height * .06), complex ? colors.habitat : colors.paper, complex ? .13 : .30);
-    const role = node.roleId;
-    if (node.gateway) {
-      ctx.fillStyle = colors.earth; ctx.globalAlpha = .16; ctx.fillRect(x - 55, y - 22, 110, 44); ctx.globalAlpha = 1;
-      ctx.strokeStyle = colors.earth; ctx.lineWidth = 1.3;
-      for (let i = 0; i < 4; i++) { ctx.strokeRect(x - 51 + i * 25, y - 19, 21, 38); }
-    }
-    for (let i = 0; i < (complex ? 13 : 8); i++) {
-      const angle = i / (complex ? 13 : 8) * Math.PI * 2;
-      const distance = 38 + random() * Math.min(75, width / 9);
-      const px = x + Math.cos(angle) * distance, py = y + Math.sin(angle) * distance * .6;
-      if (role.includes('litter') || role.includes('bark')) {
-        ctx.save(); ctx.translate(px, py); ctx.rotate(random() * Math.PI);
-        ctx.strokeStyle = colors.earth; ctx.fillStyle = colors.ochre; ctx.globalAlpha = .48;
-        ctx.beginPath(); ctx.ellipse(0, 0, 10, 4, 0, 0, Math.PI * 2); ctx.fill(); ctx.beginPath(); ctx.moveTo(-11, 0); ctx.lineTo(11, 0); ctx.stroke(); ctx.restore();
-      } else if (complex || role.includes('scrub') || role.includes('garden') || role.includes('margin')) {
-        const tall = ['japan', 'newzealand'].includes(regionId);
-        const spread = tall ? 8 : 13;
-        ctx.strokeStyle = colors.habitat; ctx.lineWidth = 1.1; ctx.globalAlpha = .6;
-        ctx.beginPath(); ctx.moveTo(px, py + 7); ctx.lineTo(px, py - (tall ? 25 : 13)); ctx.stroke(); ctx.globalAlpha = 1;
-        for (let leaf = 0; leaf < 3; leaf++) fillEllipse(px + (leaf % 2 ? 7 : -5), py - leaf * 7, spread, 5, colors.habitat, .35);
-        if (role.includes('garden') || regionId === 'africa') fillEllipse(px + 3, py - 17, 2.5, 2.5, colors.ochre, .9);
-      } else {
-        ctx.strokeStyle = regionId === 'hawaii' ? colors.earth : colors.habitat; ctx.globalAlpha = .38; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(px - 3, py + 3); ctx.lineTo(px, py - 4); ctx.lineTo(px + 2, py + 3); ctx.stroke(); ctx.globalAlpha = 1;
-      }
-      if (role.includes('rock') || role.includes('gravel') || regionId === 'hawaii' || regionId === 'mediterranean') {
-        fillEllipse(px + 12, py + 12, 5 + random() * 6, 3 + random() * 4, colors.earth, .2);
-      }
-    }
-  }
 }
 
 function ant(ctx: CanvasRenderingContext2D, x: number, y: number, angle: number, color: string, size = 1) {
@@ -134,10 +125,13 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     const bg = background.getContext('2d')!;
     const css = getComputedStyle(document.documentElement);
     const color = (token: string) => css.getPropertyValue(token).trim();
-    const colors = { paper: color('--color-paper'), ochre: color('--color-rival'), earth: color('--color-rival-dark'), water: color('--color-water'), land: color('--color-land'), contour: color('--color-contour'), grid: color('--color-map-grid'), ink: color('--color-ink'), player: color('--color-player-dark'), rival: color('--color-rival-dark'), ally: color('--color-player-dark'), neutral: color('--color-neutral'), habitat: color('--color-habitat') };
-    let width = 0, height = 0, frame = 0, redraw = true, lastDraw = 0;
+    const colors = { paper: color('--color-paper'), sand: color('--color-paper-deep'), ochre: color('--color-rival'), earth: color('--color-rival-dark'), water: color('--color-water'), land: color('--color-land'), contour: color('--color-contour'), grid: color('--color-map-grid'), ink: color('--color-ink'), player: color('--color-player-dark'), rival: color('--color-rival-dark'), ally: color('--color-player-dark'), neutral: color('--color-neutral'), habitat: color('--color-habitat') };
+    let width = 0, height = 0, frame = 0, redraw = true, lastDraw = 0, alive = true;
+    delete surface.dataset.renderedView;
+    const worldTerrain = new Image();
+    if (!view) { worldTerrain.onload = () => { redraw = true; }; worldTerrain.src = '/art/world-terrain.jpg'; }
     const scale = Math.min(window.devicePixelRatio || 1, 2);
-    const geographicPoint = (lon: number, lat: number) => geographicProjection(WORLD_BOUNDS, width, height)(lon, lat);
+    const geographicPoint = (lon: number, lat: number) => geographicProjection(WORLD_BOUNDS, width, height, .075)(lon, lat);
     const resize = new ResizeObserver(entries => {
       width = Math.max(1, entries[0].contentRect.width); height = Math.max(1, entries[0].contentRect.height);
       setSize({ width, height });
@@ -148,30 +142,51 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     resize.observe(surface);
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     function drawBackground() {
-      if (view) { drawRegionalScene(bg, width, height, view, gameStore.getState().nodes.filter(node => node.regionId === view), colors); redraw = false; return; }
-      bg.fillStyle = colors.water; bg.fillRect(0, 0, width, height);
+      bg.clearRect(0, 0, width, height);
+      if (view) { redraw = false; return; }
+      const sea = bg.createLinearGradient(0, 0, width, height);
+      sea.addColorStop(0, colors.water); sea.addColorStop(.62, colors.water); sea.addColorStop(1, colors.land);
+      bg.fillStyle = sea; bg.fillRect(0, 0, width, height);
+      const land = new Path2D();
       if (geometry.current) {
-        bg.fillStyle = colors.land; bg.strokeStyle = colors.contour; bg.lineWidth = .7;
-        for (const feature of geometry.current.features) {
-          const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates as Polygon] : feature.geometry.coordinates as Polygon[];
-          for (const polygon of polygons) {
-            bg.beginPath();
-            for (const ring of polygon) {
-              ring.forEach(([lon, lat], i) => { const p = geographicPoint(lon, lat); if (i === 0) bg.moveTo(p[0], p[1]); else bg.lineTo(p[0], p[1]); });
-              bg.closePath();
-            }
-            bg.fill('evenodd'); bg.stroke();
+        for (const path of geographicPaths(geometry.current, geographicPoint)) land.addPath(new Path2D(path));
+        bg.strokeStyle = colors.paper; bg.lineWidth = 6; bg.stroke(land);
+        const landWash = bg.createLinearGradient(0, 0, 0, height);
+        landWash.addColorStop(0, colors.paper); landWash.addColorStop(.42, colors.land); landWash.addColorStop(.68, colors.land); landWash.addColorStop(1, colors.paper);
+        bg.fillStyle = landWash; bg.fill(land, 'evenodd');
+        bg.save(); bg.clip(land, 'evenodd');
+        if (worldTerrain.complete && worldTerrain.naturalWidth) {
+          const illustration = bg.createPattern(worldTerrain, 'repeat');
+          if (illustration) {
+            illustration.setTransform(new DOMMatrix().scale(Math.max(220, width / 4) / worldTerrain.naturalWidth));
+            bg.globalAlpha = .68; bg.fillStyle = illustration; bg.fillRect(0, 0, width, height); bg.globalAlpha = 1;
           }
         }
+        // Engraved hill marks and botanical stippling enrich the true Natural Earth geometry.
+        bg.strokeStyle = colors.habitat; bg.fillStyle = colors.habitat;
+        for (let row = 0; row < height / 14; row++) for (let column = 0; column < width / 18; column++) {
+          const x = column * 18 + row % 2 * 9, y = row * 14;
+          const tone = ((column * 17 + row * 31) % 23) / 23;
+          bg.globalAlpha = .07 + tone * .11; bg.lineWidth = .8;
+          bg.beginPath(); bg.moveTo(x - 6, y + 3); bg.quadraticCurveTo(x, y - 6 - tone * 5, x + 6, y + 3); bg.stroke();
+          if (tone > .65) { bg.beginPath(); bg.ellipse(x + 7, y + 6, 4, 2, -.4, 0, Math.PI * 2); bg.fill(); }
+        }
+        bg.restore(); bg.globalAlpha = 1; bg.lineWidth = .7; bg.strokeStyle = colors.contour; bg.stroke(land);
       }
+      // Faint rhumb lines and paper grain belong to the atlas, not to fictional frontlines.
       bg.strokeStyle = colors.grid; bg.lineWidth = .6;
-      for (let x = 0; x < width; x += width / 12) { bg.beginPath(); bg.moveTo(x, 0); bg.lineTo(x, height); bg.stroke(); }
-      for (let y = 0; y < height; y += height / 6) { bg.beginPath(); bg.moveTo(0, y); bg.lineTo(width, y); bg.stroke(); }
-      bg.globalAlpha = .2; bg.fillStyle = colors.contour;
-      for (let x = 8; x < width; x += 13) for (let y = 6; y < height; y += 13) { if (((x * 7 + y * 3) % 19) < 8) bg.fillRect(x, y, .7, .7); }
+      const compassX = width * .17, compassY = height * .80;
+      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 8) {
+        bg.beginPath(); bg.moveTo(compassX, compassY); bg.lineTo(compassX + Math.cos(angle) * width * 1.2, compassY + Math.sin(angle) * width * 1.2); bg.stroke();
+      }
+      bg.globalAlpha = .12; bg.fillStyle = colors.ink;
+      for (let x = 6; x < width; x += 9) for (let y = 5; y < height; y += 11) { if (((x * 7 + y * 3) % 23) < 7) bg.fillRect(x, y, .8, .8); }
+
       bg.globalAlpha = 1; redraw = false;
     }
     const draw = (now: number) => {
+      if (!alive) return;
+      if (width <= 0 || height <= 0) { frame = requestAnimationFrame(draw); return; }
       const current = gameStore.getState();
       if (!redraw && (reduced.matches || current.status !== 'running') && now - lastDraw < 100) { frame = requestAnimationFrame(draw); return; }
       lastDraw = now;
@@ -179,49 +194,53 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
       ctx.clearRect(0, 0, width, height); ctx.drawImage(background, 0, 0, width, height);
       const s = gameStore.getState();
       const byId = new Map(s.nodes.map(n => [n.id, n]));
-      if (view) {
-        for (const n of s.nodes.filter(n => n.regionId === view && n.terrain === 'complex')) {
-          const [px, py] = nestPoint(n, view, width, height); ctx.fillStyle = colors.habitat; ctx.globalAlpha = .18;
-          ctx.beginPath(); ctx.ellipse(px * width, py * height, 48, 32, -.3, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
-          ctx.strokeStyle = colors.contour; ctx.lineWidth = .8;
-          for (let t = 0; t < 4; t++) { const x = px * width - 34 + t * 19, y = py * height + (t % 2 ? 22 : -25); ctx.beginPath(); ctx.moveTo(x - 4, y + 5); ctx.lineTo(x, y - 5); ctx.lineTo(x + 4, y + 5); ctx.closePath(); ctx.stroke(); }
-        }
-      }
       for (const edge of s.edges) {
         const from = byId.get(edge.from)!, to = byId.get(edge.to)!;
         if (view ? from.regionId !== view || to.regionId !== view : edge.kind !== 'overseas') continue;
-        const a = nestPoint(from, view, width, height), b = nestPoint(to, view, width, height);
-        ctx.strokeStyle = selectedRef.current.includes(edge.from) || selectedRef.current.includes(edge.to) ? colors.ink : view ? colors.earth : colors.contour;
-        ctx.lineWidth = selectedRef.current.includes(edge.from) || selectedRef.current.includes(edge.to) ? 1.5 : 1;
-        ctx.setLineDash(edge.kind === 'overseas' ? [4, 6] : []);
-        ctx.beginPath(); ctx.moveTo(a[0] * width, a[1] * height); ctx.lineTo(b[0] * width, b[1] * height); ctx.stroke(); ctx.setLineDash([]);
+        const curve = landscapeTrail(from, to, view, width, height);
+        const highlighted = selectedRef.current.includes(edge.from) || selectedRef.current.includes(edge.to);
+        ctx.lineCap = 'round';
+        if (view) {
+          ctx.strokeStyle = colors.earth; ctx.globalAlpha = .18; ctx.lineWidth = highlighted ? 9 : 7; traceTrail(ctx, curve); ctx.stroke();
+          ctx.globalAlpha = highlighted ? 1 : .85; ctx.strokeStyle = colors.sand; ctx.lineWidth = highlighted ? 6 : 4.5; traceTrail(ctx, curve); ctx.stroke();
+          ctx.strokeStyle = highlighted ? colors.ink : colors.earth; ctx.globalAlpha = highlighted ? 1 : .62; ctx.lineWidth = highlighted ? 2.2 : 1.7; ctx.setLineDash([1, 8]);
+        } else { ctx.strokeStyle = highlighted ? colors.ink : colors.earth; ctx.globalAlpha = highlighted ? .9 : .48; ctx.lineWidth = highlighted ? 2 : 1.2; ctx.setLineDash([4, 6]); }
+        traceTrail(ctx, curve); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
         if (view && from.owner !== 'neutral' && !reduced.matches) {
           const phase = s.status === 'running' ? now / 20000 : s.time / 20;
-          for (let i = 0; i < 5; i++) { const t = (i / 5 + phase) % 1; ant(ctx, (a[0] + (b[0] - a[0]) * t) * width, (a[1] + (b[1] - a[1]) * t) * height, Math.atan2((b[1] - a[1]) * height, (b[0] - a[0]) * width), colors[from.owner], .65); }
+          for (let i = 0; i < 5; i++) { const t = (i / 5 + phase) % 1; const [x, y, angle] = alongTrail(curve, t); ant(ctx, x, y, angle, colors.ink, .65); }
         }
+
       }
       for (const fleet of s.fleets) {
         const from = byId.get(fleet.path[fleet.legIndex]), to = byId.get(fleet.path[fleet.legIndex + 1]);
         if (!from || !to || (view ? from.regionId !== view || to.regionId !== view : from.regionId === to.regionId)) continue;
-        const a = nestPoint(from, view, width, height), b = nestPoint(to, view, width, height);
+        const curve = landscapeTrail(from, to, view, width, height);
         const edge = s.edges.find(e => (e.from === from.id && e.to === to.id) || (e.to === from.id && e.from === to.id));
         const progress = Math.min(1, fleet.elapsed / (edge?.travelSeconds || 5));
         const fleetColor = colors[fleet.owner];
         if (from.regionId !== to.regionId) {
-          const x = (a[0] + (b[0] - a[0]) * progress) * width, y = (a[1] + (b[1] - a[1]) * progress) * height;
+          const [x, y] = alongTrail(curve, progress);
           ctx.save(); ctx.translate(x, y); ctx.fillStyle = fleetColor; ctx.beginPath(); ctx.moveTo(-7, 0); ctx.lineTo(7, 0); ctx.lineTo(3, 5); ctx.lineTo(-3, 5); ctx.closePath(); ctx.fill(); ctx.fillRect(-2, -5, 4, 4); ctx.restore();
         } else {
           const count = reduced.matches ? 1 : Math.min(width < 600 ? 10 : 20, Math.max(3, Math.floor(fleet.units / 3)));
-          for (let i = 0; i < count; i++) { const t = Math.max(0, Math.min(1, progress - (i % 8) * .012)); ant(ctx, (a[0] + (b[0] - a[0]) * t) * width, (a[1] + (b[1] - a[1]) * t) * height + Math.floor(i / 8) * 5 - 5, Math.atan2((b[1] - a[1]) * height, (b[0] - a[0]) * width), fleetColor, .9); }
+          for (let i = 0; i < count; i++) { const t = Math.max(0, Math.min(1, progress - (i % 8) * .012)); const [x, y, angle] = alongTrail(curve, t); ant(ctx, x, y + Math.floor(i / 8) * 5 - 5, angle, fleetColor, .9); }
         }
       }
       if (!view && width < 600) {
-        for (const n of s.nodes.filter(n => n.gateway)) { const p = nestPoint(n, view, width, height); ctx.beginPath(); ctx.fillStyle = colors[n.owner]; ctx.arc(p[0] * width, p[1] * height, 4.5, 0, Math.PI * 2); ctx.fill(); }
+        for (const n of s.nodes.filter(n => n.gateway)) {
+          const region = regions.find(entry => entry.id === n.regionId)!;
+          const anchor = geographicPoint(...region.anchor), p = nestPoint(n, view, width, height);
+          ctx.strokeStyle = colors.ink; ctx.globalAlpha = .40; ctx.lineWidth = .8; ctx.beginPath(); ctx.moveTo(...anchor); ctx.lineTo(p[0] * width, p[1] * height); ctx.stroke(); ctx.globalAlpha = 1;
+          ctx.beginPath(); ctx.fillStyle = colors.ink; ctx.arc(...anchor, 2.5, 0, Math.PI * 2); ctx.fill();
+        }
       }
+      if (surface.dataset.renderedView !== (view ?? 'world')) surface.dataset.renderedView = view ?? 'world';
+      if (!view) surface.dataset.terrainReady = worldTerrain.complete && worldTerrain.naturalWidth ? 'true' : 'false';
       frame = requestAnimationFrame(draw);
     };
     frame = requestAnimationFrame(draw);
-    return () => { cancelAnimationFrame(frame); resize.disconnect(); };
+    return () => { alive = false; cancelAnimationFrame(frame); resize.disconnect(); worldTerrain.onload = null; };
   }, [view, load, state.mode]);
 
   const viewport = useRef<HTMLDivElement>(null);
@@ -239,7 +258,7 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     if (preview.current) preview.current.hidden = true;
     viewport.current?.classList.remove('ordering');
   }
-  useEffect(() => { clearGesture(true); return () => clearGesture(true); }, [view, active, gestureRevision]); // A view/menu/pause change cancels the order.
+  useEffect(() => { clearGesture(true); return () => clearGesture(true); }, [view, active, gestureRevision, size.width, size.height]); // Navigation or layout changes cancel the order.
   useEffect(() => {
     const surface = viewport.current;
     if (!surface) return;
@@ -307,17 +326,18 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
   const visible = state.nodes.filter(n => view ? n.regionId === view : n.gateway);
   const compactRegional = !!view && visible.length === 6 && compactRegionalSize(size.width, size.height);
   const nativeRegion = regions.find(region => region.id === 'southamerica');
-  const nativePoint = nativeRegion && geographicProjection(WORLD_BOUNDS, size.width, size.height)(...nativeRegion.anchor);
-  return <div className={'map-stage ' + (view ? 'illustrated-region' + (compactRegional ? ' compact-regional-board' : '') : 'geographic-world')} data-view={view ?? 'world'}>
+  const nativePoint = nativeRegion && geographicProjection(WORLD_BOUNDS, size.width, size.height, .075)(...nativeRegion.anchor);
+  return <div className={'map-stage ' + (view ? 'illustrated-region' + (compactRegional ? ' compact-regional-board' : '') : 'geographic-world')} data-view={view ?? 'world'} data-mode={state.mode}>
     <div ref={viewport} className="map-viewport" onPointerDown={begin} onPointerMove={move} onPointerUp={end} onPointerCancel={() => { suppressClick.current = true; clearGesture(true); }} onClickCapture={e => { if (suppressClick.current) { e.preventDefault(); e.stopPropagation(); suppressClick.current = false; } }}>
+    {view && atlasArtboards[view] ? <TerrainBoard key={view} art={atlasArtboards[view]} /> : <div className="world-atlas-art" aria-hidden="true" />}
     <canvas ref={canvas} className="map-canvas" aria-hidden="true" /><svg className="order-trail" aria-hidden="true"><polyline ref={trail} fill="none" /></svg><div ref={preview} className="drag-preview" hidden role="status" />
-    <div className="map-heading"><span className="eyebrow">{view ? currentRegion?.nativeRange ? 'Native-range field notes' : 'Regional trail network' : 'A planet connected by tiny travelers'}</span><h2>{currentRegion?.name ?? 'The living world'}</h2><p>{view ? currentRegion?.nativeRange ? 'Native-range context · no playable nests' : 'Illustrated game board · fictional nest sites' : state.mode === 'species' ? 'Australian matchup · Worldwide context' : `${new Set(state.nodes.map(n => n.regionId)).size} regions. One continuous match.`}</p></div>
-    {view && <button className="back-world" onClick={() => onZoom(null)}><Icon name="world" />World view</button>}
+    <div className="map-heading"><span className="eyebrow">{view ? currentRegion?.nativeRange ? 'Native-range field notes' : 'SUPERColony · Field atlas' : 'A planet connected by tiny travelers'}</span><h2>{currentRegion?.name ?? 'The living world'}</h2><p>{view ? currentRegion?.nativeRange ? 'Native-range context · no playable nests' : 'Simulated habitat board' : state.mode === 'species' ? 'Australian matchup · Worldwide context' : `${new Set(state.nodes.map(n => n.regionId)).size} regions. One continuous match.`}</p>{view && atlasArtboards[view] && <span className="terrain-surroundings">{atlasArtboards[view].surroundings}</span>}</div>
+    {view && <button className="back-world" aria-label="World view" title="World view" onClick={() => onZoom(null)}><Icon name="world" /><span className="world-view-label">World view</span></button>}
     {!view && <><span className="ocean-label ocean-pacific">Pacific Ocean</span><span className="ocean-label ocean-atlantic">Atlantic Ocean</span><span className="ocean-label ocean-indian">Indian Ocean</span></>}
     {visible.map(n => {
       const p = nestPoint(n, view, size.width, size.height); const region = regions.find(r => r.id === n.regionId)!;
       return <div key={n.id} data-region={n.regionId} className={`map-node-wrap ${!view && p[0] > .90 ? 'label-left' : ''}`} style={{ left: `${p[0] * 100}%`, top: `${p[1] * 100}%` }}>
-        <button data-nest-id={n.id} className={`map-node ${n.owner} ${selected.includes(n.id) ? 'selected' : ''}`} aria-label={`${n.name}, ${n.owner === 'player' ? 'your nest' : n.owner === 'rival' ? 'rival nest' : n.owner === 'ally' ? 'cooperating nest' : 'unclaimed nest'}, ${Math.floor(n.units)} game units`} aria-pressed={selected.includes(n.id)} onClick={e => onSelect(n.id, true, e.shiftKey || e.metaKey)}><span className="owner-glyph" aria-hidden="true">{n.owner === 'rival' ? '◆' : n.owner === 'neutral' ? '○' : n.owner === 'ally' ? '◐' : '●'}</span><span className="node-count">{Math.floor(n.units)}</span></button>
+        <button data-nest-id={n.id} className={`map-node ${n.owner} ${selected.includes(n.id) ? 'selected' : ''}`} aria-label={`${n.name}, ${n.owner === 'player' ? 'your nest' : n.owner === 'rival' ? 'rival nest' : n.owner === 'ally' ? 'cooperating nest' : 'unclaimed nest'}, ${Math.floor(n.units)} game units`} aria-pressed={selected.includes(n.id)} onClick={e => onSelect(n.id, true, e.shiftKey || e.metaKey)}><span className="map-node-medallion" aria-hidden="true" style={view ? { backgroundPosition: habitatMedallionPosition(n.roleId, n.terrain, n.gateway) } : { backgroundImage: `url(${atlasArtboards[n.regionId]?.src})`, backgroundSize: 'cover', backgroundPosition: 'center' }} /><span className="owner-glyph" aria-hidden="true">{n.owner === 'rival' ? '◆' : n.owner === 'neutral' ? '○' : n.owner === 'ally' ? '◐' : '●'}</span><span className="node-count">{Math.floor(n.units)}</span></button>
         <div className="map-node-label"><span>{view ? n.name : region.shortName}</span>{!view ? <button aria-label={`Zoom into ${region.shortName}`} onClick={() => onZoom(region.id)}>Explore region <Icon name="zoom" size={12} /></button> : <small>{n.terrain === 'complex' ? 'Complex habitat' : 'Open terrain'}</small>}</div>
       </div>;
     })}
@@ -326,8 +346,9 @@ export default function BattlefieldMap({ state, view, selected, onSelect, onZoom
     {state.mode === 'species' && !view && <div className="species-context"><Icon name="leaf" /><span>This species matchup lives in Australia.</span><button onClick={() => onZoom('australia')}>Enter the battlefield <Icon name="arrow" /></button></div>}
     {load !== 'ready' && <div className="map-load" role={load === 'error' ? 'alert' : 'status'}>{load === 'loading' ? 'Preparing the map…' : <><span>The geographic map couldn’t load.</span><button onClick={() => { setLoad('loading'); setRevision(v => v + 1); }}>Retry map</button></>}</div>}
     {view && <figure className="region-locator" aria-label="Regional geographic locator"><svg viewBox="0 0 180 84" role="img" aria-label={currentRegion?.nativeRange ? 'Paraná native-range geographic context' : 'Historical sampled populations in this region, 2008–2009'}><rect width="180" height="84" className="locator-water" />{locatorPaths.map((path, index) => <path key={index} d={path} className="locator-land" />)}{globalSamples.filter(sample => sample.regionId === view).map(sample => { const [x, y] = geographicProjection(WORLD_BOUNDS, 180, 84)(sample.lon, sample.lat); return <circle key={sample.id} cx={x} cy={y} r="3" className="locator-point" />; })}{currentRegion?.nativeRange && (() => { const [x,y] = geographicProjection(WORLD_BOUNDS, 180, 84)(...currentRegion.anchor); return <circle cx={x} cy={y} r="3" className="locator-point" />; })()}</svg><figcaption>{currentRegion?.nativeRange ? 'Native-range context' : 'Historical samples · 2008–2009'}</figcaption></figure>}
+    <div className="atlas-compass" aria-hidden="true"><span>N</span><svg viewBox="0 0 60 60"><path d="M30 3 34 25 57 30 34 34 30 57 26 34 3 30 26 26Z"/><path className="compass-light" d="m30 3 0 27 4-5ZM57 30H30l4 4ZM30 57V30l-4 4ZM3 30h27l-4-4Z"/><circle cx="30" cy="30" r="7"/></svg><span>S</span></div>
     <div className="map-key"><span><i className="key-player" />Your colony ●</span><span><i className="key-ally" />Cooperating ◐</span><span><i className="key-rival" />Rival colony ◆</span><span><i className="key-neutral" />Unclaimed ○</span><span className="route-key">{view ? '— Local trails' : '┄ Human-assisted dispersal'}</span></div>
-    <span className="map-credit">{view ? 'Original illustrated surroundings · fictional nests' : 'Geography: Natural Earth · Match state: simulated'}</span>
     </div>
+    <span className="map-credit">{view ? 'Original illustrated surroundings · fictional nests' : 'Natural Earth geography · illustrative terrain · simulated match'}</span>
   </div>;
 }

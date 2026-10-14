@@ -2,3 +2,8 @@ node_modules/
 dist/
 output/
 .DS_Store
+# Retain intermediate visual inspection evidence locally; publish the final set.
+docs/screenshots/rich-visual/a4-chromium-*
+docs/screenshots/rich-visual/a4i2-*
+docs/screenshots/rich-visual/a4i3-*
+docs/screenshots/rich-visual/a4confirm-*

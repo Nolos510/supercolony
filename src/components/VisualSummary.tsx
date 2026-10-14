@@ -31,10 +31,32 @@ function Mechanism({ summary }: { summary: SummaryDefinition }): ReactNode {
 }
 
 export default function VisualSummary({ summary }: { summary: SummaryDefinition }) {
-  return <figure className="visual-summary" aria-label="At a glance">
-    <div className="visual-summary-heading"><span className="eyebrow">At a glance</span><span>Field note · visual summary</span></div>
-    <svg viewBox="0 0 450 180" role="img" aria-label={`${summary.labels.join(' → ')}. ${summary.takeaway}`}><Mechanism summary={summary} /></svg>
-    <ol className="summary-labels">{summary.labels.map((label, index) => <li key={label}><span aria-hidden="true">{index + 1}</span>{label}</li>)}</ol>
-    <figcaption>{summary.takeaway}</figcaption>
+  const terrain = summary.diagram === 'terrain';
+  const habitatDecoration = ['landscape', 'foraging', 'habitat'].includes(summary.diagram);
+  return <figure className={`visual-summary${terrain ? ' visual-summary-terrain' : ''}`} aria-label="At a glance">
+    <div className="visual-summary-heading">
+      <span className="eyebrow">Field note</span>
+      <strong>{terrain ? 'TLDR: Terrain matters' : 'At a glance'}</strong>
+      <span className="summary-heading-mark" aria-hidden="true">✦</span>
+    </div>
+    {terrain ? <div className="summary-terrain-comparison">
+      {summary.labels.slice(0, 2).map((label, index) => <div className="summary-terrain-panel" key={label}>
+        <div className={`summary-terrain-art summary-terrain-${index === 0 ? 'open' : 'complex'}`} role="img" aria-label={index === 0 ? 'Illustrated open ground with space for ant workers' : 'Illustrated narrow trail among rocks, leaves, and fallen wood'}>
+          <img src="/art/terrain-comparison.jpg" width={1774} height={887} alt="" loading="eager" decoding="async" />
+        </div>
+        <div className="summary-terrain-label"><span aria-hidden="true">{index + 1}</span><strong>{label}</strong></div>
+      </div>)}
+      <div className="summary-terrain-conclusion"><span className="summary-step" aria-hidden="true">3</span><strong>{summary.labels[2]}</strong></div>
+    </div> : <>
+      <div className="summary-diagram-surface">
+        <svg viewBox="0 0 450 180" role="img" aria-label={`${summary.labels.join(' → ')}. ${summary.takeaway}`}><Mechanism summary={summary} /></svg>
+      </div>
+      <ol className="summary-labels">{summary.labels.map((label, index) => <li key={label}><span aria-hidden="true">{index + 1}</span>{label}</li>)}</ol>
+    </>}
+    <figcaption>
+      {habitatDecoration && <span className={`summary-habitat-decoration summary-decoration-${summary.diagram}`} aria-hidden="true" />}
+      <span>{summary.takeaway}</span>
+    </figcaption>
+    {terrain && <div className="summary-art-note">Illustrated mechanism · game terrain is an abstraction</div>}
   </figure>;
 }

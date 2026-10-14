@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-14T19:55:09.666448+00:00",
+  "artifactRevision": "67e8f200700175d1fd66275b51d3efee862e17ba; rejected shipping baseline before visual correction",
+  "reference": {
+    "path": "docs/design/atlas-richer-terrain-approved.png",
+    "sha256": "70f456abdef293488b0c1fa0bff44e8f31366737597469e45e52517611642162"
+  },
+  "artifactFiles": [
+    {
+      "path": "src/components/Map.tsx",
+      "sha256": "356cb5911c5e2734ebdcce4509ce743768c9da20dafa39a387060e9ba833708d"
+    },
+    {
+      "path": "src/App.tsx",
+      "sha256": "ab99cede5921cfa022cc480cc1e7312e45f2d6cc3e20fd640e4a2185b964ec74"
+    },
+    {
+      "path": "src/styles.css",
+      "sha256": "9bcca931e8dd93c26a896aa7e633f73fa631abc904f2541631f1cff3b0e47467"
+    },
+    {
+      "path": "src/atlas-map.css",
+      "sha256": "1e8d22a266abf3fb53d6b57d9d917cb1075f9de81b768732ae172cd370991f76"
+    },
+    {
+      "path": "src/atlas-learning.css",
+      "sha256": "93596027787363472d1e118a4e88c6629cd8d1bb542ecf566c7b9412ad62d778"
+    },
+    {
+      "path": "src/components/Inspector.tsx",
+      "sha256": "6737d995bf0620a350c0a5bad644c80829062cdb51caf1bbcad4ec92b9bd2830"
+    },
+    {
+      "path": "src/components/VisualSummary.tsx",
+      "sha256": "6d0e4231847381e6205349ab4a674b162f8eccc66a83033e4528a849b8557d48"
+    },
+    {
+      "path": "tokens.css",
+      "sha256": "3d80a66c410f1e3427fb78f1e61b2e8abe40cdda2e642596815cab6b18b5b664"
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "world",
+      "status": "fail",
+      "finding": "The user rejected the existing flat world map. No fresh saved world render has been reviewed in this baseline record; current world certification is blocked.",
+      "screenshots": []
+    },
+    {
+      "id": "california-desktop",
+      "status": "fail",
+      "finding": "Opened the saved shipping desktop render beside the exact approved study. The board uses faint moss ellipses and simple plant sprites, without the detailed coastal landscape, integrated paths, or habitat medallions in the approved direction.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/atlas-shipping-chromium-desktop.png",
+          "sha256": "2fbd97c38fc620cf2c15aca17f32a9ba55e3f4c83c17b73bea95fc566b1ef047"
+        }
+      ]
+    },
+    {
+      "id": "california-phone",
+      "status": "fail",
+      "finding": "Opened the saved shipping phone render beside the exact approved study. Multiple header rows and a pale procedural board retain the previous composition; the illustrated coast, clearings, and visual habitat markers are absent.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/atlas-shipping-webkit-mobile.png",
+          "sha256": "b7951a4af78d2791d1e5e6fb9fdd1e9d9f57256c1cef5c69f1eef9a22d284f40"
+        }
+      ]
+    },
+    {
+      "id": "other-regions",
+      "status": "unreviewed",
+      "finding": "Other region renders have not been compared to the approved richer-atlas treatment in this correction. No passing claim is made.",
+      "screenshots": []
+    },
+    {
+      "id": "inspector",
+      "status": "fail",
+      "finding": "The saved desktop inspector has a paper surface, but its visible hierarchy is dominated by numeric reserves and a harbor photograph. It does not show the specimen-led nest, habitat examples, and concise growth composition in the approved study.",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/atlas-shipping-chromium-desktop.png",
+          "sha256": "2fbd97c38fc620cf2c15aca17f32a9ba55e3f4c83c17b73bea95fc566b1ef047"
+        }
+      ]
+    },
+    {
+      "id": "terrain-summary",
+      "status": "unreviewed",
+      "finding": "The terrain summary has not been rendered and compared to the approved illustrated open-ground versus narrow-trail field note. No passing claim is made.",
+      "screenshots": []
+    }
+  ],
+  "criteria": [
+    {
+      "id": "rich-illustration",
+      "status": "fail",
+      "finding": "Shipping California captures show procedural background decoration rather than a richly illustrated playable landscape."
+    },
+    {
+      "id": "landscape-trails",
+      "status": "fail",
+      "finding": "Routes are thin graph lines laid across the procedural board; they do not read as paths through the approved physical landscape."
+    },
+    {
+      "id": "habitat-medallions",
+      "status": "fail",
+      "finding": "The shipping nests are number circles without the habitat imagery shown in the approved study."
+    },
+    {
+      "id": "paper-inspector",
+      "status": "fail",
+      "finding": "Paper color exists, but the approved specimen-led inspector hierarchy is not delivered in the visible shipping desktop capture."
+    },
+    {
+      "id": "compact-chrome",
+      "status": "fail",
+      "finding": "The shipping phone has several full-width chrome rows before the pale board, retaining the prior composition instead of the compact illustrated-board treatment."
+    },
+    {
+      "id": "mobile-composition",
+      "status": "fail",
+      "finding": "The shipping phone render lacks the coastline, detailed terrain and habitat markers central to the approved mobile composition."
+    }
+  ],
+  "reviewer": {
+    "name": "Direction guard specialist; rejected-baseline comparison only",
+    "method": "Opened the exact approved PNG and saved shipping Chromium desktop and WebKit phone PNGs with the image inspection tool. These historical captures establish failed reference fidelity, not current live build acceptance. World, other regions, and terrain summary remain without fresh rendered certification."
+  },
+  "limitations": [
+    "Initial record intentionally fails. It does not certify any new visual work or a fresh served build. Preserve this baseline and its screenshots before replacing the current report."
+  ]
+}
