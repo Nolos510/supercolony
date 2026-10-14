@@ -36,7 +36,7 @@ The evidence guard is scoped to this project: a playable desktop/phone thin slic
 
 Original preflight17:33:35Z and deadline23:33:35Z on2026-10-14 were carried through this correction. Five shared repair cycles used across the original and corrective work; three remain unused. Contracts explain successor reasons and preserve old evidence. The old atlas receipt remains engineering history after the user's visual rejection; it does not certify this appearance.
 
-Private repository: `Nolos510/supercolony`, branch `main`. This document, source/art, final screenshots and verification evidence ship together. Use `git log -1` for the delivery revision. The production archive is local at `output/releases/supercolony-rich-atlas-browser-build.zip`; `build-manifest.json` records every built file hash.
+Private repository: `Nolos510/supercolony`, branch `main`. Source/art, final screenshots and verification evidence were pushed and independently read back at `51f64664d6df6788031a49b8c3ddafb38744be5c`. The closure commit adds only delivery documentation. The production archive is local at `output/releases/supercolony-rich-atlas-browser-build-verified.zip`; `build-manifest.json` records every built file hash.
 
 ## Phone preview and human acceptance
 

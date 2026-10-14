@@ -1,7 +1,8 @@
 {
-  "path": "output/releases/supercolony-rich-atlas-browser-build.zip",
-  "bytes": 61350853,
-  "sha256": "1f6a6b1a98dbdfafd7a65fb7b6cf413d7b77beafa4934b374b76ed7134248530",
-  "files": 138,
-  "crcVerified": true
+  "path": "output/releases/supercolony-rich-atlas-browser-build-verified.zip",
+  "bytes": 61351484,
+  "sha256": "c1c37771d830cd7018545029256eba27cd42902c518a6105d8a85da0ecc4c7cf",
+  "crcVerified": true,
+  "sourceCommit": "51f64664d6df6788031a49b8c3ddafb38744be5c",
+  "previousArchivePreserved": "output/releases/supercolony-rich-atlas-browser-build.zip"
 }
